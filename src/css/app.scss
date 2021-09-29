@@ -1,0 +1,24 @@
+// app global css in SCSS form
+
+body
+{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #414141;
+  background-color: #FFF;
+  margin: 0;
+}
+
+.q-field
+{
+  font-size: 1rem;
+}
+
+.clear_float::after
+{
+  content: "";
+  display: table;
+  clear: both;
+}
