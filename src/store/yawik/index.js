@@ -9,6 +9,9 @@ import {
   GET_APPLY_EMAIL,
   GET_APPLICATION,
   GET_REFERENCE,
+  GET_WORK_KIND,
+  GET_WORK_DURATION,
+  GET_TERMS,
   CLEAR_FORM,
   SET_STEP,
   SET_JOB_TITLE,
@@ -18,19 +21,25 @@ import {
   SET_APPLY_URL,
   SET_APPLY_EMAIL,
   SET_APPLICATION,
-  SET_REFERENCE
+  SET_WORK_KIND,
+  SET_WORK_DURATION,
+  SET_REFERENCE,
+  SET_TERMS
 } from '../names';
 
 const emptyForm = {
   step: 'stepOne',
   jobTitle: '',
   organization: '',
-  country: '',
+  country: null,
   location: '',
   applyURL: '',
   applyEmail: '',
   application: false,
   reference: '',
+  workKind: [],
+  workDuration: [],
+  acceptTerms: false,
 };
 
 export default
@@ -83,6 +92,18 @@ export default
       {
         return state.form.reference;
       },
+      [GET_WORK_KIND](state)
+      {
+        return state.form.workKind;
+      },
+      [GET_WORK_DURATION](state)
+      {
+        return state.form.workDuration;
+      },
+      [GET_TERMS](state)
+      {
+        return state.form.acceptTerms;
+      },
     },
   mutations:
     {
@@ -125,6 +146,18 @@ export default
       [SET_REFERENCE](state, value)
       {
         state.form.reference = value;
+      },
+      [SET_WORK_KIND](state, value)
+      {
+        state.form.workKind = value;
+      },
+      [SET_WORK_DURATION](state, value)
+      {
+        state.form.workDuration = value;
+      },
+      [SET_TERMS](state, value)
+      {
+        state.form.acceptTerms = value;
       },
     }
 };

@@ -6,7 +6,7 @@ export default
     {
       ruleRequired(value)
       {
-        return typeof value === 'number' ? true : !!value || this.$t('rules.required');
+        return typeof value === 'number' ? true : (Array.isArray(value) ? value.length > 0 : !!value) || this.$t('rules.required');
       },
       validDMY(value)
       {

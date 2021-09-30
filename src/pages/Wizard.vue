@@ -25,7 +25,7 @@
         <!-- eslint-enable quasar/no-invalid-props -->
         <q-step v-for="stepName in steps" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t('steps.' + stepName)"
                 done-color="positive" active-color="primary" error-color="negative"
-                :done="isCompleted(stepName)" :error="validationErrors[stepName]"
+                :done="isCompleted(stepName)" :error="validationErrors[stepName] && isCompleted(stepName)"
         >
           <component :is="stepName" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" :style="{maxWidth: maxWidth + 'px'}" />
         </q-step>
@@ -138,7 +138,7 @@ export default
       onResize()
       {
         // limit the width of QEditor - otherwise it grows too much on typing
-        this.maxWidth = Math.min(Math.max(maxContentWidth, this.$refs.frm.$el.clientWidth), document.body.clientWidth);
+        this.maxWidth = Math.min(maxContentWidth, document.body.clientWidth);
       },
       navigate(direction)
       {
@@ -197,7 +197,8 @@ export default
       validateStep(step)
       {
         const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
-        this.validationErrors[step] = components.some(item => !item.validate());
+        this.validationErrors[step] = components.some(item => !item.validate()); // stop on the first validation error
+        // this.validationErrors[step] = components.filter(item => !item.validate()).length > 0; // validate all fields
       },
       submitForm()
       {

@@ -10,7 +10,7 @@
       <q-select v-model="country" :label="$t('country')" :options="filteredCountries" color="primary" bg-color="white" name="country"
                 outlined dense options-dense use-input fill-input hide-selected
                 lazy-rules :rules="[ruleRequired]" hide-bottom-space input-debounce="200" class="col-4"
-                @input-value="country = $event" @filter="countryAutocomplete" @keypress.enter="gotoNext"
+                @filter="countryAutocomplete" @keypress.enter="gotoNext"
       >
         <template #option="scope">
           <q-item v-bind="scope.itemProps">
