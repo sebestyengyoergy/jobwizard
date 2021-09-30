@@ -6,7 +6,7 @@
 
 <script>
 import PrivacyPolicy from 'src/components/PrivacyPolicy';
-import { GET_TERMS, SET_TERMS } from 'src/store/names';
+import { GET_FORM, SET_FIELD } from 'src/store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default
@@ -16,42 +16,24 @@ export default
     {
       PrivacyPolicy,
     },
-  props:
-    {
-      active: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Boolean,
-          default: false
-        },
-      stepper: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Object,
-          default: null
-        },
-      width: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Number,
-          default: 1024
-        },
-    },
   computed:
     {
-      ...mapGetters([GET_TERMS]),
+      ...mapGetters([GET_FORM]),
       acceptTerms:
         {
           get()
           {
-            return this[GET_TERMS];
+            return this[GET_FORM].acceptTerms;
           },
           set(val)
           {
-            this[SET_TERMS](val);
+            this[SET_FIELD]({ acceptTerms: val });
           }
         }
     },
   methods:
     {
-      ...mapMutations([SET_TERMS]),
+      ...mapMutations([SET_FIELD]),
     }
 };
 </script>

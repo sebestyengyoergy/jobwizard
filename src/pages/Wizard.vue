@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex" padding>
-    <q-form ref="frm" class="q-mx-auto" @submit="submitForm" @validation-error="hasErrors">
+    <q-form ref="frm" class="q-mx-auto grow" :style="{maxWidth: maxWidth + 'px'}" @submit="submitForm" @validation-error="hasErrors">
       <div class="justify-center q-pb-lg flex">
         <q-btn-group push>
           <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
@@ -27,7 +27,7 @@
                 done-color="positive" active-color="primary" error-color="negative"
                 :done="isCompleted(stepName)" :error="validationErrors[stepName] && isCompleted(stepName)"
         >
-          <component :is="stepName" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" :style="{maxWidth: maxWidth + 'px'}" />
+          <component :is="stepName" style="min-height: 500px;" @next="navigate('next')" />
         </q-step>
         <template #navigation>
           <div class="row justify-end q-px-lg q-pb-lg">

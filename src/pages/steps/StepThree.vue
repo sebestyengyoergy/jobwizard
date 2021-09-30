@@ -9,6 +9,7 @@
           </template>
         </q-field>
       </div>
+
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('work_duration.title') }}</div>
         <q-field :model-value="workDuration" lazy-rules :rules="[ruleRequired]" borderless>
@@ -24,53 +25,35 @@
 <script>
 import mixinValidations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_WORK_KIND, GET_WORK_DURATION, SET_WORK_KIND, SET_WORK_DURATION } from 'src/store/names';
+import { GET_FORM, SET_FIELD } from 'src/store/names';
 
 export default
 {
   name: 'StepThree',
   mixins: [mixinValidations],
-  props:
-    {
-      active: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Boolean,
-          default: false
-        },
-      stepper: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Object,
-          default: null
-        },
-      width: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Number,
-          default: 1024
-        },
-    },
   computed:
     {
-      ...mapGetters([GET_WORK_KIND, GET_WORK_DURATION]),
+      ...mapGetters([GET_FORM]),
       workKind:
         {
           get()
           {
-            return this[GET_WORK_KIND];
+            return this[GET_FORM].workKind;
           },
           set(val)
           {
-            this[SET_WORK_KIND](val);
+            this[SET_FIELD]({ workKind: val });
           }
         },
       workDuration:
         {
           get()
           {
-            return this[GET_WORK_DURATION];
+            return this[GET_FORM].workDuration;
           },
           set(val)
           {
-            this[SET_WORK_DURATION](val);
+            this[SET_FIELD]({ workDuration: val });
           }
         },
       listKinds()
@@ -102,7 +85,7 @@ export default
     },
   methods:
     {
-      ...mapMutations([SET_WORK_KIND, SET_WORK_DURATION]),
+      ...mapMutations([SET_FIELD]),
     }
 };
 </script>

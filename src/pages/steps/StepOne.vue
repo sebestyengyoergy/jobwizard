@@ -1,11 +1,16 @@
 <template>
   <div class="q-gutter-md">
+    <!-- Job title -->
     <q-input v-model.trim="jobTitle" :label="$t('job_title')" color="primary" bg-color="white" name="job_title"
              outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
     />
+
+    <!-- Organization -->
     <q-input v-model.trim="organization" :label="$t('organization')" color="primary" bg-color="white" name="organization"
              outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
     />
+
+    <!-- Country and location -->
     <div class="row">
       <q-select v-model="country" :label="$t('country')" :options="filteredCountries" color="primary" bg-color="white" name="country"
                 outlined dense options-dense use-input fill-input hide-selected
@@ -15,16 +20,17 @@
         <template #option="scope">
           <q-item v-bind="scope.itemProps">
             <q-item-section avatar>
-              <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'" style="max-width: 64px; border: 1px solid #E5E5E5;">
+              <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
             </q-item-section>
             <q-item-section>
               <q-item-label>{{ scope.opt.label }}</q-item-label>
             </q-item-section>
           </q-item>
         </template>
+        <!-- Current flag -->
         <template #prepend>
           <q-avatar v-if="country">
-            <img :src="'country/'+(country.value || '').toLowerCase()+'.png'" style="max-width: 64px; border: 1px solid #E5E5E5;">
+            <img :src="'country/'+(country.value || '').toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
           </q-avatar>
         </template>
       </q-select>
@@ -33,13 +39,20 @@
                @keypress.enter="gotoNext"
       />
     </div>
+
+    <!-- URL -->
     <q-input v-model.trim="applyUrl" :label="$t('apply_url')" color="primary" bg-color="white" name="apply_url"
              outlined dense lazy-rules :rules="[validURL]" hide-bottom-space @keypress.enter="gotoNext"
     />
+
+    <!-- Email -->
     <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" bg-color="white" name="apply_email"
              outlined dense lazy-rules :rules="[validEmail]" hide-bottom-space @keypress.enter="gotoNext"
     />
+
     <q-checkbox v-model="application" :label="$t('application')" color="primary" name="application" />
+
+    <!-- Reference -->
     <q-input v-model.trim="reference" :label="$t('reference')" color="primary" bg-color="white" name="reference"
              outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
     />
@@ -48,24 +61,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import {
-  GET_JOB_TITLE,
-  GET_ORGANIZATION,
-  GET_COUNTRY,
-  GET_LOCATION,
-  GET_APPLY_URL,
-  GET_APPLY_EMAIL,
-  GET_APPLICATION,
-  GET_REFERENCE,
-  SET_JOB_TITLE,
-  SET_ORGANIZATION,
-  SET_COUNTRY,
-  SET_LOCATION,
-  SET_APPLY_URL,
-  SET_APPLY_EMAIL,
-  SET_APPLICATION,
-  SET_REFERENCE
-} from 'src/store/names';
+import { GET_FORM, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
 import countries from 'src/countries';
 
@@ -73,24 +69,7 @@ export default
 {
   name: 'StepOne',
   mixins: [mixinValidations],
-  props:
-    {
-      active: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Boolean,
-          default: false
-        },
-      stepper: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Object,
-          default: null
-        },
-      width: // eslint-disable-line vue/no-unused-properties
-        {
-          type: Number,
-          default: 1024
-        },
-    },
+  emits: ['next'],
   data()
   {
     return {
@@ -99,7 +78,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_JOB_TITLE, GET_ORGANIZATION, GET_COUNTRY, GET_LOCATION, GET_APPLY_URL, GET_APPLY_EMAIL, GET_APPLICATION, GET_REFERENCE]),
+      ...mapGetters([GET_FORM]),
       countryList()
       {
         return Object.entries(countries).map(([code, name]) => ({
@@ -112,94 +91,94 @@ export default
         {
           get()
           {
-            return this[GET_JOB_TITLE];
+            return this[GET_FORM].jobTitle;
           },
           set(val)
           {
-            this[SET_JOB_TITLE](val);
+            this[SET_FIELD]({ jobTitle: val });
           }
         },
       organization:
         {
           get()
           {
-            return this[GET_ORGANIZATION];
+            return this[GET_FORM].organization;
           },
           set(val)
           {
-            this[SET_ORGANIZATION](val);
+            this[SET_FIELD]({ organization: val });
           }
         },
       location:
         {
           get()
           {
-            return this[GET_LOCATION];
+            return this[GET_FORM].location;
           },
           set(val)
           {
-            this[SET_LOCATION](val);
+            this[SET_FIELD]({ location: val });
           }
         },
       country:
         {
           get()
           {
-            return this[GET_COUNTRY];
+            return this[GET_FORM].country;
           },
           set(val)
           {
-            this[SET_COUNTRY](val);
+            this[SET_FIELD]({ country: val });
           }
         },
       applyUrl:
         {
           get()
           {
-            return this[GET_APPLY_URL];
+            return this[GET_FORM].applyURL;
           },
           set(val)
           {
-            this[SET_APPLY_URL](val);
+            this[SET_FIELD]({ applyURL: val });
           }
         },
       applyEmail:
         {
           get()
           {
-            return this[GET_APPLY_EMAIL];
+            return this[GET_FORM].applyEmail;
           },
           set(val)
           {
-            this[SET_APPLY_EMAIL](val);
+            this[SET_FIELD]({ applyEmail: val });
           }
         },
       application:
         {
           get()
           {
-            return this[GET_APPLICATION];
+            return this[GET_FORM].application;
           },
           set(val)
           {
-            this[SET_APPLICATION](val);
+            this[SET_FIELD]({ application: val });
           }
         },
       reference:
         {
           get()
           {
-            return this[GET_REFERENCE];
+            return this[GET_FORM].reference;
           },
           set(val)
           {
-            this[SET_REFERENCE](val);
+            this[SET_FIELD]({ reference: val });
           }
         },
     },
   methods:
     {
-      ...mapMutations([SET_JOB_TITLE, SET_ORGANIZATION, SET_COUNTRY, SET_LOCATION, SET_APPLY_URL, SET_APPLY_EMAIL, SET_APPLICATION, SET_REFERENCE]),
+      ...mapMutations([SET_FIELD]),
       countryAutocomplete(val, update, abort)
       {
         update(() =>
@@ -210,7 +189,7 @@ export default
       },
       gotoNext()
       {
-        this.stepper && this.stepper.next();
+        this.$emit('next');
       }
     }
 };
