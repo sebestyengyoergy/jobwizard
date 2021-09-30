@@ -88,8 +88,6 @@ export default
     {
       [CLEAR_FORM](state)
       {
-        state.photo = null;
-        state.attachments = [];
         for (const key in emptyForm) state.form[key] = emptyForm[key];
       },
       [SET_STEP](state, value)

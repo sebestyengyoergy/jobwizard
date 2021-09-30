@@ -1,18 +1,48 @@
 <template>
   <div class="q-gutter-md">
-    <q-input v-model.trim="jobTitle" :label="$t('job_title')" color="primary" name="job_title" outlined dense />
-    <q-input v-model.trim="organization" :label="$t('organization')" color="primary" name="organization" outlined dense />
+    <q-input v-model.trim="jobTitle" :label="$t('job_title')" color="primary" bg-color="white" name="job_title"
+             outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+    />
+    <q-input v-model.trim="organization" :label="$t('organization')" color="primary" bg-color="white" name="organization"
+             outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+    />
     <div class="row">
-      <q-select v-model="country" :label="$t('country')" :options="filteredCountries" color="primary" name="country"
+      <q-select v-model="country" :label="$t('country')" :options="filteredCountries" color="primary" bg-color="white" name="country"
                 outlined dense options-dense use-input fill-input hide-selected
-                input-debounce="200" class="col-4" @input-value="country = $event" @filter="countryAutocomplete"
+                lazy-rules :rules="[ruleRequired]" hide-bottom-space input-debounce="200" class="col-4"
+                @input-value="country = $event" @filter="countryAutocomplete" @keypress.enter="gotoNext"
+      >
+        <template #option="scope">
+          <q-item v-bind="scope.itemProps">
+            <q-item-section avatar>
+              <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'" style="max-width: 64px; border: 1px solid #E5E5E5;">
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>{{ scope.opt.label }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </template>
+        <template #prepend>
+          <q-avatar v-if="country">
+            <img :src="'country/'+(country.value || '').toLowerCase()+'.png'" style="max-width: 64px; border: 1px solid #E5E5E5;">
+          </q-avatar>
+        </template>
+      </q-select>
+      <q-input v-model.trim="location" :label="$t('location')" color="primary" bg-color="white" name="location"
+               outlined dense class="col-grow" lazy-rules :rules="[ruleRequired]" hide-bottom-space
+               @keypress.enter="gotoNext"
       />
-      <q-input v-model.trim="location" :label="$t('location')" color="primary" name="location" outlined dense class="col-grow" />
     </div>
-    <q-input v-model.trim="applyUrl" :label="$t('apply_url')" color="primary" name="apply_url" outlined dense />
-    <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" name="apply_email" outlined dense />
+    <q-input v-model.trim="applyUrl" :label="$t('apply_url')" color="primary" bg-color="white" name="apply_url"
+             outlined dense lazy-rules :rules="[validURL]" hide-bottom-space @keypress.enter="gotoNext"
+    />
+    <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" bg-color="white" name="apply_email"
+             outlined dense lazy-rules :rules="[validEmail]" hide-bottom-space @keypress.enter="gotoNext"
+    />
     <q-checkbox v-model="application" :label="$t('application')" color="primary" name="application" />
-    <q-input v-model.trim="reference" :label="$t('reference')" color="primary" name="reference" outlined dense />
+    <q-input v-model.trim="reference" :label="$t('reference')" color="primary" bg-color="white" name="reference"
+             outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+    />
   </div>
 </template>
 
@@ -36,11 +66,13 @@ import {
   SET_APPLICATION,
   SET_REFERENCE
 } from 'src/store/names';
+import mixinValidations from 'src/lib/validations';
 import countries from 'src/countries';
 
 export default
 {
   name: 'StepOne',
+  mixins: [mixinValidations],
   props:
     {
       active: // eslint-disable-line vue/no-unused-properties
@@ -175,14 +207,14 @@ export default
           const needle = val.toLocaleLowerCase();
           this.filteredCountries = this.countryList.filter(v => v.search.indexOf(needle) > -1);
         });
+      },
+      gotoNext()
+      {
+        this.stepper && this.stepper.next();
       }
     }
 };
 </script>
-
-<style lang="scss">
-  //
-</style>
 
 <i18n>
   {

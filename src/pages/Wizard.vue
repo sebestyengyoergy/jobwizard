@@ -25,9 +25,9 @@
         <!-- eslint-enable quasar/no-invalid-props -->
         <q-step v-for="stepName in steps" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t('steps.' + stepName)"
                 done-color="positive" active-color="primary" error-color="negative"
-                :done="isCompleted(stepName)" :error="validationErrors(stepName)"
+                :done="isCompleted(stepName)" :error="validationErrors[stepName]"
         >
-          <component :is="stepName" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" />
+          <component :is="stepName" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" :style="{maxWidth: maxWidth + 'px'}" />
         </q-step>
         <template #navigation>
           <div class="row justify-end q-px-lg q-pb-lg">
@@ -52,6 +52,8 @@ import StepFour from './steps/StepFour';
 import { GET_STEP, SET_STEP, CLEAR_FORM } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
+const maxContentWidth = 800; // pixels
+
 export default
 {
   name: 'Wizard',
@@ -71,6 +73,13 @@ export default
       maxWidth: 1024, // used to limit the width of QEditor, otherwise it grows too much when you type text
       dlgPreview: false,
       lastStep: false,
+      validationErrors:
+        {
+          stepOne: false,
+          stepTwo: false,
+          stepThree: false,
+          stepFour: false,
+        }
     };
   },
   computed:
@@ -89,18 +98,19 @@ export default
         },
       steps()
       {
-        return ['stepOne', 'stepTwo', 'stepThree', 'stepFour'];
+        return Object.keys(this.validationErrors);
       },
     },
   watch:
     {
-      currentStep()
+      currentStep(newVal, oldVal)
       {
         this.$nextTick(() =>
         {
           // Quasar is too fast - as soon as it detects MouseDown event on the CONTINUE button, it goes to the next step
           // And on the last step the button becomes a SUBMIT type too fast, even before MouseUp - which then leads to speculative form submit
           this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
+          this.validateStep(oldVal);
         });
       }
     },
@@ -113,6 +123,10 @@ export default
   {
     this.stepper = this.$refs.stepper; // used by steps to navigate to next step by ENTER key inside any input field
     this.onResize();
+    this.steps.slice(0, this.steps.indexOf(this.currentStep)).forEach(step =>
+    {
+      this.validateStep(step);
+    });
   },
   beforeUnmount()
   {
@@ -124,7 +138,7 @@ export default
       onResize()
       {
         // limit the width of QEditor - otherwise it grows too much on typing
-        this.maxWidth = this.$refs.frm.$el.clientWidth;
+        this.maxWidth = Math.min(Math.max(maxContentWidth, this.$refs.frm.$el.clientWidth), document.body.clientWidth);
       },
       navigate(direction)
       {
@@ -176,20 +190,14 @@ export default
           if (node.$options.name === 'QStep') return node.name;
         } while (node !== this.$root);
       },
-      validationErrors(step)
-      {
-        if (!this.$refs.frm) return false;
-        // get all components for the given step and check if they have a validation error
-        return false;
-        //const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
-        //return step !== this.currentStep ? components.some(item => !item.validate()) : components.some(item => item.hasError);
-      },
       isCompleted(step)
       {
-        if (this.steps.indexOf(this.currentStep) <= this.steps.indexOf(step)) return false;
-        //if (step === 'stepTwo' && !this[GET_COVER_LETTER]) return false;
-        //if (step === 'stepFour' && this[GET_FILES].length === 0 && !this[GET_PHOTO]) return false;
-        return true;
+        return (this.steps.indexOf(this.currentStep) > this.steps.indexOf(step));
+      },
+      validateStep(step)
+      {
+        const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
+        this.validationErrors[step] = components.some(item => !item.validate());
       },
       submitForm()
       {
@@ -202,13 +210,6 @@ export default
     }
 };
 </script>
-
-<style lang="scss">
-  .q-stepper .q-step > *
-  {
-    max-width: $yawik-max-stepper-width;
-  }
-</style>
 
 <i18n>
   {

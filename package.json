@@ -1,7 +1,7 @@
 {
-  "name": "yawik-application-form",
-  "description": "application form with file upload and preview based on quasar framework",
-  "productName": "Yawik Application Form",
+  "name": "yawik-jobad-wizard",
+  "description": "Multi-step wizard for generating job ads",
+  "productName": "Yawik Jobad Wizard",
   "author": "Ivaylo Gelov",
   "private": true,
   "scripts": {
@@ -20,8 +20,8 @@
     "@quasar/quasar-ui-qoverlay": "^2.0.0-alpha.1",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
-    "hellojs": "^1.19.3",
     "quasar": "^2.0.2",
+    "validator": "^13.6.0",     
     "vue-i18n": "^9.1.6",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.0.0-beta.3"
