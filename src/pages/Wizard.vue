@@ -229,6 +229,20 @@ export default
       "back": "Back",
       "continue": "Next",
       "download": "Download"
+    },
+    "de": {
+      "preview": "Vorschau",
+      "cancel": "Cancel",
+      "abort": "Abbrechen",
+      "steps": {
+        "stepOne": "Allgemeine Daten",
+        "stepTwo": "Stellenanzeige anlegen",
+        "stepThree": "Kategorien",
+        "stepFour": "Datenschutz"
+      },
+      "back": "Zurück",
+      "continue": "Weiter",
+      "download": "Download"
     }
   }
 </i18n>

@@ -35,7 +35,7 @@ The form is .env-aware.
 
 ## Demo
 
-It's not public yet.
+https://yawik.gitlab.io/jobwizard/de
 
 ## Documentation
 

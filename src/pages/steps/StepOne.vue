@@ -206,6 +206,16 @@ export default
       "apply_email": "Apply e-mail",
       "application": "Application",
       "reference": "Reference"
+    },
+    "de": {
+      "job_title": "Anzeigentitel",
+      "organization": "Name des Unternehmens",
+      "country": "Land",
+      "location": "Ort",
+      "apply_url": "Bewerbungslink",
+      "apply_email": "Bewerbungsemail",
+      "application": "nur postalisch",
+      "reference": "Referenz"
     }
   }
 </i18n>
