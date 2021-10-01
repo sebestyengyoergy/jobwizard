@@ -214,6 +214,15 @@ export default
       "profile": "Profile",
       "offer": "Offer",
       "contact_info": "Contact info"
+    },
+    "de": {
+      "logo": "Logo",
+      "header": "Header image",
+      "intro": "Unternehmensbeschreibung",
+      "tasks": "Aufgaben",
+      "profile": "Ihre Voraussetzungen",
+      "offer": "Ihre Vorteile",
+      "contact_info": "Contact info"
     }
   }
 </i18n>

@@ -107,6 +107,22 @@ export default
           "part_time": "Part-time"
         }
       }
+    },
+    "en": {
+      "work_kind": {
+        "title": "Art der Anstellung",
+        "options": {
+          "freelance": "Freie Mitarbeit",
+          "contract": "Festanstellung"
+        }
+      },
+      "work_duration": {
+        "title": "Pensum",
+        "options": {
+          "full_time": "Vollzeit",
+          "part_time": "Teilzeit"
+        }
+      }
     }
   }
 </i18n>
