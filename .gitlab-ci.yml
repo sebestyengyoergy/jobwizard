@@ -20,6 +20,8 @@ stages:
 pages:
   stage: deploy
   script:
+    - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
+    - env | ( grep YAWIK || echo -n "" )  >> .env.local
     - yarn
     - yarn build
     - mkdir .public
