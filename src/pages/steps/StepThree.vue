@@ -108,7 +108,7 @@ export default
         }
       }
     },
-    "en": {
+    "de": {
       "work_kind": {
         "title": "Art der Anstellung",
         "options": {
