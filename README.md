@@ -27,7 +27,11 @@ yarn dev
 
 ## Configuration
 
-The wizard is self-contained. 
+The form is .env-aware.  
+
+| Name                         | Value                               | 
+|------------------------------|-------------------------------------|
+| YAWIK_URL_PRIVACY            | Link to the Privacy notes           | 
 
 ## Demo
 
