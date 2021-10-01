@@ -22,7 +22,7 @@
 
     <!-- Intro -->
     <div>{{ $t('intro') }}</div>
-    <q-field :model-value="intro" lazy-rules :rules="[ruleRequired]" borderless hide-bottom-space>
+    <q-field :model-value="intro" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
         <q-editor ref="editor" v-model="intro" name="intro" min-height="200px" class="col-grow" />
       </template>
@@ -30,7 +30,7 @@
 
     <!-- Tasks -->
     <div class="q-pt-sm">{{ $t('tasks') }}</div>
-    <q-field :model-value="tasks" lazy-rules :rules="[ruleRequired]" borderless hide-bottom-space>
+    <q-field :model-value="tasks" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="tasks" name="tasks" min-height="200px" class="col-grow" />
       </template>
@@ -38,7 +38,7 @@
 
     <!-- Profile -->
     <div class="q-pt-sm">{{ $t('profile') }}</div>
-    <q-field :model-value="profile" lazy-rules :rules="[ruleRequired]" borderless hide-bottom-space>
+    <q-field :model-value="profile" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="profile" name="profile" min-height="200px" class="col-grow" />
       </template>
@@ -46,7 +46,7 @@
 
     <!-- Offer -->
     <div class="q-pt-sm">{{ $t('offer') }}</div>
-    <q-field :model-value="offer" lazy-rules :rules="[ruleRequired]" borderless hide-bottom-space>
+    <q-field :model-value="offer" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="offer" name="offer" min-height="200px" class="col-grow" />
       </template>
@@ -54,7 +54,7 @@
 
     <!-- Contact info -->
     <div class="q-pt-sm">{{ $t('contact_info') }}</div>
-    <q-field :model-value="contactInfo" lazy-rules :rules="[ruleRequired]" borderless hide-bottom-space>
+    <q-field :model-value="contactInfo" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="contactInfo" name="contactInfo" min-height="200px" class="col-grow" />
       </template>
@@ -65,7 +65,7 @@
 <script>
 import mixinValidations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_STEP, GET_FORM, SET_FIELD } from 'src/store/names';
+import { GET_STEP, GET_FORM, SET_FIELD, GET_LOGO, GET_HEADER, SET_LOGO, SET_HEADER } from 'src/store/names';
 
 export default
 {
@@ -75,14 +75,12 @@ export default
   {
     return {
       fileLogo: null,
-      imageLogo: '',
       fileHeader: null,
-      imageHeader: '',
     };
   },
   computed:
     {
-      ...mapGetters([GET_FORM]),
+      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
       intro:
         {
           get()
@@ -138,6 +136,28 @@ export default
             this[SET_FIELD]({ contactInfo: val });
           }
         },
+      imageLogo:
+        {
+          get()
+          {
+            return this[GET_LOGO];
+          },
+          set(val)
+          {
+            this[SET_LOGO](val);
+          }
+        },
+      imageHeader:
+        {
+          get()
+          {
+            return this[GET_HEADER];
+          },
+          set(val)
+          {
+            this[SET_HEADER](val);
+          }
+        },
     },
   watch:
     {
@@ -166,7 +186,7 @@ export default
   },
   methods:
     {
-      ...mapMutations([SET_FIELD]),
+      ...mapMutations([SET_FIELD, SET_LOGO, SET_HEADER]),
       setFocus()
       {
         if (this[GET_STEP] === 'stepTwo') this.$refs.editor.focus();

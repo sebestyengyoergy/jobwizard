@@ -2,19 +2,19 @@
   <div class="q-gutter-md">
     <!-- Job title -->
     <q-input v-model.trim="jobTitle" :label="$t('job_title')" color="primary" bg-color="white" name="job_title"
-             outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
     />
 
     <!-- Organization -->
     <q-input v-model.trim="organization" :label="$t('organization')" color="primary" bg-color="white" name="organization"
-             outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
     />
 
     <!-- Country and location -->
     <div class="row">
       <q-select v-model="country" :label="$t('country')" :options="filteredCountries" color="primary" bg-color="white" name="country"
                 outlined dense options-dense use-input fill-input hide-selected
-                lazy-rules :rules="[ruleRequired]" hide-bottom-space input-debounce="200" class="col-4"
+                :rules="[ruleRequired]" hide-bottom-space input-debounce="200" class="col-4"
                 @filter="countryAutocomplete" @keypress.enter="gotoNext"
       >
         <template #option="scope">
@@ -35,26 +35,26 @@
         </template>
       </q-select>
       <q-input v-model.trim="location" :label="$t('location')" color="primary" bg-color="white" name="location"
-               outlined dense class="col-grow" lazy-rules :rules="[ruleRequired]" hide-bottom-space
+               outlined dense class="col-grow" :rules="[ruleRequired]" hide-bottom-space
                @keypress.enter="gotoNext"
       />
     </div>
 
     <!-- URL -->
     <q-input v-model.trim="applyUrl" :label="$t('apply_url')" color="primary" bg-color="white" name="apply_url"
-             outlined dense lazy-rules :rules="[validURL]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[validURL]" hide-bottom-space @keypress.enter="gotoNext"
     />
 
     <!-- Email -->
     <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" bg-color="white" name="apply_email"
-             outlined dense lazy-rules :rules="[validEmail]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[validEmail]" hide-bottom-space @keypress.enter="gotoNext"
     />
 
     <q-checkbox v-model="application" :label="$t('application')" color="primary" name="application" />
 
     <!-- Reference -->
     <q-input v-model.trim="reference" :label="$t('reference')" color="primary" bg-color="white" name="reference"
-             outlined dense lazy-rules :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
     />
   </div>
 </template>

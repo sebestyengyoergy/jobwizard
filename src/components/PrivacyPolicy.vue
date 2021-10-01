@@ -1,5 +1,5 @@
 <template>
-  <q-field :model-value="acceptTerms" class="privacy" lazy-rules :rules="[ruleRequired]" borderless dense v-bind="$attrs">
+  <q-field :model-value="acceptTerms" class="privacy" :rules="[ruleRequired]" borderless dense v-bind="$attrs">
     <template #control>
       <q-item v-ripple tag="label">
         <q-item-section avatar top>

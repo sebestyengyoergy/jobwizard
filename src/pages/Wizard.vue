@@ -38,7 +38,7 @@
         </template>
       </q-stepper>
     </q-form>
-    <DialogPreview v-model="dlgPreview" />
+    <DialogPreview ref="preview" v-model="dlgPreview" />
   </q-page>
 </template>
 
@@ -51,6 +51,7 @@ import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
 import { GET_STEP, SET_STEP, CLEAR_FORM } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
+import saveAs from 'src/lib/FileSaver';
 
 const maxContentWidth = 800; // pixels
 
@@ -202,7 +203,8 @@ export default
       },
       submitForm()
       {
-        //
+        const html = this.$refs.preview.htmlCode;
+        saveAs(new Blob([html], { type: 'text/html' }), 'job_ad.html', { autoBOM: true });
       },
       abortForm()
       {

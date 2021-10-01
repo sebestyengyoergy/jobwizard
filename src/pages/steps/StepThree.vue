@@ -3,7 +3,7 @@
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('work_kind.title') }}</div>
-        <q-field :model-value="workKind" lazy-rules :rules="[ruleRequired]" borderless>
+        <q-field :model-value="workKind" :rules="[ruleRequired]" borderless>
           <template #control>
             <q-option-group v-model="workKind" :options="listKinds" type="checkbox" color="primary" name="workKind" />
           </template>
@@ -12,7 +12,7 @@
 
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('work_duration.title') }}</div>
-        <q-field :model-value="workDuration" lazy-rules :rules="[ruleRequired]" borderless>
+        <q-field :model-value="workDuration" :rules="[ruleRequired]" borderless>
           <template #control>
             <q-option-group v-model="workDuration" :options="listDurations" type="checkbox" color="primary" name="workDuration" />
           </template>
