@@ -6,7 +6,7 @@
           <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
             {{ $t('preview') }}
           </q-btn>
-          <SwitchLanguage class="q-mx-auto" />
+          <SwitchLanguage v-if="!toolbar" class="q-mx-auto" />
           <q-btn name="abort" color="negative" @click="abortForm">{{ $t($q.platform.is.mobile ? 'cancel' : 'abort') }}</q-btn>
         </q-btn-group>
       </div>
@@ -66,6 +66,14 @@ export default
       StepTwo,
       StepThree,
       StepFour,
+    },
+  props:
+    {
+      toolbar:
+        {
+          type: Boolean,
+          default: false
+        },
     },
   data()
   {

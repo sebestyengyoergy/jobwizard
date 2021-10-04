@@ -3,11 +3,13 @@ import {
   GET_STEP,
   GET_LOGO,
   GET_HEADER,
+  GET_TOKEN,
   CLEAR_FORM,
   SET_STEP,
   SET_FIELD,
   SET_LOGO,
-  SET_HEADER
+  SET_HEADER,
+  SET_TOKEN
 } from '../names';
 
 const emptyForm = {
@@ -38,6 +40,7 @@ export default
       form: Object.assign({}, emptyForm),
       logo: '', // Base-64 encoded
       header: '', // Base-64 encoded
+      token: null,
     };
   },
   getters:
@@ -57,6 +60,10 @@ export default
       [GET_HEADER](state)
       {
         return state.header;
+      },
+      [GET_TOKEN](state)
+      {
+        return state.token;
       },
     },
   mutations:
@@ -82,6 +89,10 @@ export default
       [SET_HEADER](state, value)
       {
         state.header = value;
-      }
+      },
+      [SET_TOKEN](state, token)
+      {
+        state.token = token;
+      },
     }
 };

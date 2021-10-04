@@ -31,7 +31,15 @@ The form is .env-aware.
 
 | Name                         | Value                               | 
 |------------------------------|-------------------------------------|
-| YAWIK_URL_PRIVACY            | Link to the Privacy notes           | 
+| YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
+| YAWIK_APP_KEY                | Shared App Key                      |
+| YAWIK_API_URL                | Yawik API                           |  
+
+It's possible to show a toolbar with the Logo and a navigation drawer by using query parameter with any non-empty value.
+
+| Param        | Description       |
+|--------------|-------------------|
+| tb           | show toolbar      |  
 
 ## Demo
 
