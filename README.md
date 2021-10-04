@@ -19,7 +19,7 @@ In development.
 ## Installation
 
 ```
-git clone https://gitlab.com/yawik/applicationform.git
+git clone https://gitlab.com/yawik/jobwizard.git
 cd wizard
 yarn install
 yarn dev
@@ -27,15 +27,15 @@ yarn dev
 
 ## Configuration
 
-The form is .env-aware.  
+The form is .env-aware. 
 
 | Name                         | Value                               | 
 |------------------------------|-------------------------------------|
-| YAWIK_URL_PRIVACY            | Link to the Privacy notes           | 
+| YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
 
 ## Demo
 
-https://yawik.gitlab.io/jobwizard/de
+http://jobwizard.yawik.org/
 
 ## Documentation
 
