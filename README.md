@@ -19,7 +19,7 @@ In development.
 ## Installation
 
 ```
-git clone https://gitlab.com/yawik/applicationform.git
+git clone https://gitlab.com/yawik/jobwizard.git
 cd wizard
 yarn install
 yarn dev
@@ -43,7 +43,7 @@ It's possible to show a toolbar with the Logo and a navigation drawer by using q
 
 ## Demo
 
-https://yawik.gitlab.io/jobwizard/de
+http://jobwizard.yawik.org/
 
 ## Documentation
 

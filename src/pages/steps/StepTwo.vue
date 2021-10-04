@@ -8,6 +8,8 @@
     </q-file>
     <div class="row">
       <img v-if="imageLogo" :src="imageLogo" class="img_logo q-mx-auto">
+      <h4>{{ GET_FORM.organization || '' }}</h4>
+      <h3 align="center">{{ GET_FORM.jobTitle }}</h3>
     </div>
 
     <!-- Header image -->

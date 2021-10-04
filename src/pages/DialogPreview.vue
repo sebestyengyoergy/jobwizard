@@ -165,6 +165,7 @@ export default
       ${this.htmlLogo}
       <div style="padding-left: 16px;">
         <h2>${this[GET_FORM].organization || ''}</h2>
+        <h1 align="center">${this[GET_FORM].jobTitle}</h1>
         <div class="flex items-center">
           <div style="padding-right: 16px;">${this.htmlCountry}</div>
           <div>${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}</div>
@@ -180,7 +181,7 @@ export default
         ${this.htmlApplyEmail}
       </table>
       ${this.htmlHeaderImage}
-      <h1 align="center">${this[GET_FORM].jobTitle}</h1>
+
       <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
       <!-- Parameters -->
       <div style="padding: 0 24px;">
