@@ -1,4 +1,4 @@
-# Wixard for entering job ad
+# Wizard for entering job ad
 
 Standalone wizard based on [quasar](https://quasar.dev/). It is a single page application (SPA) running in the 
 clients browser. The result is a static HTML content.
