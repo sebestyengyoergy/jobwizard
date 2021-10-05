@@ -36,7 +36,7 @@ import SwitchLanguage from '../components/SwitchLanguage';
 import SidebarDrawer from '../components/Drawer.vue';
 import LogoPanel from '../components/Logo';
 import DialogLogin from '../components/dialogs/DialogLogin';
-import eventBus, { SHOW_LOGIN } from 'src/lib/eventBus';
+import eventBus, { AJAX_FAILED } from 'src/lib/eventBus';
 import { GET_TOKEN, SET_TOKEN } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
@@ -54,6 +54,7 @@ export default
   {
     return {
       showDrawer: false,
+      tokenTimer: null,
     };
   },
   computed:
@@ -76,9 +77,17 @@ export default
       this.$q.lang.set(lang.default);
     });
   },
+  beforeUnmount()
+  {
+    this.clearTimer();
+  },
   methods:
     {
       ...mapMutations([SET_TOKEN]),
+      clearTimer()
+      {
+        if (this.tokenTimer) clearInterval(this.tokenTimer);
+      },
       showLogin()
       {
         if (this[GET_TOKEN])
@@ -87,7 +96,39 @@ export default
         }
         else
         {
-          eventBus.emit(SHOW_LOGIN);
+          //eventBus.emit(SHOW_LOGIN);
+          const cloak = new window.Keycloak({
+            url: process.env.YAWIK_SSO_URL,
+            realm: process.env.YAWIK_SSO_REALM,
+            clientId: process.env.YAWIK_SSO_CLIENT,
+          });
+          cloak.init({
+            onLoad: 'login-required',
+          }).then(authenticated =>
+          {
+            if (authenticated)
+            {
+              this[SET_TOKEN](cloak);
+              //Token Refresh
+              this.clearTimer();
+              this.tokenTimer = setInterval(() =>
+              {
+                cloak.updateToken(70).then((refreshed) =>
+                {
+                  if (!refreshed)
+                  {
+                    console.warn('Token not refreshed, valid for ' + Math.round(cloak.tokenParsed.exp + cloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
+                  }
+                }).catch(() =>
+                {
+                  console.error('Failed to refresh token');
+                });
+              }, 6000);
+            }
+          }).catch(err =>
+          {
+            eventBus.emit(AJAX_FAILED, err);
+          });
         }
       },
     }

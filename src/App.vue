@@ -20,12 +20,15 @@ export default
     {
       ajaxFailed(axiosError)
       {
-        this.$q.notify({
-          color: 'negative',
-          position: 'top',
-          icon: 'mdi-alert',
-          message: (axiosError.response?.data?.messages || [])[0] || axiosError.response?.data?.message || axiosError.message || axiosError,
-        });
+        if (axiosError)
+        {
+          this.$q.notify({
+            color: 'negative',
+            position: 'top',
+            icon: 'mdi-alert',
+            message: typeof axiosError === 'string' ? axiosError : (axiosError.response?.data?.messages || [])[0] || axiosError.response?.data?.message || axiosError.message,
+          });
+        }
       }
     }
 };

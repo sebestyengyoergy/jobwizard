@@ -47,6 +47,10 @@ module.exports = function(ctx)
       // 'material-icons' // optional, you are not bound to it
     ],
 
+    htmlVariables:
+      {
+        keyCloak: variables.YAWIK_SSO_URL,
+      },
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       publicPath: variables.ROUTER_BASE || '/',
