@@ -62,7 +62,7 @@ export default
       ...mapGetters([GET_TOKEN]),
       showToolbar()
       {
-        return !!this.$route.query.tb;
+        return !this.$route.query.tb;
       },
     },
   created()
