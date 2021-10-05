@@ -6,11 +6,17 @@
         <q-icon name="mdi-paperclip" />
       </template>
     </q-file>
-    <div class="row">
-      <img v-if="imageLogo" :src="imageLogo" class="img_logo q-mx-auto">
-      <h4>{{ GET_FORM.organization || '' }}</h4>
-      <h3 align="center">{{ GET_FORM.jobTitle }}</h3>
-    </div>
+    <q-item>
+      <q-item-section side>
+        <q-button size="100px" class="img_logo">
+          <img v-if="imageLogo" :src="imageLogo" class="col-md-2 img_logo q-mx-auto">
+        </q-button>
+      </q-item-section>
+      <q-item-section>
+        <q-item-label caption>{{ GET_FORM.organization || '' }}</q-item-label>
+        <q-item-label>{{ GET_FORM.jobTitle }}</q-item-label>
+      </q-item-section>
+    </q-item>
 
     <!-- Header image -->
     <q-file v-model="fileHeader" :label="$t('header')" name="header" accept="image/*" clearable dense outlined color="primary" bg-color="white">
@@ -215,8 +221,8 @@ export default
 <style>
   .img_logo
   {
-    max-width: 160px;
-    max-height: 160px;
+    width: 150px;
+    max-height: 150px;
   }
 
   .img_header
