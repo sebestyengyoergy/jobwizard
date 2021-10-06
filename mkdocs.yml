@@ -3,7 +3,7 @@ site_description: Documentation JobWizard
 site_url: https://yawik.github.io/jobwizard/docs/
 copyright: 'Copyright &copy; 2021 Carsten Bleek'
 repo_name: yawik/jobwizard
-repo_url: https://github.com/yawik/JobWizard
+repo_url: https://gitlab.com/yawik/JobWizard
 site_dir: build/docs
 theme: material
 markdown_extensions:
