@@ -8,9 +8,9 @@
     </q-file>
     <q-item>
       <q-item-section side>
-        <q-button size="100px" class="img_logo">
+        <q-btn size="100px" class="img_logo">
           <img v-if="imageLogo" :src="imageLogo" class="col-md-2 img_logo q-mx-auto">
-        </q-button>
+        </q-btn>
       </q-item-section>
       <q-item-section>
         <q-item-label caption>{{ GET_FORM.organization || '' }}</q-item-label>

@@ -93,6 +93,7 @@ export default
         if (this[GET_TOKEN])
         {
           this[SET_TOKEN](null);
+          window.location.href = process.env.YAWIK_SSO_URL + 'realms/' + process.env.YAWIK_SSO_REALM + '/protocol/openid-connect/logout?redirect_uri=' + encodeURI(window.location.origin + '/' + this.$root.$i18n.locale);
         }
         else
         {
