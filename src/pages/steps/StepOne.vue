@@ -42,12 +42,12 @@
 
     <!-- URL -->
     <q-input v-model.trim="applyUrl" :label="$t('apply_url')" color="primary" bg-color="white" name="apply_url"
-             outlined dense :rules="[validURL]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[validURL]" hide-bottom-space :disabled="application" @keypress.enter="gotoNext"
     />
 
     <!-- Email -->
     <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" bg-color="white" name="apply_email"
-             outlined dense :rules="[validEmail]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[validEmail]" hide-bottom-space :disabled="application" @keypress.enter="gotoNext"
     />
 
     <q-checkbox v-model="application" :label="$t('application')" color="primary" name="application" />

@@ -53,13 +53,13 @@ export default
       {
         return this.countryImage ? `<img src="${this.countryImage}" class="img_country">` : '';
       },
-      htmlApplyURL()
+      htmlApply()
       {
-        return this[GET_FORM].applyURL ? `<tr><td><strong>URL</strong>:</td><td>&nbsp;<a href="${this[GET_FORM].applyURL}" target="_blank" rel="noopener noreferrer">${this[GET_FORM].applyURL}</a></td></tr>` : '';
-      },
-      htmlApplyEmail()
-      {
-        return this[GET_FORM].applyEmail ? `<tr><td><strong>${this.$t('email')}</strong>:</td><td>&nbsp;<a href="mailto:${this[GET_FORM].applyEmail}">${this[GET_FORM].applyEmail}</a></td></tr>` : '';
+        return this[GET_FORM].application
+          ? this.$t('apply_postmail')
+          : this[GET_FORM].applyURL
+            ? `<a href="${this[GET_FORM].applyURL}" target="_blank" rel="noopener noreferrer">${this[GET_FORM].applyURL}</a>`
+            : this[GET_FORM].applyEmail ? `<a href="mailto:${this[GET_FORM].applyEmail}">${this[GET_FORM].applyEmail}</a>` : '';
       },
       htmlIntro()
       {
@@ -177,10 +177,7 @@ export default
   <div class="flex" style="padding: 20px 0;">
     <article>
       <!-- Applications -->
-      <table align="center" cellpadding="4">
-        ${this.htmlApplyURL}
-        ${this.htmlApplyEmail}
-      </table>
+      <div align="center">${this.htmlApply}</div>
       ${this.htmlHeaderImage}
 
       <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
@@ -307,7 +304,6 @@ export default
     "en": {
       "close": "Close",
       "jobad_wizard": "Job ad Wizard",
-      "email": "E-mail",
       "intro": "Intro",
       "tasks": "Tasks",
       "profile": "Profile",
@@ -318,12 +314,12 @@ export default
       "contract": "Contract",
       "work_duration": "Duration",
       "fulltime": "Full-time",
-      "parttime": "Part-time"
+      "parttime": "Part-time",
+      "apply_postmail": "Apply by regular post"
     },
     "de": {
       "close": "Schließen",
       "jobad_wizard": "Job ad Wizard",
-      "email": "E-mail",
       "intro": "Einleitung",
       "tasks": "Aufgaben",
       "profile": "Profil",
