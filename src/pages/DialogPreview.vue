@@ -93,9 +93,10 @@ export default
       {
         return `<!DOCTYPE html><html lang="${this.$root.$i18n.locale}">
 <head>
-  <title>${this.$t('jobad_wizard')}</title>
+  <title>${this[GET_FORM].jobTitle}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <script type="application/ld+json">${JSON.stringify(this.jsonLD)}` + '<' + `/script>
   <style>
     a
     {
@@ -213,7 +214,51 @@ export default
   </div>
 </body>
 </html>`;
-      }
+      },
+      jsonLD()
+      {
+        const today = new Date();
+        const expires = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+        const result = {
+          '@context': 'https://schema.org/',
+          '@type': 'JobPosting',
+          title: this[GET_FORM].jobTitle,
+          description: this[GET_FORM].intro,
+          identifier:
+            {
+              '@type': 'PropertyValue',
+              name: this[GET_FORM].organization,
+              value: this[GET_FORM].reference,
+            },
+          datePosted: this.dateText(today),
+          validThrough: this.dateText(expires),
+          hiringOrganization: {
+            '@type': 'Organization',
+            name: this[GET_FORM].organization,
+          },
+          jobLocation: {
+            '@type': 'Place',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: this[GET_FORM].location,
+              addressCountry: this[GET_FORM].country,
+            }
+          },
+        };
+        if (this.employment.length > 0) result.employmentType = this.employment;
+        if (this[GET_FORM].applyURL) result.directApply = true;
+        return result;
+      },
+      employment()
+      {
+        return this[GET_FORM].workKind.map(item => ({
+          freelance: 'OTHER',
+          contract: 'CONTRACTOR',
+        }[item])).concat(this[GET_FORM].workDuration.map(item => ({
+          fulltime: 'FULL_TIME',
+          parttime: 'PART_TIME',
+        }[item])));
+      },
     },
   watch:
     {
@@ -249,6 +294,10 @@ export default
       {
         this.$emit('update:modelValue', false);
       },
+      dateText(value)
+      {
+        return value.getFullYear() + '-' + String(value.getMonth() + 1).padStart(2, '0') + '-' + String(value.getDate()).padStart(2, '0');
+      }
     }
 };
 </script>
