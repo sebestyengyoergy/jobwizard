@@ -182,7 +182,7 @@ export default
   {
     if (window.google)
     {
-      this.googleSearchBox = new window.google.maps.places.SearchBox(this.$refs.location.$refs.input);
+      this.googleSearchBox = new window.google.maps.places.SearchBox(this.$refs.location.getNativeElement());
       window.google.maps.event.addListener(this.googleSearchBox, 'places_changed', this.locationChanged);
     }
   },
@@ -210,6 +210,7 @@ export default
       {
         const place = this.googleSearchBox.getPlaces()[0];
         this.location = place.formatted_address;
+        this.$refs.location.focus();
       },
     }
 };
