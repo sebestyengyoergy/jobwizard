@@ -34,7 +34,7 @@
           </q-avatar>
         </template>
       </q-select>
-      <q-input v-model.trim="location" :label="$t('location')" color="primary" bg-color="white" name="location"
+      <q-input ref="location" v-model.trim="location" :label="$t('location')" color="primary" bg-color="white" name="location"
                outlined dense class="col-grow" :rules="[ruleRequired]" hide-bottom-space
                @keypress.enter="gotoNext"
       />
@@ -74,6 +74,8 @@ export default
   {
     return {
       filteredCountries: [],
+      googleSearchBox: null,
+      googleMapsListener: null,
     };
   },
   computed:
@@ -176,6 +178,19 @@ export default
           }
         },
     },
+  mounted()
+  {
+    if (window.google)
+    {
+      this.googleSearchBox = new window.google.maps.places.SearchBox(this.$refs.location.$refs.input);
+      window.google.maps.event.addListener(this.googleSearchBox, 'places_changed', this.locationChanged);
+    }
+  },
+  beforeUnmount()
+  {
+    if (this.googleMapsListener) window.google.maps.event.removeListener(this.googleMapsListener);
+    this.googleSearchBox = null;
+  },
   methods:
     {
       ...mapMutations([SET_FIELD]),
@@ -190,7 +205,12 @@ export default
       gotoNext()
       {
         this.$emit('next');
-      }
+      },
+      locationChanged()
+      {
+        const place = this.googleSearchBox.getPlaces()[0];
+        this.location = place.formatted_address;
+      },
     }
 };
 </script>
