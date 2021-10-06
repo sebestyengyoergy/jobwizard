@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a href="/">
+    <a :href="urlHome">
       <img :alt="$t('logo')" :src="logoUrl" class="logo">
     </a>
   </div>
@@ -17,7 +17,7 @@ export default
           type: String,
           required: true
         },
-    },
+    }
 };
 </script>
 
