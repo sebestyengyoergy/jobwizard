@@ -4,6 +4,7 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+    - build/
 
 workflow:
   rules:
@@ -15,7 +16,18 @@ variables:
   VUE_APP_I18N_SUPPORTED_LOCALE: en,de
 
 stages:
+  - doc
   - deploy
+
+mkdocs:
+  stage: doc
+  image: python:3.8-buster
+  script:
+    - pip install -r requirements.txt
+    - mkdocs build --strict
+  artifacts:
+    paths:
+      - build
 
 pages:
   stage: deploy
@@ -26,6 +38,7 @@ pages:
     - yarn build
     - mkdir .public
     - cp -r dist/spa/* .public
+    - cp -r build/docs .public
     - cp dist/spa/index.html .public/404.html
     - rm -Rf public
     - mv .public public
