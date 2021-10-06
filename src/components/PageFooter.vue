@@ -41,7 +41,7 @@
           type="a"
           rel="noopener noreferrer"
           target="_blank"
-          :href="urlDocs"
+          :href="urlPrivacy"
           :label="$t('Privacy')"
         />
       </q-tab>
@@ -55,7 +55,7 @@
           type="a"
           rel="noopener noreferrer"
           target="_blank"
-          :href="urlPrivacy"
+          :href="urlDocs"
           :label="$t('Docs')"
         />
       </q-tab>

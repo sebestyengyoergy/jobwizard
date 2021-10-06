@@ -27,11 +27,13 @@
         </transition>
       </router-view>
     </q-page-container>
+    <PageFooter v-if="showFooter" />1
     <DialogLogin />
   </q-layout>
 </template>
 
 <script>
+import PageFooter from '../components/PageFooter';
 import SwitchLanguage from '../components/SwitchLanguage';
 import SidebarDrawer from '../components/Drawer.vue';
 import LogoPanel from '../components/Logo';
@@ -45,6 +47,7 @@ export default
   name: 'MainLayout',
   components:
     {
+      PageFooter,
       SidebarDrawer,
       LogoPanel,
       SwitchLanguage,
@@ -64,6 +67,10 @@ export default
       {
         return !this.$route.query.tb;
       },
+      showFooter()
+      {
+        return !this.$route.query.hf;
+      }
     },
   created()
   {
