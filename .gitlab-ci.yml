@@ -31,7 +31,7 @@ mkdocs:
 pages:
   stage: deploy
   script:
-    - la -la
+    - ls -la
     - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
     - env | ( grep YAWIK || echo -n "" )  >> .env.local
     - yarn
