@@ -62,7 +62,7 @@
 
     <!-- Contact info -->
     <div class="q-pt-sm">{{ $t('contact_info') }}</div>
-    <q-field :model-value="contactInfo" :rules="[ruleRequired]" borderless hide-bottom-space>
+    <q-field :model-value="contactInfo" :rules="[GET_FORM].application ? [ruleRequired] : []" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="contactInfo" name="contactInfo" min-height="200px" class="col-grow" />
       </template>

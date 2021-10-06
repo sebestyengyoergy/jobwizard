@@ -47,7 +47,7 @@
 
     <!-- Email -->
     <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" bg-color="white" name="apply_email"
-             outlined dense :rules="[validEmail]" hide-bottom-space :disabled="application" @keypress.enter="gotoNext"
+             outlined dense :rules="[validEmail]" hide-bottom-space :disabled="application || (applyUrl && validURL(applyUrl) === true)" @keypress.enter="gotoNext"
     />
 
     <q-checkbox v-model="application" :label="$t('application')" color="primary" name="application" />
