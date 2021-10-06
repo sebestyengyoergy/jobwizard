@@ -270,6 +270,22 @@ export default
       "work_duration": "Duration",
       "fulltime": "Full-time",
       "parttime": "Part-time"
+    },
+    "de": {
+      "close": "Schließen",
+      "jobad_wizard": "Job ad Wizard",
+      "email": "E-mail",
+      "intro": "Einleitung",
+      "tasks": "Aufgaben",
+      "profile": "Profil",
+      "offer": "Angebot",
+      "contacts": "Kontact Info",
+      "work_kind": "Art der Anstellung",
+      "freelance": "Freie Mitarbeit",
+      "contract": "Festanstellung",
+      "work_duration": "Pensum",
+      "fulltime": "Vollzeit",
+      "parttime": "Teilzeit"
     }
   }
 </i18n>
