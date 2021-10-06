@@ -15,11 +15,23 @@ variables:
   VUE_APP_I18N_SUPPORTED_LOCALE: en,de
 
 stages:
+  - doc
   - deploy
+
+mkdocs:
+  stage: doc
+  image: python:3.8-buster
+  script:
+    - pip install -r requirements.txt
+    - mkdocs build --strict --verbose --site-dir test
+  artifacts:
+    paths:
+      - build
 
 pages:
   stage: deploy
   script:
+    - la -la
     - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
     - env | ( grep YAWIK || echo -n "" )  >> .env.local
     - yarn
