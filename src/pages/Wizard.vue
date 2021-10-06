@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex" padding>
-    <q-form ref="frm" class="q-mx-auto grow" :style="{maxWidth: maxWidth + 'px'}" @submit="submitForm" @validation-error="hasErrors">
+    <q-form ref="frm" spellcheck="true" class="q-mx-auto grow" :style="{maxWidth: maxWidth + 'px'}" @submit="submitForm" @validation-error="hasErrors">
       <div class="justify-center q-pb-lg flex">
         <q-btn-group push>
           <q-btn name="preview" color="primary" outline @click="dlgPreview = true">

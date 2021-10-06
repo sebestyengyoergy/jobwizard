@@ -58,8 +58,8 @@ export default
         return this[GET_FORM].application
           ? this.$t('apply_postmail')
           : this[GET_FORM].applyURL
-            ? `<a href="${this[GET_FORM].applyURL}" target="_blank" rel="noopener noreferrer">${this[GET_FORM].applyURL}</a>`
-            : this[GET_FORM].applyEmail ? `<a href="mailto:${this[GET_FORM].applyEmail}">${this[GET_FORM].applyEmail}</a>` : '';
+            ? `<a href="${this[GET_FORM].applyURL}" target="_blank" rel="noopener noreferrer">${this.$t('apply_text')}</a>`
+            : this[GET_FORM].applyEmail ? `<a href="mailto:${this[GET_FORM].applyEmail}">${this.$t('apply_text')}</a>` : '';
       },
       htmlIntro()
       {
@@ -108,6 +108,15 @@ export default
     {
       text-decoration: underline;
     }
+    .button a
+    {
+      color: #fff;
+      text-decoration: none;
+    }
+    a:hover
+    {
+      text-decoration: none;
+    }
     .flex
     {
       display: flex;
@@ -131,7 +140,7 @@ export default
     {
       max-width: 48px;
     }
-    .items-center
+        .items-center
     {
       align-items: center;
     }
@@ -163,24 +172,22 @@ export default
 </head>
 <body>
   <div class="container">
-    <table>
-      <tr>
-        <td>
-          ${this.htmlLogo}
-        </td>
-        <td>
-          <h5>${this[GET_FORM].organization || ''}</h5>
-          <h1>${this[GET_FORM].jobTitle}</h1>
-          <div>${this.htmlCountry}</div>
-          <div>${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}</div>
-        </td>
-      </tr>
-    </table>
+    <div class="row">
+      <div class="three columns">${this.htmlLogo}</div>
+      <div class="nine columns">
+        <h5>${this[GET_FORM].organization || ''}</h5>
+        <h1>${this[GET_FORM].jobTitle}</h1>
+        <div>${this.htmlCountry}</div>
+        <div>${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}</div>
+      </div>
+    </div>
   </div>
-  <div>
+  <div class="container">
     <article>
       <!-- Applications -->
-      <div class="button button-primary">${this.htmlApply}</div>
+      <div class="button button-primary">
+        ${this.htmlApply}
+      </div>
       ${this.htmlHeaderImage}
 
       <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
@@ -318,7 +325,8 @@ export default
       "work_duration": "Duration",
       "fulltime": "Full-time",
       "parttime": "Part-time",
-      "apply_postmail": "Apply by regular post"
+      "apply_postmail": "Apply by regular post",
+      "apply_text": "apply now"
     },
     "de": {
       "close": "Schließen",
@@ -333,7 +341,9 @@ export default
       "contract": "Festanstellung",
       "work_duration": "Pensum",
       "fulltime": "Vollzeit",
-      "parttime": "Teilzeit"
+      "parttime": "Teilzeit",
+      "apply_postmail": "Bewerbung per Post",
+      "apply_text": "jetzt bewerben"
     }
   }
 </i18n>

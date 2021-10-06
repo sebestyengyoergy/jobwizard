@@ -8,8 +8,8 @@
     </q-file>
     <q-item>
       <q-item-section side>
-        <q-btn size="100px" class="img_logo">
-          <img v-if="imageLogo" :src="imageLogo" class="col-md-2 img_logo q-mx-auto">
+        <q-btn size="30px" :ripple="false" class="img_logo">
+          <img v-if="imageLogo" :src="imageLogo" class="img_logo">
         </q-btn>
       </q-item-section>
       <q-item-section>
@@ -32,7 +32,7 @@
     <div>{{ $t('intro') }}</div>
     <q-field :model-value="intro" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
-        <q-editor ref="editor" v-model="intro" name="intro" min-height="200px" class="col-grow" />
+        <q-editor ref="editor" v-model="intro" name="intro" :toolbar="toolbar" min-height="200px" class="col-grow" />
       </template>
     </q-field>
 
@@ -40,7 +40,7 @@
     <div class="q-pt-sm">{{ $t('tasks') }}</div>
     <q-field :model-value="tasks" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
-        <q-editor v-model="tasks" name="tasks" min-height="200px" class="col-grow" />
+        <q-editor v-model="tasks" name="tasks" :toolbar="toolbar" min-height="200px" class="col-grow" />
       </template>
     </q-field>
 
@@ -48,7 +48,7 @@
     <div class="q-pt-sm">{{ $t('profile') }}</div>
     <q-field :model-value="profile" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
-        <q-editor v-model="profile" name="profile" min-height="200px" class="col-grow" />
+        <q-editor v-model="profile" name="profile" :toolbar="toolbar" min-height="200px" class="col-grow" />
       </template>
     </q-field>
 
@@ -56,7 +56,7 @@
     <div class="q-pt-sm">{{ $t('offer') }}</div>
     <q-field :model-value="offer" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
-        <q-editor v-model="offer" name="offer" min-height="200px" class="col-grow" />
+        <q-editor v-model="offer" name="offer" :toolbar="toolbar" min-height="200px" class="col-grow" />
       </template>
     </q-field>
 
@@ -64,7 +64,7 @@
     <div class="q-pt-sm">{{ $t('contact_info') }}</div>
     <q-field :model-value="contactInfo" :rules="[GET_FORM].application ? [ruleRequired] : []" borderless hide-bottom-space>
       <template #control>
-        <q-editor v-model="contactInfo" name="contactInfo" min-height="200px" class="col-grow" />
+        <q-editor v-model="contactInfo" :toolbar="toolbar" name="contactInfo" min-height="200px" class="col-grow" />
       </template>
     </q-field>
   </div>
@@ -84,6 +84,13 @@ export default
     return {
       fileLogo: null,
       fileHeader: null,
+      toolbar: [
+        ['left', 'justify'],
+        ['bold', 'italic'],
+        ['token', 'hr', 'link'],
+        ['quote', 'unordered', 'ordered'],
+        ['undo', 'redo']
+      ],
     };
   },
   computed:
