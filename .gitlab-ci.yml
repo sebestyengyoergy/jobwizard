@@ -4,7 +4,7 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
-    - build
+    - build/
 
 workflow:
   rules:
@@ -24,10 +24,11 @@ mkdocs:
   image: python:3.8-buster
   script:
     - pip install -r requirements.txt
-    - mkdocs build --strict --verbose --site-dir test
+    - mkdocs build --strict
   artifacts:
     paths:
       - build
+
 pages:
   stage: deploy
   script:
