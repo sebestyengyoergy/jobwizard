@@ -4,7 +4,7 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
-    - build
+    - build/
 
 workflow:
   rules:
@@ -28,6 +28,7 @@ mkdocs:
   artifacts:
     paths:
       - build
+      
 pages:
   stage: deploy
   script:
