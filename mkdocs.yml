@@ -1,0 +1,21 @@
+site_name: JobWizard
+site_description: Documentation JobWizard
+site_url: https://yawik.github.io/jobwizard/docs/
+copyright: 'Copyright &copy; 2021 Carsten Bleek'
+repo_name: yawik/jobwizard
+repo_url: https://github.com/yawik/JobWizard
+site_dir: build/docs
+theme: material
+markdown_extensions:
+  - codehilite:
+      guess_lang: true
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.magiclink
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.extra
+  - footnotes
