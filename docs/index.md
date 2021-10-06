@@ -1,17 +1,11 @@
-# Welcome to MkDocs
+# About
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+With the JobWizard you can create a responsive job advertisement free of charge, quickly and easily. All you need to do is fill in the fields and you will end up with a stand-alone HTML page. You can submit the ad to the job board of your choice for publication.
 
-## Commands
+Or you can register in the JobWizard. Then they can manage your job ad (coming soon.)
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+## Features
 
-## Project layout
+* create job posting as standalone HTML page
+* Google for Jobs Json-LD
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
