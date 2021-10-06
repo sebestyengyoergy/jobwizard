@@ -40,3 +40,5 @@ package-lock.json
 .env.*
 /build
 /cypress/videos/
+
+.public

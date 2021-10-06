@@ -96,6 +96,7 @@ export default
   <title>${this[GET_FORM].jobTitle}</title>
   <meta charset="utf-8">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script type="application/ld+json">${JSON.stringify(this.jsonLD)}` + '<' + `/script>
   <style>
     a
@@ -161,23 +162,25 @@ export default
   </style>
 </head>
 <body>
-  <div class="flex">
-    <div class="mx-auto flex items-center">
-      ${this.htmlLogo}
-      <div style="padding-left: 16px;">
-        <h2>${this[GET_FORM].organization || ''}</h2>
-        <h1 align="center">${this[GET_FORM].jobTitle}</h1>
-        <div class="flex items-center">
-          <div style="padding-right: 16px;">${this.htmlCountry}</div>
+  <div class="container">
+    <table>
+      <tr>
+        <td>
+          ${this.htmlLogo}
+        </td>
+        <td>
+          <h5>${this[GET_FORM].organization || ''}</h5>
+          <h1>${this[GET_FORM].jobTitle}</h1>
+          <div>${this.htmlCountry}</div>
           <div>${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}</div>
-        </div>
-      </div>
-    </div>
+        </td>
+      </tr>
+    </table>
   </div>
-  <div class="flex" style="padding: 20px 0;">
+  <div>
     <article>
       <!-- Applications -->
-      <div align="center">${this.htmlApply}</div>
+      <div class="button button-primary">${this.htmlApply}</div>
       ${this.htmlHeaderImage}
 
       <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
