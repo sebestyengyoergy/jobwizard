@@ -32,13 +32,13 @@ mkdocs:
 pages:
   stage: deploy
   script:
-    - ls -la
     - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
     - env | ( grep YAWIK || echo -n "" )  >> .env.local
     - yarn
     - yarn build
     - mkdir .public
     - cp -r dist/spa/* .public
+    - cp -r build/docs .public
     - cp dist/spa/index.html .public/404.html
     - rm -Rf public
     - mv .public public
