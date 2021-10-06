@@ -4,8 +4,21 @@ With the JobWizard you can create a responsive job advertisement free of charge,
 
 Or you can register in the JobWizard. Then they can manage your job ad (coming soon.)
 
-## Features
+## Status
 
-* create job posting as standalone HTML page
-* Google for Jobs Json-LD
+currently under development. But the following is already working
 
+* Login, register and everything related to authentication (Thanks to [Keycloak](https://www.keycloak.org/))
+* Entering a job ad (Thanks to [Quasar](https://quasar.dev))
+* Download of a job ad with Google for Jobs Markup.
+* Integration of Google Places API 
+
+
+## Roadmap
+
+There is Google for Jobs. A great service that makes job ads findable via Google. But there is no entry tool for ads. We want to close this gap.
+
+* configure colors and layout
+* save Jobs (give jobs an URI)
+* join a newsletter
+* more documentation (running gag)
