@@ -54,7 +54,7 @@
 
     <!-- Reference -->
     <q-input v-model.trim="reference" :label="$t('reference')" color="primary" bg-color="white" name="reference"
-             outlined dense :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+             outlined dense :rules="[]" hide-bottom-space @keypress.enter="gotoNext"
     />
   </div>
 </template>

@@ -29,7 +29,12 @@
     </div>
 
     <!-- Intro -->
-    <div>{{ $t('intro') }}</div>
+    <div class="cursor-pointer">
+      {{ introLabel }}
+      <q-popup-edit v-slot="scope" v-model="introLabel" auto-save>
+        <q-input v-model="introLabel" dense autofocus counter @keyup.enter="scope.set" />
+      </q-popup-edit>
+    </div>
     <q-field :model-value="intro" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
         <q-editor ref="editor" v-model="intro" name="intro" :toolbar="toolbar" min-height="200px" class="col-grow" />
@@ -37,7 +42,12 @@
     </q-field>
 
     <!-- Tasks -->
-    <div class="q-pt-sm">{{ $t('tasks') }}</div>
+    <div class="cursor-pointer">
+      {{ taskLabel }}
+      <q-popup-edit v-slot="scope" v-model="taskLabel" auto-save>
+        <q-input v-model="taskLabel" dense autofocus counter @keyup.enter="scope.set" />
+      </q-popup-edit>
+    </div>
     <q-field :model-value="tasks" :rules="[ruleRequired]" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="tasks" name="tasks" :toolbar="toolbar" min-height="200px" class="col-grow" />
@@ -45,24 +55,39 @@
     </q-field>
 
     <!-- Profile -->
-    <div class="q-pt-sm">{{ $t('profile') }}</div>
-    <q-field :model-value="profile" :rules="[ruleRequired]" borderless hide-bottom-space>
+    <div class="cursor-pointer">
+      {{ profileLabel }}
+      <q-popup-edit v-slot="scope" v-model="profileLabel" auto-save>
+        <q-input v-model="profileLabel" dense autofocus counter @keyup.enter="scope.set" />
+      </q-popup-edit>
+    </div>
+    <q-field :model-value="profile" :rules="[]" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="profile" name="profile" :toolbar="toolbar" min-height="200px" class="col-grow" />
       </template>
     </q-field>
 
     <!-- Offer -->
-    <div class="q-pt-sm">{{ $t('offer') }}</div>
-    <q-field :model-value="offer" :rules="[ruleRequired]" borderless hide-bottom-space>
+    <div class="cursor-pointer">
+      {{ offerLabel }}
+      <q-popup-edit v-slot="scope" v-model="offerLabel" auto-save>
+        <q-input v-model="offerLabel" dense autofocus counter @keyup.enter="scope.set" />
+      </q-popup-edit>
+    </div>
+    <q-field :model-value="offer" :rules="[]" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="offer" name="offer" :toolbar="toolbar" min-height="200px" class="col-grow" />
       </template>
     </q-field>
 
     <!-- Contact info -->
-    <div class="q-pt-sm">{{ $t('contact_info') }}</div>
-    <q-field :model-value="contactInfo" :rules="[GET_FORM].application ? [ruleRequired] : []" borderless hide-bottom-space>
+    <div class="cursor-pointer">
+      {{ contactInfoLabel }}
+      <q-popup-edit v-slot="scope" v-model="contactInfoLabel" auto-save>
+        <q-input v-model="contactInfoLabel" dense autofocus counter @keyup.enter="scope.set" />
+      </q-popup-edit>
+    </div>
+    <q-field :model-value="contactInfo" :rules="[GET_FORM].applyPost ? [ruleRequired] : []" borderless hide-bottom-space>
       <template #control>
         <q-editor v-model="contactInfo" :toolbar="toolbar" name="contactInfo" min-height="200px" class="col-grow" />
       </template>
@@ -96,6 +121,17 @@ export default
   computed:
     {
       ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
+      introLabel:
+        {
+          get()
+          {
+            return this[GET_FORM].introLabel ? this[GET_FORM].introLabel : this.$t('intro');
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ introLabel: val });
+          }
+        },
       intro:
         {
           get()
@@ -105,6 +141,17 @@ export default
           set(val)
           {
             this[SET_FIELD]({ intro: val });
+          }
+        },
+      taskLabel:
+        {
+          get()
+          {
+            return this[GET_FORM].taskLabel ? this[GET_FORM].taskLabel : this.$t('task');
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ taskLabel: val });
           }
         },
       tasks:
@@ -118,6 +165,17 @@ export default
             this[SET_FIELD]({ tasks: val });
           }
         },
+      profileLabel:
+        {
+          get()
+          {
+            return this[GET_FORM].profileLabel ? this[GET_FORM].profileLabel : this.$t('profile');
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ profileLabel: val });
+          }
+        },
       profile:
         {
           get()
@@ -129,6 +187,17 @@ export default
             this[SET_FIELD]({ profile: val });
           }
         },
+      offerLabel:
+        {
+          get()
+          {
+            return this[GET_FORM].offerLabel ? this[GET_FORM].offerLabel : this.$t('offer');
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ offerLabel: val });
+          }
+        },
       offer:
         {
           get()
@@ -138,6 +207,17 @@ export default
           set(val)
           {
             this[SET_FIELD]({ offer: val });
+          }
+        },
+      contactInfoLabel:
+        {
+          get()
+          {
+            return this[GET_FORM].contactInfoLabel ? this[GET_FORM].contactInfoLabel : this.$t('contact_info');
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ contactInfoLabel: val });
           }
         },
       contactInfo:

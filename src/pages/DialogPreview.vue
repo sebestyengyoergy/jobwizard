@@ -59,23 +59,23 @@ export default
       },
       htmlIntro()
       {
-        return this[GET_FORM].intro ? `<section><header>${this.$t('intro')}</header><div>${this[GET_FORM].intro}</div></section>` : '';
+        return this[GET_FORM].intro ? `<section><header>${this[GET_FORM].introLabel}</header><div>${this[GET_FORM].intro}</div></section>` : '';
       },
       htmlTasks()
       {
-        return this[GET_FORM].tasks ? `<section><header>${this.$t('tasks')}</header><div>${this[GET_FORM].tasks}</div></section>` : '';
+        return this[GET_FORM].tasks ? `<section><header>${this[GET_FORM].taskLabel}</header><div>${this[GET_FORM].tasks}</div></section>` : '';
       },
       htmlProfile()
       {
-        return this[GET_FORM].profile ? `<section><header>${this.$t('profile')}</header><div>${this[GET_FORM].profile}</div></section>` : '';
+        return this[GET_FORM].profile ? `<section><header>${this[GET_FORM].profileLabel}</header><div>${this[GET_FORM].profile}</div></section>` : '';
       },
       htmlOffer()
       {
-        return this[GET_FORM].offer ? `<section><header>${this.$t('offer')}</header><div>${this[GET_FORM].offer}</div></section>` : '';
+        return this[GET_FORM].offer ? `<section><header>${this[GET_FORM].offerLabel}</header><div>${this[GET_FORM].offer}</div></section>` : '';
       },
       htmlContacts()
       {
-        return this[GET_FORM].contactInfo ? `<section><header>${this.$t('contacts')}</header><div>${this[GET_FORM].contactInfo}</div></section>` : '';
+        return this[GET_FORM].contactInfo ? `<section><header>${this[GET_FORM].contactInfoLabel}</header><div>${this[GET_FORM].contactInfo}</div></section>` : '';
       },
       htmlWorkKind()
       {
