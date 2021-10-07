@@ -3,9 +3,15 @@
     <q-card flat class="bg-third column overflow-hidden">
       <q-card-actions class="bg-primary text-white q-py-sm" align="center">
         <q-btn color="secondary" @click="close">{{ $t('close') }}</q-btn>
+        <q-btn>
+          <q-tooltip>
+            {{ $t('tooltip') }}
+          </q-tooltip>
+          <input v-model="color" type="color">
+        </q-btn>
       </q-card-actions>
       <q-card-section class="col-grow overflow-hidden row q-pa-md">
-        <iframe class="col-grow q-mx-auto rounded-borders" style="max-width: 1280px; border: 3px dashed #CCC;" :srcdoc="htmlCode" />
+        <iframe class="col-grow q-mx-auto full-height rounded-borders" style="max-width: 1140px; margin-top: 35px; max-height: 723px; border: 3px dashed #CCC;" :srcdoc="htmlCode" />
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -32,6 +38,7 @@ export default
     return {
       canvas: null,
       countryImage: '',
+      color: '#ff0000'
     };
   },
   computed:
@@ -97,7 +104,7 @@ export default
   <style>
     a
     {
-      color: #5498D7;
+      color: ${this.color};
       text-decoration: none;
     }
     a:hover
@@ -154,14 +161,17 @@ export default
       margin: 0 auto;
     }
     .jobintro {
-      border: 1px solid #eee;
-      background-color: #eef4fb;
+      border: 1px solid ${this.color}22;
+      background-color: ${this.color}11;
     }
     .jobdetails {
       border: 1px solid #eee;
     }
     .container {
       max-width: 700px;
+    }
+    h1 {
+      color: ${this.color}
     }
   </style>
 </head>
@@ -299,6 +309,17 @@ export default
 };
 </script>
 
+<style>
+  .q-card
+  {
+    width: 900px;
+    background-image: url("/images/macbook-mockup.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+</style>
+
 <i18n>
   {
     "en": {
@@ -314,7 +335,8 @@ export default
       "fulltime": "Full-time",
       "parttime": "Part-time",
       "apply_postmail": "Apply by regular post",
-      "apply_text": "apply now"
+      "apply_text": "apply now",
+      "tooltip": "Here you can adjust the main colour of your job advertisement."
     },
     "de": {
       "close": "Schließen",
@@ -329,7 +351,8 @@ export default
       "fulltime": "Vollzeit",
       "parttime": "Teilzeit",
       "apply_postmail": "Bewerbung per Post",
-      "apply_text": "jetzt bewerben"
+      "apply_text": "jetzt bewerben",
+      "tooltip": "Hier können sie die Hauptfarbe ihrer Stellenanzeige anpassen."
     }
   }
 </i18n>
