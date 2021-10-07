@@ -42,15 +42,15 @@
 
     <!-- URL -->
     <q-input v-model.trim="applyUrl" :label="$t('apply_url')" color="primary" bg-color="white" name="apply_url"
-             outlined dense :rules="[validURL]" hide-bottom-space :disabled="application" @keypress.enter="gotoNext"
+             outlined dense :rules="[validURL]" hide-bottom-space :disable="applyPost" @keypress.enter="gotoNext"
     />
 
     <!-- Email -->
     <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" bg-color="white" name="apply_email"
-             outlined dense :rules="[validEmail]" hide-bottom-space :disabled="application || (applyUrl && validURL(applyUrl) === true)" @keypress.enter="gotoNext"
+             outlined dense :rules="[validEmail]" hide-bottom-space :disable="applyPost" @keypress.enter="gotoNext"
     />
 
-    <q-checkbox v-model="application" :label="$t('application')" color="primary" name="application" />
+    <q-checkbox v-model="applyPost" :label="$t('apply_post')" color="primary" name="apply_post" />
 
     <!-- Reference -->
     <q-input v-model.trim="reference" :label="$t('reference')" color="primary" bg-color="white" name="reference"
@@ -155,15 +155,15 @@ export default
             this[SET_FIELD]({ applyEmail: val });
           }
         },
-      application:
+      applyPost:
         {
           get()
           {
-            return this[GET_FORM].application;
+            return this[GET_FORM].applyPost;
           },
           set(val)
           {
-            this[SET_FIELD]({ application: val });
+            this[SET_FIELD]({ applyPost: val });
           }
         },
       reference:
@@ -225,7 +225,7 @@ export default
       "location": "Location",
       "apply_url": "Apply URL",
       "apply_email": "Apply e-mail",
-      "application": "Application",
+      "apply_post": "No online application/postal application",
       "reference": "Reference"
     },
     "de": {
@@ -235,7 +235,7 @@ export default
       "location": "Ort",
       "apply_url": "Bewerbungslink",
       "apply_email": "Bewerbungsemail",
-      "application": "nur postalisch",
+      "apply_post": "keine Onlinebewerbung/postalische Bewerbungen",
       "reference": "Referenz"
     }
   }

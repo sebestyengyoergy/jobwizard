@@ -55,7 +55,7 @@ export default
       },
       htmlApply()
       {
-        return this[GET_FORM].application
+        return this[GET_FORM].applyPost
           ? this.$t('apply_postmail')
           : this[GET_FORM].applyURL
             ? `<a href="${this[GET_FORM].applyURL}" target="_blank" rel="noopener noreferrer">${this.$t('apply_text')}</a>`
