@@ -11,7 +11,7 @@
         </q-btn>
       </q-card-actions>
       <q-card-section class="col-grow overflow-hidden row q-pa-md">
-        <iframe class="col-grow q-mx-auto full-height rounded-borders" style="max-width: 1140px; margin-top: 35px; max-height: 723px; border: 3px dashed #CCC;" :srcdoc="htmlCode" />
+        <iframe class="col-grow q-mx-auto rounded-borders" style="max-width: 55vw; max-height: 35vw; margin-top: 4vw; border: 3px dashed #CCC;" :srcdoc="htmlCode" />
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -38,7 +38,7 @@ export default
     return {
       canvas: null,
       countryImage: '',
-      color: '#ff0000'
+      color: '#5498D7'
     };
   },
   computed:
@@ -312,11 +312,11 @@ export default
 <style>
   .q-card
   {
-    width: 900px;
     background-image: url("/images/macbook-mockup.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
+    background-size: 75vw;
   }
 </style>
 

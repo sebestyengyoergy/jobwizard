@@ -22,7 +22,7 @@ const emptyForm = {
   applyEmail: '',
   applyPost: false,
   reference: '',
-  introLabel: 'test',
+  introLabel: '',
   intro: '',
   taskLabel: '',
   tasks: '',
