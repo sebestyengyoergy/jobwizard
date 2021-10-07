@@ -104,8 +104,8 @@ export default
             'realms/' + process.env.YAWIK_SSO_REALM +
             '/protocol/openid-connect/logout?redirect_uri=' +
             encodeURI(
-              window.location.origin + '/' +
-              (window.location.path ? (window.location.path + '/') : '/') +
+              window.location.origin +
+              (window.location.pathname ? (window.location.pathname + '/') : '/') +
               this.$root.$i18n.locale);
         }
         else
