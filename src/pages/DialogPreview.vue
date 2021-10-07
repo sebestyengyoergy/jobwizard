@@ -49,16 +49,12 @@ export default
       {
         return this[GET_HEADER] ? `<div class="flex" style="padding: 16px 0 0;"><img src="${this[GET_HEADER]}" class="img_header mx-auto"></div>` : '';
       },
-      htmlCountry()
-      {
-        return this.countryImage ? `<img src="${this.countryImage}" class="img_country">` : '';
-      },
       htmlApply()
       {
         return this[GET_FORM].applyPost
           ? this.$t('apply_postmail')
           : this[GET_FORM].applyURL
-            ? `<a href="${this[GET_FORM].applyURL}" target="_blank" rel="noopener noreferrer">${this.$t('apply_text')}</a>`
+            ? `<a href="${this[GET_FORM].applyURL}" class="mx-auto" target="_blank" rel="noopener noreferrer">${this.$t('apply_text')}</a>`
             : this[GET_FORM].applyEmail ? `<a href="mailto:${this[GET_FORM].applyEmail}">${this.$t('apply_text')}</a>` : '';
       },
       htmlIntro()
@@ -136,23 +132,13 @@ export default
       max-width: 100%;
       max-height: 220px;
     }
-    .img_country
-    {
-      max-width: 48px;
-    }
-        .items-center
+    .items-center
     {
       align-items: center;
     }
     .bold
     {
       font-weight: bold;
-    }
-    .list
-    {
-      margin: 4px 0;
-      padding-left: 25px;
-      list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -20 24 40' width='20' height='28'%3E%3Cpath d='M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z'%3E%3C/path%3E%3C/svg%3E");
     }
     section
     {
@@ -166,31 +152,47 @@ export default
     article
     {
       margin: 0 auto;
-      max-width: 1280px;
+    }
+    .jobintro {
+      border: 1px solid #eee;
+      background-color: #eef4fb;
+    }
+    .jobdetails {
+      border: 1px solid #eee;
+    }
+    .container {
+      max-width: 700px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container jobintro">
     <div class="row">
       <div class="three columns">${this.htmlLogo}</div>
       <div class="nine columns">
         <h5>${this[GET_FORM].organization || ''}</h5>
         <h1>${this[GET_FORM].jobTitle}</h1>
-        <div>${this.htmlCountry}</div>
-        <div>${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}</div>
+        <div>
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
+        </svg>
+        ${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H10V20.09L12.09,18H6V16H14.09L16.09,14H6V12H18.09L20,10.09V8L14,2H6M13,3.5L18.5,9H13V3.5M20.15,13C20,13 19.86,13.05 19.75,13.16L18.73,14.18L20.82,16.26L21.84,15.25C22.05,15.03 22.05,14.67 21.84,14.46L20.54,13.16C20.43,13.05 20.29,13 20.15,13M18.14,14.77L12,20.92V23H14.08L20.23,16.85L18.14,14.77Z" />
+        </svg>
+        ${[this[GET_FORM].workKind]}
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M17 11.5V13H11V7H12.5V11.5H17Z" />
+        </svg>
+        ${[this[GET_FORM].workDuration]}
+        </div>
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container jobdetails">
     <article>
       <!-- Applications -->
-      <div class="button button-primary">
-        ${this.htmlApply}
-      </div>
       ${this.htmlHeaderImage}
-
-      <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
       <!-- Parameters -->
       <div style="padding: 0 24px;">
         ${this.htmlIntro}
@@ -199,25 +201,13 @@ export default
         ${this.htmlOffer}
         ${this.htmlContacts}
       </div>
-      <!-- Work kind and duration -->
-      <div class="flex" style="padding-top: 25px;">
-        <div class="mx-auto flex">
-          <div>
-            <div class="bold">${this.$t('work_kind')}</div>
-            <ul class="list">
-              ${this.htmlWorkKind}
-            </ul>
-          </div>
-          <div style="border: 1px solid #DDD; border-width: 0 1px 0 1px; margin: 0 16px;"></div>
-          <div>
-            <div class="bold">${this.$t('work_duration')}</div>
-            <ul class="list">
-              ${this.htmlWorkDuration}
-            </ul>
-          </div>
-        </div>
-      </div>
     </article>
+    <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
+    <div class="row items-center">
+      <div class="six columns offset-by-three button button-primary">
+        ${this.htmlApply}
+      </div>
+    </h5>
   </div>
 </body>
 </html>`;
@@ -319,10 +309,8 @@ export default
       "profile": "Profile",
       "offer": "Offer",
       "contacts": "Contact info",
-      "work_kind": "Work kind",
       "freelance": "Freelance",
       "contract": "Contract",
-      "work_duration": "Duration",
       "fulltime": "Full-time",
       "parttime": "Part-time",
       "apply_postmail": "Apply by regular post",
@@ -335,11 +323,9 @@ export default
       "tasks": "Aufgaben",
       "profile": "Profil",
       "offer": "Angebot",
-      "contacts": "Kontact Info",
-      "work_kind": "Art der Anstellung",
+      "contacts": "Kontakt Info",
       "freelance": "Freie Mitarbeit",
       "contract": "Festanstellung",
-      "work_duration": "Pensum",
       "fulltime": "Vollzeit",
       "parttime": "Teilzeit",
       "apply_postmail": "Bewerbung per Post",
