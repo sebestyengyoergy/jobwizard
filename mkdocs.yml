@@ -1,7 +1,7 @@
-site_name: JobWizard
+site_name: Job Wizard
 site_description: Documentation JobWizard
 site_url: https://yawik.github.io/jobwizard/docs/
-copyright: 'Copyright &copy; 2021 Carsten Bleek'
+copyright: 'Copyright &copy; 2021 Yawik'
 repo_name: yawik/jobwizard
 repo_url: https://gitlab.com/yawik/JobWizard
 site_dir: build/docs

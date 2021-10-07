@@ -13,7 +13,8 @@
     "lintfix-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss} --fix",
     "prepare": "custompatch",
     "test": "npx cypress open",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "docs:serve": "mkdocs serve -a 0.0.0.0:8000"
   },
   "dependencies": {
     "@quasar/extras": "^1.10.8",
