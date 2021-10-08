@@ -2,8 +2,8 @@
   <q-drawer v-model="value" side="right" overlay bordered no-swipe-open no-swipe-close no-swipe-backdrop>
     <div class="text-secondary q-pb-md">
       <q-separator />
-      <DrawerButton :icon="GET_TOKEN ? 'mdi-logout' : 'mdi-login'" @click="value = false,showLogin()">{{ $t(GET_TOKEN ? 'logout' : 'login') }}</DrawerButton>
-      <template v-if="GET_TOKEN">
+      <DrawerButton :icon="isAuthenticated ? 'mdi-logout' : 'mdi-login'" @click="value = false,showLogin()">{{ $t(isAuthenticated ? 'logout' : 'login') }}</DrawerButton>
+      <template v-if="isAuthenticated">
         <q-separator />
         <DrawerButton icon="mdi-image-search" @click="value = false,dlgLogo = true">{{ $t('change_logo') }}</DrawerButton>
         <q-separator />
@@ -61,7 +61,12 @@ export default
           {
             this.$emit('update:modelValue', val);
           }
-        }
+        },
+      isAuthenticated()
+      {
+        const cloak = this[GET_TOKEN];
+        return cloak && cloak.authenticated;
+      }
     },
   methods:
   {

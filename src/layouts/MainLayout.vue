@@ -11,7 +11,7 @@
         <q-separator spaced vertical />
 
         <q-btn flat @click="showLogin">
-          {{ $t(GET_TOKEN ? 'logout' : 'login') }}
+          {{ $t(isAuthenticated ? 'logout' : 'login') }}
         </q-btn>
 
         <q-separator spaced vertical />
@@ -70,6 +70,11 @@ export default
       showFooter()
       {
         return !this.$route.query.hf;
+      },
+      isAuthenticated()
+      {
+        const cloak = this[GET_TOKEN];
+        return cloak && cloak.authenticated;
       }
     },
   created()
@@ -82,6 +87,17 @@ export default
     ).then(lang =>
     {
       this.$q.lang.set(lang.default);
+    });
+    const cloak = new window.Keycloak({
+      url: process.env.YAWIK_SSO_URL,
+      realm: process.env.YAWIK_SSO_REALM,
+      clientId: process.env.YAWIK_SSO_CLIENT,
+    });
+    cloak.init({
+      onLoad: 'check-sso'
+    }).then(() =>
+    {
+      this[SET_TOKEN](cloak);
     });
   },
   beforeUnmount()
@@ -97,32 +113,22 @@ export default
       },
       showLogin()
       {
-        if (this[GET_TOKEN])
+        if (this.isAuthenticated)
         {
-          this[SET_TOKEN](null);
           window.location.href = process.env.YAWIK_SSO_URL +
             'realms/' + process.env.YAWIK_SSO_REALM +
             '/protocol/openid-connect/logout?redirect_uri=' +
-            encodeURI(
-              window.location.origin +
-              (window.location.pathname ? (window.location.pathname + '/') : '/') +
-              this.$root.$i18n.locale);
+            encodeURI(window.location.href);
         }
         else
         {
-          //eventBus.emit(SHOW_LOGIN);
-          const cloak = new window.Keycloak({
-            url: process.env.YAWIK_SSO_URL,
-            realm: process.env.YAWIK_SSO_REALM,
-            clientId: process.env.YAWIK_SSO_CLIENT,
-          });
+          const cloak = this[GET_TOKEN];
           cloak.init({
             onLoad: 'login-required',
           }).then(authenticated =>
           {
             if (authenticated)
             {
-              this[SET_TOKEN](cloak);
               //Token Refresh
               this.clearTimer();
               this.tokenTimer = setInterval(() =>

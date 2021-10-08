@@ -12,7 +12,7 @@ export default function(/* { ssrContext } */)
       [
         createPersistedState({
           key: 'yavik',
-          paths: ['yawik.form', 'yawik.token']
+          paths: ['yawik.form']
         })
       ],
     // enable strict mode (adds overhead!)
