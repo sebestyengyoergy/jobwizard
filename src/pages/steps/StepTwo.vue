@@ -1,29 +1,57 @@
 <template>
   <div class="q-gutter-md">
     <!-- Logo -->
-    <q-file v-model="fileLogo" :label="$t('logo')" name="logo" accept="image/*" clearable dense outlined color="primary" bg-color="white">
-      <template #prepend>
-        <q-icon name="mdi-paperclip" />
-      </template>
-    </q-file>
-    <q-item>
-      <q-item-section side>
-        <q-btn size="30px" :ripple="false" class="img_logo">
+    <div class="row">
+      <q-uploader
+        hide-upload-btn
+        accept="image/*"
+        style="max-width: 220px;"
+        :max-total-size="1e7"
+        :max-files="1"
+        :label="$t('choose_logo')"
+        @rejected="rejectedFiles"
+        @added="logoAdded"
+        @removed="logoRemoved"
+      />
+      <!--
+      <q-file v-model="fileLogo" :label="$t('logo')" name="logo" accept="image/*" clearable dense outlined color="primary" bg-color="white">
+        <template #prepend>
+          <q-icon name="mdi-paperclip" />
+        </template>
+      </q-file>
+      -->
+      <q-card class="q-ml-lg self-center" style="min-width: 180px; min-height: 180px;">
+        <q-card-section class="text-center">
           <img v-if="imageLogo" :src="imageLogo" class="img_logo">
-        </q-btn>
-      </q-item-section>
-      <q-item-section>
-        <q-item-label caption>{{ GET_FORM.organization || '' }}</q-item-label>
-        <q-item-label>{{ GET_FORM.jobTitle }}</q-item-label>
-      </q-item-section>
-    </q-item>
+        </q-card-section>
+      </q-card>
+      <q-item>
+        <q-item-section>
+          <q-item-label caption>{{ GET_FORM.organization || '' }}</q-item-label>
+          <q-item-label>{{ GET_FORM.jobTitle }}</q-item-label>
+        </q-item-section>
+      </q-item>
+    </div>
 
     <!-- Header image -->
+    <q-uploader
+      hide-upload-btn
+      accept="image/*"
+      style="max-height: 400px;"
+      :max-total-size="1e7"
+      :max-files="1"
+      :label="$t('choose_header')"
+      @rejected="rejectedFiles"
+      @added="headerAdded"
+      @removed="headerRemoved"
+    />
+    <!--
     <q-file v-model="fileHeader" :label="$t('header')" name="header" accept="image/*" clearable dense outlined color="primary" bg-color="white">
       <template #prepend>
         <q-icon name="mdi-paperclip" />
       </template>
     </q-file>
+    -->
     <div class="row">
       <img v-if="imageHeader" :src="imageHeader" class="img_header q-mx-auto">
     </div>
@@ -107,8 +135,8 @@ export default
   data()
   {
     return {
-      fileLogo: null,
-      fileHeader: null,
+      // fileLogo: null,
+      // fileHeader: null,
       toolbar: [
         ['left', 'justify'],
         ['bold', 'italic'],
@@ -260,6 +288,7 @@ export default
       {
         this.setFocus();
       },
+      /*
       fileLogo(file)
       {
         this.readFile(file).then(b64 =>
@@ -274,6 +303,7 @@ export default
           this.imageHeader = b64;
         });
       }
+      */
     },
   mounted()
   {
@@ -301,6 +331,37 @@ export default
           }
         });
       },
+      rejectedFiles(files)
+      {
+        this.$q.notify({
+          color: 'negative',
+          position: 'top',
+          icon: 'mdi-alert',
+          message: this.$t('image_rejected'),
+        });
+      },
+      logoAdded(files)
+      {
+        this.readFile(files[0]).then(b64 =>
+        {
+          this.imageLogo = b64;
+        });
+      },
+      logoRemoved(files)
+      {
+        this.imageLogo = '';
+      },
+      headerAdded(files)
+      {
+        this.readFile(files[0]).then(b64 =>
+        {
+          this.imageHeader = b64;
+        });
+      },
+      headerRemoved(files)
+      {
+        this.imageHeader = '';
+      },
     }
 };
 </script>
@@ -308,7 +369,7 @@ export default
 <style>
   .img_logo
   {
-    width: 150px;
+    max-width: 150px;
     max-height: 150px;
   }
 
@@ -317,6 +378,7 @@ export default
     max-width: 100%;
     max-height: 220px;
   }
+
 </style>
 
 <i18n>
@@ -328,7 +390,10 @@ export default
       "tasks": "Tasks",
       "profile": "Profile",
       "offer": "Offer",
-      "contact_info": "Contact info"
+      "contact_info": "Contact info",
+      "image_rejected": "File too big - above 10Mb",
+      "choose_logo": "Choose company logo",
+      "choose_header": "Choose a header image"
     },
     "de": {
       "logo": "Logo",
