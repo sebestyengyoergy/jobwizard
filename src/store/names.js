@@ -11,6 +11,7 @@ export const GET_FORM = 'GET_FORM';
 export const GET_LOGO = 'GET_LOGO';
 export const GET_HEADER = 'GET_HEADER';
 export const GET_TOKEN = 'GET_TOKEN';
+export const HAS_AUTH = 'HAS_AUTH';
 
 // mutations
 export const SET_STEP = 'SET_STEP';

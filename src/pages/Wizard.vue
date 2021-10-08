@@ -121,7 +121,7 @@ export default
           this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
           this.validateStep(oldVal);
         });
-      }
+      },
     },
   created()
   {
@@ -217,7 +217,7 @@ export default
       abortForm()
       {
         this[CLEAR_FORM]();
-      }
+      },
     }
 };
 </script>

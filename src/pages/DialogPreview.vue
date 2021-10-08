@@ -3,11 +3,14 @@
     <q-card flat class="bg-third column overflow-hidden">
       <q-card-actions class="bg-primary text-white q-py-sm" align="center">
         <q-btn color="secondary" @click="close">{{ $t('close') }}</q-btn>
-        <q-btn>
+        <q-btn color="white">
+          <div :style="colorBlock" />
+          <q-popup-proxy v-model="dlgColor" transition-show="scale" transition-hide="scale" style="max-height: none !important; transform: translateY(50px);">
+            <q-color v-model="color" no-header no-footer default-view="palette" style="max-width: 250px;" @change="dlgColor = false" />
+          </q-popup-proxy>
           <q-tooltip>
             {{ $t('tooltip') }}
           </q-tooltip>
-          <input v-model="color" type="color">
         </q-btn>
       </q-card-actions>
       <q-card-section class="col-grow overflow-hidden row q-pa-md">
@@ -38,12 +41,22 @@ export default
     return {
       canvas: null,
       countryImage: '',
-      color: '#5498D7'
+      color: '#5498D7',
+      dlgColor: false,
     };
   },
   computed:
     {
       ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
+      colorBlock()
+      {
+        return {
+          border: '1px solid black',
+          backgroundColor: this.color,
+          width: '100%',
+          height: '16px',
+        };
+      },
       country()
       {
         return this[GET_FORM].country;

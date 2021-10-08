@@ -10,8 +10,8 @@
 
         <q-separator spaced vertical />
 
-        <q-btn flat @click="showLogin">
-          {{ $t(isAuthenticated ? 'logout' : 'login') }}
+        <q-btn flat @click="toggleLogin">
+          {{ $t(HAS_AUTH ? 'logout' : 'login') }}
         </q-btn>
 
         <q-separator spaced vertical />
@@ -28,7 +28,6 @@
       </router-view>
     </q-page-container>
     <PageFooter v-if="showFooter" />1
-    <DialogLogin />
   </q-layout>
 </template>
 
@@ -37,9 +36,8 @@ import PageFooter from '../components/PageFooter';
 import SwitchLanguage from '../components/SwitchLanguage';
 import SidebarDrawer from '../components/Drawer.vue';
 import LogoPanel from '../components/Logo';
-import DialogLogin from '../components/dialogs/DialogLogin';
-import eventBus, { AJAX_FAILED } from 'src/lib/eventBus';
-import { GET_TOKEN, SET_TOKEN } from '../store/names';
+import eventBus, { AJAX_FAILED, TOGGLE_LOGIN } from 'src/lib/eventBus';
+import { GET_TOKEN, SET_TOKEN, HAS_AUTH } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default
@@ -51,7 +49,6 @@ export default
       SidebarDrawer,
       LogoPanel,
       SwitchLanguage,
-      DialogLogin,
     },
   data()
   {
@@ -62,7 +59,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_TOKEN]),
+      ...mapGetters([GET_TOKEN, HAS_AUTH]),
       showToolbar()
       {
         return !this.$route.query.tb;
@@ -71,14 +68,10 @@ export default
       {
         return !this.$route.query.hf;
       },
-      isAuthenticated()
-      {
-        const cloak = this[GET_TOKEN];
-        return cloak && cloak.authenticated;
-      }
     },
   created()
   {
+    eventBus.on(TOGGLE_LOGIN, this.toggleLogin);
     const lang = this.$route.params.lang;
     this.$root.$i18n.locale = lang;
     import(
@@ -102,6 +95,7 @@ export default
   },
   beforeUnmount()
   {
+    eventBus.off(TOGGLE_LOGIN, this.toggleLogin);
     this.clearTimer();
   },
   methods:
@@ -111,9 +105,9 @@ export default
       {
         if (this.tokenTimer) clearInterval(this.tokenTimer);
       },
-      showLogin()
+      toggleLogin()
       {
-        if (this.isAuthenticated)
+        if (this[HAS_AUTH])
         {
           window.location.href = process.env.YAWIK_SSO_URL +
             'realms/' + process.env.YAWIK_SSO_REALM +

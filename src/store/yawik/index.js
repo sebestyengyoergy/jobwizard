@@ -4,6 +4,7 @@ import {
   GET_LOGO,
   GET_HEADER,
   GET_TOKEN,
+  HAS_AUTH,
   CLEAR_FORM,
   SET_STEP,
   SET_FIELD,
@@ -69,6 +70,10 @@ export default
       [GET_TOKEN](state)
       {
         return state.token;
+      },
+      [HAS_AUTH](state)
+      {
+        return state.token && state.token.authenticated;
       },
     },
   mutations:

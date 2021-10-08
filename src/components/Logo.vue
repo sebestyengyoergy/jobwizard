@@ -17,6 +17,13 @@ export default
           type: String,
           required: true
         },
+    },
+  computed:
+    {
+      urlHome()
+      {
+        return process.env.YAWIK_URL_HOME;
+      }
     }
 };
 </script>
