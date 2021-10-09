@@ -357,7 +357,7 @@ export default
 <style>
   .desktop
   {
-    background-image: url("/images/macbook-mockup.png");
+    background-image: url("../assets/images/macbook-mockup.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
@@ -366,7 +366,7 @@ export default
 
   .mobile
   {
-    background-image: url("/images/iphone-mockup.png");
+    background-image: url("../assets/images/iphone-mockup.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
