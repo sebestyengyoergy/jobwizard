@@ -12,9 +12,18 @@
             {{ $t('tooltip') }}
           </q-tooltip>
         </q-btn>
+        <q-btn-toggle
+          v-model="mode"
+          toggle-color="primary"
+          :options="[
+            {label: 'Mobil', value: 'mobile'},
+            {label: 'Desktop', value: 'desktop'},
+            {label: 'Fullscreen', value: 'screen'}
+          ]"
+        />
       </q-card-actions>
-      <q-card-section class="col-grow overflow-hidden row q-pa-md">
-        <iframe class="col-grow q-mx-auto rounded-borders" style="max-width: 55vw; max-height: 35vw; margin-top: 4vw; border: 3px dashed #CCC;" :srcdoc="htmlCode" />
+      <q-card-section :class="'col-grow overflow-hidden row q-pa-md mx-auto '+mode">
+        <iframe class="col-grow q-mx-auto rounded-borders fixed-center" :style="frameStyle" :srcdoc="htmlCode" />
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -43,6 +52,7 @@ export default
       countryImage: '',
       color: '#5498D7',
       dlgColor: false,
+      mode: 'mobile'
     };
   },
   computed:
@@ -61,13 +71,21 @@ export default
       {
         return this[GET_FORM].country;
       },
+      frameStyle()
+      {
+        return this.mode === 'mobile'
+          ? 'width: 25.5%; margin-top: 0.2vw; height: 53.2vw;'
+          : this.mode === 'desktop'
+            ? 'width: 60%; margin-top: -2.5vw; height: 38vw;'
+            : 'width: 100%; height: 80%';
+      },
       htmlLogo()
       {
         return this[GET_LOGO] ? `<img src="${this[GET_LOGO]}" class="img_logo">` : '';
       },
       htmlHeaderImage()
       {
-        return this[GET_HEADER] ? `<div class="flex" style="padding: 16px 0 0;"><img src="${this[GET_HEADER]}" class="img_header mx-auto"></div>` : '';
+        return this[GET_HEADER] ? `<div class="flex" style="width: 100%; padding: 16px 0 0;"><img src="${this[GET_HEADER]}" class="img_header mx-auto"></div>` : '';
       },
       htmlApply()
       {
@@ -149,7 +167,7 @@ export default
     }
     .img_header
     {
-      max-width: 100%;
+      width: 100%;
       max-height: 220px;
     }
     .items-center
@@ -172,25 +190,40 @@ export default
     article
     {
       margin: 0 auto;
+      width: 100%;
     }
-    .jobintro {
-      border: 1px solid ${this.color}22;
+    .job
+    {
+      border: 1px solid ${this.color}66;
+      margin: 0 auto;
+      max-width:1200px;
+    }
+    .intro {
+      width: 100%;
+      border: 1px solid ${this.color}66;
       background-color: ${this.color}11;
     }
     .jobdetails {
-      border: 1px solid #eee;
-    }
-    .container {
-      max-width: 700px;
+      border: 1px solid ${this.color}66;
     }
     h1 {
       color: ${this.color}
     }
+    .button.button-primary, button.button-primary {
+      color: #FFF;
+      background-color:  ${this.color};
+      border-color:  ${this.color}55;
+    }
+    .button.button-primary:hover, button.button-primary:hover {
+      color: #FFF;
+      background-color:  ${this.color}DD;
+      border-color:  ${this.color}11;
+    }
   </style>
 </head>
 <body>
-  <div class="container jobintro">
-    <div class="row">
+  <div class="job">
+    <div class="row intro">
       <div class="three columns">${this.htmlLogo}</div>
       <div class="nine columns">
         <h5>${this[GET_FORM].organization || ''}</h5>
@@ -210,27 +243,26 @@ export default
         ${[this[GET_FORM].workDuration]}
         </div>
       </div>
-    </div>
-  </div>
-  <div class="container jobdetails">
-    <article>
-      <!-- Applications -->
       ${this.htmlHeaderImage}
-      <!-- Parameters -->
-      <div style="padding: 0 24px;">
-        ${this.htmlIntro}
-        ${this.htmlTasks}
-        ${this.htmlProfile}
-        ${this.htmlOffer}
-        ${this.htmlContacts}
-      </div>
-    </article>
-    <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
-    <div class="row items-center">
-      <div class="six columns offset-by-three button button-primary">
-        ${this.htmlApply}
-      </div>
-    </h5>
+    </div>
+    <div class="row details">
+      <article>
+        <!-- Parameters -->
+        <div style="padding: 0 24px;">
+          ${this.htmlIntro}
+          ${this.htmlTasks}
+          ${this.htmlProfile}
+          ${this.htmlOffer}
+          ${this.htmlContacts}
+        </div>
+        <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
+        <div class="row items-center">
+          <div class="six columns offset-by-three button button-primary">
+            ${this.htmlApply}
+          </div>
+        </div>
+      </article>
+    </div>
   </div>
 </body>
 </html>`;
@@ -323,13 +355,22 @@ export default
 </script>
 
 <style>
-  .q-card
+  .desktop
   {
     background-image: url("/images/macbook-mockup.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
-    background-size: 75vw;
+    background-size: 80%;
+  }
+
+  .mobile
+  {
+    background-image: url("/images/iphone-mockup.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: 30%;
   }
 </style>
 

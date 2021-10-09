@@ -5,7 +5,7 @@
       <q-uploader
         hide-upload-btn
         accept="image/*"
-        style="max-width: 220px;"
+        style="max-width: 220px; height: 220px;"
         :max-total-size="1e7"
         :max-files="1"
         :label="$t('choose_logo')"
@@ -13,18 +13,6 @@
         @added="logoAdded"
         @removed="logoRemoved"
       />
-      <!--
-      <q-file v-model="fileLogo" :label="$t('logo')" name="logo" accept="image/*" clearable dense outlined color="primary" bg-color="white">
-        <template #prepend>
-          <q-icon name="mdi-paperclip" />
-        </template>
-      </q-file>
-      -->
-      <q-card class="q-ml-lg self-center" style="min-width: 180px; min-height: 180px;">
-        <q-card-section class="text-center">
-          <img v-if="imageLogo" :src="imageLogo" class="img_logo">
-        </q-card-section>
-      </q-card>
       <q-item>
         <q-item-section>
           <q-item-label caption>{{ GET_FORM.organization || '' }}</q-item-label>
@@ -37,7 +25,7 @@
     <q-uploader
       hide-upload-btn
       accept="image/*"
-      style="max-height: 400px;"
+      style="max-height: 400px; min-height: 200px; width: 100%;"
       :max-total-size="1e7"
       :max-files="1"
       :label="$t('choose_header')"
@@ -45,16 +33,6 @@
       @added="headerAdded"
       @removed="headerRemoved"
     />
-    <!--
-    <q-file v-model="fileHeader" :label="$t('header')" name="header" accept="image/*" clearable dense outlined color="primary" bg-color="white">
-      <template #prepend>
-        <q-icon name="mdi-paperclip" />
-      </template>
-    </q-file>
-    -->
-    <div class="row">
-      <img v-if="imageHeader" :src="imageHeader" class="img_header q-mx-auto">
-    </div>
 
     <!-- Intro -->
     <div class="cursor-pointer">
@@ -288,22 +266,6 @@ export default
       {
         this.setFocus();
       },
-      /*
-      fileLogo(file)
-      {
-        this.readFile(file).then(b64 =>
-        {
-          this.imageLogo = b64;
-        });
-      },
-      fileHeader(file)
-      {
-        this.readFile(file).then(b64 =>
-        {
-          this.imageHeader = b64;
-        });
-      }
-      */
     },
   mounted()
   {
@@ -369,8 +331,8 @@ export default
 <style>
   .img_logo
   {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 220px;
+    max-height: 220px;
   }
 
   .img_header
