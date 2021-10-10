@@ -14,7 +14,7 @@
         </q-btn>
         <q-btn-toggle
           v-model="mode"
-          toggle-color="primary"
+          toggle-color="secondary"
           :options="[
             {label: 'Mobil', value: 'mobile'},
             {label: 'Desktop', value: 'desktop'},
@@ -52,7 +52,7 @@ export default
       countryImage: '',
       color: '#5498D7',
       dlgColor: false,
-      mode: 'mobile'
+      mode: 'desktop'
     };
   },
   computed:

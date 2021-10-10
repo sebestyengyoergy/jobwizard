@@ -90,6 +90,7 @@ export default
       onLoad: 'check-sso'
     }).then(() =>
     {
+      console.log('Hallo Set Token', cloak);
       this[SET_TOKEN](cloak);
     });
   },
@@ -123,6 +124,7 @@ export default
           {
             if (authenticated)
             {
+              console.log('Hallo Has Auth');
               //Token Refresh
               this.clearTimer();
               this.tokenTimer = setInterval(() =>
