@@ -36,8 +36,11 @@ const emptyForm = {
   workKind: [],
   workDuration: [],
   acceptTerms: false,
-  salary: '',
-  salaryVisibility: false
+  salary: {
+    label: '40.000€ - 60.000€',
+    value: '40|60'
+  },
+  salaryVisibility: true
 };
 
 export default

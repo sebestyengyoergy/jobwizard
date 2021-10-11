@@ -22,7 +22,7 @@
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('salary.label') }}</div>
-        <q-select v-model="salary" :options="options" outlined :label="Filled" />
+        <q-select v-model="salary" :options="options" outlined />
       </div>
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('salary.visibility') }}</div>
