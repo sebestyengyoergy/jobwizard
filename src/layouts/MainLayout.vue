@@ -39,10 +39,33 @@ import LogoPanel from '../components/Logo';
 import eventBus, { AJAX_FAILED, TOGGLE_LOGIN } from 'src/lib/eventBus';
 import { GET_TOKEN, SET_TOKEN, HAS_AUTH } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
+import { useMeta } from 'quasar';
+
+const metaData = {
+  title: 'JobWizard',
+  titleTemplate: title => `${title} - Stellenanzeigen einfach auf Google veröffentlichen`,
+  meta: {
+    description: {
+      name: 'description',
+      content: 'Der Yawik Jobwizard ist ein Generator für Stellenanzeigen, die mobil und auf dem Desktop gut aussehen und die Sie auf Google Jobs schalten können'
+    },
+    keywords: {
+      name: 'keywords',
+      content: 'Anzeigengenerator Stellenanzeigen Google Jobs'
+    }
+  },
+  noscript: {
+    default: 'Der Yawik Anzeigengenerator benötigt Javascript'
+  }
+};
 
 export default
 {
   name: 'MainLayout',
+  setup()
+  {
+    useMeta(metaData);
+  },
   components:
     {
       PageFooter,
@@ -68,6 +91,10 @@ export default
       {
         return !this.$route.query.hf;
       },
+      metaTitle()
+      {
+        return this.$t('metaTitle');
+      }
     },
   created()
   {
@@ -90,7 +117,6 @@ export default
       onLoad: 'check-sso'
     }).then(() =>
     {
-      console.log('Hallo Set Token', cloak);
       this[SET_TOKEN](cloak);
     });
   },
@@ -175,7 +201,17 @@ export default
   {
     "en": {
       "login": "Login",
-      "logout": "Logout"
+      "logout": "Logout",
+      "metaTitle": "",
+      "meta-description": "The Jobwizard is a generator for job ads that look good on mobile and desktop that you can post on Google Jobs",
+      "meta-keyword": "Job ads, ad generator, Google Jobs"
+    },
+    "de": {
+      "login": "Anmelden",
+      "logout": "Abmelden",
+      "meta-title": "",
+      "meta-description": "Der Jobwizard ist ein Generator für Stellenanzeigen, die mobil und auf dem Desktop gut aussehen und die Sie auf Google Jobs schalten können",
+      "meta-keyword": "Stellenanzeigen, Anzeigengenerator, Google Jobs"
     }
   }
 </i18n>
