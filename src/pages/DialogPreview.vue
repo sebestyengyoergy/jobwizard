@@ -85,7 +85,10 @@ export default
       },
       htmlHeaderImage()
       {
-        return this[GET_HEADER] ? `<div class="flex" style="width: 100%; padding: 16px 0 0;"><img src="${this[GET_HEADER]}" class="img_header mx-auto"></div>` : '';
+        return this[GET_HEADER]
+          ? `<div class="flex" style="width: 100%; padding: 16px 0 0;">
+          <img src="${this[GET_HEADER]}" class="img_header mx-auto"></div>`
+          : '';
       },
       htmlApply()
       {
@@ -117,11 +120,23 @@ export default
       },
       htmlWorkKind()
       {
-        return this[GET_FORM].workKind.length > 0 ? this[GET_FORM].workKind.map(item => `<li>${this.$t(item)}</li>`).join('') : '';
+        return this[GET_FORM].workKind.length > 0
+          ? this[GET_FORM].workKind.map(item => `${this.$t(item)}`).join(', ')
+          : '';
       },
       htmlWorkDuration()
       {
-        return this[GET_FORM].workDuration.length > 0 ? this[GET_FORM].workDuration.map(item => `<li>${this.$t(item)}</li>`).join('') : '';
+        return this[GET_FORM].workDuration.length > 0
+          ? '<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M17 11.5V13H11V7H12.5V11.5H17Z" /></svg>' +
+          this[GET_FORM].workDuration.map(item => `${this.$t(item)}`).join(', ')
+          : '';
+      },
+      htmlSalary()
+      {
+        return !this[GET_FORM].salaryVisibility
+          ? '<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" /></svg>' +
+          this[GET_FORM].salary.value.split('|').map(item => item + '.000€').join(' - ')
+          : '';
       },
       htmlCode()
       {
@@ -203,6 +218,14 @@ export default
       border: 1px solid ${this.color}66;
       background-color: ${this.color}11;
     }
+    .info {
+
+    }
+    .info svg {
+      color: ${this.color}88;
+      vertical-align: bottom;
+      margin-right: 5px;
+    }
     .jobdetails {
       border: 1px solid ${this.color}66;
     }
@@ -228,19 +251,13 @@ export default
       <div class="nine columns">
         <h5>${this[GET_FORM].organization || ''}</h5>
         <h1>${this[GET_FORM].jobTitle}</h1>
-        <div>
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" />
-        </svg>
+        <div class="info">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
         ${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H10V20.09L12.09,18H6V16H14.09L16.09,14H6V12H18.09L20,10.09V8L14,2H6M13,3.5L18.5,9H13V3.5M20.15,13C20,13 19.86,13.05 19.75,13.16L18.73,14.18L20.82,16.26L21.84,15.25C22.05,15.03 22.05,14.67 21.84,14.46L20.54,13.16C20.43,13.05 20.29,13 20.15,13M18.14,14.77L12,20.92V23H14.08L20.23,16.85L18.14,14.77Z" />
-        </svg>
-        ${[this[GET_FORM].workKind]}
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-          <path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M17 11.5V13H11V7H12.5V11.5H17Z" />
-        </svg>
-        ${[this[GET_FORM].workDuration]}
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H10V20.09L12.09,18H6V16H14.09L16.09,14H6V12H18.09L20,10.09V8L14,2H6M13,3.5L18.5,9H13V3.5M20.15,13C20,13 19.86,13.05 19.75,13.16L18.73,14.18L20.82,16.26L21.84,15.25C22.05,15.03 22.05,14.67 21.84,14.46L20.54,13.16C20.43,13.05 20.29,13 20.15,13M18.14,14.77L12,20.92V23H14.08L20.23,16.85L18.14,14.77Z" /></svg>
+        ${this.htmlWorkKind}
+        ${this.htmlWorkDuration}
+        ${this.htmlSalary}
         </div>
       </div>
       ${this.htmlHeaderImage}
@@ -296,6 +313,16 @@ export default
               addressCountry: this[GET_FORM].country,
             }
           },
+          baseSalary: {
+            '@type': 'MonetaryAmount',
+            currency: 'EUR',
+            value: {
+              '@type': 'QuantitativeValue',
+              minValue: this[GET_FORM].salary.value.split('|').map(item => item + '000')[0],
+              maxValue: this[GET_FORM].salary.value.split('|').map(item => item + '000')[1],
+              unitText: 'YEAR'
+            }
+          }
         };
         if (this.employment.length > 0) result.employmentType = this.employment;
         if (this[GET_FORM].applyURL) result.directApply = true;
@@ -394,7 +421,7 @@ export default
     },
     "de": {
       "close": "Schließen",
-      "jobad_wizard": "Job ad Wizard",
+      "jobad_wizard": "Jobad Wizard",
       "intro": "Einleitung",
       "tasks": "Aufgaben",
       "profile": "Profil",

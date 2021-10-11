@@ -77,7 +77,7 @@ export default
   {
     return {
       showDrawer: false,
-      tokenTimer: null,
+      tokenTimer: null
     };
   },
   computed:
@@ -90,10 +90,6 @@ export default
       showFooter()
       {
         return !this.$route.query.hf;
-      },
-      metaTitle()
-      {
-        return this.$t('metaTitle');
       }
     },
   created()
@@ -201,17 +197,11 @@ export default
   {
     "en": {
       "login": "Login",
-      "logout": "Logout",
-      "metaTitle": "",
-      "meta-description": "The Jobwizard is a generator for job ads that look good on mobile and desktop that you can post on Google Jobs",
-      "meta-keyword": "Job ads, ad generator, Google Jobs"
+      "logout": "Logout"
     },
     "de": {
       "login": "Anmelden",
-      "logout": "Abmelden",
-      "meta-title": "",
-      "meta-description": "Der Jobwizard ist ein Generator für Stellenanzeigen, die mobil und auf dem Desktop gut aussehen und die Sie auf Google Jobs schalten können",
-      "meta-keyword": "Stellenanzeigen, Anzeigengenerator, Google Jobs"
+      "logout": "Abmelden"
     }
   }
 </i18n>

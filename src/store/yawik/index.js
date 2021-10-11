@@ -36,6 +36,8 @@ const emptyForm = {
   workKind: [],
   workDuration: [],
   acceptTerms: false,
+  salary: '',
+  salaryVisibility: false
 };
 
 export default

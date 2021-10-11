@@ -1,7 +1,8 @@
 # Wizard for entering job ad
 
-Standalone wizard based on [quasar](https://quasar.dev/). It is a single page application (SPA) running in the 
-clients browser. The result is a static HTML content.
+Standalone wizard based on [quasar](https://quasar.dev/). It is a single page application (SPA) running in the  clients browser. The result is a static HTML content. 
+
+As an authenticated user it's possible to save the job.
 
 ## Task description
 
@@ -33,7 +34,8 @@ The form is .env-aware.
 |------------------------------|-------------------------------------|
 | YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
 | YAWIK_APP_KEY                | Shared App Key                      |
-| YAWIK_API_URL                | Yawik API                           |  
+| YAWIK_API_URL                | Yawik API                           |
+| YAWIK_ROUTER_BASE            | Router Base of the web app          |
 | YAWIK_SSO_URL                | Keycloak base URL                   |  
 | YAWIK_SSO_REALM              | Keycloak realm                      |  
 | YAWIK_SSO_CLIENT             | Keycloak application ID             |  
@@ -42,7 +44,7 @@ It's possible to show a toolbar with the Logo and a navigation drawer by using q
 
 | Param        | Description       |
 |--------------|-------------------|
-| tb           | show toolbar      |  
+| tb           | hide toolbar      |  
 
 ## Demo
 

@@ -19,6 +19,16 @@
         </q-field>
       </div>
     </div>
+    <div class="q-col-gutter-sm row">
+      <div class="col-6 column">
+        <div class="q-pb-sm">{{ $t('salary.label') }}</div>
+        <q-select v-model="salary" :options="options" outlined :label="Filled" />
+      </div>
+      <div class="col-6 column">
+        <div class="q-pb-sm">{{ $t('salary.visibility') }}</div>
+        <q-checkbox v-model="salaryVisibility" :label="$t('salary.visibility')" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -31,6 +41,41 @@ export default
 {
   name: 'StepThree',
   mixins: [mixinValidations],
+  data()
+  {
+    return {
+      options: [
+        {
+          label: '<20.000€',
+          value: '20|'
+        },
+        {
+          label: '20.000€ - 40.000€',
+          value: '20|40'
+        },
+        {
+          label: '40.000€ - 60.000€',
+          value: '40|60'
+        },
+        {
+          label: '60.000€ - 80.000€',
+          value: '60|80'
+        },
+        {
+          label: '80.000€ - 100.000€',
+          value: '80|100'
+        },
+        {
+          label: '100.000€ - 120.000€',
+          value: '100|120'
+        },
+        {
+          label: '>120.000€',
+          value: '|120'
+        }
+      ]
+    };
+  },
   computed:
     {
       ...mapGetters([GET_FORM]),
@@ -67,6 +112,14 @@ export default
             value: 'contract',
             label: this.$t('work_kind.options.contract')
           },
+          {
+            value: 'internship',
+            label: this.$t('work_kind.options.internship')
+          },
+          {
+            value: 'apprenticeship',
+            label: this.$t('work_kind.options.apprenticeship')
+          },
         ];
       },
       listDurations()
@@ -80,8 +133,35 @@ export default
             value: 'parttime',
             label: this.$t('work_duration.options.part_time')
           },
+          {
+            value: 'shiftwork',
+            label: this.$t('work_duration.options.shift_work')
+          },
         ];
       },
+      salary:
+        {
+          get()
+          {
+            return this[GET_FORM].salary;
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ salary: val });
+          }
+        },
+      salaryVisibility:
+        {
+          get()
+          {
+            return this[GET_FORM].salaryVisibility;
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ salaryVisibility: val });
+          }
+        },
+
     },
   methods:
     {
@@ -93,34 +173,50 @@ export default
 <i18n>
   {
     "en": {
+      "salary": {
+        "label": "Annual salary",
+        "visibility": "Hide salary in jobad"
+      },
+      "visibility": "Visibility",
       "work_kind": {
         "title": "Kind of work",
         "options": {
           "freelance": "Freelance",
-          "contract": "Contract"
+          "contract": "Contract",
+          "internship": "Internship",
+          "apprenticeship": "Apprenticeship",
         }
       },
       "work_duration": {
         "title": "Duration",
         "options": {
           "full_time": "Full-time",
-          "part_time": "Part-time"
+          "part_time": "Part-time",
+          "shift_work": "Shift work"
         }
       }
     },
     "de": {
+      "salary": {
+        "label": "Jahresgehalt",
+        "visibility": "Gehalt in Stellenanzeige ausblenden"
+      },
+      "visibility": "Sichtbarkeit",
       "work_kind": {
         "title": "Art der Anstellung",
         "options": {
           "freelance": "Freie Mitarbeit",
-          "contract": "Festanstellung"
+          "contract": "Festanstellung",
+          "internship": "Praktikum",
+          "apprenticeship": "Ausbildungsplatz",
         }
       },
       "work_duration": {
         "title": "Pensum",
         "options": {
           "full_time": "Vollzeit",
-          "part_time": "Teilzeit"
+          "part_time": "Teilzeit",
+          "shift_work": "Schichtarbeit"
         }
       }
     }
