@@ -413,8 +413,11 @@ export default
       "contacts": "Contact info",
       "freelance": "Freelance",
       "contract": "Contract",
+      "internship": "Internship",
+      "apprenticeship": "Apprenticeship",
       "fulltime": "Full-time",
       "parttime": "Part-time",
+      "shiftwork": "Shift work",
       "apply_postmail": "Apply by regular post",
       "apply_text": "apply now",
       "tooltip": "Here you can adjust the main colour of your job advertisement."
@@ -429,8 +432,11 @@ export default
       "contacts": "Kontakt Info",
       "freelance": "Freie Mitarbeit",
       "contract": "Festanstellung",
+      "internship": "Praktikum",
+      "apprenticeship": "Ausbildung",
       "fulltime": "Vollzeit",
       "parttime": "Teilzeit",
+      "shiftwork": "Schichtarbeit",
       "apply_postmail": "Bewerbung per Post",
       "apply_text": "jetzt bewerben",
       "tooltip": "Hier können sie die Hauptfarbe ihrer Stellenanzeige anpassen."

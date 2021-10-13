@@ -32,7 +32,21 @@
         <template #navigation>
           <div class="row justify-end q-px-lg q-pb-lg">
             <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('back')" class="q-mr-md" @click.stop="navigate('previous')" />
-            <q-btn v-if="lastStep" color="primary" name="next" :label="$t('download')" @click.stop="trySubmit" />
+            <q-btn v-if="lastStep & !hasAuth" color="primary" name="next" :label="$t('download')" @click.stop="trySubmit" />
+            <q-btn-dropdown v-if="lastStep & hasAuth" color="primary" name="next" :label="$t('save')">
+              <q-list>
+                <q-item v-close-popup clickable @click.stop="trySubmit">
+                  <q-item-section>
+                    <q-item-label>{{ $t('save') }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item v-close-popup clickable @click.stop="trySubmit">
+                  <q-item-section>
+                    <q-item-label>{{ $t('download') }}</q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-btn-dropdown>
             <q-btn v-else color="primary" name="next" :label="$t('continue')" @click.stop="navigate('next')" />
           </div>
         </template>
@@ -49,7 +63,7 @@ import StepOne from './steps/StepOne';
 import StepTwo from './steps/StepTwo';
 import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM } from '../store/names';
+import { GET_STEP, SET_STEP, CLEAR_FORM, HAS_AUTH } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
 
@@ -93,7 +107,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_STEP]),
+      ...mapGetters([GET_STEP, HAS_AUTH]),
       currentStep:
         {
           get()
@@ -109,6 +123,10 @@ export default
       {
         return Object.keys(this.validationErrors);
       },
+      hasAuth()
+      {
+        return this[HAS_AUTH];
+      }
     },
   watch:
     {
@@ -127,6 +145,7 @@ export default
   {
     // we have to update maxWidth on window resize
     window.addEventListener('resize', this.onResize, false);
+    this.hasAuth = this[HAS_AUTH];
   },
   mounted()
   {
@@ -143,7 +162,7 @@ export default
   },
   methods:
     {
-      ...mapMutations([SET_STEP, CLEAR_FORM]),
+      ...mapMutations([SET_STEP, CLEAR_FORM, HAS_AUTH]),
       onResize()
       {
         // limit the width of QEditor - otherwise it grows too much on typing
@@ -236,7 +255,8 @@ export default
       },
       "back": "Back",
       "continue": "Next",
-      "download": "Download"
+      "download": "Download",
+      "save": "Save"
     },
     "de": {
       "preview": "Vorschau",
@@ -250,7 +270,9 @@ export default
       },
       "back": "Zurück",
       "continue": "Weiter",
-      "download": "Download"
+      "download": "Download",
+      "save": "Speichern"
+
     }
   }
 </i18n>

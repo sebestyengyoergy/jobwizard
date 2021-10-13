@@ -352,19 +352,22 @@ export default
       "tasks": "Tasks",
       "profile": "Profile",
       "offer": "Offer",
-      "contact_info": "Contact info",
+      "contact_info": "Contact",
       "image_rejected": "File too big - above 10Mb",
       "choose_logo": "Choose company logo",
       "choose_header": "Choose a header image"
     },
     "de": {
       "logo": "Logo",
-      "header": "Header image",
+      "header": "Headerbild",
       "intro": "Unternehmensbeschreibung",
       "tasks": "Aufgaben",
       "profile": "Ihre Voraussetzungen",
       "offer": "Ihre Vorteile",
-      "contact_info": "Contact info"
+      "contact_info": "Kontakt",
+      "image_rejected": "Die Datei ist zu groß. über 10Mb",
+      "choose_logo": "Logo wählen",
+      "choose_header": "Header wählen"
     }
   }
 </i18n>
