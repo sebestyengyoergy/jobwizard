@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!hasAuth" class="text-center">
+    <div v-if="!$store.getters.HAS_AUTH" class="text-center">
       <h3>{{ $t('thank') }}</h3>
       <div>
         {{ $t('howtoDownload') }}
@@ -15,7 +15,7 @@
 
 <script>
 import PrivacyPolicy from 'src/components/PrivacyPolicy';
-import { GET_FORM, SET_FIELD, HAS_AUTH } from 'src/store/names';
+import { GET_FORM, SET_FIELD } from 'src/store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default
@@ -27,7 +27,7 @@ export default
     },
   computed:
     {
-      ...mapGetters([GET_FORM, HAS_AUTH]),
+      ...mapGetters([GET_FORM]),
       acceptTerms:
         {
           get()
@@ -38,11 +38,7 @@ export default
           {
             this[SET_FIELD]({ acceptTerms: val });
           }
-        },
-      hasAuth()
-      {
-        return this[HAS_AUTH];
-      }
+        }
     },
   methods:
     {
