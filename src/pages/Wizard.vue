@@ -47,7 +47,7 @@
                 </q-item>
               </q-list>
             </q-btn-dropdown>
-            <q-btn v-else color="primary" name="next" :label="$t('continue')" @click.stop="navigate('next')" />
+            <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('continue')" @click.stop="navigate('next')" />
           </div>
         </template>
       </q-stepper>
@@ -145,7 +145,7 @@ export default
   {
     // we have to update maxWidth on window resize
     window.addEventListener('resize', this.onResize, false);
-    this.hasAuth = this[HAS_AUTH];
+    this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
   },
   mounted()
   {
