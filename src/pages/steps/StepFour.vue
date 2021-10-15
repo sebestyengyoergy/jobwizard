@@ -1,6 +1,15 @@
 <template>
   <div>
-    <PrivacyPolicy v-model="acceptTerms" />
+    <div v-if="!$store.getters.HAS_AUTH" class="text-center">
+      <h3>{{ $t('thank') }}</h3>
+      <div>
+        {{ $t('howtoDownload') }}
+      </div>
+      <q-btn type="a" style="background-color: orange; margin-top: 20px;" glossy href="https://github.com/sponsors/cbleek" rounded size="xl">{{ $t('supportYawik') }}</q-btn>
+    </div>
+    <div v-else>
+      <PrivacyPolicy v-model="acceptTerms" />
+    </div>
   </div>
 </template>
 
@@ -37,3 +46,18 @@ export default
     }
 };
 </script>
+
+<i18n>
+  {
+    "en": {
+      "thank": "Thank you for using Yawik",
+      "howtoDownload": "You can now download your job advertisement. If you register, you will be able to save and publish your jobad.",
+      "supportYawik": "Support Yawik"
+    },
+    "de": {
+      "thank": "Danke, dass sie Yawik nutzen",
+      "howtoDownload": "Sie können nun ihre Stellenanzeige runterladen. Wenn sie sich registrieren, werden sie Ihre Anzeige speichern und veröffentlichen können.",
+      "supportYawik": "Yawik unterstützen"
+    }
+  }
+</i18n>
