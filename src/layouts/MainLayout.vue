@@ -2,9 +2,11 @@
   <q-layout view="lHh Lpr lFf" class="yawik">
     <q-header v-if="showToolbar" reveal class="bg-white text-primary">
       <q-toolbar>
+        <LogoPanel v-if="showToolbar" logo-url="https://form.yawik.org/yawik-logo.png" />
         <q-toolbar-title>
-          <LogoPanel v-if="showToolbar" logo-url="https://form.yawik.org/yawik-logo.png" />
+          <Breadcrumb />
         </q-toolbar-title>
+
         <q-separator spaced vertical />
         <SwitchLanguage class="q-mx-auto" />
 
@@ -18,6 +20,7 @@
 
         <q-btn dense flat round :icon="showDrawer ? 'mdi-menu' : 'mdi-menu-open'" @click="showDrawer = !showDrawer" />
       </q-toolbar>
+
       <SidebarDrawer v-model="showDrawer" />
     </q-header>
     <q-page-container style="overflow-x: hidden;">
@@ -34,6 +37,7 @@
 <script>
 import PageFooter from '../components/PageFooter';
 import SwitchLanguage from '../components/SwitchLanguage';
+import Breadcrumb from '../components/Breadcrumb';
 import SidebarDrawer from '../components/Drawer.vue';
 import LogoPanel from '../components/Logo';
 import eventBus, { AJAX_FAILED, TOGGLE_LOGIN } from 'src/lib/eventBus';
@@ -68,6 +72,7 @@ export default
   },
   components:
     {
+      Breadcrumb,
       PageFooter,
       SidebarDrawer,
       LogoPanel,

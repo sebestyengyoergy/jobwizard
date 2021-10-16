@@ -5,7 +5,7 @@
       <div>
         {{ $t('howtoDownload') }}
       </div>
-      <q-btn type="a" style="background-color: orange; margin-top: 20px;" glossy href="https://github.com/sponsors/cbleek" rounded size="xl">{{ $t('supportYawik') }}</q-btn>
+      <q-btn type="a" style="background-color: grey-6; margin-top: 20px;" glossy href="https://github.com/sponsors/cbleek" rounded size="xl">{{ $t('supportYawik') }}</q-btn>
     </div>
     <div v-else>
       <PrivacyPolicy v-model="acceptTerms" />

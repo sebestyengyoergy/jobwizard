@@ -16,15 +16,22 @@
 </template>
 
 <script>
+import { SET_LANG } from '../store/names';
+import { mapMutations } from 'vuex';
+
 export default
 {
   name: 'SwitchLanguage',
   methods:
     {
+      ...mapMutations([SET_LANG]),
       setLocale(lang)
       {
         // TODO - if we store the data in Vuex, we can redirect to the relevant route; at the moment we can't because form data will be lost after the redirect
         this.$root.$i18n.locale = lang;
+        this[SET_LANG](lang);
+
+        this.$router.push('/' + lang + (this.$route.name !== 'wizard' ? '/' + this.$route.name : ''));
         import(
           /* webpackInclude: /(de|en-GB)\.js$/ */
           'quasar/lang/' + (lang === 'en' ? 'en-GB' : lang)

@@ -18,6 +18,16 @@ const routes = [
         name: 'wizard',
         component: () => import('pages/Wizard.vue')
       },
+      {
+        path: 'jobs',
+        name: 'jobs',
+        component: () => import('pages/Jobs.vue')
+      },
+      {
+        path: 'settings',
+        name: 'settings',
+        component: () => import('pages/Settings.vue')
+      },
     ]
   },
 

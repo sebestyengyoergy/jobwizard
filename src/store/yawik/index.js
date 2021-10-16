@@ -1,6 +1,7 @@
 import {
   GET_FORM,
   GET_STEP,
+  GET_LANG,
   GET_LOGO,
   GET_HEADER,
   GET_TOKEN,
@@ -8,6 +9,7 @@ import {
   CLEAR_FORM,
   SET_STEP,
   SET_FIELD,
+  SET_LANG,
   SET_LOGO,
   SET_HEADER,
   SET_TOKEN
@@ -52,6 +54,7 @@ export default
       logo: '', // Base-64 encoded
       header: '', // Base-64 encoded
       token: null,
+      lang: null
     };
   },
   getters:
@@ -63,6 +66,10 @@ export default
       [GET_STEP](state)
       {
         return state.form.step;
+      },
+      [GET_LANG](state)
+      {
+        return state.lang;
       },
       [GET_LOGO](state)
       {
@@ -96,6 +103,10 @@ export default
       [SET_FIELD](state, obj)
       {
         state.form[Object.keys(obj)[0]] = Object.values(obj)[0];
+      },
+      [SET_LANG](state, value)
+      {
+        state.lang = value;
       },
       [SET_LOGO](state, value)
       {
