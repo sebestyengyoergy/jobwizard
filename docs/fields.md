@@ -4,32 +4,32 @@
 
 
 
-| Name                    | Value                              |
-|-------------------------|------------------------------------|
-| acceptTerms             ||
-| applyEmail              ||
-| applyPost               ||
-| applyURL                ||
-| contactInfo             ||
-| contactInfoLabel        ||
-| country                 || Country
-| intro                   ||
-| introLabel              ||
-| jobTitle                | The title of the job (not the title of the posting)|
-| location                | The physical location(s) of the business           |
-| offer                   ||
-| offerLabel              ||
-| organization            | The organization offering the job position. |
-| profile                 ||
-| profileLabel            ||
+| Name                    | Value                                                   |
+|-------------------------|---------------------------------------------------------|
+| acceptTerms             | accept Terms and Condition                              |
+| applyEmail              | email Address for Applications                          |
+| applyPost               | Link to an Application Form                             |
+| applyURL                | no online application                                   |
+| contactInfo             | Contact where to apply                                  |
+| contactInfoLabel        | Label of the Contact Textarea                           |
+| country                 | Country                                                 |
+| intro                   | Company description                                     |
+| introLabel              | Label of the Company description Textarea               |
+| jobTitle                | The title of the job (not the title of the posting)     |
+| location                | The physical location(s) of the business                |
+| offer                   | Benefits                                                |
+| offerLabel              | Label of the Benefits TextArea                          |
+| organization            | The organization offering the job position.             |
+| profile                 | Requirements for the jobposting. Textarea               |
+| profileLabel            | Label of the Requirements Textarea                      |
 | reference               | The hiring organization's unique identifier for the job.|
-| salary                  ||
-| salaryVisibility        ||
-| step                    ||
-| taskLabel               ||
-| tasks                   ||
-| workDuration            || FULL_TIME, PART_TIME                                   |
-| workKind                || Type of employment.                                    |
+| salary                  | salary used in JSON-LD and if visibly with the jobad    |
+| salaryVisibility        | if false, salary is not displayed in the jobad          |
+| step                    | current step of the wizard                              |
+| taskLabel               | Label of the Task Textarea Field                        |
+| tasks                   | Task                                                    |
+| workDuration            | FULL_TIME, PART_TIME                                    |
+| workKind                | Type of employment.                                     |
 
 
 ## Enviroment

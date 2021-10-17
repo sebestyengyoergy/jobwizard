@@ -4,6 +4,11 @@ With the JobWizard you can create a responsive job advertisement free of charge,
 
 Or you can register in the Job Wizard. Then they can manage your job ad (coming soon.)
 
+<figure markdown> 
+  ![Dummy image](jobwizard-animated.gif/){ width="400" }
+  <figcaption>Job Wizard</figcaption>
+</figure>
+
 ## Status
 
 currently under development. But the following is already working

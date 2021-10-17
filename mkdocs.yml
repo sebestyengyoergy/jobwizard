@@ -5,8 +5,11 @@ copyright: 'Copyright &copy; 2021 Yawik'
 repo_name: yawik/jobwizard
 repo_url: https://gitlab.com/yawik/JobWizard
 site_dir: build/docs
+docs_dir: docs
 theme: material
 markdown_extensions:
+  - attr_list
+  - md_in_html
   - codehilite:
       guess_lang: true
   - toc:

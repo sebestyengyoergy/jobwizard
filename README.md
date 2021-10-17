@@ -4,6 +4,8 @@ Standalone wizard based on [quasar](https://quasar.dev/). It is a single page ap
 
 As an authenticated user it's possible to save the job.
 
+![JobWizard](./docs/jobwizard-animated.gif)
+
 ## Task description
 
 https://gitlab.com/yawik/rewrite/-/issues/1
