@@ -8,6 +8,9 @@
       <q-card-section>
         <q-btn type="a" style="background-color: orange; margin-top: 20px;" glossy href="https://github.com/sponsors/cbleek" rounded size="xl">{{ $t('support') }}</q-btn>
       </q-card-section>
+      <q-card-section>
+        {{ $t('supportYawik') }}
+      </q-card-section>
     </q-card>
   </div>
 </template>

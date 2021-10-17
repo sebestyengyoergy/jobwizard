@@ -16,7 +16,7 @@
 
         <q-item v-ripple clickable :to="'/' + lang + '/settings'">
           <q-item-section avatar>
-            <q-icon name="mdi-cog" color="secondary" />
+            <q-icon name="mdi-cogs" color="secondary" />
           </q-item-section>
 
           <q-item-section>
@@ -25,11 +25,12 @@
         </q-item>
       </q-list>
     </q-scroll-area>
+    11 {{ $q.lang.isoName }} 12
   </q-drawer>
 </template>
 
 <script>
-import { HAS_AUTH, GET_LANG } from 'src/store/names';
+import { HAS_AUTH } from 'src/store/names';
 import { mapGetters } from 'vuex';
 import eventBus, { TOGGLE_LOGIN } from 'src/lib/eventBus';
 
@@ -52,7 +53,7 @@ export default
   emits: ['update:modelValue'],
   computed:
     {
-      ...mapGetters([HAS_AUTH, GET_LANG]),
+      ...mapGetters([HAS_AUTH]),
       value:
         {
           get()
@@ -64,14 +65,10 @@ export default
             this.$emit('update:modelValue', val);
           }
         },
-      lang:
-        {
-          get()
-          {
-            return this[GET_LANG];
-          }
-        },
-
+      lang()
+      {
+        return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
+      }
     },
   methods:
     {
