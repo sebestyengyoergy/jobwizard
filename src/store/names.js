@@ -22,3 +22,4 @@ export const SET_LANG = 'SET_LANG';
 export const SET_LOGO = 'SET_LOGO';
 export const SET_HEADER = 'SET_HEADER';
 export const SET_TOKEN = 'SET_TOKEN';
+export const SET_LOCATION = 'SET_LOCATION';
