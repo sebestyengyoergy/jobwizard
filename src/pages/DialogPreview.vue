@@ -253,7 +253,7 @@ export default
         <h1>${this[GET_FORM].jobTitle}</h1>
         <div class="info">
         <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
-        ${[this[GET_FORM].country?.label || '', this[GET_FORM].location || ''].filter(val => val).join(', ')}
+        ${[this[GET_FORM].country?.label || '', this[GET_FORM].location.addressLocality ? this[GET_FORM].location.addressLocality : (this[GET_FORM].location.addressRegion ? this[GET_FORM].location.addressRegion : this[GET_FORM].location.addressCountry) || ''].filter(val => val).join(', ')}
         <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H10V20.09L12.09,18H6V16H14.09L16.09,14H6V12H18.09L20,10.09V8L14,2H6M13,3.5L18.5,9H13V3.5M20.15,13C20,13 19.86,13.05 19.75,13.16L18.73,14.18L20.82,16.26L21.84,15.25C22.05,15.03 22.05,14.67 21.84,14.46L20.54,13.16C20.43,13.05 20.29,13 20.15,13M18.14,14.77L12,20.92V23H14.08L20.23,16.85L18.14,14.77Z" /></svg>
         ${this.htmlWorkKind}
         ${this.htmlWorkDuration}
@@ -309,7 +309,7 @@ export default
             '@type': 'Place',
             address: {
               '@type': 'PostalAddress',
-              streetAddress: this[GET_FORM].location,
+              streetAddress: this[GET_FORM].location.streetAddress,
               addressCountry: this[GET_FORM].country,
             }
           },
@@ -366,6 +366,7 @@ export default
   created()
   {
     this.canvas = document.createElement('canvas');
+    console.log(this[GET_FORM].location.streetAddress);
   },
   methods:
     {

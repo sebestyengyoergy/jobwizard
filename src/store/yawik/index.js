@@ -12,7 +12,8 @@ import {
   SET_LANG,
   SET_LOGO,
   SET_HEADER,
-  SET_TOKEN
+  SET_TOKEN,
+  SET_LOCATION
 } from '../names';
 
 const emptyForm = {
@@ -20,7 +21,14 @@ const emptyForm = {
   jobTitle: '',
   organization: '',
   country: null,
-  location: '',
+  location: {
+    streetAdress: '',
+    addressLocality: '',
+    addressRegion: '',
+    postalCode: '',
+    addressCountry: '',
+  },
+  formattedAddress: '',
   applyURL: '',
   applyEmail: '',
   applyPost: false,
@@ -50,7 +58,7 @@ export default
   state()
   {
     return {
-      form: Object.assign({}, emptyForm),
+      form: emptyForm,
       logo: '', // Base-64 encoded
       header: '', // Base-64 encoded
       token: null,
@@ -107,6 +115,10 @@ export default
       [SET_LANG](state, value)
       {
         state.lang = value;
+      },
+      [SET_LOCATION](state, obj)
+      {
+        state.form.location = obj;
       },
       [SET_LOGO](state, value)
       {

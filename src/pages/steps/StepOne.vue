@@ -34,7 +34,8 @@
           </q-avatar>
         </template>
       </q-select>
-      <q-input ref="location" v-model.trim="location" :label="$t('location')" color="primary" bg-color="white" name="location"
+      <q-input id="location" ref="location" v-model.trim="locationDisplay" :label="$t('location')" color="primary" bg-color="white"
+               name="location"
                outlined dense class="col-grow" :rules="[ruleRequired]" hide-bottom-space
                @keypress.enter="gotoNext"
       />
@@ -76,6 +77,28 @@ export default
       filteredCountries: [],
       googleSearchBox: null,
       googleMapsListener: null,
+      locationForm: [
+        'location',
+        'locality',
+        'administrative_area_level_1',
+        'country',
+        'postal_code',
+      ],
+      locationData: {
+        streetAddress: '',
+        addressLocality: '',
+        addressRegion: '',
+        postalCode: '',
+        addressCountry: ''
+      },
+      locationNameFormat: {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name',
+      },
     };
   },
   computed:
@@ -111,17 +134,6 @@ export default
             this[SET_FIELD]({ organization: val });
           }
         },
-      location:
-        {
-          get()
-          {
-            return this[GET_FORM].location;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ location: val });
-          }
-        },
       country:
         {
           get()
@@ -130,6 +142,11 @@ export default
           },
           set(val)
           {
+            this.googleSearchBox.setComponentRestrictions(
+              {
+                country: [val.value.toLocaleLowerCase()]
+              }
+            );
             this[SET_FIELD]({ country: val });
           }
         },
@@ -177,18 +194,38 @@ export default
             this[SET_FIELD]({ reference: val });
           }
         },
+      locationDisplay:
+        {
+          get()
+          {
+            return this[GET_FORM].formattedAddress;
+          },
+          set(val)
+          {
+            this[SET_FIELD]({ formattedAddress: val });
+          }
+        },
     },
   mounted()
   {
     if (window.google)
     {
-      this.googleSearchBox = new window.google.maps.places.SearchBox(this.$refs.location.getNativeElement());
-      window.google.maps.event.addListener(this.googleSearchBox, 'places_changed', this.locationChanged);
+      const autocompleteInput = this.$refs.location.getNativeElement();
+      this.googleSearchBox = new window.google.maps.places.Autocomplete(autocompleteInput, {
+        fields: ['formatted_address', 'address_components'],
+        types: ['(cities)']
+      });
+      this.googleSearchBox.addListener('place_changed', () =>
+      {
+        const place = this.googleSearchBox.getPlace();
+        this.locationChanged(place);
+      }
+      );
     }
   },
   beforeUnmount()
   {
-    if (this.googleMapsListener) window.google.maps.event.removeListener(this.googleMapsListener);
+    if (this.googleMapsListener) this.googleSearchBox.removeListener(this.googleMapsListener);
     this.googleSearchBox = null;
   },
   methods:
@@ -206,11 +243,47 @@ export default
       {
         this.$emit('next');
       },
-      locationChanged()
+      getLocationComp(place, type)
       {
-        const place = this.googleSearchBox.getPlaces()[0];
-        this.location = place.formatted_address;
-        this.$refs.location.focus();
+        for (const component of place)
+        {
+          if (component.types[0] === type)
+          {
+            return component[this.locationNameFormat[type]];
+          }
+        }
+        return '';
+      },
+      insertLocatationData(loc)
+      {
+        for (const component of this.locationForm)
+        {
+          switch (component)
+          {
+            case 'location':
+              this.locationData.streetAddress = this.getLocationComp(loc, 'street_number') + ' ' + this.getLocationComp(loc, 'route');
+              break;
+            case 'locality':
+              this.locationData.addressLocality = this.getLocationComp(loc, component);
+              break;
+            case 'administrative_area_level_1':
+              this.locationData.addressRegion = this.getLocationComp(loc, component);
+              break;
+            case 'country':
+              this.locationData.addressCountry = this.getLocationComp(loc, component);
+              break;
+            case 'postal_code':
+              this.locationData.postalCode = this.getLocationComp(loc, component);
+              break;
+          }
+        }
+      },
+      locationChanged(place)
+      {
+        const addressComponents = place.address_components;
+        this.insertLocatationData(addressComponents);
+        this.$store.commit('SET_LOCATION', Object.assign({}, this.locationData));
+        this.locationDisplay = place.formatted_address;
       },
     }
 };
