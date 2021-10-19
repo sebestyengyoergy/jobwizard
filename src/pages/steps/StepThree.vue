@@ -3,7 +3,7 @@
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('work_kind.title') }}</div>
-        <q-field :model-value="workKind" :rules="[ruleRequired]" borderless>
+        <q-field :model-value="workKind" name="workKind" :rules="[ruleRequired]" borderless>
           <template #control>
             <q-option-group v-model="workKind" :options="listKinds" type="checkbox" color="primary" name="workKind" />
           </template>
@@ -12,7 +12,7 @@
 
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('work_duration.title') }}</div>
-        <q-field :model-value="workDuration" :rules="[ruleRequired]" borderless>
+        <q-field :model-value="workDuration" name="workDuration" :rules="[ruleRequired]" borderless>
           <template #control>
             <q-option-group v-model="workDuration" :options="listDurations" type="checkbox" color="primary" name="workDuration" />
           </template>
@@ -22,11 +22,11 @@
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('salary.label') }}</div>
-        <q-select v-model="salary" :options="options" outlined />
+        <q-select v-model="salary" :options="options" name="salary" outlined />
       </div>
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('salary.visibility') }}</div>
-        <q-checkbox v-model="salaryVisibility" :label="$t('salary.visibility')" />
+        <q-checkbox v-model="salaryVisibility" :label="$t('salary.visibility')" name="salaryVisibility" />
       </div>
     </div>
   </div>

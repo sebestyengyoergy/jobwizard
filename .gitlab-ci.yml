@@ -16,8 +16,20 @@ variables:
   VUE_APP_I18N_SUPPORTED_LOCALE: en,de
 
 stages:
+  - test
   - doc
   - deploy
+
+cypress:
+  image: cypress/browsers:node14.17.0-chrome91-ff89
+  stage: test
+  script:
+    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
+    - yarn
+    - yarn "test:e2e:ci"
+  only:
+    variables:
+      - $YAWIK_RUN_CYPRESS == "yes"
 
 mkdocs:
   stage: doc
