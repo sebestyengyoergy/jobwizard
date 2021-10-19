@@ -299,7 +299,7 @@ export default
       "apply_url": "Apply URL",
       "apply_email": "Apply e-mail",
       "apply_post": "No online application/postal application",
-      "reference": "Reference"
+      "reference": "Reference",
     },
     "de": {
       "job_title": "Anzeigentitel",
@@ -309,7 +309,10 @@ export default
       "apply_url": "Bewerbungslink",
       "apply_email": "Bewerbungsemail",
       "apply_post": "keine Onlinebewerbung/postalische Bewerbungen",
-      "reference": "Referenz"
+      "reference": "Referenz",
+      "rules": {
+        "required": "Pflichtfeld"
+      }
     }
   }
 </i18n>

@@ -46,6 +46,10 @@ export default
   {
     "en": {
       "logo": "Logo"
+    },
+    "de": {
+      "logo": "Logo"
     }
+
   }
 </i18n>

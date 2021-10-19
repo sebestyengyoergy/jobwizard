@@ -282,7 +282,10 @@ export default
       "continue": "Weiter",
       "download": "Download",
       "save": "Speichern",
-      "publish": "Veröffentlichen"
+      "publish": "Veröffentlichen",
+      "rules": {
+        "required": "Pflichtfeld"
+      }
     }
   }
 </i18n>

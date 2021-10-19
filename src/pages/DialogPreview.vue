@@ -366,7 +366,6 @@ export default
   created()
   {
     this.canvas = document.createElement('canvas');
-    console.log(this[GET_FORM].location.streetAddress);
   },
   methods:
     {

@@ -22,7 +22,6 @@
           flat
           rounded
           no-caps
-          @click="onMainClick"
         >
           <template #label>
             <div class="row items-center no-wrap">
@@ -38,7 +37,7 @@
                 <q-item-label caption>{{ user.email }}</q-item-label>
               </q-item-section>
             </q-item>
-            <q-item v-close-popup clickable @click="onItemClick">
+            <q-item v-close-popup clickable>
               <q-item-section>
                 <q-btn class="bg-primary text-white" @click="toggleLogin">
                   {{ $t(HAS_AUTH ? 'logout' : 'login') }}
@@ -117,7 +116,7 @@ export default
       user: {
         firstName: '',
         lastName: '',
-        email: '',
+        email: ''
       }
     };
   },
@@ -159,9 +158,13 @@ export default
     }).then(() =>
     {
       this[SET_TOKEN](cloak);
-      this.user.email = cloak.tokenParsed.email;
-      this.user.firstName = cloak.tokenParsed.given_name;
-      this.user.lastName = cloak.tokenParsed.family_name;
+      console.log('cloak', cloak);
+      if (cloak.tokenParsed)
+      {
+        this.user.email = cloak.tokenParsed.email;
+        this.user.firstName = cloak.tokenParsed.given_name;
+        this.user.lastName = cloak.tokenParsed.family_name;
+      }
     });
   },
   beforeUnmount()
@@ -245,11 +248,13 @@ export default
   {
     "en": {
       "login": "Login",
-      "logout": "Logout"
+      "logout": "Logout",
+      "jobs": "Jobs"
     },
     "de": {
       "login": "Anmelden",
-      "logout": "Abmelden"
+      "logout": "Abmelden",
+      "jobs": "Stellenanzeigen"
     }
   }
 </i18n>

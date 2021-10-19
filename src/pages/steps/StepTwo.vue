@@ -113,8 +113,6 @@ export default
   data()
   {
     return {
-      // fileLogo: null,
-      // fileHeader: null,
       toolbar: [
         ['left', 'justify'],
         ['bold', 'italic'],
@@ -153,7 +151,7 @@ export default
         {
           get()
           {
-            return this[GET_FORM].taskLabel ? this[GET_FORM].taskLabel : this.$t('task');
+            return this[GET_FORM].taskLabel ? this[GET_FORM].taskLabel : this.$t('tasks');
           },
           set(val)
           {
@@ -355,7 +353,7 @@ export default
       "contact_info": "Contact",
       "image_rejected": "File too big - above 10Mb",
       "choose_logo": "Choose company logo",
-      "choose_header": "Choose a header image"
+      "choose_header": "Choose a header image",
     },
     "de": {
       "logo": "Logo",
@@ -367,7 +365,10 @@ export default
       "contact_info": "Kontakt",
       "image_rejected": "Die Datei ist zu groß. über 10Mb",
       "choose_logo": "Logo wählen",
-      "choose_header": "Header wählen"
+      "choose_header": "Header wählen",
+      "rules": {
+        "required": "Pflichtfeld"
+      }
     }
   }
 </i18n>

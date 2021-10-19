@@ -218,6 +218,9 @@ export default
           "part_time": "Teilzeit",
           "shift_work": "Schichtarbeit"
         }
+      },
+      "rules": {
+        "required": "Pflichtfeld"
       }
     }
   }

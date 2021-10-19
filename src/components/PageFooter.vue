@@ -28,7 +28,7 @@
           rel="noopener noreferrer"
           target="_blank"
           :href="urlImprint"
-          :label="$t('Imprint')"
+          :label="$t('imprint')"
         />
       </q-tab>
       <q-tab
@@ -42,7 +42,7 @@
           rel="noopener noreferrer"
           target="_blank"
           :href="urlPrivacy"
-          :label="$t('Privacy')"
+          :label="$t('privacy')"
         />
       </q-tab>
       <q-tab
@@ -56,7 +56,7 @@
           rel="noopener noreferrer"
           target="_blank"
           :href="urlDocs"
-          :label="$t('Docs')"
+          :label="$t('docs')"
         />
       </q-tab>
     </q-tabs>
@@ -104,3 +104,21 @@ export default
     line-height: 1.25em !important;
   }
 </style>
+
+<i18n>
+  {
+    "en": {
+      "copyright": "Copyright",
+      "docs": "Documentation",
+      "privacy": "Privacy",
+      "imprint": "Imprint",
+    },
+    "de": {
+      "docs": "Dokumentation",
+      "privacy": "Datenschutz",
+      "imprint": "Impressum",
+      "copyright": "Copyright"
+    }
+
+  }
+</i18n>

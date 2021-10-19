@@ -87,7 +87,7 @@ export default
       "settings": "Settings"
     },
     "de": {
-      "jobList": "Stellenanzeigen",
+      "jobs": "Stellenanzeigen",
       "settings": "Einstellungen"
     }
   }

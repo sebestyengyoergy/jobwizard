@@ -57,7 +57,10 @@ export default
     "de": {
       "thank": "Danke, dass sie Yawik nutzen",
       "howtoDownload": "Sie können nun ihre Stellenanzeige runterladen. Wenn sie sich registrieren, werden sie Ihre Anzeige speichern und veröffentlichen können.",
-      "supportYawik": "Yawik unterstützen"
+      "supportYawik": "Yawik unterstützen",
+      "rules": {
+        "required": "Pflichtfeld"
+      }
     }
   }
 </i18n>
