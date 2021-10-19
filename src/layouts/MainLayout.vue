@@ -8,14 +8,45 @@
         </q-toolbar-title>
 
         <q-separator spaced vertical />
+
         <SwitchLanguage class="q-mx-auto" />
 
         <q-separator spaced vertical />
 
-        <q-btn flat @click="toggleLogin">
+        <q-btn v-if="!HAS_AUTH" flat @click="toggleLogin">
           {{ $t(HAS_AUTH ? 'logout' : 'login') }}
         </q-btn>
 
+        <q-btn-dropdown
+          v-if="HAS_AUTH"
+          flat
+          rounded
+          no-caps
+          @click="onMainClick"
+        >
+          <template #label>
+            <div class="row items-center no-wrap">
+              <q-avatar>
+                {{ initials }}
+              </q-avatar>
+            </div>
+          </template>
+          <q-list>
+            <q-item v-close-popup>
+              <q-item-section>
+                <q-item-label>{{ user.firstName }} {{ user.lastName }}</q-item-label>
+                <q-item-label caption>{{ user.email }}</q-item-label>
+              </q-item-section>
+            </q-item>
+            <q-item v-close-popup clickable @click="onItemClick">
+              <q-item-section>
+                <q-btn class="bg-primary text-white" @click="toggleLogin">
+                  {{ $t(HAS_AUTH ? 'logout' : 'login') }}
+                </q-btn>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-btn-dropdown>
         <q-separator spaced vertical />
 
         <q-btn dense flat round :icon="showDrawer ? 'mdi-menu' : 'mdi-menu-open'" @click="showDrawer = !showDrawer" />
@@ -82,7 +113,12 @@ export default
   {
     return {
       showDrawer: false,
-      tokenTimer: null
+      tokenTimer: null,
+      user: {
+        firstName: '',
+        lastName: '',
+        email: '',
+      }
     };
   },
   computed:
@@ -95,6 +131,10 @@ export default
       showFooter()
       {
         return !this.$route.query.hf;
+      },
+      initials()
+      {
+        return this.user.firstName[0] + this.user.lastName[0];
       }
     },
   created()
@@ -119,6 +159,9 @@ export default
     }).then(() =>
     {
       this[SET_TOKEN](cloak);
+      this.user.email = cloak.tokenParsed.email;
+      this.user.firstName = cloak.tokenParsed.given_name;
+      this.user.lastName = cloak.tokenParsed.family_name;
     });
   },
   beforeUnmount()
