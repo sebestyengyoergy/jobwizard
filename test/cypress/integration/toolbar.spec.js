@@ -10,9 +10,8 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
   before(() =>
   {
     cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
-    cy.viewport(1024, 768);
+    cy.viewport(1480, 1280);
     cy.visit('/en');
-    // load job details
   });
 
   it('open and close drawer', () =>
@@ -24,13 +23,6 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
     // check for menu icon
     cy.get('.mdi-menu').click();
     cy.get('.q-drawer__content').should('not.be.visible');
-    cy.contains('CROSS Solution');
   });
 
-  it('check for Speculative Application', () =>
-  {
-    cy.visit('/en?tb=1');
-    // check for menu-open icon
-    cy.contains('Speculative Application');
-  });
 });

@@ -11,7 +11,7 @@ describe('Filling and sending the form', () =>
   {
     cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
     cy.viewport(1024, 768);
-    cy.request('/de');
+    cy.visit('/de');
     // load job details
   });
 
@@ -20,31 +20,41 @@ describe('Filling and sending the form', () =>
     // fill step 1 (general data)
     cy.get('[name="job_title"]').type('Software Developer');
     cy.get('[name="organization"]').type('CROSS Solution');
+    cy.get('[name="apply_url"]').type('http://coss-solution.de');
+    cy.get('[name="apply_email"]').type('bleek@cross-solution.de');
+    cy.get('[name="reference"]').type('123');
     cy.get('[name="next"]').click();
   });
 
   it('Step 2. Fill text fields', () =>
   {
     // fill step 2 (cover letter)
-    cy.get('[name="intro"]').type('My cover letter');
-    cy.get('[name="tasks"]').type('My cover letter');
+    cy.get('[name="intro"]').type('We are a good company');
+    cy.get('[name="tasks"]').type('Your tasks will be');
+    cy.get('[name="profile"]').type('You should fullfill the requirements');
+    cy.get('[name="offer"]').type('We offer you a lot');
+    cy.get('[name="contactInfo"]').type('You should fullfill the requirements');
     cy.get('[name="next"]').click();
   });
 
   it('Step 3. fill categories', () =>
   {
+    cy.get('[name="salary"]').parents('label').click();
+    cy.get('.q-menu .q-item').contains('100.000€ - 120.000€').click();
     cy.get('[name="next"]').click();
+  });
+
+  it('Check Preview', () =>
+  {
+    cy.get('[name="preview"]').click();
+    cy.contains('CROSS Solution');
+    cy.get('[name="close"]').click();
   });
 
   it('Step 4. Download', () =>
   {
     cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
-    // fill step 5 (privacy)
-    cy.get('[name="copy"]').parents('.q-checkbox').click();
-    cy.get('[name="terms"]').parent().click();
     // submit form
     cy.get('[name="next"]').click();
-    cy.wait('@submitForm');
-    cy.get('.form_submit_success');
   });
 });

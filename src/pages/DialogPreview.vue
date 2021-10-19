@@ -2,7 +2,7 @@
   <q-dialog :model-value="modelValue" maximized @update:modelValue="close">
     <q-card flat class="bg-third column overflow-hidden">
       <q-card-actions class="bg-primary text-white q-py-sm" align="center">
-        <q-btn color="secondary" @click="close">{{ $t('close') }}</q-btn>
+        <q-btn color="secondary" name="close" @click="close">{{ $t('close') }}</q-btn>
         <q-btn color="white">
           <div :style="colorBlock" />
           <q-popup-proxy v-model="dlgColor" transition-show="scale" transition-hide="scale" style="max-height: none !important; transform: translateY(50px);">
