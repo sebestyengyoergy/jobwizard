@@ -164,8 +164,6 @@ export default
     {
       this.validateStep(step);
     });
-
-    console.log('dd', this[GET_FORM], this.GET_FORM);
   },
   beforeUnmount()
   {
@@ -188,15 +186,14 @@ export default
       },
       trySubmit()
       {
-        console.log('dd', this[GET_FORM], this.GET_FORM);
-        this.$refs.frm.submit();
+        // this.$refs.frm.submit();
         fetch(process.env.YAWIK_API_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            ...this.GET_FORM
+            ...this.$store.getters.GET_FORM
           }),
         });
       },
