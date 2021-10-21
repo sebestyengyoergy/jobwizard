@@ -186,7 +186,7 @@ export default
       },
       trySubmit()
       {
-        // this.$refs.frm.submit();
+        this.$refs.frm.submit();
         fetch(process.env.YAWIK_API_URL, {
           method: 'POST',
           headers: {
