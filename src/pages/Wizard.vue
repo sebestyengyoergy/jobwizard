@@ -42,7 +42,7 @@
               :label="$t('publish')"
             >
               <q-list>
-                <q-item v-close-popup clickable @click.stop="trySubmit">
+                <q-item v-close-popup clickable @click.stop="onSave">
                   <q-item-section side>
                     <q-icon name="mdi-content-save" color="secondary" />
                   </q-item-section>
@@ -182,6 +182,18 @@ export default
         this.$nextTick(() =>
         {
           this.$refs.stepper[direction]();
+        });
+      },
+      onSave()
+      {
+        fetch(process.env.YAWIK_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...this.$store.getters.GET_FORM
+          }),
         });
       },
       trySubmit()
