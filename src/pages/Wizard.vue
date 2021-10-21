@@ -76,7 +76,7 @@ import StepOne from './steps/StepOne';
 import StepTwo from './steps/StepTwo';
 import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM } from '../store/names';
+import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
 
@@ -164,6 +164,8 @@ export default
     {
       this.validateStep(step);
     });
+
+    console.log('dd', this[GET_FORM], this.GET_FORM);
   },
   beforeUnmount()
   {
@@ -186,7 +188,17 @@ export default
       },
       trySubmit()
       {
+        console.log('dd', this[GET_FORM], this.GET_FORM);
         this.$refs.frm.submit();
+        fetch(process.env.YAWIK_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...this.GET_FORM
+          }),
+        });
       },
       hasErrors(ref)
       {
