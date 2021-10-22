@@ -25,7 +25,6 @@
         </q-item>
       </q-list>
     </q-scroll-area>
-    11 {{ $q.lang.isoName }} 12
   </q-drawer>
 </template>
 
