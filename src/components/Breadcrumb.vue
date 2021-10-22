@@ -26,9 +26,13 @@ export default
     {
       return this.$route.name;
     },
+    lang()
+    {
+      return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
+    },
     home()
     {
-      return process.env.YAWIK_URL_HOME;
+      return process.env.VUE_ROUTER_BASE + this.lang;
     }
   }
 };
