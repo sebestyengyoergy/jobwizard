@@ -60,7 +60,7 @@
         </transition>
       </router-view>
     </q-page-container>
-    <PageFooter v-if="showFooter" />1
+    <PageFooter v-if="showFooter" />
   </q-layout>
 </template>
 
