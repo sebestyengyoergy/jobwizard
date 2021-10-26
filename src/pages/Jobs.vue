@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
 const metaData = {
   title: 'JobWizard',
   titleTemplate: title => `${title} - Aktuelle Stellenanzeigen`,
