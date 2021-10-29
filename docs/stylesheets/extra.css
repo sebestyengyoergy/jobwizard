@@ -2,6 +2,6 @@
     --md-primary-fg-color:        #5498D7;
   }
 
-.md-header-nav__button.md-logo img, .md-header-nav__button.md-logo svg {
+.md-header .md-logo img, .md-header .md-logo svg {
     width: 100%;
 }
