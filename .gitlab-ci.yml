@@ -1,10 +1,9 @@
-image: node:lts-slim
+image: node:latest
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
-    - /root/.cache/Cypress
     - build/
 
 workflow:
