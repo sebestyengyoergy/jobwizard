@@ -1,5 +1,13 @@
 image: node:latest
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}new
+  paths:
+    - node_modules/
+    - ~/.cache
+    - ~/.npm
+    - build/
+
 workflow:
   rules:
     - if: $CI_COMMIT_BRANCH
@@ -39,6 +47,7 @@ mkdocs:
 
 pages:
   stage: deploy
+  image: node:lts-slim
   script:
     - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
     - env | ( grep YAWIK || echo -n "" )  >> .env.local
