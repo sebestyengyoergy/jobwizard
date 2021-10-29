@@ -12,7 +12,6 @@ https://gitlab.com/yawik/rewrite/-/issues/1
 
 ## Status
 
-
 In development.
 
 ## Requirements
@@ -55,4 +54,7 @@ http://jobwizard.yawik.org/
 
 ## Documentation
 
-Currently in development.
+we use mkdocs dor documentation. Rendered version is located at:
+
+https://jobwizard.yawik.org/docs/
+

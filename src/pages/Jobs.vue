@@ -15,9 +15,36 @@
 </template>
 
 <script>
+const metaData = {
+  title: 'JobWizard',
+  titleTemplate: title => `${title} - Aktuelle Stellenanzeigen`,
+  meta: {
+    description: {
+      name: 'description',
+      content: 'Übersicht von Stellenazeigen, die mit dem Yawik Jobwizard erstellt und veröffentlicht wurden.'
+    },
+    keywords: {
+      name: 'keywords',
+      content: 'Aktuelle Stellenanzeigen, JobWizard, Anzeigengenerator'
+    },
+    robots: {
+      name: 'robots',
+      content: 'index, follow'
+    }
+  },
+  noscript: {
+    default: 'Der Yawik Anzeigengenerator benötigt Javascript'
+  }
+};
+
+import { useMeta } from 'quasar';
 
 export default {
   name: 'Jobs',
+  setup()
+  {
+    useMeta(metaData);
+  },
   components:
     {},
   data()
