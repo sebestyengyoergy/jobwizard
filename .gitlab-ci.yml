@@ -4,6 +4,8 @@ cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
     - node_modules/
+    - ~/.cache
+    - ~/.npm
     - build/
 
 workflow:
@@ -26,6 +28,8 @@ cypress:
   script:
     - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
     - yarn
+    - cypress cache list
+    - cypress info
     - yarn "test:e2e:ci"
   only:
     variables:
