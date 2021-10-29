@@ -28,8 +28,8 @@ cypress:
   script:
     - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
     - yarn
-    - cypress cache list
-    - cypress info
+    - node_modules/.bin/cypress cache list
+    - node_modules/.bin/cypress info
     - yarn "test:e2e:ci"
   only:
     variables:
