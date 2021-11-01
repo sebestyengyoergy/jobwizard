@@ -154,11 +154,19 @@ export default {
 {
   "en": {
     "jobs": "Jobs",
-    "title": "Job Title"
+    "title": "Job Title",
+    "location": "Location",
+    "organization": "Organization",
+    "email": "E-Mail",
+    "date": "Date"
   },
   "de": {
-    "jobs": "Stellenanzeigen (Demo Daten)",
-    "title": "Anzeigentitel"
+    "jobs": "Stellenanzeigen",
+    "title": "Anzeigentitel",
+    "location": "Ort",
+    "organization": "Unternehmen",
+    "email": "E-Mail",
+    "date": "Datum"
   }
 }
 </i18n>

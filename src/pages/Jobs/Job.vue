@@ -116,13 +116,13 @@ export default {
   },
   "de": {
    "job":{
-      "title": "Job Title",
+      "title": "Anzeigentitel",
       "email" : "Email",
-      "organization": "Organization",
-      "location" : "Location",
-      "city": "City",
+      "organization": "Unternehmen",
+      "location" : "Ort",
+      "city": "Stadt",
       "region" : "Region",
-      "country": "Country"
+      "country": "Land"
 
     }
   }
