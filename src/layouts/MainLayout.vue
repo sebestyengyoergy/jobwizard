@@ -158,7 +158,6 @@ export default
     }).then(() =>
     {
       this[SET_TOKEN](cloak);
-      console.log('cloak', cloak);
       if (cloak.tokenParsed)
       {
         this.user.email = cloak.tokenParsed.email;
