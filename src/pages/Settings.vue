@@ -1,13 +1,6 @@
 <template>
   <q-page class="flex">
     <q-layout view="hHh Lpr lff" container style="height: 700px;" class="shadow-2">
-      <q-header elevated class="bg-grey">
-        <q-toolbar>
-          <q-btn flat round dense icon="mdi-menu" @click="drawer = !drawer" />
-          <q-toolbar-title>{{ $t('settings') }}</q-toolbar-title>
-        </q-toolbar>
-      </q-header>
-
       <q-drawer
         v-model="drawer"
         show-if-above

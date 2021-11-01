@@ -5,8 +5,14 @@
         <q-breadcrumbs-el label="Home" icon="mdi-home" :to="home" />
         <q-breadcrumbs-el
           v-if="!(route == 'wizard')"
-          :label="$t(route)"
+          :label="$t(route == 'job' ? 'jobs' : route )"
           :icon="'mdi-' + ((route=='jobs' || route=='job') ? 'view-list' : 'cog')"
+          :to="jobs"
+        />
+        <q-breadcrumbs-el
+          v-if="route == 'job'"
+          label="job"
+          icon="mdi-star"
         />
       </q-breadcrumbs>
     </q-toolbar>
@@ -33,6 +39,10 @@ export default
     home()
     {
       return process.env.VUE_ROUTER_BASE + this.lang;
+    },
+    jobs()
+    {
+      return process.env.VUE_ROUTER_BASE + this.lang + '/jobs';
     }
   }
 };

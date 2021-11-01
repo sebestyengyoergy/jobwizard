@@ -19,13 +19,13 @@ const routes = [
       {
         path: 'jobs',
         name: 'jobs',
-        component: () => import('pages/Jobs/Index.vue'),
+        component: () => import('pages/jobs/Index.vue'),
       },
       {
         path: 'job/:id',
         name: 'job',
         props: true,
-        component: () => import('pages/Jobs/Job.vue'),
+        component: () => import('pages/jobs/Job.vue'),
       },
       {
         path: 'settings',

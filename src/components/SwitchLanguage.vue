@@ -1,5 +1,5 @@
 <template>
-  <q-btn-dropdown color="primary">
+  <q-btn-dropdown no-caps color="primary">
     <template #label>
       <img :src="'flags/'+$root.$i18n.locale+'.png'" width="28" :alt="$root.$i18n.locale.substr(0, 2).toUpperCase()" class="q-mr-md">
       {{ $q.platform.is.mobile ? '' : $t('localeName') }}

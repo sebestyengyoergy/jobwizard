@@ -80,9 +80,9 @@ export default {
             field: 'contactEmail',
             sortable: false
           },
-
           {
             name: 'organization',
+            align: 'left',
             label: this.$t('organization'),
             field: row => row.organization.name,
             sortable: false
