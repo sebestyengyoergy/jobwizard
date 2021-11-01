@@ -1,10 +1,10 @@
 <template>
   <q-page class="flex">
     <q-layout view="hHh Lpr lff" container style="height: 700px;" class="shadow-2">
-      <q-header elevated class="bg-grey" >
-        <q-toolbar >
-          <q-btn flat @click="drawer = !drawer" round dense icon="mdi-menu" />
-          <q-toolbar-title>{{$t('settings')}}</q-toolbar-title>
+      <q-header elevated class="bg-grey">
+        <q-toolbar>
+          <q-btn flat round dense icon="mdi-menu" @click="drawer = !drawer" />
+          <q-toolbar-title>{{ $t('settings') }}</q-toolbar-title>
         </q-toolbar>
       </q-header>
 
@@ -18,20 +18,17 @@
       >
         <q-scroll-area class="fit">
           <q-list>
-
             <template v-for="(menuItem, index) in menuList" :key="index">
-              <q-item clickable :active="index===selectedIndex" @click="selectedIndex=index"  v-ripple>
+              <q-item v-ripple clickable :active="index===selectedIndex" @click="selectedIndex=index">
                 <q-item-section avatar>
                   <q-icon :name="menuItem.icon" />
                 </q-item-section>
                 <q-item-section>
-
                   {{ menuItem.label }}
                 </q-item-section>
               </q-item>
-              <q-separator :key="'sep' + index"  v-if="menuItem.separator" />
+              <q-separator v-if="menuItem.separator" :key="'sep' + index" />
             </template>
-
           </q-list>
         </q-scroll-area>
       </q-drawer>
@@ -49,7 +46,7 @@
         </q-page>
       </q-page-container>
     </q-layout>
-        <SupportYawik />
+    <SupportYawik />
   </q-page>
 </template>
 
@@ -65,10 +62,17 @@ export default
     SupportYawik,
     Organization
   },
+  data()
+  {
+    return {
+      selectedIndex: 0
+    };
+  },
   computed:
   {
-      menuList(){
-        return [
+    menuList()
+    {
+      return [
         {
           icon: 'mdi-domain',
           label: this.$t('organization'),
@@ -79,12 +83,7 @@ export default
           label: this.$t('misc'),
           separator: false
         }
-      ]
-    }
-  },
-  data(){
-    return{
-      selectedIndex:0
+      ];
     }
   },
   setup()

@@ -1,36 +1,36 @@
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: () => import("pages/Home.vue"),
+    path: '/',
+    name: 'home',
+    component: () => import('pages/Home.vue'),
   },
   {
-    path: "/:lang",
+    path: '/:lang',
     redirect: {
-      name: "wizard",
+      name: 'wizard',
     },
-    component: () => import("layouts/MainLayout.vue"),
+    component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: "",
-        name: "wizard",
-        component: () => import("pages/Wizard.vue"),
+        path: '',
+        name: 'wizard',
+        component: () => import('pages/Wizard.vue'),
       },
       {
-        path: "jobs",
-        name: "jobs",
-        component: () => import("pages/Jobs/Index.vue"),
+        path: 'jobs',
+        name: 'jobs',
+        component: () => import('pages/Jobs/Index.vue'),
       },
       {
-        path: "job/:id",
-        name: "job",
+        path: 'job/:id',
+        name: 'job',
         props: true,
-        component: () => import("pages/Jobs/Job.vue"),
+        component: () => import('pages/Jobs/Job.vue'),
       },
       {
-        path: "settings",
-        name: "settings",
-        component: () => import("pages/Settings.vue"),
+        path: 'settings',
+        name: 'settings',
+        component: () => import('pages/Settings.vue'),
       },
     ],
   },
@@ -38,8 +38,8 @@ const routes = [
   // Always leave this as last one,
   // but you can also remove it
   {
-    path: "/:catchAll(.*)*",
-    component: () => import("pages/Error404.vue"),
+    path: '/:catchAll(.*)*',
+    component: () => import('pages/Error404.vue'),
   },
 ];
 

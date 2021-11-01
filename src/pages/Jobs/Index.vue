@@ -11,7 +11,7 @@
       class="full-width"
       @request="getJobs"
     >
-      <template v-slot:body="props">
+      <template #body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
             <span style="color: blue; cursor: pointer;" @click="viewJob(props.row)">
@@ -29,7 +29,6 @@
           </q-td>
         </q-tr>
       </template>
-
     </q-table>
   </q-page>
 </template>
@@ -134,18 +133,19 @@ export default {
         //console.log("Title "+job.title)
         this.$router.push(
           {
-           name:'job',
-            params:{
+            name: 'job',
+            params: {
               id: job.id
             }
           });
       },
-       convertToSlug(Text) {
+      convertToSlug(Text)
+      {
         return Text
           .toLowerCase()
           .replace(/ /g, '-')
           .replace(/[^\w-]+/g, '');
-}
+      }
     }
 };
 </script>
