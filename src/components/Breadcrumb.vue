@@ -6,7 +6,7 @@
         <q-breadcrumbs-el
           v-if="!(route == 'wizard')"
           :label="$t(route)"
-          :icon="'mdi-' + (route=='jobs' ? 'view-list' : 'cog')"
+          :icon="'mdi-' + ((route=='jobs' || route=='job') ? 'view-list' : 'cog')"
         />
       </q-breadcrumbs>
     </q-toolbar>

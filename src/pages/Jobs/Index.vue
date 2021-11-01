@@ -10,42 +10,33 @@
       row-key="name"
       class="full-width"
       @request="getJobs"
-    />
+    >
+      <template #body="props">
+        <q-tr :props="props">
+          <q-td key="title" :props="props">
+            <span style="color: blue; cursor: pointer;" @click="viewJob(props.row)">
+              {{ props.row.title }}
+            </span>
+          </q-td>
+          <q-td key="location" :props="props">
+            {{ props.row.location }}
+          </q-td>
+          <q-td key="email" :props="props">
+            {{ props.row.contactEmail }}
+          </q-td>
+          <q-td key="organization" :props="props">
+            {{ props.row.organization.name }}
+          </q-td>
+        </q-tr>
+      </template>
+    </q-table>
   </q-page>
 </template>
 
 <script>
 
-const metaData = {
-  title: 'JobWizard',
-  titleTemplate: title => `${title} - Aktuelle Stellenanzeigen`,
-  meta: {
-    description: {
-      name: 'description',
-      content: 'Übersicht von Stellenazeigen, die mit dem Yawik Jobwizard erstellt und veröffentlicht wurden.'
-    },
-    keywords: {
-      name: 'keywords',
-      content: 'Aktuelle Stellenanzeigen, JobWizard, Anzeigengenerator'
-    },
-    robots: {
-      name: 'robots',
-      content: 'index, follow'
-    }
-  },
-  noscript: {
-    default: 'Der Yawik Anzeigengenerator benötigt Javascript'
-  }
-};
-
-import { useMeta } from 'quasar';
-
 export default {
-  name: 'Jobs',
-  setup()
-  {
-    useMeta(metaData);
-  },
+  name: 'Index',
   components:
     {},
   data()
@@ -73,29 +64,29 @@ export default {
             align: 'left',
             field: row => row.title,
             format: val => `${val}`,
-            sortable: true
+            sortable: false
           },
           {
             name: 'location',
             align: 'left',
             label: this.$t('location'),
             field: 'location',
-            sortable: true
+            sortable: false
           },
           {
             name: 'email',
             align: 'left',
             label: this.$t('email'),
             field: 'contactEmail',
-            sortable: true
+            sortable: false
           },
 
           {
             name: 'organization',
             label: this.$t('organization'),
             field: row => row.organization.name,
-            sortable: true
-          },
+            sortable: false
+          }
         ];
       }
     },
@@ -135,7 +126,25 @@ export default {
           page: this.getIndexNumber(data['hydra:view']['@id']),
           rowsPerPage: 10
         };
-        //console.log(JSON.stringify(this.pagination));
+      },
+      viewJob(job)
+      {
+        //console.log("JOB "+JSON.stringify(job))
+        //console.log("Title "+job.title)
+        this.$router.push(
+          {
+            name: 'job',
+            params: {
+              id: job.id
+            }
+          });
+      },
+      convertToSlug(Text)
+      {
+        return Text
+          .toLowerCase()
+          .replace(/ /g, '-')
+          .replace(/[^\w-]+/g, '');
       }
     }
 };
