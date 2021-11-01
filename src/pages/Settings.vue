@@ -1,43 +1,55 @@
-OA<template>
+<template>
   <q-page class="flex">
-    <q-splitter
-      v-model="splitterModel"
-      style="min-height: 250px;"
-      :limit="[10,100]"
-    >
-      <template #before>
-        <q-tabs
-          v-model="tab"
-          vertical
-          class="text-primary"
-        >
-          <q-tab name="organization" icon="mdi-domain" :label="$t('organization')" />
-          <q-tab name="misc" icon="mdi-cog" :label="$t('misc')" />
-        </q-tabs>
-      </template>
+    <q-layout view="hHh Lpr lff" container style="height: 700px;" class="shadow-2">
+      <q-header elevated class="bg-grey" >
+        <q-toolbar >
+          <q-btn flat @click="drawer = !drawer" round dense icon="mdi-menu" />
+          <q-toolbar-title>{{$t('settings')}}</q-toolbar-title>
+        </q-toolbar>
+      </q-header>
 
-      <template #after>
-        <q-tab-panels
-          v-model="tab"
-          animated
-          swipeable
-          vertical
-          transition-prev="jump-up"
-          transition-next="jump-up"
-        >
-          <q-tab-panel name="organization">
+      <q-drawer
+        v-model="drawer"
+        show-if-above
+        :width="200"
+        :breakpoint="500"
+        bordered
+        class="bg-grey-3"
+      >
+        <q-scroll-area class="fit">
+          <q-list>
+
+            <template v-for="(menuItem, index) in menuList" :key="index">
+              <q-item clickable :active="index===selectedIndex" @click="selectedIndex=index"  v-ripple>
+                <q-item-section avatar>
+                  <q-icon :name="menuItem.icon" />
+                </q-item-section>
+                <q-item-section>
+
+                  {{ menuItem.label }}
+                </q-item-section>
+              </q-item>
+              <q-separator :key="'sep' + index"  v-if="menuItem.separator" />
+            </template>
+
+          </q-list>
+        </q-scroll-area>
+      </q-drawer>
+
+      <q-page-container>
+        <q-page padding>
+          <div v-if="selectedIndex===0">
             <Organization />
-          </q-tab-panel>
-
-          <q-tab-panel name="misc">
+          </div>
+          <div v-else-if="selectedIndex===1">
             <div class="text-h4 q-mb-md">{{ $t('misc') }}</div>
             <p>{{ $t('text') }}</p>
             <p>{{ $t('text') }}</p>
-          </q-tab-panel>
-        </q-tab-panels>
-      </template>
-    </q-splitter>
-    <SupportYawik />
+          </div>
+        </q-page>
+      </q-page-container>
+    </q-layout>
+        <SupportYawik />
   </q-page>
 </template>
 
@@ -45,7 +57,6 @@ OA<template>
 import { ref } from 'vue';
 import SupportYawik from 'src/components/SupportYawik';
 import Organization from './settings/Organization';
-
 export default
 {
   name: 'Settings',
@@ -54,16 +65,36 @@ export default
     SupportYawik,
     Organization
   },
-  data()
+  computed:
   {
-    return {
-    };
+      menuList(){
+        return [
+        {
+          icon: 'mdi-domain',
+          label: this.$t('organization'),
+          separator: true
+        },
+        {
+          icon: 'mdi-cog',
+          label: this.$t('misc'),
+          separator: false
+        }
+      ]
+    }
+  },
+  data(){
+    return{
+      selectedIndex:0
+    }
   },
   setup()
   {
     return {
       tab: ref('organization'),
-      splitterModel: ref(10)
+      splitterModel: ref(10),
+
+      drawer: ref(false),
+
     };
   }
 };
