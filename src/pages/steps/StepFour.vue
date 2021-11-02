@@ -8,6 +8,7 @@
       <q-btn type="a" style="background-color: grey-6; margin-top: 20px;" glossy href="https://github.com/sponsors/cbleek" rounded size="xl">{{ $t('supportYawik') }}</q-btn>
     </div>
     <div v-else>
+      <ChooseChannel />
       <PrivacyPolicy v-model="acceptTerms" />
     </div>
   </div>
@@ -15,6 +16,7 @@
 
 <script>
 import PrivacyPolicy from 'src/components/PrivacyPolicy';
+import ChooseChannel from 'src/components/ChooseChannel';
 import { GET_FORM, SET_FIELD } from 'src/store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
@@ -24,6 +26,7 @@ export default
   components:
     {
       PrivacyPolicy,
+      ChooseChannel
     },
   computed:
     {

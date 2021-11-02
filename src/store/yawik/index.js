@@ -21,6 +21,7 @@ const emptyForm = {
   jobTitle: '',
   organization: '',
   country: null,
+  channels: [],
   location: {
     streetAdress: '',
     addressLocality: '',

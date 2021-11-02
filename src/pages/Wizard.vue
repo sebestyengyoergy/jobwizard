@@ -272,7 +272,7 @@ export default
         "stepOne": "General data",
         "stepTwo": "Create job ad",
         "stepThree": "Categories",
-        "stepFour": "Privacy"
+        "stepFour": "Channels"
       },
       "back": "Back",
       "continue": "Next",
@@ -288,7 +288,7 @@ export default
         "stepOne": "Allgemeine Daten",
         "stepTwo": "Stellenanzeige anlegen",
         "stepThree": "Kategorien",
-        "stepFour": "Datenschutz"
+        "stepFour": "Kanäle"
       },
       "back": "Zurück",
       "continue": "Weiter",
