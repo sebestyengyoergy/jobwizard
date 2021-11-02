@@ -31,7 +31,6 @@
       </q-btn>
       <q-toggle
         v-model="portal"
-        :label="portal"
         :val="name"
       />
     </q-card-actions>
