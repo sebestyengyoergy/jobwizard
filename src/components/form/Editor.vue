@@ -1,5 +1,5 @@
 <template>
-  <div :style="{maxWidth: maxWidth + 'px'}" class="col-md-6 col-sm-12">
+  <div :style="{maxWidth: maxWidth}" class="col-md-6 col-sm-12">
     <div class="cursor-pointer text-h5">
       <q-icon color="primary" name="mdi-pencil" /> {{ labelText }}
       <q-popup-edit v-slot="scope" v-model="labelText" auto-save>
@@ -8,7 +8,14 @@
     </div>
     <q-field :model-value="inputVal" :rules="rules" borderless hide-bottom-space>
       <template #control>
-        <q-editor :ref="name" v-model="inputVal" :name="name" :toolbar="toolbar" :min-height="minHeight" class="col-grow" />
+        <q-editor
+          :ref="name"
+          v-model="inputVal"
+          :name="name"
+          :toolbar="toolbar"
+          :min-height="minHeight"
+          class="col-grow"
+        />
       </template>
     </q-field>
   </div>
