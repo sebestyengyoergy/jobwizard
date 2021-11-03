@@ -1,27 +1,42 @@
 <template>
   <div class="full-width">
-    <div style="width: 100%;" class="text-h4 q-mb-md">{{ $t('organization') }}</div>
-    <q-input v-model.trim="organization" :label="$t('orgName')" color="primary" bg-color="white" name="organization"
-             dense outlined hide-bottom-space
+    <div
+      style="width: 100%;"
+      class="text-h4 q-mb-md"
+    >
+      {{ $t('organization') }}
+    </div>
+    <q-input
+      v-model.trim="organization"
+      :label="$t('orgName')"
+      color="primary"
+      bg-color="white"
+      name="organization"
+      dense outlined
     >
       <template #hint>
         {{ $t('orgNameHelp') }}
       </template>
     </q-input>
     {{ $t('introDescHelp') }}
-    <TextArea section="intro" />
+    <EditorInput
+      v-model:label="introLabel"
+      v-model:value="intro"
+      :rules="[ruleRequired]"
+      name="intro"
+    />
   </div>
 </template>
 
 <script>
-import TextArea from 'src/components/TextArea';
+import EditorInput from 'src/components/form/Editor';
 
 export default
 {
   name: 'Organization',
   components:
   {
-    TextArea
+    EditorInput
   },
   data()
   {

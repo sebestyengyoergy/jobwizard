@@ -34,17 +34,7 @@
         :val="name"
         :disable="!$store.getters.HAS_AUTH"
       >
-        <q-tooltip v-if="!$store.getters.HAS_AUTH"
-                   max-width="15em"
-                   hide-delay="650"
-                   delay="500"
-                   style="text-align: center;"
-                   transition-show="scale"
-                   transition-hide="fade"
-                   class="bg-secondary text-subtitle1 text-black text-center shadow-4"
-        >
-          {{ $t('pleaseRegister') }}
-        </q-tooltip>
+        <Tooltip v-if="!$store.getters.HAS_AUTH" :text="$t('pleaseRegister')" />
       </q-toggle>
     </q-card-actions>
   </q-card>
@@ -53,10 +43,13 @@
 <script>
 import { GET_FORM, SET_FIELD } from 'src/store/names';
 import { mapGetters, mapMutations } from 'vuex';
-
+import Tooltip from 'src/components/form/Tooltip';
 export default
 {
   name: 'Channel',
+  components: {
+    Tooltip,
+  },
   props: {
     id: {
       type: String,
@@ -77,6 +70,14 @@ export default
     price: {
       type: Number,
       default: undefined
+    },
+    delay: {
+      type: Number,
+      default: 500
+    },
+    hideDelay: {
+      type: Number,
+      default: 650
     },
     mode: {
       type: Boolean

@@ -60,7 +60,7 @@ export default {
     rules: {
       required: false,
       default: null,
-      type: String
+      type: Array
     },
     id: {
       required: false,

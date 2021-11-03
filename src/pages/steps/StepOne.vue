@@ -99,7 +99,9 @@
       :label="$t('apply_post')"
       color="primary"
       name="apply_post"
-    />
+    >
+      <Tooltip :text="$t('help.applyPost')" />
+    </q-checkbox>
 
     <!-- Reference -->
     <TextInput
@@ -118,18 +120,21 @@ import { GET_FORM, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
 import countries from 'src/countries';
 import TextInput from 'src/components/form/TextInput.vue';
+import Tooltip from 'src/components/form/Tooltip.vue';
 
 export default
 {
   name: 'StepOne',
   components: {
-    TextInput
+    TextInput,
+    Tooltip
   },
   mixins: [mixinValidations],
   emits: ['next'],
   data()
   {
     return {
+      hideDelay: 600,
       filteredCountries: [],
       googleSearchBox: null,
       googleMapsListener: null,
@@ -356,6 +361,9 @@ export default
       "apply_email": "Apply e-mail",
       "apply_post": "No online application/postal application",
       "reference": "Reference",
+      "help": {
+        "reference": "You can assign a reference number to your advertisement. An applicant can refer to this.",
+      }
     },
     "de": {
       "job_title": "Anzeigentitel",
@@ -368,6 +376,10 @@ export default
       "reference": "Referenz",
       "rules": {
         "required": "Pflichtfeld"
+      },
+      "help": {
+        "reference": "Sie können Ihrer Anzeige eine Referenznummer zuweisen. Auf diese kann sich ein Bewerber beziehen.",
+        "applyPost": "hier können sie festlegen, ob sie Bewerbungen lieber in der traditionellen Form per Post wüschen. Der Berwerbungsbutton in der Stellenanzeige passt sich dann entsprechend an."
       }
     }
   }

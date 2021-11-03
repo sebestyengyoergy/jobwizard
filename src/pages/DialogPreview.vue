@@ -8,9 +8,7 @@
           <q-popup-proxy v-model="dlgColor" transition-show="scale" transition-hide="scale" style="max-height: none !important; transform: translateY(50px);">
             <q-color v-model="color" no-header no-footer default-view="palette" style="max-width: 250px;" @change="dlgColor = false" />
           </q-popup-proxy>
-          <q-tooltip>
-            {{ $t('tooltip') }}
-          </q-tooltip>
+          <Tooltip :text="$t('tooltip')" />
         </q-btn>
         <q-btn-toggle
           v-model="mode"
@@ -30,12 +28,16 @@
 </template>
 
 <script>
+import Tooltip from 'src/components/form/Tooltip.vue';
 import { GET_FORM, GET_LOGO, GET_HEADER } from 'src/store/names';
 import { mapGetters } from 'vuex';
 
 export default
 {
   name: 'DialogPreview',
+  components: {
+    Tooltip
+  },
   props:
     {
       modelValue:
