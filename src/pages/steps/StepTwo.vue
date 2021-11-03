@@ -88,7 +88,7 @@
 import mixinValidations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
 import { GET_STEP, GET_FORM, SET_FIELD, GET_LOGO, GET_HEADER, SET_LOGO, SET_HEADER } from 'src/store/names';
-import EditorInput from 'src/components/controls/Editor.vue';
+import EditorInput from 'src/components/form/Editor.vue';
 
 export default
 {

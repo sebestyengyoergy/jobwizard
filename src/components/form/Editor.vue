@@ -1,7 +1,7 @@
 <template>
   <div :style="{maxWidth: maxWidth + 'px'}" class="col-md-6 col-sm-12">
     <div class="cursor-pointer text-h5">
-      {{ labelText }}
+      <q-icon color="primary" name="mdi-pencil" /> {{ labelText }}
       <q-popup-edit v-slot="scope" v-model="labelText" auto-save>
         <q-input v-model="labelText" dense autofocus counter @keyup.enter="scope.set" />
       </q-popup-edit>

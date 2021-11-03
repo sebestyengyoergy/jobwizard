@@ -117,7 +117,7 @@ import { mapGetters, mapMutations } from 'vuex';
 import { GET_FORM, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
 import countries from 'src/countries';
-import TextInput from 'src/components/controls/TextInput.vue';
+import TextInput from 'src/components/form/TextInput.vue';
 
 export default
 {
