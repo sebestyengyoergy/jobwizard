@@ -54,7 +54,7 @@
         v-model:label="taskLabel"
         v-model:value="tasks"
         :rules="[ruleRequired]"
-        name="task"
+        name="tasks"
       />
 
       <!-- Profile -->
@@ -78,7 +78,7 @@
         v-model:label="contactInfoLabel"
         v-model:value="contactInfo"
         :rules="[]"
-        name="contact"
+        name="contactInfo"
       />
     </div>
   </div>
