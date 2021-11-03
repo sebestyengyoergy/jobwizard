@@ -77,7 +77,7 @@
       <EditorInput
         v-model:label="contactInfoLabel"
         v-model:value="contactInfo"
-        :rules="[]"
+        :rules="applyPost ? [ruleRequired] : []"
         name="contactInfo"
       />
     </div>
@@ -238,6 +238,10 @@ export default
             this[SET_HEADER](val);
           }
         },
+      applyPost()
+      {
+        return this[GET_FORM].applyPost;
+      }
     },
   watch:
     {
