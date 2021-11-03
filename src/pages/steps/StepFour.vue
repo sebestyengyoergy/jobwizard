@@ -1,16 +1,7 @@
 <template>
   <div>
-    <div v-if="!$store.getters.HAS_AUTH" class="text-center">
-      <h3>{{ $t('thank') }}</h3>
-      <div>
-        {{ $t('howtoDownload') }}
-      </div>
-      <q-btn type="a" style="background-color: grey-6; margin-top: 20px;" glossy href="https://github.com/sponsors/cbleek" rounded size="xl">{{ $t('supportYawik') }}</q-btn>
-    </div>
-    <div v-else>
-      <ChooseChannel />
-      <PrivacyPolicy v-model="acceptTerms" />
-    </div>
+    <ChooseChannel />
+    <PrivacyPolicy v-if="$store.getters.HAS_AUTH" v-model="acceptTerms" />
   </div>
 </template>
 

@@ -32,7 +32,20 @@
       <q-toggle
         v-model="portal"
         :val="name"
-      />
+        :disable="!$store.getters.HAS_AUTH"
+      >
+        <q-tooltip v-if="!$store.getters.HAS_AUTH"
+                   max-width="15em"
+                   hide-delay="650"
+                   delay="500"
+                   style="text-align: center;"
+                   transition-show="scale"
+                   transition-hide="fade"
+                   class="bg-secondary text-subtitle1 text-black text-center shadow-4"
+        >
+          {{ $t('pleaseRegister') }}
+        </q-tooltip>
+      </q-toggle>
     </q-card-actions>
   </q-card>
 </template>
@@ -130,8 +143,7 @@ export default
         "description": "the job posting will be published on Goole for jobs"
       },
       "free": "free",
-      "true": "On",
-      "false": "Off"
+      "pleaseRegister": "You must be logged in to use this channel. If you are not logged in, you can only download the job advertisement."
     },
     "de": {
       "channel": "Wo möchten Sie ihre Stellenanzeige veröffentlichen?",
@@ -154,8 +166,7 @@ export default
         "description": "mit dem Geld unterstützen Sie die weitere Entwicklung von Yawik"
       },
       "free": "kostenlos",
-      "true": "An",
-      "false": "Aus"
+      "pleaseRegister": "Sie müssen angemeldet ein, um diesen Kanal nutzen zu können. Unangemeldet können Sie die Stellenanzeige nur downloaden.",
     }
   }
 </i18n>
