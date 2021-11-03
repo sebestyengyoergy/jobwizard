@@ -1,61 +1,113 @@
 <template>
-  <div class="q-gutter-md">
+  <div class="row q-col-gutter-md">
     <!-- Job title -->
-    <q-input v-model.trim="jobTitle" :label="$t('job_title')" color="primary" bg-color="white" name="job_title"
-             outlined dense :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+    <TextInput
+      v-model="jobTitle"
+      name="job_title"
+      class="col-md-12"
+      :label="$t('job_title')"
+      :rules="[ruleRequired]"
+      @enterPress="gotoNext"
     />
 
     <!-- Organization -->
-    <q-input v-model.trim="organization" :label="$t('organization')" color="primary" bg-color="white" name="organization"
-             outlined dense :rules="[ruleRequired]" hide-bottom-space @keypress.enter="gotoNext"
+    <TextInput
+      v-model.trim="organization"
+      name="organization"
+      class="col-md-12"
+      :label="$t('organization')"
+      :rules="[ruleRequired]"
+      @enterPress="gotoNext"
     />
 
     <!-- Country and location -->
-    <div class="row">
-      <q-select v-model="country" :label="$t('country')" :options="filteredCountries" color="primary" bg-color="white" name="country"
-                outlined dense options-dense use-input fill-input hide-selected
-                :rules="[ruleRequired]" hide-bottom-space input-debounce="200" class="col-4"
-                @filter="countryAutocomplete" @keypress.enter="gotoNext"
-      >
-        <template #option="scope">
-          <q-item v-bind="scope.itemProps">
-            <q-item-section avatar>
-              <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>{{ scope.opt.label }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </template>
-        <!-- Current flag -->
-        <template #prepend>
-          <q-avatar v-if="country">
-            <img :src="'country/'+(country.value || '').toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
-          </q-avatar>
-        </template>
-      </q-select>
-      <q-input id="location" ref="location" v-model.trim="locationDisplay" :label="$t('location')" color="primary" bg-color="white"
-               name="location"
-               outlined dense class="col-grow" :rules="[ruleRequired]" hide-bottom-space
-               @keypress.enter="gotoNext"
-      />
-    </div>
+    <q-select
+      v-model="country"
+      :label="$t('country')"
+      :options="filteredCountries"
+      color="primary"
+      bg-color="white"
+      name="country"
+      outlined
+      dense
+      options-dense
+      use-input
+      fill-input
+      hide-selected
+      :rules="[ruleRequired]"
+      input-debounce="200"
+      class="col-md-2"
+      @filter="countryAutocomplete"
+      @keypress.enter="gotoNext"
+    >
+      <template #option="scope">
+        <q-item v-bind="scope.itemProps">
+          <q-item-section avatar>
+            <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ scope.opt.label }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </template>
+      <!-- Current flag -->
+      <template #prepend>
+        <q-avatar v-if="country">
+          <img :src="'country/'+(country.value || '').toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
+        </q-avatar>
+      </template>
+    </q-select>
+    <q-input
+      id="location"
+      ref="location"
+      v-model.trim="locationDisplay"
+      :label="$t('location')"
+      color="primary"
+      bg-color="white"
+      class="col-md-10"
+      name="location"
+      outlined
+      dense
+      :rules="[ruleRequired]"
+      @keypress.enter="gotoNext"
+    />
 
     <!-- URL -->
-    <q-input v-model.trim="applyUrl" :label="$t('apply_url')" color="primary" bg-color="white" name="apply_url"
-             outlined dense :rules="[validURL]" hide-bottom-space :disable="applyPost" @keypress.enter="gotoNext"
+    <TextInput
+      v-model="applyUrl"
+      name="apply_url"
+      class="col-md-12"
+      :label="$t('apply_url')"
+      :rules="[validURL]"
+      :disable="applyPost"
+      @enterPress="gotoNext"
     />
 
     <!-- Email -->
-    <q-input v-model.trim="applyEmail" :label="$t('apply_email')" color="primary" bg-color="white" name="apply_email"
-             outlined dense :rules="[validEmail]" hide-bottom-space :disable="applyPost" @keypress.enter="gotoNext"
+    <TextInput
+      v-model="applyEmail"
+      name="apply_email"
+      class="col-md-12"
+      :label="$t('apply_email')"
+      :rules="[validEmail]"
+      :disable="applyPost"
+      @enterPress="gotoNext"
     />
 
-    <q-checkbox v-model="applyPost" :label="$t('apply_post')" color="primary" name="apply_post" />
+    <q-checkbox
+      v-model="applyPost"
+      :label="$t('apply_post')"
+      color="primary"
+      name="apply_post"
+    />
 
     <!-- Reference -->
-    <q-input v-model.trim="reference" :label="$t('reference')" color="primary" bg-color="white" name="reference"
-             outlined dense :rules="[]" hide-bottom-space @keypress.enter="gotoNext"
+    <TextInput
+      v-model="reference"
+      name="reference"
+      class="col-md-12"
+      :label="$t('reference')"
+      @enterPress="gotoNext"
     />
   </div>
 </template>
@@ -65,10 +117,14 @@ import { mapGetters, mapMutations } from 'vuex';
 import { GET_FORM, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
 import countries from 'src/countries';
+import TextInput from 'src/components/form/TextInput.vue';
 
 export default
 {
   name: 'StepOne',
+  components: {
+    TextInput
+  },
   mixins: [mixinValidations],
   emits: ['next'],
   data()

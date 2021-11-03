@@ -42,79 +42,44 @@
 
     <div class="jobfields row q-col-gutter-md justify-center">
       <!-- Intro -->
-      <div :style="{maxWidth: maxWidth + 'px'}" class="col-md-6 col-sm-12">
-        <div class="cursor-pointer text-h5">
-          {{ introLabel }}
-          <q-popup-edit v-slot="scope" v-model="introLabel" auto-save>
-            <q-input v-model="introLabel" dense autofocus counter @keyup.enter="scope.set" />
-          </q-popup-edit>
-        </div>
-        <q-field :model-value="intro" :rules="[ruleRequired]" borderless hide-bottom-space>
-          <template #control>
-            <q-editor ref="editor" v-model="intro" name="intro" :toolbar="toolbar" min-height="200px" class="col-grow" />
-          </template>
-        </q-field>
-      </div>
+      <EditorInput
+        v-model:label="introLabel"
+        v-model:value="intro"
+        :rules="[ruleRequired]"
+        name="intro"
+      />
 
       <!-- Tasks -->
-      <div :style="{maxWidth: maxWidth + 'px'}" class="col-md-6 col-sm-12">
-        <div class="cursor-pointer text-h5">
-          {{ taskLabel }}
-          <q-popup-edit v-slot="scope" v-model="taskLabel" auto-save>
-            <q-input v-model="taskLabel" dense autofocus counter @keyup.enter="scope.set" />
-          </q-popup-edit>
-        </div>
-        <q-field :model-value="tasks" :rules="[ruleRequired]" borderless hide-bottom-space>
-          <template #control>
-            <q-editor v-model="tasks" name="tasks" :toolbar="toolbar" min-height="200px" class="col-grow" />
-          </template>
-        </q-field>
-      </div>
+      <EditorInput
+        v-model:label="taskLabel"
+        v-model:value="tasks"
+        :rules="[ruleRequired]"
+        name="tasks"
+      />
 
       <!-- Profile -->
-      <div :style="{maxWidth: maxWidth + 'px'}" class="col-md-6 col-sm-12">
-        <div class="cursor-pointer text-h5">
-          {{ profileLabel }}
-          <q-popup-edit v-slot="scope" v-model="profileLabel" auto-save>
-            <q-input v-model="profileLabel" dense autofocus counter @keyup.enter="scope.set" />
-          </q-popup-edit>
-        </div>
-        <q-field :model-value="profile" :rules="[]" borderless hide-bottom-space>
-          <template #control>
-            <q-editor v-model="profile" name="profile" :toolbar="toolbar" min-height="200px" class="col-grow" />
-          </template>
-        </q-field>
-      </div>
+      <EditorInput
+        v-model:label="profileLabel"
+        v-model:value="profile"
+        :rules="[]"
+        name="profile"
+      />
 
       <!-- Offer -->
-      <div :style="{maxWidth: maxWidth + 'px'}" class="col-md-6 col-sm-12">
-        <div class="cursor-pointer text-h5">
-          {{ offerLabel }}
-          <q-popup-edit v-slot="scope" v-model="offerLabel" auto-save>
-            <q-input v-model="offerLabel" dense autofocus counter @keyup.enter="scope.set" />
-          </q-popup-edit>
-        </div>
-        <q-field :model-value="offer" :rules="[]" borderless hide-bottom-space>
-          <template #control>
-            <q-editor v-model="offer" name="offer" :toolbar="toolbar" min-height="200px" class="col-grow" />
-          </template>
-        </q-field>
-      </div>
+      <EditorInput
+        v-model:label="offerLabel"
+        v-model:value="offer"
+        :rules="[]"
+        name="offer"
+      />
 
       <!-- Contact info -->
-      <div :style="{maxWidth: maxWidth + 'px'}" class="col-md-12 col-xl-6">
-        <div class="cursor-pointer text-h5">
-          {{ contactInfoLabel }}
-          <q-popup-edit v-slot="scope" v-model="contactInfoLabel" auto-save>
-            <q-input v-model="contactInfoLabel" dense autofocus counter @keyup.enter="scope.set" />
-          </q-popup-edit>
-        </div>
-        <q-field :model-value="contactInfo" :rules="[GET_FORM].applyPost ? [ruleRequired] : []" borderless hide-bottom-space>
-          <template #control>
-            <q-editor v-model="contactInfo" :toolbar="toolbar" name="contactInfo" min-height="200px" class="col-grow" />
-          </template>
-        </q-field>
-      </div>
+      <EditorInput
+        v-model:label="contactInfoLabel"
+        v-model:value="contactInfo"
+        :rules="[]"
+        name="contactInfo"
+      />
     </div>
   </div>
 </template>
@@ -123,22 +88,19 @@
 import mixinValidations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
 import { GET_STEP, GET_FORM, SET_FIELD, GET_LOGO, GET_HEADER, SET_LOGO, SET_HEADER } from 'src/store/names';
+import EditorInput from 'src/components/form/Editor.vue';
 
 export default
 {
   name: 'StepTwo',
+  components: {
+    EditorInput
+  },
   mixins: [mixinValidations],
   data()
   {
     return {
       maxWidth: 800,
-      toolbar: [
-        ['left', 'justify'],
-        ['bold', 'italic'],
-        ['token', 'hr', 'link'],
-        ['quote', 'unordered', 'ordered'],
-        ['undo', 'redo']
-      ],
     };
   },
   computed:
