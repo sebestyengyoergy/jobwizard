@@ -7,6 +7,8 @@
   "supportFile": "test/cypress/support/index.js",
   "videosFolder": "test/cypress/videos",
   "video": false,
+  "viewportHeight": 1280,
+  "viewportWidth": 1480,
   "ignoreTestFiles": [
     "*~"
   ]
