@@ -4,7 +4,7 @@
     <TextInput
       v-model="jobTitle"
       name="job_title"
-      class="col-md-12"
+      class="col-12"
       :label="$t('job_title')"
       :rules="[ruleRequired]"
       @enterPress="gotoNext"
@@ -14,7 +14,7 @@
     <TextInput
       v-model.trim="organization"
       name="organization"
-      class="col-md-12"
+      class="col-12"
       :label="$t('organization')"
       :rules="[ruleRequired]"
       @enterPress="gotoNext"
@@ -35,7 +35,7 @@
       hide-selected
       :rules="[ruleRequired]"
       input-debounce="200"
-      class="col-md-2"
+      class="col-lg-1 col-md-2 col-sm-3 col-xs-4"
       @filter="countryAutocomplete"
       @keypress.enter="gotoNext"
     >
@@ -62,7 +62,7 @@
       v-model.trim="locationDisplay"
       :label="$t('location')"
       color="primary"
-      class="col-md-10"
+      class="col-lg-11 col-md-10 col-sm-9 col-xs-8"
       name="location"
       outlined
       dense
@@ -74,7 +74,7 @@
     <TextInput
       v-model="applyUrl"
       name="apply_url"
-      class="col-md-12"
+      class="col-12"
       :label="$t('apply_url')"
       :rules="[validURL]"
       :disable="applyPost"
@@ -85,7 +85,7 @@
     <TextInput
       v-model="applyEmail"
       name="apply_email"
-      class="col-md-12"
+      class="col-12"
       :label="$t('apply_email')"
       :rules="[validEmail]"
       :disable="applyPost"
@@ -105,7 +105,7 @@
     <TextInput
       v-model="reference"
       name="reference"
-      class="col-md-12"
+      class="col-12"
       :label="$t('reference')"
       @enterPress="gotoNext"
     />

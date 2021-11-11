@@ -23,7 +23,7 @@ export default {
     },
     delay: {
       required: false,
-      default: 500,
+      default: 2000,
       type: Number
     },
     hideDelay: {
