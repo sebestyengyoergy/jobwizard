@@ -48,7 +48,8 @@ describe('Filling and sending the form', () =>
   {
     cy.get('[name="preview"]').click();
     //
-    //cy.contains('CROSS');
+    cy.contains('CROSS Solution');
+    cy.contains('120.000€');
     cy.get('[name="close"]').click();
   });
 

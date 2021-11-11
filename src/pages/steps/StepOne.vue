@@ -373,7 +373,13 @@ export default
       "apply_post": "keine Onlinebewerbung/postalische Bewerbungen",
       "reference": "Referenz",
       "rules": {
-        "required": "Pflichtfeld"
+        "required": "Pflichtfeld",
+        "invalid_url": "ungültige URL",
+        "invalid_email": {
+          "hostname": "ungültiger Email Hostname",
+          "domain": "ungültige Email Domain",
+          "delimiters": "ungültige Email Trennzeichen"
+        }
       },
       "help": {
         "reference": "Sie können Ihrer Anzeige eine Referenznummer zuweisen. Auf diese kann sich ein Bewerber beziehen.",

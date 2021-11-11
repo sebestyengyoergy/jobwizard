@@ -3,7 +3,6 @@
     <q-layout
       view="hHh Lpr lff"
       container
-      :class="$q.dark.mode ? 'bg-dark' : 'bg-grey-2'"
       style="height: 800px;"
     >
       <q-drawer

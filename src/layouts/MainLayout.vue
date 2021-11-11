@@ -196,7 +196,7 @@ export default
   },
   methods:
     {
-      ...mapMutations([SET_TOKEN, SET_SETTINGS_FIELD]),
+      ...mapMutations([SET_TOKEN]),
       clearTimer()
       {
         if (this.tokenTimer) clearInterval(this.tokenTimer);

@@ -24,4 +24,12 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
     cy.get('.mdi-menu').click();
     cy.get('.q-drawer__content').should('not.be.visible');
   });
+
+  it('click on dark mode toggle', () =>
+  {
+    cy.get('.mdi-weather-night').click();
+    cy.get('.body--dark').should('be.visible');
+    cy.get('.mdi-weather-night').click();
+    cy.get('.body--light').should('be.visible');
+  });
 });

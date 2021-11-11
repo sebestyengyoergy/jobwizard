@@ -23,10 +23,6 @@
       :rules="[ruleRequired]"
       name="orgDesc"
     />
-
-    <div>
-      {{ GET_SETTINGS }}
-    </div>
   </div>
 </template>
 
