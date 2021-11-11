@@ -98,7 +98,7 @@
       color="primary"
       name="apply_post"
     >
-      <Tooltip :text="$t('help.applyPost')" />
+      <Tooltip :text="$t('help.apply_post')" />
     </q-checkbox>
 
     <!-- Reference -->
@@ -383,7 +383,7 @@ export default
       },
       "help": {
         "reference": "Sie können Ihrer Anzeige eine Referenznummer zuweisen. Auf diese kann sich ein Bewerber beziehen.",
-        "applyPost": "hier können sie festlegen, ob sie Bewerbungen lieber in der traditionellen Form per Post wüschen. Der Berwerbungsbutton in der Stellenanzeige passt sich dann entsprechend an."
+        "apply_post": "hier können sie festlegen, ob sie Bewerbungen lieber in der traditionellen Form per Post wüschen. Der Berwerbungsbutton in der Stellenanzeige passt sich dann entsprechend an."
       }
     }
   }

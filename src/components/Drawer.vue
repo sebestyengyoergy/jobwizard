@@ -10,27 +10,17 @@
   >
     <q-scroll-area class="fit">
       <q-list padding>
-        <q-item v-ripple clickable :to="'/' + lang + '/jobs'">
-          <q-item-section avatar>
-            <q-icon name="mdi-view-list" color="secondary" />
-          </q-item-section>
-
-          <q-item-section>
-            {{ $t('jobs') }}
-          </q-item-section>
-        </q-item>
-
-        <q-separator />
-
-        <q-item v-ripple clickable :to="'/' + lang + '/settings'">
-          <q-item-section avatar>
-            <q-icon name="mdi-cogs" color="secondary" />
-          </q-item-section>
-
-          <q-item-section>
-            {{ $t('settings') }}
-          </q-item-section>
-        </q-item>
+        <template v-for="(menuItem, index) in menuList" :key="index">
+          <q-item v-ripple clickable :to="menuItem.to" :active="index===selectedIndex" @click="selectedIndex=index">
+            <q-item-section avatar>
+              <q-icon :name="menuItem.icon" color="secondary" />
+            </q-item-section>
+            <q-item-section>
+              {{ menuItem.label }}
+            </q-item-section>
+          </q-item>
+          <q-separator v-if="menuItem.separator" :key="'sep' + index" />
+        </template>
       </q-list>
     </q-scroll-area>
   </q-drawer>
@@ -55,6 +45,7 @@ export default
   data()
   {
     return {
+      selectedIndex: 0
     };
   },
   emits: ['update:modelValue'],
@@ -75,6 +66,29 @@ export default
       lang()
       {
         return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
+      },
+      menuList()
+      {
+        return [
+          {
+            icon: 'mdi-view-list',
+            label: this.$t('jobs'),
+            to: '/' + this.lang + '/jobs',
+            separator: true
+          },
+          {
+            icon: 'mdi-poll',
+            label: this.$t('statistics'),
+            to: '/' + this.lang + '/statistics',
+            separator: true
+          },
+          {
+            icon: 'mdi-cogs',
+            label: this.$t('settings'),
+            to: '/' + this.lang + '/settings',
+            separator: false
+          }
+        ];
       }
     },
   methods:
@@ -91,10 +105,12 @@ export default
   {
     "en": {
       "jobs": "Jobs",
+      "statistics": "Statistics",
       "settings": "Settings"
     },
     "de": {
       "jobs": "Stellenanzeigen",
+      "statistics": "Statistiken",
       "settings": "Einstellungen"
     }
   }

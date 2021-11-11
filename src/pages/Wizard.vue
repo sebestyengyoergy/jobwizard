@@ -1,15 +1,17 @@
 <template>
   <q-page class="flex">
     <q-form ref="frm" spellcheck="true" class="grow full-width" @submit="submitForm" @validation-error="hasErrors">
-      <div class="justify-center q-pb-lg flex">
-        <q-btn-group push>
-          <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
-            {{ $t('preview') }}
-          </q-btn>
-          <SwitchLanguage v-if="!toolbar" class="q-mx-auto" />
-          <q-btn name="abort" color="negative" @click="abortForm">{{ $t($q.platform.is.mobile ? 'cancel' : 'abort') }}</q-btn>
-        </q-btn-group>
-      </div>
+      <q-page-sticky style="z-index: 5900;" position="bottom-left" :offset="[18, -65]">
+        <div class="justify-center q-pb-lg flex">
+          <q-btn-group push>
+            <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
+              {{ $t('preview') }}
+            </q-btn>
+            <SwitchLanguage v-if="!toolbar" class="q-mx-auto" />
+            <q-btn name="abort" color="negative" @click="abortForm">{{ $t($q.platform.is.mobile ? 'cancel' : 'abort') }}</q-btn>
+          </q-btn-group>
+        </div>
+      </q-page-sticky>
       <!-- eslint-disable quasar/no-invalid-props -->
       <q-stepper
         ref="stepper"
@@ -30,38 +32,40 @@
           <component :is="stepName" style="min-height: 500px;" @next="navigate('next')" />
         </q-step>
         <template #navigation>
-          <div class="row justify-end q-px-lg q-pb-lg">
-            <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('back')" class="q-mr-md" @click.stop="navigate('previous')" />
-            <q-btn v-if="lastStep & !$store.getters.HAS_AUTH" color="primary" name="next" :label="$t('download')" @click.stop="trySubmit" />
-            <q-btn-dropdown
-              v-if="lastStep & $store.getters.HAS_AUTH"
-              split
-              color="primary"
-              name="next"
-              :disable-main-btn="$store.getters.acceptTerms"
-              :label="$t('publish')"
-            >
-              <q-list>
-                <q-item v-close-popup clickable @click.stop="onSave">
-                  <q-item-section side>
-                    <q-icon name="mdi-content-save" color="secondary" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>{{ $t('save') }}</q-item-label>
-                  </q-item-section>
-                </q-item>
-                <q-item v-close-popup clickable @click.stop="trySubmit">
-                  <q-item-section side>
-                    <q-icon name="mdi-download" color="secondary" />
-                  </q-item-section>
-                  <q-item-section>
-                    <q-item-label>{{ $t('download') }}</q-item-label>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </q-btn-dropdown>
-            <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('continue')" @click.stop="navigate('next')" />
-          </div>
+          <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
+            <div class="row justify-end q-px-lg q-pb-lg">
+              <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('back')" class="q-mr-md" @click.stop="navigate('previous')" />
+              <q-btn v-if="lastStep & !$store.getters.HAS_AUTH" color="primary" name="next" :label="$t('download')" @click.stop="trySubmit" />
+              <q-btn-dropdown
+                v-if="lastStep & $store.getters.HAS_AUTH"
+                split
+                color="primary"
+                name="next"
+                :disable-main-btn="$store.getters.acceptTerms"
+                :label="$t('publish')"
+              >
+                <q-list>
+                  <q-item v-close-popup clickable @click.stop="onSave">
+                    <q-item-section side>
+                      <q-icon name="mdi-content-save" color="secondary" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>{{ $t('save') }}</q-item-label>
+                    </q-item-section>
+                  </q-item>
+                  <q-item v-close-popup clickable @click.stop="trySubmit">
+                    <q-item-section side>
+                      <q-icon name="mdi-download" color="secondary" />
+                    </q-item-section>
+                    <q-item-section>
+                      <q-item-label>{{ $t('download') }}</q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-btn-dropdown>
+              <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('continue')" @click.stop="navigate('next')" />
+            </div>
+          </q-page-sticky>
         </template>
       </q-stepper>
     </q-form>

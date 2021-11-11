@@ -32,6 +32,11 @@ const routes = [
         name: 'settings',
         component: () => import('pages/Settings.vue'),
       },
+      {
+        path: 'statistics',
+        name: 'statistics',
+        component: () => import('pages/Statistics.vue'),
+      },
     ],
   },
 
