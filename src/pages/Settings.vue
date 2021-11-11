@@ -1,20 +1,27 @@
 <template>
   <q-page class="flex">
-    <q-layout view="hHh Lpr lff" container style="height: 700px;" class="shadow-2">
+    <q-layout
+      view="hHh Lpr lff"
+      container
+      :class="$q.dark.mode ? 'bg-dark' : 'bg-grey-2'"
+      style="height: 800px;"
+    >
       <q-drawer
         v-model="drawer"
         show-if-above
         :width="200"
         :breakpoint="500"
         bordered
-        class="bg-grey-3"
+        no-swipe-open
+        no-swipe-close
+        no-swipe-backdrop
       >
         <q-scroll-area class="fit">
           <q-list>
             <template v-for="(menuItem, index) in menuList" :key="index">
               <q-item v-ripple clickable :active="index===selectedIndex" @click="selectedIndex=index">
                 <q-item-section avatar>
-                  <q-icon :name="menuItem.icon" />
+                  <q-icon :name="menuItem.icon" color="secondary" />
                 </q-item-section>
                 <q-item-section>
                   {{ menuItem.label }}
@@ -33,36 +40,53 @@
           </div>
           <div v-else-if="selectedIndex===1">
             <div class="text-h4 q-mb-md">{{ $t('misc') }}</div>
-            <p>{{ $t('text') }}</p>
-            <p>{{ $t('text') }}</p>
+            <q-checkbox
+              v-model="dark"
+              :label="$t('darkmode')"
+              color="primary"
+              name="darkmode"
+              @click="$q.dark.toggle()"
+            />
           </div>
         </q-page>
       </q-page-container>
     </q-layout>
-    <SupportYawik />
   </q-page>
 </template>
 
 <script>
 import { ref } from 'vue';
-import SupportYawik from 'src/components/SupportYawik';
 import Organization from './settings/Organization';
+import { mapGetters, mapMutations } from 'vuex';
+import { GET_SETTINGS, SET_SETTINGS_FIELD } from 'src/store/names';
+
 export default
 {
   name: 'Settings',
   components:
   {
-    SupportYawik,
     Organization
   },
   data()
   {
     return {
-      selectedIndex: 0
+      selectedIndex: 0,
     };
   },
   computed:
   {
+    ...mapGetters([GET_SETTINGS]),
+    dark:
+        {
+          get()
+          {
+            return this[GET_SETTINGS].miscDarkmode;
+          },
+          set(val)
+          {
+            this[SET_SETTINGS_FIELD]({ miscDarkmode: val });
+          }
+        },
     menuList()
     {
       return [
@@ -88,6 +112,10 @@ export default
       drawer: ref(false),
 
     };
+  },
+  methods:
+  {
+    ...mapMutations([SET_SETTINGS_FIELD])
   }
 };
 </script>
@@ -98,13 +126,13 @@ export default
       "settings": "Settings",
       "misc": "Misc",
       "organization": "Organization",
-      "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+      "darkmode": "Dark mode"
     },
     "de": {
       "settings": "Einstellungen",
       "misc": "Sonstiges",
       "organization": "Organisation",
-      "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+      "darkmode": "Nachtmodus"
     }
   }
 </i18n>

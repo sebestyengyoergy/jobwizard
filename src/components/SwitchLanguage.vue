@@ -27,7 +27,6 @@ export default
       ...mapMutations([SET_LANG]),
       setLocale(lang)
       {
-        // TODO - if we store the data in Vuex, we can redirect to the relevant route; at the moment we can't because form data will be lost after the redirect
         this.$root.$i18n.locale = lang;
         this[SET_LANG](lang);
 

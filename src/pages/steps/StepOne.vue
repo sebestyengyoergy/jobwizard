@@ -26,7 +26,6 @@
       :label="$t('country')"
       :options="filteredCountries"
       color="primary"
-      bg-color="white"
       name="country"
       outlined
       dense
@@ -63,7 +62,6 @@
       v-model.trim="locationDisplay"
       :label="$t('location')"
       color="primary"
-      bg-color="white"
       class="col-md-10"
       name="location"
       outlined

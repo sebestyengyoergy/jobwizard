@@ -1,6 +1,10 @@
 <template>
-  <q-footer bordered class="bg-white text-primary">
-    <q-tabs no-caps active-color="primary" indicator-color="transparent" class="text-grey">
+  <q-footer
+    bordered
+  >
+    <q-tabs
+      no-caps
+    >
       <q-tab
         name="yawik"
       >

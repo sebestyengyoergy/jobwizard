@@ -1,5 +1,13 @@
 <template>
-  <q-drawer v-model="value" side="right" overlay bordered no-swipe-open no-swipe-close no-swipe-backdrop>
+  <q-drawer
+    v-model="value"
+    side="right"
+    overlay
+    bordered
+    no-swipe-open
+    no-swipe-close
+    no-swipe-backdrop
+  >
     <q-scroll-area class="fit">
       <q-list padding>
         <q-item v-ripple clickable :to="'/' + lang + '/jobs'">

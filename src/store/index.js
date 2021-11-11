@@ -11,8 +11,11 @@ export default function(/* { ssrContext } */)
     plugins:
       [
         createPersistedState({
-          key: 'yavik',
-          paths: ['yawik.form']
+          key: 'yawik',
+          paths: [
+            'yawik.form',
+            'yawik.settings'
+          ]
         })
       ],
     // enable strict mode (adds overhead!)

@@ -1,11 +1,23 @@
 <template>
-  <q-layout view="lHh Lpr lFf" class="yawik">
-    <q-header v-if="showToolbar" reveal class="bg-white text-primary">
+  <q-layout view="lHh Lpr lFf">
+    <q-header
+      v-if="showToolbar"
+      reveal
+      elevated
+    >
       <q-toolbar>
         <LogoPanel v-if="showToolbar" logo-url="https://form.yawik.org/yawik-logo.png" />
         <q-toolbar-title>
           <Breadcrumb />
         </q-toolbar-title>
+
+        <q-toggle
+          v-model="dark"
+          color="primary"
+          icon="mdi-weather-night"
+          size="lg"
+          @click="$q.dark.toggle()"
+        />
 
         <q-separator spaced vertical />
 
@@ -71,7 +83,7 @@ import Breadcrumb from '../components/Breadcrumb';
 import SidebarDrawer from '../components/Drawer.vue';
 import LogoPanel from '../components/Logo';
 import eventBus, { AJAX_FAILED, TOGGLE_LOGIN } from 'src/lib/eventBus';
-import { GET_TOKEN, SET_TOKEN, HAS_AUTH } from '../store/names';
+import { GET_TOKEN, SET_TOKEN, HAS_AUTH, GET_SETTINGS, SET_SETTINGS_FIELD } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import { useMeta } from 'quasar';
 
@@ -122,7 +134,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_TOKEN, HAS_AUTH]),
+      ...mapGetters([GET_TOKEN, HAS_AUTH, GET_SETTINGS, SET_SETTINGS_FIELD]),
       showToolbar()
       {
         return !this.$route.query.tb;
@@ -134,6 +146,17 @@ export default
       initials()
       {
         return this.user.firstName[0] + this.user.lastName[0];
+      },
+      dark:
+      {
+        get()
+        {
+          return this.$q.dark.isActive;
+        },
+        set(val)
+        {
+          // this[SET_SETTINGS_FIELD]({ miscDarkmode: val });
+        }
       }
     },
   created()
@@ -173,7 +196,7 @@ export default
   },
   methods:
     {
-      ...mapMutations([SET_TOKEN]),
+      ...mapMutations([SET_TOKEN, SET_SETTINGS_FIELD]),
       clearTimer()
       {
         if (this.tokenTimer) clearInterval(this.tokenTimer);
@@ -235,11 +258,6 @@ export default
   {
     opacity: 0;
     transform: translate(2em, 0);
-  }
-
-  .yawik
-  {
-    background-color: #EEF4FB;
   }
 </style>
 

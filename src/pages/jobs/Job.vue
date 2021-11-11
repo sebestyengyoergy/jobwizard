@@ -1,7 +1,10 @@
 <template>
   <q-page class="flex">
     <div class="q-pa-md absolute-center">
-      <q-list bordered separator style="width: 500px; background: white;">
+      <q-list
+        bordered
+        separator
+      >
         <q-item v-ripple clickable>
           <q-item-section>
             <q-item-label>{{ $t('job.title') }}</q-item-label>

@@ -1,5 +1,6 @@
 import {
   GET_FORM,
+  GET_SETTINGS,
   GET_STEP,
   GET_LANG,
   GET_LOGO,
@@ -7,6 +8,7 @@ import {
   GET_TOKEN,
   HAS_AUTH,
   CLEAR_FORM,
+  SET_SETTINGS_FIELD,
   SET_STEP,
   SET_FIELD,
   SET_LANG,
@@ -54,12 +56,22 @@ const emptyForm = {
   salaryVisibility: true
 };
 
+const userSettings = {
+  miscDarkmode: 'auto',
+  miscTimezone: '',
+  miscLocale: '',
+  orgName: '',
+  orgLabel: '',
+  orgDescription: ''
+};
+
 export default
 {
   state()
   {
     return {
       form: emptyForm,
+      settings: userSettings,
       logo: '', // Base-64 encoded
       header: '', // Base-64 encoded
       token: null,
@@ -71,6 +83,10 @@ export default
       [GET_FORM](state)
       {
         return state.form;
+      },
+      [GET_SETTINGS](state)
+      {
+        return state.settings;
       },
       [GET_STEP](state)
       {
@@ -132,6 +148,10 @@ export default
       [SET_TOKEN](state, token)
       {
         state.token = token;
+      },
+      [SET_SETTINGS_FIELD](state, obj)
+      {
+        state.settings[Object.keys(obj)[0]] = Object.values(obj)[0];
       },
     }
 };

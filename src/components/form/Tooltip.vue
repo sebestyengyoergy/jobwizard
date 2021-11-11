@@ -6,7 +6,7 @@
     style="text-align: center;"
     transition-show="scale"
     transition-hide="fade"
-    class="bg-light-green-1 text-subtitle1 text-black text-center shadow-4"
+    class="text-center shadow-4"
     @onHover="true"
   >
     {{ text }}

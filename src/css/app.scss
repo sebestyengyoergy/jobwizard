@@ -6,8 +6,6 @@ body
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #414141;
-  background-color: #FFF;
   margin: 0;
 }
 
@@ -53,7 +51,6 @@ body
   .q-field--float .q-field__label
   {
     transform: translateY(-120%) scale(0.75);
-    background-color: inherit;
     max-width: 133%;
     padding-left: 6px;
     padding-right: 6px;
@@ -64,5 +61,57 @@ body
   .q-field--dense.q-field--float .q-field__label
   {
     transform: translateY(-85%) scale(0.75);
+  }
+}
+
+body.body--dark .q-layout
+{
+  background-color: $dark;
+
+  .q-field--float .q-field__label
+  {
+    background-color: #222;
+  }
+
+  .q-layout__section--marginal
+  {
+    background-color: #333;
+  }
+}
+
+body.body--light .q-layout
+{
+  background-color: #FFF;
+
+  .q-field--float .q-field__label
+  {
+    background-color: #FFF;
+  }
+
+  .q-layout__section--marginal
+  {
+    background-color: #EEE;
+  }
+
+  a
+  {
+    color: $primary;
+  }
+
+  .q-breadcrumbs--last a
+  {
+    color: $primary;
+  }
+
+  .q-breadcrumbs a
+  {
+    color: $secondary;
+  }
+
+  button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-btn--rectangle.q-btn--actionable.q-focusable.q-hoverable > span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.row,
+  button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-btn--round.q-btn--actionable.q-focusable.q-hoverable.q-btn--dense,
+  div.flex.items-center.q-breadcrumbs--last
+  {
+    color: $primary;
   }
 }

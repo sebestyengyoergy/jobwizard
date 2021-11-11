@@ -3,12 +3,10 @@
     :id="id"
     v-model="inputVal"
     :disable="disable"
-    :class="cssClasses"
     :label="label"
-    :color="color"
-    :bg-color="bgColor"
     :name="name"
     :rules="rules"
+    :dark="$q.dark.mode"
     dense
     outlined
     @keypress.enter="$emit('enter-press')"
@@ -28,16 +26,6 @@ export default {
       required: true,
       type: String
     },
-    color: {
-      required: false,
-      default: 'primary',
-      type: String
-    },
-    bgColor: {
-      required: false,
-      default: 'white',
-      type: String
-    },
     name: {
       required: true,
       type: String
@@ -49,11 +37,6 @@ export default {
     },
     hint: {
       require: false,
-      default: null,
-      type: String
-    },
-    cssClasses: {
-      required: false,
       default: null,
       type: String
     },

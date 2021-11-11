@@ -1,67 +1,101 @@
 <template>
   <div class="full-width">
-    <div
-      style="width: 100%;"
-      class="text-h4 q-mb-md"
-    >
-      {{ $t('organization') }}
+    <div style="width: 100%;" class="text-h4 q-mb-md">
+      {{ $t("org") }}
     </div>
     <q-input
-      v-model.trim="organization"
+      v-model.trim="orgName"
       :label="$t('orgName')"
-      color="primary"
-      bg-color="white"
-      name="organization"
-      dense outlined
+      name="orgName"
+      dense
+      outlined
     >
       <template #hint>
-        {{ $t('orgNameHelp') }}
+        {{ $t("orgHelp") }}
       </template>
     </q-input>
-    {{ $t('introDescHelp') }}
+
+    {{ $t("orgDescHelp") }}
+
     <EditorInput
-      v-model:label="introLabel"
-      v-model:value="intro"
+      v-model:label="orgLabel"
+      v-model:value="orgDescription"
       :rules="[ruleRequired]"
-      name="intro"
+      name="orgDesc"
     />
+
+    <div>
+      {{ GET_SETTINGS }}
+    </div>
   </div>
 </template>
 
 <script>
 import EditorInput from 'src/components/form/Editor';
+import { mapGetters, mapMutations } from 'vuex';
+import mixinValidations from 'src/lib/validations';
+import { GET_SETTINGS, SET_SETTINGS_FIELD } from 'src/store/names';
 
-export default
-{
+export default {
   name: 'Organization',
-  components:
-  {
-    EditorInput
+  components: {
+    EditorInput,
   },
-  data()
-  {
-    return {
-      organization: '',
-    };
-  }
+  mixins: [mixinValidations],
+  computed: {
+    ...mapGetters([GET_SETTINGS]),
+    orgName: {
+      get()
+      {
+        return this[GET_SETTINGS].orgName;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ orgName: val });
+      },
+    },
+    orgLabel: {
+      get()
+      {
+        return this[GET_SETTINGS].orgLabel;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ orgLabel: val });
+      },
+    },
+    orgDescription: {
+      get()
+      {
+        return this[GET_SETTINGS].orgDescription;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ orgDescription: val });
+      },
+    },
+  },
+  methods: {
+    ...mapMutations([SET_SETTINGS_FIELD]),
+  },
 };
 </script>
 
 <i18n>
   {
     "en": {
-      "organization": "Organization",
+      "org": "Organization",
       "orgName": "Organization name",
-      "orgNameHelp": "The company name is suggested when entering a job advertisement",
-      "introDescHelp": "The company description is suggested as an introduction when you enter a job ad. You can change the heading by clicking on it. It is displayed in the advertisement above the introduction.",
-      "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+      "orgLabel": "Company description",
+      "orgHelp": "The company name is suggested when entering a job advertisement",
+      "orgDescHelp": "The company description is suggested as an introduction when you enter a job ad. You can change the heading by clicking on it. It is displayed in the advertisement above the introduction.",
     },
     "de": {
-      "organization": "Organisation",
+      "org": "Organisation",
+      "orgLabel": "Unternehmensbeschreibung",
       "orgName": "Firmenname",
-      "orgNameHelp": "Der Firmenname wird bei der Eingabe einer Stellenanzeigen vorgeschlagen",
-      "introDescHelp": "Die Unternehmensbeschreibung wird Ihnen bei der Eingabe einer Stellenanzeige als Einleitung vorgeschlagen. Die Überschrift können sie durch Anklicken ändern. Sie wird in der Anzeige oberhalb der Einleitung angezeigt.",
-      "text": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam. In, libero."
+      "orgHelp": "Der Firmenname wird bei der Eingabe einer Stellenanzeigen vorgeschlagen",
+      "orgDescHelp": "Die Unternehmensbeschreibung wird Ihnen bei der Eingabe einer Stellenanzeige als Einleitung vorgeschlagen. Die Überschrift können sie durch Anklicken ändern. Sie wird in der Anzeige oberhalb der Einleitung angezeigt.",
     }
   }
 </i18n>

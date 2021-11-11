@@ -10,7 +10,7 @@ describe('Filling and sending the form', () =>
   before(() =>
   {
     cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
-    cy.viewport(1024, 768);
+    cy.viewport(1480, 1280);
     cy.visit('/de');
     // load job details
   });
@@ -47,7 +47,8 @@ describe('Filling and sending the form', () =>
   it('Check Preview', () =>
   {
     cy.get('[name="preview"]').click();
-    cy.contains('CROSS Solution');
+    //
+    //cy.contains('CROSS');
     cy.get('[name="close"]').click();
   });
 
