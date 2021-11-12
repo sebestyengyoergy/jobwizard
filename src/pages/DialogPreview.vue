@@ -21,7 +21,7 @@
         />
       </q-card-actions>
       <q-card-section :class="'col-grow overflow-hidden row q-pa-md mx-auto '+mode">
-        <iframe class="col-grow q-mx-auto rounded-borders fixed-center" :style="frameStyle" :srcdoc="htmlCode" />
+        <iframe id="jobpreview" class="col-grow q-mx-auto rounded-borders fixed-center" :style="frameStyle" :srcdoc="htmlCode" data-cy="the-frame" />
       </q-card-section>
     </q-card>
   </q-dialog>
@@ -280,7 +280,7 @@ export default
         </div>
         <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
         <div class="row items-center">
-          <div class="six columns offset-by-three button button-primary">
+          <div id="apply" class="six columns offset-by-three button button-primary">
             ${this.htmlApply}
           </div>
         </div>

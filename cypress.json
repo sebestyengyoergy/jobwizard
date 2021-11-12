@@ -9,6 +9,7 @@
   "video": false,
   "viewportHeight": 1280,
   "viewportWidth": 1480,
+  "chromeWebSecurity": false,
   "ignoreTestFiles": [
     "*~"
   ]

@@ -1,4 +1,4 @@
-// form_submit.spec.js created with Cypress
+// form_submit.spec.js
 //
 // Start writing your Cypress tests below!
 // If you're unfamiliar with how Cypress works,
@@ -21,6 +21,7 @@ describe('Filling and sending the form', () =>
     cy.get('[name="organization"]').type('CROSS Solution');
     cy.get('[name="apply_url"]').type('http://coss-solution.de');
     cy.get('[name="apply_email"]').type('bleek@cross-solution.de');
+    cy.get('.q-checkbox__svg').click();
     cy.get('[name="reference"]').type('123');
     cy.get('[name="next"]').click();
   });
@@ -43,18 +44,21 @@ describe('Filling and sending the form', () =>
     cy.get('[name="next"]').click();
   });
 
-  it('Check Preview', () =>
-  {
-    cy.get('[name="preview"]').click();
-    // cy.contains('CROSS Solution');
-    // cy.contains('120.000€');
-    cy.get('[name="close"]').click();
-  });
-
   it('Step 4. Download', () =>
   {
     cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
     // submit form
     cy.get('[name="next"]').click();
+  });
+
+  it('Check Preview', () =>
+  {
+    cy.get('[name="preview"]').click();
+    cy.get('iframe#jobpreview').invoke('attr', 'srcdoc').then( ($job) => {
+      cy.state('document').write($job)
+      cy.contains('CROSS Solution');
+      cy.contains('123');
+      return null
+    })
   });
 });

@@ -9,8 +9,7 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
 {
   before(() =>
   {
-    cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
-    cy.viewport(1480, 1280);
+    cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm')
     cy.visit('/en');
   });
 
@@ -28,8 +27,8 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
   it('click on dark mode toggle', () =>
   {
     cy.get('.mdi-weather-night').click();
-    cy.get('.body--dark').should('be.visible');
+    cy.get('body').should('have.class', 'body--dark');
     cy.get('.mdi-weather-night').click();
-    cy.get('.body--light').should('be.visible');
+    cy.get('body').should('have.class', 'body--light');
   });
 });
