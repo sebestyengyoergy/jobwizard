@@ -26,7 +26,7 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
 
   it('click on dark mode toggle', () =>
   {
-    cy.get('.mdi-weather-night').click();
+    cy.get('.mdi-white-balance-sunny').click();
     cy.get('body').should('have.class', 'body--dark');
     cy.get('.mdi-weather-night').click();
     cy.get('body').should('have.class', 'body--light');
