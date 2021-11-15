@@ -5,6 +5,8 @@
       <div class="col-lg-2 col-md-3">
         <q-uploader
           hide-upload-btn
+          :color="$q.dark.mode ? 'black' : 'grey-2' "
+          :text-color="$q.dark.mode ? 'white' : 'dark'"
           accept="image/*"
           style="max-width: 220px; height: 220px;"
           :max-total-size="1e7"
@@ -25,9 +27,11 @@
       </div>
 
       <!-- Header image -->
-      <div class="col-md-12 col-sm-12 col-xs-12" :style="{maxWidth: (maxWidth * 2) + 'px'}">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" :style="{maxWidth: (maxWidth * 2) + 'px'}">
         <q-uploader
           hide-upload-btn
+          :color="$q.dark.mode ? 'black' : 'grey-2' "
+          :text-color="$q.dark.mode ? 'white' : 'dark'"
           accept="image/*"
           style="max-height: 400px; min-height: 200px; width: 100%;"
           :max-total-size="1e7"

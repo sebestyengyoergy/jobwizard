@@ -3,6 +3,7 @@
     <div style="width: 100%;" class="text-h4 q-mb-md">
       {{ $t("org") }}
     </div>
+    <h5>{{ $t('orgNameHeader') }}</h5>
     <q-input
       v-model.trim="orgName"
       :label="$t('orgName')"
@@ -15,7 +16,10 @@
       </template>
     </q-input>
 
+    <h5>{{ $t('orgDescHeader') }}</h5>
+
     {{ $t("orgDescHelp") }}
+    <q-space /><br>
 
     <EditorInput
       v-model:label="orgLabel"
@@ -82,16 +86,20 @@ export default {
     "en": {
       "org": "Organization",
       "orgName": "Organization name",
+      "orgNameHeader": "Organization name",
       "orgLabel": "Company description",
       "orgHelp": "The company name is suggested when entering a job advertisement",
       "orgDescHelp": "The company description is suggested as an introduction when you enter a job ad. You can change the heading by clicking on it. It is displayed in the advertisement above the introduction.",
+      "orgDescHeader": "Company description"
     },
     "de": {
       "org": "Organisation",
       "orgLabel": "Unternehmensbeschreibung",
       "orgName": "Firmenname",
+      "orgNameHeader": "Name der Organisation",
       "orgHelp": "Der Firmenname wird bei der Eingabe einer Stellenanzeigen vorgeschlagen",
       "orgDescHelp": "Die Unternehmensbeschreibung wird Ihnen bei der Eingabe einer Stellenanzeige als Einleitung vorgeschlagen. Die Überschrift können sie durch Anklicken ändern. Sie wird in der Anzeige oberhalb der Einleitung angezeigt.",
+      "orgDescHeader": "Unternehmensbeschreibung"
     }
   }
 </i18n>

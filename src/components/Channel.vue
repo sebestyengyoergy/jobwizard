@@ -140,7 +140,7 @@ export default
       "product3": {
         "name": "Yawik",
         "slug": "for jobs",
-        "slogan": "publish on google for jobs",
+        "slogan": "publish on yawik portal and support the project.",
         "description": "the job posting will be published on Goole for jobs"
       },
       "free": "free",
@@ -163,8 +163,8 @@ export default
       "product3": {
         "name": "Yawik",
         "slug": "Yawik",
-        "slogan": "auf dem Yawik Portal schalten",
-        "description": "mit dem Geld unterstützen Sie die weitere Entwicklung von Yawik"
+        "slogan": "auf Yawik schalten",
+        "description": "mit dem Geld unterstützen Sie die Entwicklung von Yawik"
       },
       "free": "kostenlos",
       "pleaseRegister": "Sie müssen angemeldet ein, um diesen Kanal nutzen zu können. Unangemeldet können Sie die Stellenanzeige nur downloaden.",

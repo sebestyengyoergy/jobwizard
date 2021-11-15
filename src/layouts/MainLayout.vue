@@ -13,11 +13,15 @@
 
         <q-toggle
           v-model="dark"
-          color="primary"
-          icon="mdi-weather-night"
+          :color="$q.dark.mode ? 'primary' : 'secondary'"
+          icon-color="secondary"
+          :icon="$q.dark.mode ? 'mdi-weather-night' : 'mdi-white-balance-sunny'"
           size="lg"
+          keep-color
           @click="$q.dark.toggle()"
-        />
+        >
+          <Tooltip :text="$t('help.dark_mode')" />
+        </q-toggle>
 
         <q-separator spaced vertical />
 
@@ -78,6 +82,7 @@
 
 <script>
 import PageFooter from '../components/PageFooter';
+import Tooltip from '../components/form/Tooltip';
 import SwitchLanguage from '../components/SwitchLanguage';
 import Breadcrumb from '../components/Breadcrumb';
 import SidebarDrawer from '../components/Drawer.vue';
@@ -119,6 +124,7 @@ export default
       SidebarDrawer,
       LogoPanel,
       SwitchLanguage,
+      Tooltip
     },
   data()
   {
@@ -266,12 +272,19 @@ export default
     "en": {
       "login": "Login",
       "logout": "Logout",
-      "jobs": "Jobs"
+      "jobs": "Jobs",
+      "help": {
+        "dark_mode": "toogle dark mode"
+      }
+
     },
     "de": {
       "login": "Anmelden",
       "logout": "Abmelden",
-      "jobs": "Stellenanzeigen"
+      "jobs": "Stellenanzeigen",
+      "help": {
+        "dark_mode": "Nachtdarstellung ein und ausschalten",
+      }
     }
   }
 </i18n>
