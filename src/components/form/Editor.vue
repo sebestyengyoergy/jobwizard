@@ -3,7 +3,7 @@
     <div class="cursor-pointer text-h5">
       <q-icon color="primary" name="mdi-pencil" /> {{ labelText }}
       <q-popup-edit v-slot="scope" v-model="labelText" auto-save>
-        <q-input v-model="labelText" dense autofocus counter @keyup.enter="scope.set" />
+        <q-input v-model="labelText" dense autofocus counter clearable maxlength="80" @keyup.enter="scope.set" />
       </q-popup-edit>
     </div>
     <q-field :model-value="inputVal" :rules="rules" borderless hide-bottom-space>
