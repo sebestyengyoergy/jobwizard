@@ -41,11 +41,12 @@
                 split
                 color="primary"
                 name="next"
-                :disable-main-btn="$store.getters.acceptTerms"
+                :disable-main-btn="!acceptTerms"
                 :label="$t('publish')"
+                @click.stop="onSave"
               >
                 <q-list>
-                  <q-item v-close-popup clickable @click.stop="onSave">
+                  <q-item v-close-popup clickable :disable="!acceptTerms" @click.stop="onSave">
                     <q-item-section side>
                       <q-icon name="mdi-content-save" color="secondary" />
                     </q-item-section>
@@ -80,7 +81,7 @@ import StepOne from './steps/StepOne';
 import StepTwo from './steps/StepTwo';
 import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM } from '../store/names';
+import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
 
@@ -124,7 +125,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_STEP]),
+      ...mapGetters([GET_STEP, GET_FORM]),
       currentStep:
         {
           get()
@@ -139,6 +140,10 @@ export default
       steps()
       {
         return Object.keys(this.validationErrors);
+      },
+      acceptTerms()
+      {
+        return this.$store.getters.GET_FORM.acceptTerms;
       }
     },
   watch:
