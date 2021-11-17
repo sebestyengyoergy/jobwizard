@@ -35,7 +35,7 @@
       <q-page-container>
         <q-page padding>
           <div v-if="selectedIndex===0">
-            <Organization />
+            <Organization @click="showNotif($t('notify.please_login'))" />
           </div>
           <div v-else-if="selectedIndex===1">
             <div class="text-h4 q-mb-md">{{ $t('misc') }}</div>
@@ -55,6 +55,7 @@
 
 <script>
 import { ref } from 'vue';
+import { useQuasar } from 'quasar';
 import Organization from './settings/Organization';
 import { mapGetters, mapMutations } from 'vuex';
 import { GET_SETTINGS, SET_SETTINGS_FIELD } from 'src/store/names';
@@ -104,12 +105,28 @@ export default
   },
   setup()
   {
+    const $q = useQuasar();
+
     return {
       tab: ref('organization'),
       splitterModel: ref(10),
-
       drawer: ref(false),
-
+      showNotif(text, label)
+      {
+        $q.notify({
+          message: text,
+          color: 'primary',
+          avatar: 'https://www.gravatar.com/avatar/c51d961553bd9e448b0768c401e98e7b',
+          actions: [
+            {
+              label: 'Dismiss',
+              color: 'white',
+              handler: () =>
+              { /* ... */ }
+            }
+          ]
+        });
+      }
     };
   },
   methods:
@@ -125,13 +142,19 @@ export default
       "settings": "Settings",
       "misc": "Misc",
       "organization": "Organization",
-      "darkmode": "Dark mode"
+      "darkmode": "Dark mode",
+      "notify": {
+        "please_login": "Um Einstellungen dauerhaft zu speichern, melden Sie sich bitte an. Die Anmeldung ist kostenlos."
+      }
     },
     "de": {
       "settings": "Einstellungen",
       "misc": "Sonstiges",
       "organization": "Organisation",
-      "darkmode": "Nachtmodus"
+      "darkmode": "Nachtmodus",
+      "notify": {
+        "please_login": "Um Einstellungen dauerhaft zu speichern, melden Sie sich bitte an. Die Anmeldung ist kostenlos."
+      }
     }
   }
 </i18n>

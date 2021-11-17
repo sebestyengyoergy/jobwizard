@@ -47,11 +47,21 @@
     <div class="jobfields row q-col-gutter-md justify-center">
       <!-- Intro -->
       <EditorInput
+        v-if="!$store.getters.GET_SETTINGS.orgDescription"
         v-model:label="introLabel"
         v-model:value="intro"
         :rules="[ruleRequired]"
         name="intro"
       />
+      <div
+        v-if="$store.getters.GET_SETTINGS.orgDescription"
+        class="col-md-12"
+      >
+        <div style="width: 100%;" class="text-h5 q-mb-md">
+          {{ $store.getters.GET_SETTINGS.orgLabel }}
+        </div>
+        {{ $store.getters.GET_SETTINGS.orgDescription }}
+      </div>
 
       <!-- Tasks -->
       <EditorInput
