@@ -198,6 +198,8 @@ export default
         fetch(process.env.YAWIK_API_URL, {
           method: 'POST',
           headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-Access-Token': this.$store.getters.GET_TOKEN.token,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
