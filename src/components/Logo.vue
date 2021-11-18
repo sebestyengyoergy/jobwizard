@@ -1,23 +1,20 @@
 <template>
   <div>
-    <a :href="urlHome">
-      <img :alt="$t('logo')" :src="logoUrl" class="logo">
-    </a>
+    <q-btn flat size="lg" :href="urlHome" class="logo" />
+    <Tooltip :text="$t('slogan')" />
   </div>
 </template>
 
 <script>
+import Tooltip from 'src/components/form/Tooltip';
+
 export default
 {
   name: 'Logo',
-  props:
-    {
-      logoUrl:
-        {
-          type: String,
-          required: true
-        },
-    },
+  components:
+  {
+    Tooltip
+  },
   computed:
     {
       urlHome()
@@ -28,27 +25,35 @@ export default
 };
 </script>
 
-<style>
+<style lang="scss">
   .logo
   {
-    max-width: 160px;
-    max-height: 80px;
+    background-size: cover;
     vertical-align: middle;
   }
 
-  .q-toolbar .logo
+  .desktop .logo
   {
-    max-height: 50px;
+    width: 167px;
+    background-image: url('../../public/images/yawik_logo-desktop.svg');
+  }
+
+  .mobile .logo
+  {
+    width: 53px;
+    background-image: url('../../public/images/yawik_logo-mobile.svg');
   }
 </style>
 
 <i18n>
   {
     "en": {
-      "logo": "Logo"
+      "logo": "Logo",
+      "slogan": "let's develop great software so you can find good people."
     },
     "de": {
-      "logo": "Logo"
+      "logo": "Logo",
+      "slogan": "lasst uns tolle Software entwickeln, damit ihr gute Leute findet."
     }
 
   }

@@ -6,7 +6,7 @@
       elevated
     >
       <q-toolbar>
-        <LogoPanel v-if="showToolbar" logo-url="https://form.yawik.org/yawik-logo.png" />
+        <LogoPanel v-if="showToolbar" />
         <q-toolbar-title>
           <Breadcrumb />
         </q-toolbar-title>
