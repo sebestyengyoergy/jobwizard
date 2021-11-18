@@ -113,9 +113,9 @@ body.body--light .q-layout
     color: $primary;
   }
 
-  span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.row,
-  button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-btn--round.q-btn--actionable.q-focusable.q-hoverable.q-btn--dense,
-  div.flex.items-center.q-breadcrumbs--last
+  .q-toolbar span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.row,
+  .q-toolbar button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-btn--round.q-btn--actionable.q-focusable.q-hoverable.q-btn--dense,
+  .q-toolbar div.flex.items-center.q-breadcrumbs--last
   {
     color: $primary;
   }

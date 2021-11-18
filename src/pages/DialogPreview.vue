@@ -18,6 +18,7 @@
             {label: 'Desktop', value: 'desktop'},
             {label: 'Fullscreen', value: 'screen'}
           ]"
+          class="preview-buttons"
         />
       </q-card-actions>
       <q-card-section :class="'col-grow overflow-hidden row q-pa-md mx-auto '+mode">
@@ -54,7 +55,7 @@ export default
       countryImage: '',
       color: '#5498D7',
       dlgColor: false,
-      mode: 'desktop'
+      mode: this.$q.platform.is.mobile ? 'fullscreen' : 'desktop'
     };
   },
   computed:
@@ -76,7 +77,7 @@ export default
       frameStyle()
       {
         return this.mode === 'mobile'
-          ? 'width: 25.5%; margin-top: 0.2vw; height: 53.2vw;'
+          ? 'width: 25.5%; margin-top: 0.2vw; height: 53.2vw; max-width: 481px; max-height: 854px;'
           : this.mode === 'desktop'
             ? 'width: 60%; margin-top: -2.5vw; height: 38vw;'
             : 'width: 100%; height: 80%';
@@ -388,6 +389,7 @@ export default
 </script>
 
 <style>
+
   .desktop
   {
     background-image: url("../assets/images/macbook-mockup.png");
@@ -404,6 +406,11 @@ export default
     background-attachment: fixed;
     background-position: center;
     background-size: 30%;
+  }
+
+  .mobile .preview-buttons
+  {
+    display: none;
   }
 </style>
 
