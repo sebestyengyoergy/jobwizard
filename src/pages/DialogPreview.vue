@@ -77,7 +77,7 @@ export default
       frameStyle()
       {
         return this.mode === 'mobile'
-          ? 'width: 25.5%; margin-top: 0.2vw; height: 53.2vw;'
+          ? 'width: 25.5%; margin-top: 0.2vw; height: 53.2vw; max-width: 481px; max-height: 854px;'
           : this.mode === 'desktop'
             ? 'width: 60%; margin-top: -2.5vw; height: 38vw;'
             : 'width: 100%; height: 80%';
