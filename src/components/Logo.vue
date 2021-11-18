@@ -1,6 +1,6 @@
 <template>
   <div>
-    <q-btn flat size="lg" :href="urlHome" class="logo" />
+    <q-btn :ripple="false" flat size="lg" :to="urlHome" class="logo" />
     <Tooltip :text="$t('slogan')" />
   </div>
 </template>
@@ -19,8 +19,13 @@ export default
     {
       urlHome()
       {
-        return process.env.YAWIK_URL_HOME;
-      }
+        return process.env.VUE_ROUTER_BASE + this.lang;
+      },
+      // ToDo: remove code duplication
+      lang()
+      {
+        return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
+      },
     }
 };
 </script>
@@ -43,6 +48,7 @@ export default
     width: 53px;
     background-image: url('../../public/images/yawik_logo-mobile.svg');
   }
+
 </style>
 
 <i18n>
@@ -55,6 +61,5 @@ export default
       "logo": "Logo",
       "slogan": "lasst uns tolle Software entwickeln, damit ihr gute Leute findet."
     }
-
   }
 </i18n>

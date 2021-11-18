@@ -52,11 +52,13 @@ export default
   {
     "en": {
       "jobs": "Jobs",
-      "settings": "Settings"
+      "settings": "Settings",
+      "statistics": "Statistcs"
     },
     "de": {
       "jobs": "Stellenanzeigen",
       "settings": "Einstellungen",
+      "statistics": "Statistiken"
     }
   }
 </i18n>

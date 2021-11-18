@@ -103,17 +103,17 @@ body.body--light .q-layout
     color: $primary;
   }
 
-  .q-breadcrumbs--last a
-  {
-    color: $primary;
-  }
-
   .q-breadcrumbs a
   {
     color: $secondary;
   }
 
-  button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-btn--rectangle.q-btn--actionable.q-focusable.q-hoverable > span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.row,
+  div.flex.items-center.q-breadcrumbs--last a
+  {
+    color: $primary;
+  }
+
+  span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.row,
   button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--flat.q-btn--round.q-btn--actionable.q-focusable.q-hoverable.q-btn--dense,
   div.flex.items-center.q-breadcrumbs--last
   {
@@ -123,5 +123,10 @@ body.body--light .q-layout
   .mdi-white-balance-sunny
   {
     color: $secondary;
+  }
+
+  button.q-btn.q-btn-item.non-selectable.no-outline.q-btn--standard.q-btn--rectangle.bg-primary.text-white.q-btn--actionable.q-focusable.q-hoverable.q-btn--no-uppercase.q-btn-dropdown.q-btn-dropdown--simple.q-mx-auto > span.q-btn__content.text-center.col.items-center.q-anchor--skip.justify-center.row.no-wrap.text-no-wrap
+  {
+    color: white;
   }
 }
