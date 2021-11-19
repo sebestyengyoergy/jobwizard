@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex">
-    <q-form ref="frm" spellcheck="true" class="grow full-width" @submit="submitForm" @validation-error="hasErrors">
+    <q-form ref="frm" :spellcheck="spellcheck" class="grow full-width" @submit="submitForm" @validation-error="hasErrors">
       <q-page-sticky style="z-index: 5900;" position="bottom-left" :offset="[18, -65]">
         <div class="justify-center q-pb-lg flex">
           <q-btn-group push>
@@ -81,7 +81,7 @@ import StepOne from './steps/StepOne';
 import StepTwo from './steps/StepTwo';
 import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM } from '../store/names';
+import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
 
@@ -125,7 +125,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_STEP, GET_FORM]),
+      ...mapGetters([GET_STEP, GET_FORM, GET_SETTINGS]),
       currentStep:
         {
           get()
@@ -144,6 +144,10 @@ export default
       acceptTerms()
       {
         return this.$store.getters.GET_FORM.acceptTerms;
+      },
+      spellcheck()
+      {
+        return this.$store.getters.GET_SETTINGS.jobsSpellcheckEnabled;
       }
     },
   watch:

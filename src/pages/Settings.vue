@@ -38,6 +38,9 @@
             <Organization @click="showNotif($t('notify.please_login'))" />
           </div>
           <div v-else-if="selectedIndex===1">
+            <Jobs />
+          </div>
+          <div v-else-if="selectedIndex===2">
             <Misc />
           </div>
         </q-page>
@@ -51,6 +54,7 @@ import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 import Organization from './settings/Organization';
 import Misc from './settings/Misc';
+import Jobs from './settings/Jobs';
 
 export default
 {
@@ -58,6 +62,7 @@ export default
   components:
   {
     Organization,
+    Jobs,
     Misc
   },
   data()
@@ -74,6 +79,11 @@ export default
         {
           icon: 'mdi-domain',
           label: this.$t('organization'),
+          separator: true
+        },
+        {
+          icon: 'mdi-newspaper-variant-outline',
+          label: this.$t('jobs'),
           separator: true
         },
         {
@@ -117,6 +127,7 @@ export default
   {
     "en": {
       "settings": "Settings",
+      "jobs": "Jobs",
       "misc": "Misc",
       "organization": "Organization",
       "notify": {
@@ -125,6 +136,7 @@ export default
     },
     "de": {
       "settings": "Einstellungen",
+      "jobs": "Stellenanzeigen",
       "misc": "Sonstiges",
       "organization": "Organisation",
       "notify": {

@@ -62,7 +62,9 @@ const userSettings = {
   miscLocale: '',
   orgName: '',
   orgLabel: '',
-  orgDescription: ''
+  orgDescription: '',
+  jobsStatsEnabled: true,
+  jobsSpellcheckEnabled: true
 };
 
 export default

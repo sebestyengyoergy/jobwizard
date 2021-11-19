@@ -47,20 +47,21 @@
     <div class="jobfields row q-col-gutter-md justify-center">
       <!-- Intro -->
       <EditorInput
-        v-if="!$store.getters.GET_SETTINGS.orgDescription"
+        v-if="!orgDescription"
         v-model:label="introLabel"
         v-model:value="intro"
         :rules="[ruleRequired]"
         name="intro"
       />
       <div
-        v-if="$store.getters.GET_SETTINGS.orgDescription"
+        v-if="orgDescription"
         class="col-md-12"
       >
         <div style="width: 100%;" class="text-h5 q-mb-md">
-          {{ $store.getters.GET_SETTINGS.orgLabel }}
+          {{ orgLabel }}
         </div>
-        {{ $store.getters.GET_SETTINGS.orgDescription }}
+        <!-- eslint-disable  vue/no-v-html -->
+        <div v-html="orgDescription" />
       </div>
 
       <!-- Tasks -->
@@ -101,7 +102,7 @@
 <script>
 import mixinValidations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_STEP, GET_FORM, SET_FIELD, GET_LOGO, GET_HEADER, SET_LOGO, SET_HEADER } from 'src/store/names';
+import { GET_SETTINGS, GET_STEP, GET_FORM, SET_FIELD, GET_LOGO, GET_HEADER, SET_LOGO, SET_HEADER } from 'src/store/names';
 import EditorInput from 'src/components/form/Editor.vue';
 
 export default
@@ -119,7 +120,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
+      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER, GET_SETTINGS]),
       introLabel:
         {
           get()
@@ -255,6 +256,15 @@ export default
       applyPost()
       {
         return this[GET_FORM].applyPost;
+      },
+      orgDescription()
+      {
+        console.log('Org description available');
+        return this[GET_SETTINGS].orgDescription;
+      },
+      orgLabel()
+      {
+        return this[GET_SETTINGS].orgLabel;
       }
     },
   watch:
@@ -264,6 +274,13 @@ export default
         this.setFocus();
       },
     },
+  created()
+  {
+    if (this.orgDescription !== '')
+    {
+      this.intro = this.orgDescription;
+    }
+  },
   mounted()
   {
     this.setFocus();

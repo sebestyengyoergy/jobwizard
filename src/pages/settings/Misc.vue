@@ -1,15 +1,15 @@
 <template>
   <div class="full-width">
-    <div class="text-h4 q-mb-md">{{ $t('misc') }}</div>
-    <h5>{{ $t('layout') }}</h5>
-
+    <div class="text-h4 q-mb-md">{{ $t('settings.misc_title') }}</div>
+    <h5>{{ $t('settings.misc_layout.header') }}</h5>
     <q-checkbox
       v-model="dark"
-      :label="$t('darkmode')"
+      :label="$t('settings.misc_layout.name')"
       color="primary"
       name="darkmode"
       @click="$q.dark.toggle()"
     />
+    <h5>{{ $t('settings.misc_locale.header') }}</h5>
   </div>
 </template>
 
@@ -44,14 +44,30 @@ export default {
 <i18n>
   {
     "en": {
-      "misc": "Misc",
-      "layout": "Layout",
-      "darkmode": "Dark mode",
+      "settings": {
+        "misc_title": "Misc",
+        "misc_layout": {
+          "header": "Layout",
+          "name": "Dark mode"
+        },
+        "misc_locale":{
+          "header": "Locale",
+          "name": "Locale"
+        }
+      }
     },
     "de": {
-      "misc": "Sonstiges",
-      "layout": "Ansicht",
-      "darkmode": "Nachtmodus",
+      "settings": {
+        "misc_title": "Sonstiges",
+        "misc_layout": {
+          "header": "Ansicht",
+          "name": "Nachtmodus",
+        },
+        "misc_locale":{
+          "header": "Standort",
+          "name": "Standort"
+        }
+      }
     }
   }
 </i18n>
