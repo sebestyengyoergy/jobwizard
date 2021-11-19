@@ -140,7 +140,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_TOKEN, HAS_AUTH, GET_SETTINGS, SET_SETTINGS_FIELD]),
+      ...mapGetters([GET_TOKEN, HAS_AUTH, GET_SETTINGS]),
       showToolbar()
       {
         return !this.$route.query.tb;
@@ -157,11 +157,11 @@ export default
       {
         get()
         {
-          return this.$q.dark.isActive;
+          return this[GET_SETTINGS].miscDarkmode;
         },
         set(val)
         {
-          // this[SET_SETTINGS_FIELD]({ miscDarkmode: val });
+          this[SET_SETTINGS_FIELD]({ miscDarkmode: val });
         }
       }
     },
@@ -195,6 +195,11 @@ export default
       }
     });
   },
+  mounted()
+  {
+    console.log('created', this.dark, this.$q.dark);
+    this.$q.dark.set(this.dark);
+  },
   beforeUnmount()
   {
     eventBus.off(TOGGLE_LOGIN, this.toggleLogin);
@@ -202,7 +207,7 @@ export default
   },
   methods:
     {
-      ...mapMutations([SET_TOKEN]),
+      ...mapMutations([SET_TOKEN, SET_SETTINGS_FIELD]),
       clearTimer()
       {
         if (this.tokenTimer) clearInterval(this.tokenTimer);
