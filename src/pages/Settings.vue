@@ -38,14 +38,7 @@
             <Organization @click="showNotif($t('notify.please_login'))" />
           </div>
           <div v-else-if="selectedIndex===1">
-            <div class="text-h4 q-mb-md">{{ $t('misc') }}</div>
-            <q-checkbox
-              v-model="dark"
-              :label="$t('darkmode')"
-              color="primary"
-              name="darkmode"
-              @click="$q.dark.toggle()"
-            />
+            <Misc />
           </div>
         </q-page>
       </q-page-container>
@@ -57,15 +50,15 @@
 import { ref } from 'vue';
 import { useQuasar } from 'quasar';
 import Organization from './settings/Organization';
-import { mapGetters, mapMutations } from 'vuex';
-import { GET_SETTINGS, SET_SETTINGS_FIELD } from 'src/store/names';
+import Misc from './settings/Misc';
 
 export default
 {
   name: 'Settings',
   components:
   {
-    Organization
+    Organization,
+    Misc
   },
   data()
   {
@@ -75,18 +68,6 @@ export default
   },
   computed:
   {
-    ...mapGetters([GET_SETTINGS]),
-    dark:
-        {
-          get()
-          {
-            return this[GET_SETTINGS].miscDarkmode;
-          },
-          set(val)
-          {
-            this[SET_SETTINGS_FIELD]({ miscDarkmode: val });
-          }
-        },
     menuList()
     {
       return [
@@ -128,10 +109,6 @@ export default
         });
       }
     };
-  },
-  methods:
-  {
-    ...mapMutations([SET_SETTINGS_FIELD])
   }
 };
 </script>
@@ -142,7 +119,6 @@ export default
       "settings": "Settings",
       "misc": "Misc",
       "organization": "Organization",
-      "darkmode": "Dark mode",
       "notify": {
         "please_login": "Um Einstellungen dauerhaft zu speichern, melden Sie sich bitte an. Die Anmeldung ist kostenlos."
       }
@@ -151,7 +127,6 @@ export default
       "settings": "Einstellungen",
       "misc": "Sonstiges",
       "organization": "Organisation",
-      "darkmode": "Nachtmodus",
       "notify": {
         "please_login": "Um Einstellungen dauerhaft zu speichern, melden Sie sich bitte an. Die Anmeldung ist kostenlos."
       }
