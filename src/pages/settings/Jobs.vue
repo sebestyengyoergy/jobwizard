@@ -1,23 +1,15 @@
 <template>
   <div class="full-width">
-    <div class="text-h4 q-mb-md">{{ $t('settings.jobs_title') }}</div>
-    <h5>{{ $t('settings.jobs_location.header') }}</h5>
-    {{ $t('settings.jobs_location.help') }}
-    <h5>{{ $t('settings.jobs_stats.header') }}</h5>
-    {{ $t('settings.jobs_stats.help') }}
+    <div class="text-h4 q-mb-md">{{ $t("settings.jobs_title") }}</div>
+    <h5>{{ $t("settings.jobs_location.header") }}</h5>
+    {{ $t("settings.jobs_location.help") }}
+    <h5>{{ $t("settings.jobs_stats.header") }}</h5>
+    {{ $t("settings.jobs_stats.help") }}
     <q-checkbox
       v-model="statistics"
       :label="$t('settings.jobs_stats.label')"
       color="primary"
       name="statistics"
-    />
-    <h5>{{ $t('settings.jobs_lang.header') }}</h5>
-
-    <q-checkbox
-      v-model="spellcheck"
-      :label="$t('settings.jobs_lang.label')"
-      color="primary"
-      name="spellcheck"
     />
   </div>
 </template>
@@ -32,32 +24,20 @@ export default {
   mixins: [mixinValidations],
   computed: {
     ...mapGetters([GET_SETTINGS]),
-    statistics:
-        {
-          get()
-          {
-            return this[GET_SETTINGS].jobsStatsEnabled;
-          },
-          set(val)
-          {
-            this[SET_SETTINGS_FIELD]({ jobsStatsEnabled: val });
-          }
-        },
-    spellcheck:
-        {
-          get()
-          {
-            return this[GET_SETTINGS].jobsSpellcheckEnabled;
-          },
-          set(val)
-          {
-            this[SET_SETTINGS_FIELD]({ jobsSpellcheckEnabled: val });
-          }
-        },
+    statistics: {
+      get()
+      {
+        return this[GET_SETTINGS].jobsStatsEnabled;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ jobsStatsEnabled: val });
+      },
+    },
   },
   methods: {
     ...mapMutations([SET_SETTINGS_FIELD]),
-  },
+  }
 };
 </script>
 
@@ -76,11 +56,6 @@ export default {
           "label": "Evaluate clicks and page views in accordance with data protection regulations.",
           "help": "with the activate, a code is built into the job advertisement that collects access figures."
         },
-        "jobs_lang": {
-          "header": "Sprachen",
-          "help": "in which language would you like to publish job advertisements?",
-          "label": "aktivate spellcheck?"
-        }
       },
     },
     "de": {
@@ -95,11 +70,6 @@ export default {
           "stats_label": "Klicks und Pageviews datenschutzkonform  auswerten.",
           "help": "mit dem aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt."
         },
-        "jobs_lang": {
-          "header": "Sprachen",
-          "help": "in welcher Sprache möchten Sie Stellenanzeigen veröffentlichen?",
-          "label": "Rechtschreibprüfung aktivieren?"
-        }
       },
     }
   }
