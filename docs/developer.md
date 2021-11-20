@@ -19,6 +19,7 @@ the documentation.
 
 our API is build with api-plattform
 
+- Staging: https://staging.api.yawik.org
+- Live: https://yawik.api.org
+
 ## VS Code
-
-
