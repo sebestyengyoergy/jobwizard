@@ -5,8 +5,6 @@ with Jobwizard you can create an appealing job ad free of charge, quickly and ea
 You can save and manage your job ads if you register in the Jobwizard. The free registration is already possible.
 The management of the ads is coming soon.
 
-Translated with www.DeepL.com/Translator (free version)
-
 <figure markdown>
   ![Dummy image](jobwizard-animated.gif/){ width="400" }
   <figcaption>Job Wizard</figcaption>
