@@ -64,7 +64,9 @@ const userSettings = {
   orgLabel: '',
   orgDescription: '',
   jobsStatsEnabled: true,
-  jobsSpellcheckEnabled: true
+  formSpellcheckEnabled: true,
+  formAutocompleteEnabled: false
+
 };
 
 export default

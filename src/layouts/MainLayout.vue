@@ -8,7 +8,7 @@
       <q-toolbar>
         <LogoPanel v-if="showToolbar" />
         <q-toolbar-title>
-          <Breadcrumb />
+          <Breadcrumb v-if="!$q.platform.is.mobile" />
         </q-toolbar-title>
 
         <q-toggle
@@ -25,9 +25,9 @@
 
         <q-separator spaced vertical />
 
-        <SwitchLanguage class="q-mx-auto" />
+        <SwitchLanguage v-if="!$q.platform.is.mobile" class="q-mx-auto" />
 
-        <q-separator spaced vertical />
+        <q-separator v-if="!$q.platform.is.mobile" spaced vertical />
 
         <q-btn v-if="!HAS_AUTH" flat @click="toggleLogin">
           {{ $t(HAS_AUTH ? 'logout' : 'login') }}
