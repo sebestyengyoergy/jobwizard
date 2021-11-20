@@ -5,8 +5,6 @@ with Jobwizard you can create an appealing job ad free of charge, quickly and ea
 You can save and manage your job ads if you register in the Jobwizard. The free registration is already possible.
 The management of the ads is coming soon.
 
-Translated with www.DeepL.com/Translator (free version)
-
 <figure markdown>
   ![Dummy image](jobwizard-animated.gif/){ width="400" }
   <figcaption>Job Wizard</figcaption>
@@ -22,7 +20,7 @@ currently under development. But the following is already working
 * Choose Channels. Post you Job on Google for Jobs.
 * Integration of Google Places API
 * configure colors and layout
-
+* dark mode. Settings of the client are taken into account 
 
 ## Roadmap
 
@@ -35,3 +33,5 @@ There is [Google Jobs](https://de.wikipedia.org/wiki/Google_for_Jobs). A great s
 * Statistics
 * join a newsletter
 * more documentation
+
+
