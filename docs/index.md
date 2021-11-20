@@ -22,7 +22,7 @@ currently under development. But the following is already working
 * Choose Channels. Post you Job on Google for Jobs.
 * Integration of Google Places API
 * configure colors and layout
-
+* dark mode. Settings of the client are taken into account 
 
 ## Roadmap
 
@@ -35,3 +35,5 @@ There is [Google Jobs](https://de.wikipedia.org/wiki/Google_for_Jobs). A great s
 * Statistics
 * join a newsletter
 * more documentation
+
+
