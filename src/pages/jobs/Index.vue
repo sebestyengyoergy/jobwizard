@@ -37,8 +37,6 @@
 
 export default {
   name: 'Index',
-  components:
-      {},
   data()
   {
     return {
@@ -141,6 +139,7 @@ export default {
           {
             headers:
                     {
+                      // Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
                       Accept: 'application/ld+json',
                     },
           }).then(response =>

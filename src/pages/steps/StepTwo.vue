@@ -279,6 +279,7 @@ export default
     if (this.orgDescription !== '')
     {
       this.intro = this.orgDescription;
+      this.introLabel = this.orgLabel;
     }
   },
   mounted()

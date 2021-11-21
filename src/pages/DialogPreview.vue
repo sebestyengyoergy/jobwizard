@@ -225,8 +225,11 @@ export default
       border: 1px solid ${this.color}66;
       background-color: ${this.color}11;
     }
-    .info {
-
+    ul {
+      list-style: inside;
+    }
+    li {
+      margin-bottom: 0;
     }
     .info svg {
       color: ${this.color}88;
