@@ -93,7 +93,7 @@ export default {
             {
               name: 'company',
               align: 'left',
-              label: this.$t('Company'),
+              label: this.$t('company'),
               field: 'company',
               sortable: true
             }
@@ -194,7 +194,7 @@ export default {
     "jobs": "Jobs",
     "title": "Job Title",
     "location": "Location",
-    "organization": "Organization",
+    "company": "Company",
     "email": "E-Mail",
     "date": "Date"
   },
@@ -202,7 +202,7 @@ export default {
     "jobs": "Stellenanzeigen",
     "title": "Anzeigentitel",
     "location": "Ort",
-    "company": "Gesellschaft",
+    "company": "Firma",
     "email": "E-Mail",
     "date": "Datum"
   }
