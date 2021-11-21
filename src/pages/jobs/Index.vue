@@ -5,7 +5,7 @@
       :title="$t('jobs')"
       :rows="rows"
       :columns="columns"
-      :rows-per-page-options="[]"
+      :rows-per-page-options="rowsPerPageOptions"
       :loading="loading"
       row-key="name"
       class="full-width"
@@ -24,8 +24,8 @@
           <q-td key="email" :props="props">
             {{ props.row.contactEmail }}
           </q-td>
-          <q-td key="organization" :props="props">
-            {{ props.row.organization.name }}
+          <q-td key="company" :props="props">
+            {{ props.row.company }}
           </q-td>
         </q-tr>
       </template>
@@ -38,115 +38,153 @@
 export default {
   name: 'Index',
   components:
-    {},
+      {},
   data()
   {
     return {
       rows: [],
       pagination: {
+        sortBy: null,
+        descending: false,
         rowsPerPage: 10,
         rowsNumber: 1,
         page: 1,
       },
       jobsUrl: `${process.env.YAWIK_API_URL}/jobs?page=`,
-      loading: false
+      // jobsUrl: `${process.env.YAWIK_API_URL}/jobs`,
+      loading: false,
+      rowsPerPageOptions: [10, 25, 50, 100, 500],
+      sortBy: null,
+      descendingOrder: false,
+      itemsPerPage: 10,
+      sortByTitle: 'asc',
+      sortByLocation: 'asc',
+      sortByCompany: 'asc'
     };
   },
   computed:
-    {
-      columns()
       {
-        return [
-          {
-            name: 'title',
-            required: true,
-            label: this.$t('title'),
-            align: 'left',
-            field: row => row.title,
-            format: val => `${val}`,
-            sortable: false
-          },
-          {
-            name: 'location',
-            align: 'left',
-            label: this.$t('location'),
-            field: 'location',
-            sortable: false
-          },
-          {
-            name: 'email',
-            align: 'left',
-            label: this.$t('email'),
-            field: 'contactEmail',
-            sortable: false
-          },
-          {
-            name: 'organization',
-            align: 'left',
-            label: this.$t('organization'),
-            field: row => row.organization.name,
-            sortable: false
-          }
-        ];
-      }
-    },
+        columns()
+        {
+          return [
+            {
+              name: 'title',
+              required: true,
+              label: this.$t('title'),
+              align: 'left',
+              field: row => row.title,
+              format: val => `${val}`,
+              sortable: true
+            },
+            {
+              name: 'location',
+              align: 'left',
+              label: this.$t('location'),
+              field: 'location',
+              sortable: true
+            },
+            {
+              name: 'email',
+              align: 'left',
+              label: this.$t('email'),
+              field: 'contactEmail',
+              sortable: false
+            },
+            {
+              name: 'company',
+              align: 'left',
+              label: this.$t('Company'),
+              field: 'company',
+              sortable: true
+            }
+          ];
+        }
+      },
   mounted()
   {
     this.getJobs();
   },
   methods:
-    {
-      getJobs(pagination = { pagination: this.pagination })
       {
-        this.loading = true;
-        this.$axios.get(this.jobsUrl + pagination.pagination.page,
+        getJobs(pagination = { pagination: this.pagination })
+        {
+        //  console.log("pagination " + JSON.stringify(pagination))
+          this.loading = true;
+          this.itemsPerPage = pagination.pagination.rowsPerPage;
+
+          const sortBy = pagination.pagination.sortBy;
+          this.sortBy = sortBy;
+          const descendingOrder = pagination.pagination.descending;
+          this.descendingOrder = descendingOrder;
+          if (sortBy != null)
+          {
+            if (sortBy === 'title')
+            {
+              this.sortByTitle = descendingOrder ? 'asc' : 'desc';
+            }
+            else if (sortBy === 'company')
+            {
+              this.sortByCompany = descendingOrder ? 'asc' : 'desc';
+            }
+            else if (sortBy === 'location')
+            {
+              this.sortByLocation = descendingOrder ? 'asc' : 'desc';
+            }
+          }
+
+          this.$axios.get(this.jobsUrl +
+              pagination.pagination.page +
+              '&itemsPerPage=' + this.itemsPerPage +
+              '&order[title]=' + this.sortByTitle +
+              '&order[company]=' + this.sortByCompany +
+              '&order[location]=' + this.sortByLocation,
           {
             headers:
-              {
-                Accept: 'application/ld+json',
-              },
+                    {
+                      Accept: 'application/ld+json',
+                    },
           }).then(response =>
-        {
-          this.rows = response.data['hydra:member'];
-          this.setPagination(response.data);
-        }).finally(() =>
-        {
-          this.loading = false;
-        });
-      },
-      getIndexNumber(str)
-      {
-        const parts = str.split('=');
-        return parseInt(parts[parts.length - 1]);
-      },
-      setPagination(data)
-      {
-        this.pagination = {
-          rowsNumber: data['hydra:totalItems'],
-          page: this.getIndexNumber(data['hydra:view']['@id']),
-          rowsPerPage: 10
-        };
-      },
-      viewJob(job)
-      {
-        //console.log("JOB "+JSON.stringify(job))
-        //console.log("Title "+job.title)
-        this.$router.push(
           {
-            name: 'job',
-            params: {
-              id: job.id
-            }
+            this.rows = response.data['hydra:member'];
+            this.setPagination(response.data);
+          }).finally(() =>
+          {
+            this.loading = false;
           });
-      },
-      convertToSlug(Text)
-      {
-        return Text
-          .toLowerCase()
-          .replace(/ /g, '-')
-          .replace(/[^\w-]+/g, '');
+        },
+        getPageNumber(str)
+        {
+          const parts = str.split('=');
+          return parseInt(parts[parts.length - 1]);
+        },
+        setPagination(data)
+        {
+          this.pagination = {
+            sortBy: this.sortBy,
+            descending: this.descendingOrder,
+            rowsNumber: data['hydra:totalItems'],
+            page: this.getPageNumber(data['hydra:view']['@id']),
+            rowsPerPage: this.itemsPerPage
+          };
+        },
+        viewJob(job)
+        {
+          this.$router.push(
+            {
+              name: 'job',
+              params: {
+                id: job.id
+              }
+            });
+        },
+        convertToSlug(Text)
+        {
+          return Text
+            .toLowerCase()
+            .replace(/ /g, '-')
+            .replace(/[^\w-]+/g, '');
+        }
       }
-    }
 };
 </script>
 
@@ -164,7 +202,7 @@ export default {
     "jobs": "Stellenanzeigen",
     "title": "Anzeigentitel",
     "location": "Ort",
-    "organization": "Unternehmen",
+    "company": "Gesellschaft",
     "email": "E-Mail",
     "date": "Datum"
   }
