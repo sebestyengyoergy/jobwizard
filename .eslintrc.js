@@ -268,7 +268,7 @@ module.exports = {
       disallowVue3BuiltInComponents: true
     }],
     'vue/no-template-target-blank': 'error',
-    'vue/no-unused-properties': ['off', {
+    'vue/no-unused-properties': ['error', {
       groups: ['props', 'data', 'computed'],
       deepData: false,
       ignorePublicMembers: false
