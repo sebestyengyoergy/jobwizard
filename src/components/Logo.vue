@@ -20,12 +20,7 @@ export default
       urlHome()
       {
         return process.env.VUE_ROUTER_BASE + this.$yawik.lang();
-      },
-      // ToDo: remove code duplication
-      /*lang()
-      {
-        return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
-      },*/
+      }
     }
 };
 </script>
