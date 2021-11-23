@@ -35,9 +35,9 @@
           <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
               <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('back')" class="q-mr-md" @click.stop="navigate('previous')" />
-              <q-btn v-if="lastStep & !$store.getters.HAS_AUTH" color="primary" name="next" :label="$t('download')" @click.stop="trySubmit" />
+              <q-btn v-if="lastStep & !$yawik.isAuth()" color="primary" name="next" :label="$t('download')" @click.stop="trySubmit" />
               <q-btn-dropdown
-                v-if="lastStep & $store.getters.HAS_AUTH"
+                v-if="lastStep & $yawik.isAuth()"
                 split
                 color="primary"
                 name="next"
@@ -84,7 +84,6 @@ import StepFour from './steps/StepFour';
 import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
-
 const maxContentWidth = 800; // pixels
 
 export default
@@ -176,6 +175,7 @@ export default
   },
   mounted()
   {
+    console.log('is auth ' + this.$yawik.isAuth());
     this.stepper = this.$refs.stepper; // used by steps to navigate to next step by ENTER key inside any input field
     this.onResize();
     this.steps.slice(0, this.steps.indexOf(this.currentStep)).forEach(step =>

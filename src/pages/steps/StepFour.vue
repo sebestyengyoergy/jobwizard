@@ -1,7 +1,7 @@
 <template>
   <div>
     <ChooseChannel />
-    <PrivacyPolicy v-if="$store.getters.HAS_AUTH" v-model="acceptTerms" />
+    <PrivacyPolicy v-if="$yawik.isAuth()" v-model="acceptTerms" />
   </div>
 </template>
 
