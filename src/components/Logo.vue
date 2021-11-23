@@ -19,13 +19,8 @@ export default
     {
       urlHome()
       {
-        return process.env.VUE_ROUTER_BASE + this.lang;
-      },
-      // ToDo: remove code duplication
-      lang()
-      {
-        return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
-      },
+        return process.env.VUE_ROUTER_BASE + this.$yawik.lang();
+      }
     }
 };
 </script>

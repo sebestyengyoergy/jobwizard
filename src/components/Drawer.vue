@@ -63,29 +63,25 @@ export default
             this.$emit('update:modelValue', val);
           }
         },
-      lang()
-      {
-        return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
-      },
       menuList()
       {
         return [
           {
             icon: 'mdi-view-list',
             label: this.$t('jobs'),
-            to: '/' + this.lang + '/jobs',
+            to: '/' + this.$yawik.lang() + '/jobs',
             separator: true
           },
           {
             icon: 'mdi-poll',
             label: this.$t('statistics'),
-            to: '/' + this.lang + '/statistics',
+            to: '/' + this.$yawik.lang() + '/statistics',
             separator: true
           },
           {
             icon: 'mdi-cogs',
             label: this.$t('settings'),
-            to: '/' + this.lang + '/settings',
+            to: '/' + this.$yawik.lang() + '/settings',
             separator: false
           }
         ];

@@ -29,7 +29,8 @@ export default
             message: typeof axiosError === 'string' ? axiosError : (axiosError.response?.data?.messages || [])[0] || axiosError.response?.data?.message || axiosError.message,
           });
         }
-      }
+      },
+
     }
 };
 </script>

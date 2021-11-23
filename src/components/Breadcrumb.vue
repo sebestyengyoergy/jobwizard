@@ -20,6 +20,7 @@
 </template>
 
 <script>
+
 export default
 {
   name: 'Breadcrumb',
@@ -32,17 +33,17 @@ export default
     {
       return this.$route.name;
     },
-    lang()
+    /*lang()
     {
       return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
-    },
+    },*/
     home()
     {
-      return process.env.VUE_ROUTER_BASE + this.lang;
+      return process.env.VUE_ROUTER_BASE + this.$yawik.lang();
     },
     jobs()
     {
-      return process.env.VUE_ROUTER_BASE + this.lang + '/jobs';
+      return process.env.VUE_ROUTER_BASE + this.$yawik.lang() + '/jobs';
     }
   }
 };
