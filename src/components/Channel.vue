@@ -32,9 +32,9 @@
       <q-toggle
         v-model="portal"
         :val="name"
-        :disable="!$store.getters.HAS_AUTH"
+        :disable="!$yawik.isAuth()"
       >
-        <Tooltip v-if="!$store.getters.HAS_AUTH" :text="$t('pleaseRegister')" />
+        <Tooltip v-if="!$yawik.isAuth()" :text="$t('pleaseRegister')" />
       </q-toggle>
     </q-card-actions>
   </q-card>

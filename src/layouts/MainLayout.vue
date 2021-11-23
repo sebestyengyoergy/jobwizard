@@ -29,12 +29,12 @@
 
         <q-separator v-if="!$q.platform.is.mobile" spaced vertical />
 
-        <q-btn v-if="!HAS_AUTH" flat @click="toggleLogin">
-          {{ $t(HAS_AUTH ? 'logout' : 'login') }}
+        <q-btn v-if="!$yawik.isAuth()" flat @click="toggleLogin">
+          {{ $t($yawik.isAuth() ? 'logout' : 'login') }}
         </q-btn>
 
         <q-btn-dropdown
-          v-if="HAS_AUTH"
+          v-if="$yawik.isAuth()"
           flat
           rounded
           no-caps
@@ -56,7 +56,7 @@
             <q-item v-close-popup clickable>
               <q-item-section>
                 <q-btn class="bg-primary text-white" @click="toggleLogin">
-                  {{ $t(HAS_AUTH ? 'logout' : 'login') }}
+                  {{ $t($yawik.isAuth() ? 'logout' : 'login') }}
                 </q-btn>
               </q-item-section>
             </q-item>
@@ -214,7 +214,7 @@ export default
       },
       toggleLogin()
       {
-        if (this[HAS_AUTH])
+        if (this.$yawik.isAuth())
         {
           window.location.href = process.env.YAWIK_SSO_URL +
             'realms/' + process.env.YAWIK_SSO_REALM +

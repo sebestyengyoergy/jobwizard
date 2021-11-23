@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import yawik from './yawik';
-
+let store = null;
 export default function(/* { ssrContext } */)
 {
   const Store = createStore({
@@ -38,6 +38,7 @@ export default function(/* { ssrContext } */)
       Store.hotUpdate({ modules: { yawik: newData } });
     });
   }
-
+  store = Store;
   return Store;
 }
+export { store };
