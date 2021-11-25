@@ -230,7 +230,6 @@ export default
           {
             if (authenticated)
             {
-              console.log('Hallo Has Auth');
               //Token Refresh
               this.clearTimer();
               this.tokenTimer = setInterval(() =>

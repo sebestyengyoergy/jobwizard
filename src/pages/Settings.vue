@@ -35,7 +35,7 @@
       <q-page-container>
         <q-page padding>
           <div v-if="selectedIndex===0">
-            <Organization @click="showNotif($t('notify.please_login'))" />
+            <Organization />
           </div>
           <div v-else-if="selectedIndex===1">
             <Jobs />
@@ -43,6 +43,18 @@
           <div v-else-if="selectedIndex===2">
             <Misc />
           </div>
+          <q-banner v-if="!$yawik.isAuth()" style="z-index: 1000;" rounded class="fixed-bottom bg-orange-1">
+            <template #avatar>
+              <q-avatar>
+                <img src="https://www.gravatar.com/avatar/c51d961553bd9e448b0768c401e98e7b">
+              </q-avatar>
+            </template>
+            {{ $t('notify.please_login') }}
+            <template #action>
+              <q-btn flat :label="$t('close')" />
+              <q-btn flat :label="$t('login')" />
+            </template>
+          </q-banner>
         </q-page>
       </q-page-container>
     </q-layout>
@@ -51,7 +63,6 @@
 
 <script>
 import { ref } from 'vue';
-import { useQuasar } from 'quasar';
 import Organization from './settings/Organization';
 import Misc from './settings/Misc';
 import Jobs from './settings/Jobs';
@@ -96,28 +107,10 @@ export default
   },
   setup()
   {
-    const $q = useQuasar();
-
     return {
       tab: ref('organization'),
       splitterModel: ref(10),
       drawer: ref(false),
-      showNotif(text, label)
-      {
-        $q.notify({
-          message: text,
-          color: 'primary',
-          avatar: 'https://www.gravatar.com/avatar/c51d961553bd9e448b0768c401e98e7b',
-          actions: [
-            {
-              label: 'Dismiss',
-              color: 'white',
-              handler: () =>
-              { /* ... */ }
-            }
-          ]
-        });
-      }
     };
   }
 };
@@ -126,21 +119,25 @@ export default
 <i18n>
   {
     "en": {
+      "login": "Login",
+      "close": "Close",
       "settings": "Settings",
       "jobs": "Jobs",
       "misc": "Misc",
       "organization": "Organization",
       "notify": {
-        "please_login": "Um Einstellungen dauerhaft zu speichern, melden Sie sich bitte an. Die Anmeldung ist kostenlos."
+        "please_login": "You are currently not logged in. All settings are saved in the local memory of your browser. If you want to save settings permanently so that you can use them on another device, please register. Registration is free of charge."
       }
     },
     "de": {
+      "login": "Anmelden",
+      "close": "Schließen",
       "settings": "Einstellungen",
       "jobs": "Stellenanzeigen",
       "misc": "Sonstiges",
       "organization": "Organisation",
       "notify": {
-        "please_login": "Um Einstellungen dauerhaft zu speichern, melden Sie sich bitte an. Die Anmeldung ist kostenlos."
+        "please_login": "Sie sind momentan nicht angemeldet. Alle Einstellungen werden im lokalen Speicher ihres Browsers gespeichert. Wenn Sie Einstellungen dauerhaft speichern möchten, um sie auch auf einem weiteren Gerät nutzen zu können melden sie sich bitte an. Die Registrierung ist kostenlos."
       }
     }
   }
