@@ -9,12 +9,15 @@
       :loading="loading"
       row-key="name"
       class="full-width"
+      table-class="jobtable"
+      title-class="text-h5"
+      table-header-class="jobtable-header"
       @request="getJobs"
     >
       <template #body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
-            <span style="color: blue; cursor: pointer;" @click="viewJob(props.row)">
+            <span class="jobtitle" @click="viewJob(props.row)">
               {{ props.row.title }}
             </span>
           </q-td>
@@ -186,6 +189,27 @@ export default {
       }
 };
 </script>
+
+<style>
+
+  .jobtable
+  {
+    font-size: 15px;
+  }
+
+  .body--dark .jobtitle
+  {
+    color: #FAA427;
+    cursor: pointer;
+  }
+
+  .body--light .jobtitle
+  {
+    color: #5498D7;
+    cursor: pointer;
+  }
+
+</style>
 
 <i18n>
 {
