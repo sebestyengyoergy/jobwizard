@@ -4,6 +4,7 @@
       v-model:pagination="pagination"
       :title="$t('jobs')"
       :rows="rows"
+      :grid="grid"
       :columns="columns"
       :rows-per-page-options="rowsPerPageOptions"
       :loading="loading"
@@ -17,7 +18,7 @@
       <template #body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
-            <span class="jobtitle" @click="viewJob(props.row)">
+            <span class="cursor-pointer jobtitle" @click="viewJob(props.row)">
               {{ props.row.title }}
             </span>
           </q-td>
@@ -44,27 +45,23 @@ export default {
   {
     return {
       rows: [],
-      pagination: {
-        sortBy: null,
-        descending: false,
-        rowsPerPage: 10,
-        rowsNumber: 1,
-        page: 1,
-      },
       jobsUrl: `${process.env.YAWIK_API_URL}/jobs?page=`,
-      // jobsUrl: `${process.env.YAWIK_API_URL}/jobs`,
       loading: false,
       rowsPerPageOptions: [10, 25, 50, 100, 500],
       sortBy: null,
-      descendingOrder: false,
+      descendingOrder: true,
       itemsPerPage: 10,
-      sortByTitle: 'asc',
+      sortByTitle: 'desc',
       sortByLocation: 'asc',
       sortByCompany: 'asc'
     };
   },
   computed:
       {
+        grid()
+        {
+          return this.$q.platform.is.mobile;
+        },
         columns()
         {
           return [
@@ -200,13 +197,11 @@ export default {
   .body--dark .jobtitle
   {
     color: #FAA427;
-    cursor: pointer;
   }
 
   .body--light .jobtitle
   {
     color: #5498D7;
-    cursor: pointer;
   }
 
 </style>
