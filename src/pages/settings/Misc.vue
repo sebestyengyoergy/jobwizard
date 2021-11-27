@@ -12,7 +12,14 @@
     />
     <h5>{{ $t('settings.locale.header') }}</h5>
     {{ $t('settings.locale.help') }}<br>
-    <SwitchLanguage />
+    <SwitchLanguage :disabled="browserLanguage" />
+    <br>
+    <q-checkbox
+      v-model="browserLanguage"
+      :label="$t('settings.layout.use_browser_language')"
+      color="primary"
+      name="browserLanguage"
+    />
     <h5>{{ $t("settings.form.header") }}</h5>
     <div>{{ $t("settings.form.help") }}</div>
 
@@ -21,13 +28,6 @@
       :label="$t('settings.form.spellcheck')"
       color="primary"
       name="spellcheck"
-    />
-    <br>
-    <q-checkbox
-      v-model="autocomplete"
-      :label="$t('settings.form.autocomplete')"
-      color="primary"
-      name="autocomplete"
     />
   </div>
 </template>
@@ -48,17 +48,34 @@ export default {
   computed: {
     ...mapGetters([GET_SETTINGS]),
     dark:
+    {
+      get()
+      {
+        return this[GET_SETTINGS].miscDarkmode;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ miscDarkmode: val });
+      }
+    },
+    browserLanguage:
+    {
+      get()
+      {
+        return this[GET_SETTINGS].useBrowserLanguage;
+      },
+      set(val)
+      {
+        if (val === false)
         {
-          get()
-          {
-            return this[GET_SETTINGS].miscDarkmode;
-          },
-          set(val)
-          {
-            this[SET_SETTINGS_FIELD]({ miscDarkmode: val });
-          }
-        },
-    spellcheck: {
+          console.log(this.$yawik);
+          //  this[SET_SETTINGS_FIELD]({ defaultLanguage: this.$yawik.lang() });
+        }
+        this[SET_SETTINGS_FIELD]({ useBrowserLanguage: val });
+      }
+    },
+    spellcheck:
+    {
       get()
       {
         return this[GET_SETTINGS].formSpellcheckEnabled;
@@ -68,7 +85,8 @@ export default {
         this[SET_SETTINGS_FIELD]({ formSpellcheckEnabled: val });
       },
     },
-    autocomplete: {
+    autocomplete:
+    {
       get()
       {
         return this[GET_SETTINGS].formAutocompleteEnabled;
@@ -93,7 +111,8 @@ export default {
         "layout": {
           "header": "Layout",
           "help": "The Job Wizard takes over the dark mode settings from the terminal. You can set the night view setting permanently.",
-          "name": "Dark mode"
+          "name": "Dark mode",
+          "use_browser_language": "Use the language settings of the browser"
         },
         "locale":{
           "header": "Locale and language",
@@ -102,7 +121,7 @@ export default {
         },
         "form": {
           "header": "Forms",
-          "help": "Many modern browsers and mobile devices have a built-in autocorrect function. In addition, form fields can be filled automatically. Here you can activate or deactivate this feature for the job wizard.",
+          "help": "Many modern browsers and mobile devices have a built-in autocorrect function. Here you can activate or deactivate this feature for the job wizard.",
           "spellcheck": "activate spellcheck?",
           "autocomplete": "activate autocomplete?"
         }
@@ -115,6 +134,7 @@ export default {
           "header": "Ansicht",
           "help": "Der Jobwizard übernimmt die Einstellungen zur Nachtansicht vom Endgerät. Die können sie die Einstellung zur Nachansicht fest einstellen.",
           "name": "Nachtmodus",
+          "use_browser_language": "Spracheinstellungen des Browsers nutzen"
         },
         "locale":{
           "header": "Standort und Sprache",
@@ -123,7 +143,7 @@ export default {
         },
         "form": {
           "header": "Formulare",
-          "help": "Viele moderne Browser und Mobilgeräte haben eine eingebaute Autokorrektur Funktion. Außerdem können Formularfelder automatisch befüllt werden. Hier können sie diese Feature für den Jobwizard aktivieren bzw. deaktivieren.",
+          "help": "Viele moderne Browser und Mobilgeräte haben eine eingebaute Autokorrektur Funktion. Hier können sie dieses Feature für den Jobwizard aktivieren bzw. deaktivieren.",
           "spellcheck": "Rechtschreibprüfung aktivieren?",
           "autocomplete": "Automatische Vervollständigung aktivieren?"
         }

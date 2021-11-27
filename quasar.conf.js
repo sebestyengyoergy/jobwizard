@@ -170,9 +170,9 @@ module.exports = function(ctx)
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Yawik Apprication Form',
-        short_name: 'Yawik Apply',
-        description: 'application form with file upload and preview based on quasar framework',
+        name: 'Yawik Jobwizard',
+        short_name: 'Jobwizard',
+        description: 'The Jobwizard enables the creation of Google Jobs compatible job advertisements. Authenticated users can manage job ads.',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',

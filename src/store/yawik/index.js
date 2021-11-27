@@ -59,14 +59,13 @@ const emptyForm = {
 const userSettings = {
   miscDarkmode: 'auto',
   miscTimezone: '',
-  miscLocale: '',
+  useBrowserLanguage: true,
+  defaultLanguage: '',
   orgName: '',
   orgLabel: '',
   orgDescription: '',
   jobsStatsEnabled: true,
   formSpellcheckEnabled: true,
-  formAutocompleteEnabled: false
-
 };
 
 export default
