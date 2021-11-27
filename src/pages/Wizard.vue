@@ -315,9 +315,6 @@ export default
       "download": "Download",
       "save": "Speichern",
       "publish": "Veröffentlichen",
-      "rules": {
-        "required": "Pflichtfeld"
-      }
     }
   }
 </i18n>

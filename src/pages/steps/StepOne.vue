@@ -372,15 +372,6 @@ export default
       "apply_email": "Bewerbungsemail",
       "apply_post": "keine Onlinebewerbung/postalische Bewerbungen",
       "reference": "Referenz",
-      "rules": {
-        "required": "Pflichtfeld",
-        "invalid_url": "ungültige URL",
-        "invalid_email": {
-          "hostname": "ungültiger Email Hostname",
-          "domain": "ungültige Email Domain",
-          "delimiters": "ungültige Email Trennzeichen"
-        }
-      },
       "help": {
         "reference": "Sie können Ihrer Anzeige eine Referenznummer zuweisen. Auf diese kann sich ein Bewerber beziehen.",
         "apply_post": "hier können sie festlegen, ob sie Bewerbungen lieber in der traditionellen Form per Post wüschen. Der Berwerbungsbutton in der Stellenanzeige passt sich dann entsprechend an."
