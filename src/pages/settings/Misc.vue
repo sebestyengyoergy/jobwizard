@@ -68,8 +68,7 @@ export default {
       {
         if (val === false)
         {
-          console.log(this.$yawik);
-          //  this[SET_SETTINGS_FIELD]({ defaultLanguage: this.$yawik.lang() });
+          this[SET_SETTINGS_FIELD]({ defaultLanguage: this.$root.$i18n.locale });
         }
         this[SET_SETTINGS_FIELD]({ useBrowserLanguage: val });
       }

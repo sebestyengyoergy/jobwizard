@@ -197,7 +197,6 @@ export default
   },
   mounted()
   {
-    console.log('created', this.dark, this.$q.dark);
     this.$q.dark.set(this.dark);
   },
   beforeUnmount()
