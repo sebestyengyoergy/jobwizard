@@ -2,11 +2,11 @@
   <q-dialog :model-value="modelValue" maximized @update:modelValue="close">
     <q-card flat class="bg-third column overflow-hidden">
       <q-card-actions class="bg-primary text-white q-py-sm" align="center">
-        <q-btn color="secondary" name="close" @click="close">{{ $t('close') }}</q-btn>
-        <q-btn color="white">
+        <q-btn class="z-top" color="secondary" name="close" @click="close">{{ $t('close') }}</q-btn>
+        <q-btn class="z-top" color="white">
           <div :style="colorBlock" />
           <q-popup-proxy v-model="dlgColor" transition-show="scale" transition-hide="scale" style="max-height: none !important; transform: translateY(50px);">
-            <q-color v-model="color" no-header no-footer default-view="palette" style="max-width: 250px;" @change="dlgColor = false" />
+            <q-color v-model="color" no-header no-footer class="z-top" default-view="palette" style="max-width: 250px;" @change="dlgColor = false" />
           </q-popup-proxy>
           <Tooltip :text="$t('tooltip')" />
         </q-btn>
