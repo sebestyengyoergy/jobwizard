@@ -33,10 +33,16 @@ export default {
   setup()
   {
     const myRef = ref(null);
+    let isPasting = false;
     return {
       myRef,
       pasteCapture(evt)
       {
+        if (isPasting)
+        {
+          return;
+        }
+        isPasting = true;
         // Let inputs do their thing, so we don't break pasting of links.
         if (evt.target.nodeName === 'INPUT') return;
         let text, onPasteStripFormattingIEPaste;
@@ -60,7 +66,12 @@ export default {
           }
           onPasteStripFormattingIEPaste = false;
         }
+        setTimeout(() =>
+        {
+          isPasting = false;
+        }, 1000);
       }
+
     };
   },
   props: {
@@ -110,7 +121,7 @@ export default {
   {
     return {
       inputVal: '',
-      labelText: '',
+      labelText: ''
     };
   },
   watch: {
@@ -149,6 +160,12 @@ export default {
     if (this.label)
     {
       this.labelText = this.label;
+    }
+  },
+  methods: {
+    inputEditor(evt)
+    {
+
     }
   }
 };
