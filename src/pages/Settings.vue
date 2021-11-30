@@ -43,7 +43,9 @@
           <div v-else-if="selectedIndex===2">
             <Misc />
           </div>
-          <q-banner v-if="!$yawik.isAuth()" style="z-index: 1000;" rounded class="fixed-bottom bg-orange-1">
+          <q-banner
+            v-if="!$yawik.isAuth() && showBanner" style="z-index: 1000;" rounded class="fixed-bottom bg-orange-1"
+          >
             <template #avatar>
               <q-avatar>
                 <img src="https://www.gravatar.com/avatar/c51d961553bd9e448b0768c401e98e7b">
@@ -51,7 +53,7 @@
             </template>
             {{ $t('notify.please_login') }}
             <template #action>
-              <q-btn flat :label="$t('close')" />
+              <q-btn flat :label="$t('close')" @click="closeBanner" />
               <q-btn flat :label="$t('login')" @click="login" />
             </template>
           </q-banner>
@@ -67,7 +69,9 @@ import Organization from './settings/Organization';
 import Misc from './settings/Misc';
 import Jobs from './settings/Jobs';
 import eventBus, { AJAX_FAILED } from 'src/lib/eventBus';
+import { Cookies } from 'quasar';
 
+const settingsBanner = 'settings_banner';
 export default
 {
   name: 'Settings',
@@ -81,6 +85,7 @@ export default
   {
     return {
       selectedIndex: 0,
+      showBanner: true
     };
   },
   computed:
@@ -114,10 +119,13 @@ export default
       drawer: ref(false),
     };
   },
+  mounted()
+  {
+    this.showBanner = !Cookies.has(settingsBanner);
+  },
   methods: {
     login()
     {
-      console.log('logging...');
       const cloak = new window.Keycloak({
         url: process.env.YAWIK_SSO_URL,
         realm: process.env.YAWIK_SSO_REALM,
@@ -147,8 +155,13 @@ export default
       {
         eventBus.emit(AJAX_FAILED, err);
       });
+    },
+    closeBanner()
+    {
+      this.$yawik.setCookies(settingsBanner, '1d');
+      this.showBanner = false;
     }
-  },
+  }
 };
 </script>
 
