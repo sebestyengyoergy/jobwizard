@@ -52,7 +52,7 @@
             {{ $t('notify.please_login') }}
             <template #action>
               <q-btn flat :label="$t('close')" />
-              <q-btn flat :label="$t('login')" />
+              <q-btn flat :label="$t('login')" @click="login" />
             </template>
           </q-banner>
         </q-page>
@@ -66,6 +66,7 @@ import { ref } from 'vue';
 import Organization from './settings/Organization';
 import Misc from './settings/Misc';
 import Jobs from './settings/Jobs';
+import eventBus, { AJAX_FAILED } from 'src/lib/eventBus';
 
 export default
 {
@@ -112,7 +113,42 @@ export default
       splitterModel: ref(10),
       drawer: ref(false),
     };
-  }
+  },
+  methods: {
+    login()
+    {
+      console.log('logging...');
+      const cloak = new window.Keycloak({
+        url: process.env.YAWIK_SSO_URL,
+        realm: process.env.YAWIK_SSO_REALM,
+        clientId: process.env.YAWIK_SSO_CLIENT,
+      });
+      cloak.init({
+        onLoad: 'login-required',
+      }).then(authenticated =>
+      {
+        if (authenticated)
+        {
+          setInterval(() =>
+          {
+            cloak.updateToken(70).then((refreshed) =>
+            {
+              if (!refreshed)
+              {
+                console.warn('Token not refreshed, valid for ' + Math.round(cloak.tokenParsed.exp + cloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
+              }
+            }).catch(() =>
+            {
+              console.error('Failed to refresh token');
+            });
+          }, 6000);
+        }
+      }).catch(err =>
+      {
+        eventBus.emit(AJAX_FAILED, err);
+      });
+    }
+  },
 };
 </script>
 
