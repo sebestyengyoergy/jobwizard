@@ -56,6 +56,7 @@
       <div
         v-if="orgDescription"
         class="col-md-12"
+        :style="{maxWidth: (maxWidth * 2) + 'px'}"
       >
         <div style="width: 100%;" class="text-h5 q-mb-md">
           {{ orgLabel }}
