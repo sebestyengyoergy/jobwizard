@@ -1,6 +1,5 @@
-import { useQuasar } from 'quasar';
+import { useQuasar, Cookies } from 'quasar';
 import { store } from '../store';
-
 const yawik = {
   lang()
   {
@@ -10,6 +9,13 @@ const yawik = {
   isAuth()
   {
     return store.getters.HAS_AUTH;
+  },
+  setCookies(name, duration)
+  {
+    const options = {
+      expires: duration
+    };
+    Cookies.set(name, name, options);
   }
 };
 export default ({ app }) =>
