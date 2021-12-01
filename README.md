@@ -23,8 +23,8 @@ In development.
 
 ```
 git clone https://gitlab.com/yawik/jobwizard.git
-cd wizard
-yarn install
+cd jobwizard
+yarn
 yarn dev
 ```
 
@@ -50,7 +50,7 @@ It's possible to show a toolbar with the Logo and a navigation drawer by using q
 
 ## Demo
 
-http://jobwizard.yawik.org/
+https://jobwizard.yawik.org/
 
 ## Documentation
 
