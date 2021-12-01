@@ -1,3 +1,5 @@
+import { uid } from 'quasar';
+
 import {
   GET_FORM,
   GET_SETTINGS,
@@ -19,6 +21,7 @@ import {
 } from '../names';
 
 const emptyForm = {
+  jobId: uid(),
   step: 'stepOne',
   jobTitle: '',
   organization: '',
