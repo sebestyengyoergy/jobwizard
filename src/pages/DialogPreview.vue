@@ -1,26 +1,38 @@
 <template>
   <q-dialog :model-value="modelValue" maximized @update:modelValue="close">
     <q-card flat class="bg-third column overflow-hidden">
-      <q-card-actions class="bg-primary text-white q-py-sm" align="center">
-        <q-btn class="z-top" color="secondary" name="close" @click="close">{{ $t('close') }}</q-btn>
-        <q-btn class="z-top" color="white">
-          <div :style="colorBlock" />
-          <q-popup-proxy v-model="dlgColor" transition-show="scale" transition-hide="scale" style="max-height: none !important; transform: translateY(50px);">
-            <q-color v-model="color" no-header no-footer class="z-top" default-view="palette" style="max-width: 250px;" @change="dlgColor = false" />
-          </q-popup-proxy>
-          <Tooltip :text="$t('tooltip')" />
-        </q-btn>
+      <q-bar class="bg-primary text-white">
         <q-btn-toggle
           v-model="mode"
           toggle-color="secondary"
           :options="[
-            {label: 'Mobil', value: 'mobile'},
-            {label: 'Desktop', value: 'desktop'},
-            {label: 'Fullscreen', value: 'screen'}
+            {value: 'mobile', slot: 'one', icon: 'mdi-cellphone'},
+            {value: 'desktop', slot: 'two', icon: 'mdi-monitor'},
+            {value: 'screen', slot: 'three', icon: 'mdi-fullscreen'}
           ]"
           class="preview-buttons"
-        />
-      </q-card-actions>
+        >
+          <template #one>
+            <q-tooltip delay="400">{{ $t('tooltip.mobile') }}</q-tooltip>
+          </template>
+          <template #two>
+            <q-tooltip delay="400">{{ $t('tooltip.desktop') }}</q-tooltip>
+          </template>
+          <template #three>
+            <q-tooltip delay="400">{{ $t('tooltip.fullscreen') }}</q-tooltip>
+          </template>
+        </q-btn-toggle>
+        <q-btn class="z-top" dense icon="mdi-eyedropper-variant">
+          <q-popup-proxy v-model="dlgColor" transition-show="scale" transition-hide="scale" style="max-height: none !important; transform: translateY(50px);">
+            <q-color v-model="color" no-header no-footer class="z-top" default-view="palette" style="max-width: 250px;" @change="dlgColor = false" />
+          </q-popup-proxy>
+          <q-tooltip delay="400">{{ $t('tooltip.colorize') }}</q-tooltip>
+        </q-btn>
+        <q-space />
+        <q-btn v-close-popup dense icon="mdi-close" class="z-top" name="close">
+          <q-tooltip delay="400">{{ $t('close') }}</q-tooltip>
+        </q-btn>
+      </q-bar>
       <q-card-section :class="'col-grow overflow-hidden row q-pa-md mx-auto '+mode">
         <iframe id="jobpreview" class="col-grow q-mx-auto rounded-borders fixed-center" :style="frameStyle" :srcdoc="htmlCode" data-cy="the-frame" />
       </q-card-section>
@@ -29,16 +41,12 @@
 </template>
 
 <script>
-import Tooltip from 'src/components/form/Tooltip.vue';
 import { GET_FORM, GET_LOGO, GET_HEADER } from 'src/store/names';
 import { mapGetters } from 'vuex';
 
 export default
 {
   name: 'DialogPreview',
-  components: {
-    Tooltip
-  },
   props:
     {
       modelValue:
@@ -61,15 +69,6 @@ export default
   computed:
     {
       ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
-      colorBlock()
-      {
-        return {
-          border: '1px solid black',
-          backgroundColor: this.color,
-          width: '100%',
-          height: '16px',
-        };
-      },
       country()
       {
         return this[GET_FORM].country;
@@ -435,7 +434,12 @@ export default
       "shiftwork": "Shift work",
       "apply_postmail": "Apply by regular post",
       "apply_text": "apply now",
-      "tooltip": "Here you can adjust the main colour of your job advertisement."
+      "tooltip": {
+        "mobile": "Mobile",
+        "desktop": "Desktop",
+        "fullscreen": "Fullscreen",
+        "colorize": "Here you can adjust the main colour of your job advertisement."
+      }
     },
     "de": {
       "jobad_wizard": "Jobad Wizard",
@@ -453,7 +457,12 @@ export default
       "shiftwork": "Schichtarbeit",
       "apply_postmail": "Bewerbung per Post",
       "apply_text": "jetzt bewerben",
-      "tooltip": "Hier können sie die Hauptfarbe ihrer Stellenanzeige anpassen."
+      "tooltip": {
+        "mobile": "Smartphone",
+        "desktop": "Desktop",
+        "fullscreen": "Fullscreen",
+        "colorize": "Hier können sie die Hauptfarbe ihrer Stellenanzeige anpassen."
+      }
     }
   }
 </i18n>
