@@ -420,7 +420,6 @@ export default
 <i18n>
   {
     "en": {
-      "close": "Close",
       "jobad_wizard": "Job ad Wizard",
       "intro": "Intro",
       "tasks": "Tasks",
@@ -439,7 +438,6 @@ export default
       "tooltip": "Here you can adjust the main colour of your job advertisement."
     },
     "de": {
-      "close": "Schließen",
       "jobad_wizard": "Jobad Wizard",
       "intro": "Einleitung",
       "tasks": "Aufgaben",

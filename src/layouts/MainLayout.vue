@@ -273,8 +273,6 @@ export default
 <i18n>
   {
     "en": {
-      "login": "Login",
-      "logout": "Logout",
       "jobs": "Jobs",
       "help": {
         "dark_mode": "toogle dark mode"
@@ -282,8 +280,6 @@ export default
 
     },
     "de": {
-      "login": "Anmelden",
-      "logout": "Abmelden",
       "jobs": "Stellenanzeigen",
       "help": {
         "dark_mode": "Nachtdarstellung ein und ausschalten",

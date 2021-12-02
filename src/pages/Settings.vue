@@ -44,7 +44,7 @@
             <Misc />
           </div>
           <q-banner
-            v-if="!$yawik.isAuth() && showBanner" style="z-index: 1000;" rounded class="fixed-bottom bg-orange-1"
+            v-if="!$yawik.isAuth() && showBanner" rounded class="login z-top fixed-bottom"
           >
             <template #avatar>
               <q-avatar>
@@ -165,11 +165,23 @@ export default
 };
 </script>
 
+<style lang="scss">
+
+.body--dark .q-banner
+{
+  background-color: $primary;
+}
+
+.body--light .q-banner
+{
+  background-color: $secondary;
+}
+
+</style>
+
 <i18n>
   {
     "en": {
-      "login": "Login",
-      "close": "Close",
       "settings": "Settings",
       "jobs": "Jobs",
       "misc": "Misc",
@@ -179,8 +191,6 @@ export default
       }
     },
     "de": {
-      "login": "Anmelden",
-      "close": "Schließen",
       "settings": "Einstellungen",
       "jobs": "Stellenanzeigen",
       "misc": "Sonstiges",

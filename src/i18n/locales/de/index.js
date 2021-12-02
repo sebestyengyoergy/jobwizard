@@ -1,6 +1,9 @@
 export default
 {
   localeName: () => 'Deutsch',
+  login: () => 'Anmelden',
+  logout: () => 'Abmelden',
+  close: () => 'Schliessen',
   rules:
   {
     required: () => 'Pflichtfeld',
