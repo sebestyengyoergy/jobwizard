@@ -5,7 +5,7 @@
         <div class="q-pb-sm">{{ $t('work_kind.title') }}</div>
         <q-field :model-value="workKind" name="workKind" :rules="[ruleRequired]" borderless>
           <template #control>
-            <q-option-group v-model="workKind" :options="listKinds" type="checkbox" color="primary" name="workKind" />
+            <q-option-group v-model="workKind" :options="listKinds" type="checkbox" color="primary" name="workKind"/>
           </template>
         </q-field>
       </div>
@@ -20,6 +20,7 @@
               type="checkbox"
               color="primary"
               name="workDuration"
+
             >
               <template #label-0="opt">
                 <span>{{ opt.label }}</span>
@@ -41,6 +42,7 @@
                         label
                         :label-value="partTimePercentage + '%'"
                         label-always
+                        @change="sliderChange"
                       />
                     </div>
                   </div>
@@ -62,6 +64,7 @@
                         label
                         :label-value="shiftWorkAmount"
                         label-always
+                        @change="sliderChange"
                       />
                     </div>
                   </div>
@@ -75,111 +78,102 @@
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('salary.label') }}</div>
-        <q-select v-model="salary" :options="options" name="salary" outlined />
+        <q-select v-model="salary" :options="options" name="salary" outlined/>
       </div>
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('salary.visibility') }}</div>
-        <q-checkbox v-model="salaryVisibility" :label="$t('salary.visibility')" name="salaryVisibility" />
+        <q-checkbox v-model="salaryVisibility" :label="$t('salary.visibility')" name="salaryVisibility"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import mixinValidations from 'src/lib/validations';
-import { mapGetters, mapMutations } from 'vuex';
-import { GET_FORM, SET_FIELD } from 'src/store/names';
+  import mixinValidations from 'src/lib/validations';
+  import {mapGetters, mapMutations} from 'vuex';
+  import {GET_FORM, SET_FIELD} from 'src/store/names';
 
-export default {
-  name: 'StepThree',
-  mixins: [mixinValidations],
-  data()
-  {
-    return {
-      //  partTimePercentage: 50,
-      //  shiftWorkAmount: 2,
-      options: [
-        {
-          label: '<20.000€',
-          value: '20|'
-        },
-        {
-          label: '20.000€ - 40.000€',
-          value: '20|40'
-        },
-        {
-          label: '40.000€ - 60.000€',
-          value: '40|60'
-        },
-        {
-          label: '60.000€ - 80.000€',
-          value: '60|80'
-        },
-        {
-          label: '80.000€ - 100.000€',
-          value: '80|100'
-        },
-        {
-          label: '100.000€ - 120.000€',
-          value: '100|120'
-        },
-        {
-          label: '>120.000€',
-          value: '|120'
-        }
-      ]
-    };
-  },
-  computed:
+  export default {
+    name: 'StepThree',
+    mixins: [mixinValidations],
+    data() {
+      return {
+        //  partTimePercentage: 50,
+        //  shiftWorkAmount: 2,
+        options: [
+          {
+            label: '<20.000€',
+            value: '20|'
+          },
+          {
+            label: '20.000€ - 40.000€',
+            value: '20|40'
+          },
+          {
+            label: '40.000€ - 60.000€',
+            value: '40|60'
+          },
+          {
+            label: '60.000€ - 80.000€',
+            value: '60|80'
+          },
+          {
+            label: '80.000€ - 100.000€',
+            value: '80|100'
+          },
+          {
+            label: '100.000€ - 120.000€',
+            value: '100|120'
+          },
+          {
+            label: '>120.000€',
+            value: '|120'
+          }
+        ]
+      };
+    },
+    computed:
       {
         ...mapGetters([GET_FORM]),
         workKind:
           {
-            get()
-            {
+            get() {
               return this[GET_FORM].workKind;
             },
-            set(val)
-            {
-              this[SET_FIELD]({ workKind: val });
+            set(val) {
+              this[SET_FIELD]({workKind: val});
             }
           },
         workDuration:
           {
-            get()
-            {
+            get() {
               return this[GET_FORM].workDuration;
             },
-            set(val)
-            {
-              this[SET_FIELD]({ workDuration: val });
+            set(val) {
+              this[SET_FIELD]({workDuration: val});
             }
           },
         partTimePercentage:
           {
-            get()
-            {
-              return this[GET_FORM].partTimePercentage;
+            get() {
+              const partTimePercentage = this[GET_FORM].partTimePercentage;
+              return partTimePercentage === undefined ? 50 : partTimePercentage;
             },
-            set(val)
-            {
-              this[SET_FIELD]({ partTimePercentage: val });
+            set(val) {
+              this[SET_FIELD]({partTimePercentage: val});
             }
           },
         shiftWorkAmount:
           {
-            get()
-            {
+            get() {
               const shiftWorkAmount = this[GET_FORM].shiftWorkAmount;
               return shiftWorkAmount === undefined ? 2 : shiftWorkAmount;
             },
-            set(val)
-            {
-              this[SET_FIELD]({ shiftWorkAmount: val });
+            set(val) {
+              this[SET_FIELD]({shiftWorkAmount: val});
             }
           },
-        listKinds()
-        {
+        listKinds() {
           return [
             {
               value: 'freelance',
@@ -199,8 +193,7 @@ export default {
             },
           ];
         },
-        listDurations()
-        {
+        listDurations() {
           return [
             {
               value: 'fulltime',
@@ -218,33 +211,36 @@ export default {
         },
         salary:
           {
-            get()
-            {
+            get() {
               return this[GET_FORM].salary;
             },
-            set(val)
-            {
-              this[SET_FIELD]({ salary: val });
+            set(val) {
+              this[SET_FIELD]({salary: val});
             }
           },
         salaryVisibility:
           {
-            get()
-            {
+            get() {
               return this[GET_FORM].salaryVisibility;
             },
-            set(val)
-            {
-              this[SET_FIELD]({ salaryVisibility: val });
+            set(val) {
+              this[SET_FIELD]({salaryVisibility: val});
             }
           },
 
       },
-  methods:
+    methods:
       {
         ...mapMutations([SET_FIELD]),
+        sliderChange() {
+          const workDurationVal = this.workDuration;
+          this.workDuration = workDurationVal;
+          setTimeout(() => {
+            this.workDuration = workDurationVal;
+          }, 10)
+        }
       }
-};
+  };
 </script>
 
 <i18n>
