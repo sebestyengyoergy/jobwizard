@@ -48,13 +48,13 @@ export default
 {
   name: 'DialogPreview',
   props:
+  {
+    modelValue:
     {
-      modelValue:
-        {
-          type: Boolean,
-          default: false
-        },
+      type: Boolean,
+      default: false
     },
+  },
   emits: ['update:modelValue'],
   data()
   {
@@ -83,7 +83,9 @@ export default
       },
       htmlLogo()
       {
-        return this[GET_LOGO] ? `<img src="${this[GET_LOGO]}" class="img_logo">` : '';
+        return this[GET_LOGO]
+          ? `<img src="${this[GET_LOGO]}" class="img_logo">`
+          : '<div class="img_logo" style="background-color: #66666622; font-size: 50px; text-align: center; border: 1px solid #BBB; margin-top: 10px;  width: 180px; display: block; height: 180px;">Logo<div style="position: relative; transform: rotate(30deg); left: 40px; top: -20px; width:1px; height: 1px; border-left: groove 40px #FAA427; border-bottom: #FAA427CC groove 40px; border-top: #5498D7 groove 40px; border-right:#5498D7CC groove 40px;"></div></div>';
       },
       htmlHeaderImage()
       {
@@ -106,19 +108,19 @@ export default
       },
       htmlTasks()
       {
-        return this[GET_FORM].tasks ? `<section><header>${this[GET_FORM].taskLabel}</header><div>${this[GET_FORM].tasks}</div></section>` : '';
+        return this[GET_FORM].tasks ? `<section class="six columns"><header>${this[GET_FORM].taskLabel}</header><div>${this[GET_FORM].tasks}</div></section>` : '';
       },
       htmlProfile()
       {
-        return this[GET_FORM].profile ? `<section><header>${this[GET_FORM].profileLabel}</header><div>${this[GET_FORM].profile}</div></section>` : '';
+        return this[GET_FORM].profile ? `<section class="six columns"><header>${this[GET_FORM].profileLabel}</header><div>${this[GET_FORM].profile}</div></section>` : '';
       },
       htmlOffer()
       {
-        return this[GET_FORM].offer ? `<section><header>${this[GET_FORM].offerLabel}</header><div>${this[GET_FORM].offer}</div></section>` : '';
+        return this[GET_FORM].offer ? `<section class="six columns"><header>${this[GET_FORM].offerLabel}</header><div>${this[GET_FORM].offer}</div></section>` : '';
       },
       htmlContacts()
       {
-        return this[GET_FORM].contactInfo ? `<section><header>${this[GET_FORM].contactInfoLabel}</header><div>${this[GET_FORM].contactInfo}</div></section>` : '';
+        return this[GET_FORM].contactInfo ? `<section class="six columns"><header>${this[GET_FORM].contactInfoLabel}</header><div>${this[GET_FORM].contactInfo}</div></section>` : '';
       },
       htmlWorkKind()
       {
@@ -136,8 +138,8 @@ export default
       htmlSalary()
       {
         return !this[GET_FORM].salaryVisibility
-          ? '<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" /></svg>' +
-          this[GET_FORM].salary.value.split('|').map(item => item + '.000€').join(' - ')
+          ? '<li><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" /></svg>' +
+          this[GET_FORM].salary.value.split('|').map(item => item + '.000€').join(' - ') + '</li>'
           : '';
       },
       htmlCode()
@@ -183,17 +185,15 @@ export default
     }
     .img_logo
     {
-      max-width: 160px;
-      max-height: 160px;
+      overflow: hidden;
+      max-width: 180px;
+      max-height: 180px;
     }
     .img_header
     {
       width: 100%;
+      text-align: center;
       max-height: 220px;
-    }
-    .items-center
-    {
-      align-items: center;
     }
     .bold
     {
@@ -220,12 +220,12 @@ export default
       max-width:1200px;
     }
     .intro {
-      width: 100%;
       border: 1px solid ${this.color}66;
       background-color: ${this.color}11;
     }
     ul {
       list-style: inside;
+      list-style-type: none;
     }
     li {
       margin-bottom: 0;
@@ -251,39 +251,70 @@ export default
       background-color:  ${this.color}DD;
       border-color:  ${this.color}11;
     }
+    .row.intro,
+    .row.details {
+      padding: 0 12px;
+    }
+    #apply: {
+      text-align: center;
+    }
+    /* Larger than phablet */
+    @media (min-width: 550px) {
+      .row.intro,
+      .row.details {
+        padding: 0 24px;
+      }
+      ul {
+        columns: 2;
+      }
+      .column,
+      .columns 
+      {
+        margin-left: 1% !important;
+      }
+      .img_logo
+      {
+        max-width: 180px;
+        max-height: 180px;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="job">
     <div class="row intro">
-      <div class="three columns">${this.htmlLogo}</div>
-      <div class="nine columns">
-        <h5>${this[GET_FORM].organization || ''}</h5>
-        <h1>${this[GET_FORM].jobTitle}</h1>
-        <div class="info">
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
-        ${[this[GET_FORM].country?.label || '', this[GET_FORM].location.addressLocality ? this[GET_FORM].location.addressLocality : (this[GET_FORM].location.addressRegion ? this[GET_FORM].location.addressRegion : this[GET_FORM].location.addressCountry) || ''].filter(val => val).join(', ')}
-        <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H10V20.09L12.09,18H6V16H14.09L16.09,14H6V12H18.09L20,10.09V8L14,2H6M13,3.5L18.5,9H13V3.5M20.15,13C20,13 19.86,13.05 19.75,13.16L18.73,14.18L20.82,16.26L21.84,15.25C22.05,15.03 22.05,14.67 21.84,14.46L20.54,13.16C20.43,13.05 20.29,13 20.15,13M18.14,14.77L12,20.92V23H14.08L20.23,16.85L18.14,14.77Z" /></svg>
-        ${this.htmlWorkKind}
-        ${this.htmlWorkDuration}
-        ${this.htmlSalary}
+      <article>
+        <div class="three columns">${this.htmlLogo}</div>
+        <div class="nine columns">
+          <h5>${this[GET_FORM].organization || ''}</h5>
+          <h1>${this[GET_FORM].jobTitle}</h1>
+          <ul class="info">
+            <li>
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
+              ${[this[GET_FORM].country?.label || '', this[GET_FORM].location.addressLocality ? this[GET_FORM].location.addressLocality : (this[GET_FORM].location.addressRegion ? this[GET_FORM].location.addressRegion : this[GET_FORM].location.addressCountry) || ''].filter(val => val).join(', ')}
+            </li>
+            <li>
+              <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H10V20.09L12.09,18H6V16H14.09L16.09,14H6V12H18.09L20,10.09V8L14,2H6M13,3.5L18.5,9H13V3.5M20.15,13C20,13 19.86,13.05 19.75,13.16L18.73,14.18L20.82,16.26L21.84,15.25C22.05,15.03 22.05,14.67 21.84,14.46L20.54,13.16C20.43,13.05 20.29,13 20.15,13M18.14,14.77L12,20.92V23H14.08L20.23,16.85L18.14,14.77Z" /></svg>
+              ${this.htmlWorkKind}
+            </li>
+            <li>${this.htmlWorkDuration}</li>
+            ${this.htmlSalary}
+          </ul>
         </div>
-      </div>
-      ${this.htmlHeaderImage}
+        ${this.htmlHeaderImage}
+      </article>
     </div>
     <div class="row details">
-      <article>
+      <article class="border">
         <!-- Parameters -->
-        <div style="padding: 0 24px;">
-          ${this.htmlIntro}
-          ${this.htmlTasks}
-          ${this.htmlProfile}
-          ${this.htmlOffer}
-          ${this.htmlContacts}
-        </div>
-        <h5 align="center">${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
-        <div class="row items-center">
-          <div id="apply" class="six columns offset-by-three button button-primary">
+        ${this.htmlIntro}
+        ${this.htmlTasks}
+        ${this.htmlProfile}
+        ${this.htmlOffer}
+        ${this.htmlContacts}
+        <div align="center">
+          <h5>${this[GET_FORM].reference ? 'Ref: ' + this[GET_FORM].reference : ''}</h5>
+          <div id="apply" class="button button-primary">
             ${this.htmlApply}
           </div>
         </div>
