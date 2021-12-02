@@ -48,6 +48,8 @@ const emptyForm = {
   contactInfo: '',
   workKind: [],
   workDuration: [],
+  partTimePercentage: 50,
+  shiftWorkAmount: 2,
   acceptTerms: false,
   salary: {
     label: '40.000€ - 60.000€',
