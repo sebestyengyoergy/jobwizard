@@ -161,8 +161,7 @@ export default {
           {
             get()
             {
-              const partTimePercentage = this[GET_FORM].partTimePercentage;
-              return partTimePercentage === undefined ? 50 : partTimePercentage;
+              return this[GET_FORM].partTimePercentage;
             },
             set(val)
             {
