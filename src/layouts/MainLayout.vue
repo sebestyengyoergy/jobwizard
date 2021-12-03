@@ -30,7 +30,7 @@
         <q-separator v-if="!$q.platform.is.mobile" spaced vertical />
 
         <q-btn v-if="!$yawik.isAuth()" flat @click="toggleLogin">
-          {{ $t($yawik.isAuth() ? 'logout' : 'login') }}
+          {{ $t($yawik.isAuth() ? 'btn.logout' : 'btn.login') }}
         </q-btn>
 
         <q-btn-dropdown
@@ -273,14 +273,12 @@ export default
 <i18n>
   {
     "en": {
-      "jobs": "Jobs",
       "help": {
         "dark_mode": "toogle dark mode"
       }
 
     },
     "de": {
-      "jobs": "Stellenanzeigen",
       "help": {
         "dark_mode": "Nachtdarstellung ein und ausschalten",
       }

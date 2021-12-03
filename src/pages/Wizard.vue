@@ -147,12 +147,7 @@ export default
       spellcheck()
       {
         return this.$store.getters.GET_SETTINGS.formSpellcheckEnabled;
-      },
-      autocomplete()
-      {
-        return this.$store.getters.GET_SETTINGS.formAutocompleteEnabled;
       }
-
     },
   watch:
     {

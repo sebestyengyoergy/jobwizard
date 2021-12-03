@@ -53,8 +53,8 @@
             </template>
             {{ $t('notify.please_login') }}
             <template #action>
-              <q-btn flat :label="$t('close')" @click="closeBanner" />
-              <q-btn flat :label="$t('login')" @click="login" />
+              <q-btn flat :label="$t('btn.close')" @click="closeBanner" />
+              <q-btn flat :label="$t('btn.login')" @click="login" />
             </template>
           </q-banner>
         </q-page>

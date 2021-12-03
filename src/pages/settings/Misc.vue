@@ -83,18 +83,7 @@ export default {
       {
         this[SET_SETTINGS_FIELD]({ formSpellcheckEnabled: val });
       },
-    },
-    autocomplete:
-    {
-      get()
-      {
-        return this[GET_SETTINGS].formAutocompleteEnabled;
-      },
-      set(val)
-      {
-        this[SET_SETTINGS_FIELD]({ formAutocompleteEnabled: val });
-      },
-    },
+    }
   },
   methods: {
     ...mapMutations([SET_SETTINGS_FIELD]),
@@ -122,7 +111,6 @@ export default {
           "header": "Forms",
           "help": "Many modern browsers and mobile devices have a built-in autocorrect function. Here you can activate or deactivate this feature for the job wizard.",
           "spellcheck": "activate spellcheck?",
-          "autocomplete": "activate autocomplete?"
         }
       }
     },
@@ -144,7 +132,6 @@ export default {
           "header": "Formulare",
           "help": "Viele moderne Browser und Mobilgeräte haben eine eingebaute Autokorrektur Funktion. Hier können sie dieses Feature für den Jobwizard aktivieren bzw. deaktivieren.",
           "spellcheck": "Rechtschreibprüfung aktivieren?",
-          "autocomplete": "Automatische Vervollständigung aktivieren?"
         }
       }
     }
