@@ -1,9 +1,21 @@
 export default
 {
   localeName: () => 'English',
-  login: () => 'Login',
-  logout: () => 'Abmelden',
-  close: () => 'Close',
+  btn:
+  {
+    login: () => 'Login',
+    logout: () => 'Logout',
+    close: () => 'Close',
+    preview: () => 'Preview',
+    cancel: () => 'Cancel',
+    abort: () => 'Abort',
+    back: () => 'Back',
+    continue: () => 'Next',
+    download: () => 'Download',
+    save: () => 'Save',
+    send: () => 'Send',
+    publish: () => 'Publish'
+  },
   rules:
   {
     required: () => 'Required field',

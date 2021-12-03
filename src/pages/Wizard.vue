@@ -5,10 +5,10 @@
         <div class="justify-center q-pb-lg flex">
           <q-btn-group push>
             <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
-              {{ $t('preview') }}
+              {{ $t('btn.preview') }}
             </q-btn>
             <SwitchLanguage v-if="!toolbar" class="q-mx-auto" />
-            <q-btn name="abort" color="negative" @click="abortForm">{{ $t($q.platform.is.mobile ? 'cancel' : 'abort') }}</q-btn>
+            <q-btn name="abort" color="negative" @click="abortForm">{{ $t($q.platform.is.mobile ? 'btn.cancel' : 'btn.abort') }}</q-btn>
           </q-btn-group>
         </div>
       </q-page-sticky>
@@ -34,15 +34,15 @@
         <template #navigation>
           <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
-              <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('back')" class="q-mr-md" @click.stop="navigate('previous')" />
-              <q-btn v-if="lastStep & !$yawik.isAuth()" color="primary" name="next" :label="$t('download')" @click.stop="trySubmit" />
+              <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('btn.back')" class="q-mr-md" @click.stop="navigate('previous')" />
+              <q-btn v-if="lastStep & !$yawik.isAuth()" color="primary" name="next" :label="$t('btn.download')" @click.stop="trySubmit" />
               <q-btn-dropdown
                 v-if="lastStep & $yawik.isAuth()"
                 split
                 color="primary"
                 name="next"
                 :disable-main-btn="!acceptTerms"
-                :label="$t('publish')"
+                :label="$t('btn.publish')"
                 @click.stop="onSave"
               >
                 <q-list>
@@ -51,7 +51,7 @@
                       <q-icon name="mdi-content-save" color="secondary" />
                     </q-item-section>
                     <q-item-section>
-                      <q-item-label>{{ $t('save') }}</q-item-label>
+                      <q-item-label>{{ $t('btn.save') }}</q-item-label>
                     </q-item-section>
                   </q-item>
                   <q-item v-close-popup clickable @click.stop="trySubmit">
@@ -59,12 +59,12 @@
                       <q-icon name="mdi-download" color="secondary" />
                     </q-item-section>
                     <q-item-section>
-                      <q-item-label>{{ $t('download') }}</q-item-label>
+                      <q-item-label>{{ $t('btn.download') }}</q-item-label>
                     </q-item-section>
                   </q-item>
                 </q-list>
               </q-btn-dropdown>
-              <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('continue')" @click.stop="navigate('next')" />
+              <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('btn.continue')" @click.stop="navigate('next')" />
             </div>
           </q-page-sticky>
         </template>
@@ -285,36 +285,20 @@ export default
 <i18n>
   {
     "en": {
-      "preview": "Preview",
-      "cancel": "Cancel",
-      "abort": "Abort",
       "steps": {
         "stepOne": "General data",
         "stepTwo": "Create job ad",
         "stepThree": "Categories",
         "stepFour": "Channels"
       },
-      "back": "Back",
-      "continue": "Next",
-      "download": "Download",
-      "save": "Save",
-      "publish": "Publish"
     },
     "de": {
-      "preview": "Vorschau",
-      "cancel": "Cancel",
-      "abort": "Abbrechen",
       "steps": {
         "stepOne": "Allgemeine Daten",
         "stepTwo": "Stellenanzeige anlegen",
         "stepThree": "Kategorien",
         "stepFour": "Kanäle"
       },
-      "back": "Zurück",
-      "continue": "Weiter",
-      "download": "Download",
-      "save": "Speichern",
-      "publish": "Veröffentlichen",
     }
   }
 </i18n>

@@ -13,10 +13,10 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn color="primary" outline class="q-mr-sm" @click="value = false">
-            {{ $t('cancel') }}
+            {{ $t('btn.cancel') }}
           </q-btn>
           <q-btn color="primary" class="q-ml-sm" type="submit">
-            {{ $t('send') }}
+            {{ $t('btn.send') }}
           </q-btn>
         </q-card-actions>
         <q-inner-loading :showing="sending">
@@ -142,8 +142,6 @@ export default
     "en": {
       "change_logo": "Change logo",
       "photo_rejected": "Image was rejected",
-      "cancel": "Cancel",
-      "send": "Send"
     }
   }
 </i18n>

@@ -1,9 +1,20 @@
 export default
 {
   localeName: () => 'Deutsch',
-  login: () => 'Anmelden',
-  logout: () => 'Abmelden',
-  close: () => 'Schliessen',
+  btn: {
+    login: () => 'Anmelden',
+    logout: () => 'Abmelden',
+    close: () => 'Schliessen',
+    preview: () => 'Vorschau',
+    cancel: () => 'Cancel',
+    abort: () => 'Abbrechen',
+    back: () => 'Zurück',
+    continue: () => 'Weiter',
+    download: () => 'Download',
+    save: () => 'Speichern',
+    send: () => 'Senden',
+    publish: () => 'Veröffentlichen',
+  },
   rules:
   {
     required: () => 'Pflichtfeld',
