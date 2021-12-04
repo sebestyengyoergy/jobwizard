@@ -2,9 +2,9 @@
   <div class="full-width">
     <div class="text-h4 q-mb-md">{{ $t("settings.jobs_title") }}</div>
     <h5>{{ $t("settings.jobs_location.header") }}</h5>
-    {{ $t("settings.jobs_location.help") }}
+    <div>{{ $t("settings.jobs_location.help") }}</div>
     <h5>{{ $t("settings.jobs_stats.header") }}</h5>
-    {{ $t("settings.jobs_stats.help") }}
+    <div>{{ $t("settings.jobs_stats.help") }}</div>
     <q-checkbox
       v-model="statistics"
       :label="$t('settings.jobs_stats.label')"
@@ -66,9 +66,9 @@ export default {
           "help": "Wenn sie immer wieder an bestimmten Orten rekrutieren, können sie hier eine Liste von Orten definieren."
         },
         "jobs_stats": {
-          "statistics": "Statistiken",
-          "stats_label": "Klicks und Pageviews datenschutzkonform  auswerten.",
-          "help": "mit dem aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt."
+          "header": "Statistiken",
+          "label": "Klicks und Pageviews datenschutzkonform  auswerten.",
+          "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt."
         },
       },
     }
