@@ -43,6 +43,7 @@
 <script>
 import { GET_FORM, GET_LOGO, GET_HEADER } from 'src/store/names';
 import { mapGetters } from 'vuex';
+import { DEFAULT_LOGO } from 'src/assets/default_logo_base64.js';
 
 export default
 {
@@ -68,7 +69,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
+      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER, DEFAULT_LOGO]),
       country()
       {
         return this[GET_FORM].country;
@@ -85,7 +86,7 @@ export default
       {
         return this[GET_LOGO]
           ? `<img src="${this[GET_LOGO]}" class="img_logo">`
-          : '<div class="img_logo" style="background-color: #66666622; font-size: 50px; text-align: center; border: 1px solid #BBB; margin-top: 10px;  width: 180px; display: block; height: 180px;">Logo<div style="position: relative; transform: rotate(30deg); left: 40px; top: -20px; width:1px; height: 1px; border-left: groove 40px #FAA427; border-bottom: #FAA427CC groove 40px; border-top: #5498D7 groove 40px; border-right:#5498D7CC groove 40px;"></div></div>';
+          : `<img src="${this[DEFAULT_LOGO]}" class="img_logo">`;
       },
       htmlHeaderImage()
       {
@@ -186,8 +187,9 @@ export default
     .img_logo
     {
       overflow: hidden;
-      max-width: 180px;
-      max-height: 180px;
+      max-width: 30vh;
+      max-height: 30vh;
+      display: inline-block;
     }
     .img_header
     {
@@ -274,8 +276,8 @@ export default
       }
       .img_logo
       {
-        max-width: 180px;
-        max-height: 180px;
+        max-width: 30vh;
+        max-height: 30vh;
       }
     }
   </style>

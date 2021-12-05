@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex">
-    <q-form ref="frm" :autocomplete="autocomplete" :spellcheck="spellcheck" class="grow full-width" @submit="submitForm" @validation-error="hasErrors">
+    <q-form ref="frm" autocomplete="false" :spellcheck="spellcheck" class="grow full-width" @submit="submitForm" @validation-error="hasErrors">
       <q-page-sticky style="z-index: 5900;" position="bottom-left" :offset="[18, -65]">
         <div class="justify-center q-pb-lg flex">
           <q-btn-group push>
