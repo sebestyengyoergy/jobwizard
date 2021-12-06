@@ -5,14 +5,14 @@
     <div>{{ $t("settings.jobs_location.help") }}</div>
     <div class="q-mt-md">
       <q-input
+        ref="autocomplete"
+        v-model="location"
         :dark="$q.dark.mode"
         dense
         outlined
-        ref="autocomplete"
-        v-model="location"
         label="Location"
         for="address"
-        placeholder="Enter Location"
+        placeholder="{{ $t('settings.jobs_location.placeholder') }}"
       />
     </div>
     <h5>{{ $t("settings.jobs_stats.header") }}</h5>
@@ -27,46 +27,52 @@
 </template>
 
 <script>
-  import {mapGetters, mapMutations} from 'vuex';
-  import mixinValidations from 'src/lib/validations';
-  import {GET_SETTINGS, SET_SETTINGS_FIELD} from 'src/store/names';
+import { mapGetters, mapMutations } from 'vuex';
+import mixinValidations from 'src/lib/validations';
+import { GET_SETTINGS, SET_SETTINGS_FIELD } from 'src/store/names';
 
-  export default {
-    name: 'Jobs',
-    mixins: [mixinValidations],
-    computed: {
-      ...mapGetters([GET_SETTINGS]),
-      statistics: {
-        get() {
-          return this[GET_SETTINGS].jobsStatsEnabled;
-        },
-        set(val) {
-          this[SET_SETTINGS_FIELD]({jobsStatsEnabled: val});
-        }
+export default {
+  name: 'Jobs',
+  mixins: [mixinValidations],
+  computed: {
+    ...mapGetters([GET_SETTINGS]),
+    statistics: {
+      get()
+      {
+        return this[GET_SETTINGS].jobsStatsEnabled;
       },
-      location: {
-        get() {
-          return this[GET_SETTINGS].location;
-        },
-        set(val) {
-          this[SET_SETTINGS_FIELD]({location: val});
-        }
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ jobsStatsEnabled: val });
       }
     },
-    methods: {
-      ...mapMutations([SET_SETTINGS_FIELD])
-    },
-    mounted() {
-      this.autocomplete = new google.maps.places.Autocomplete(
-        (document.getElementById("address")),
-        {types: ['geocode']});
-      this.autocomplete.addListener('place_changed', () => {
-        let place = this.autocomplete.getPlace();
-        //  let ac = place.address_components;
-        this.location = place.formatted_address;
-      });
+    location: {
+      get()
+      {
+        return this[GET_SETTINGS].location;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ location: val });
+      }
     }
-  }
+  },
+  mounted()
+  {
+    this.autocomplete = new google.maps.places.Autocomplete(
+      (document.getElementById('address')),
+      { types: ['geocode'] });
+    this.autocomplete.addListener('place_changed', () =>
+    {
+      const place = this.autocomplete.getPlace();
+      //  let ac = place.address_components;
+      this.location = place.formatted_address;
+    });
+  },
+  methods: {
+    ...mapMutations([SET_SETTINGS_FIELD])
+  },
+};
 </script>
 
 <i18n>
@@ -82,7 +88,8 @@
   "jobs_stats": {
   "header": "Statistics",
   "label": "Evaluate clicks and page views in accordance with data protection regulations.",
-  "help": "with the activate, a code is built into the job advertisement that collects access figures."
+  "help": "with the activate, a code is built into the job advertisement that collects access figures.",
+  "placeholder":"Enter Location"
   },
   },
   },
@@ -97,6 +104,7 @@
   "header": "Statistiken",
   "label": "Klicks und Pageviews datenschutzkonform auswerten.",
   "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt."
+  "placeholder":"Enter Location"
   },
   },
   }
