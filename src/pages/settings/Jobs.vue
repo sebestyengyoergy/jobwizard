@@ -12,7 +12,7 @@
         outlined
         label="Location"
         for="address"
-        placeholder="{{ $t('settings.jobs_location.placeholder') }}"
+        placeholder="$t('settings.jobs_location.placeholder')"
       />
     </div>
     <h5>{{ $t("settings.jobs_stats.header") }}</h5>

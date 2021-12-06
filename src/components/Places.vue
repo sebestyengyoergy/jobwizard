@@ -3,7 +3,7 @@
     <input type="text" v-model="location">
     <ul>
       <li v-for="(result, i) in searchResults" :key="i">
-        {{ result }} // list of all places
+        {{ result }}
       </li>
     </ul>
   </div>
@@ -72,7 +72,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>
