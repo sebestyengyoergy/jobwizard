@@ -208,9 +208,9 @@ export default
           },
           body: JSON.stringify({
             data: {
-              title: 'test',
-              jobId: 'test1',
-              job: 'test2',
+              title: this.$store.getters.GET_FORM.jobTitle,
+              jobId: this.$store.getters.GET_FORM.jobId,
+              job: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
               createdBy: '1234',
               updatedBy: '1234'
             }
