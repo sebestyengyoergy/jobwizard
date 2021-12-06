@@ -69,7 +69,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER, DEFAULT_LOGO]),
+      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
       country()
       {
         return this[GET_FORM].country;
@@ -86,7 +86,7 @@ export default
       {
         return this[GET_LOGO]
           ? `<img src="${this[GET_LOGO]}" class="img_logo">`
-          : `<img src="${this[DEFAULT_LOGO]}" class="img_logo">`;
+          : `<img src="${DEFAULT_LOGO}" class="img_logo">`;
       },
       htmlHeaderImage()
       {
