@@ -59,15 +59,18 @@ export default {
   },
   mounted()
   {
-    this.autocomplete = new google.maps.places.Autocomplete(
-      (document.getElementById('address')),
-      { types: ['geocode'] });
-    this.autocomplete.addListener('place_changed', () =>
+    if (window.google)
     {
-      const place = this.autocomplete.getPlace();
-      //  let ac = place.address_components;
-      this.location = place.formatted_address;
-    });
+      this.autocomplete = new window.google.maps.places.Autocomplete(
+        (document.getElementById('address')),
+        { types: ['geocode'] });
+      this.autocomplete.addListener('place_changed', () =>
+      {
+        const place = this.autocomplete.getPlace();
+        //  let ac = place.address_components;
+        this.location = place.formatted_address;
+      });
+    }
   },
   methods: {
     ...mapMutations([SET_SETTINGS_FIELD])
