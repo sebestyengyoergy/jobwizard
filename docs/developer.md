@@ -17,9 +17,15 @@ the documentation.
 
 ## Api
 
-our API is build with api-plattform
+our API is build with strapi
+
+https://api.yawik.org/documentation/
+
+There is a staging and a live version. 
 
 - Staging: https://staging.api.yawik.org
-- Live: https://yawik.api.org
+- Live: https://api.yawik.org
 
 ## VS Code
+
+
