@@ -15,6 +15,12 @@ export default
     send: () => 'Senden',
     publish: () => 'Veröffentlichen',
   },
+  nav: {
+    settings: () => 'Einstellungen',
+    jobs: () => 'Stellenanzeigen',
+    misc: () => 'Sonstiges',
+    organization: () => 'Organisation',
+  },
   rules:
   {
     required: () => 'Pflichtfeld',

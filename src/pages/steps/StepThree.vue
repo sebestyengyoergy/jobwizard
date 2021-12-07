@@ -133,128 +133,128 @@ export default {
     };
   },
   computed:
+  {
+    ...mapGetters([GET_FORM]),
+    workKind:
+    {
+      get()
       {
-        ...mapGetters([GET_FORM]),
-        workKind:
-          {
-            get()
-            {
-              return this[GET_FORM].workKind;
-            },
-            set(val)
-            {
-              this[SET_FIELD]({ workKind: val });
-            }
-          },
-        workDuration:
-          {
-            get()
-            {
-              return this[GET_FORM].workDuration;
-            },
-            set(val)
-            {
-              this[SET_FIELD]({ workDuration: val });
-            }
-          },
-        partTimePercentage:
-          {
-            get()
-            {
-              return this[GET_FORM].partTimePercentage;
-            },
-            set(val)
-            {
-              this[SET_FIELD]({ partTimePercentage: val });
-            }
-          },
-        shiftWorkAmount:
-          {
-            get()
-            {
-              const shiftWorkAmount = this[GET_FORM].shiftWorkAmount;
-              return shiftWorkAmount === undefined ? 2 : shiftWorkAmount;
-            },
-            set(val)
-            {
-              this[SET_FIELD]({ shiftWorkAmount: val });
-            }
-          },
-        listKinds()
-        {
-          return [
-            {
-              value: 'freelance',
-              label: this.$t('work_kind.options.freelance')
-            },
-            {
-              value: 'contract',
-              label: this.$t('work_kind.options.contract')
-            },
-            {
-              value: 'internship',
-              label: this.$t('work_kind.options.internship')
-            },
-            {
-              value: 'apprenticeship',
-              label: this.$t('work_kind.options.apprenticeship')
-            },
-          ];
-        },
-        listDurations()
-        {
-          return [
-            {
-              value: 'fulltime',
-              label: this.$t('work_duration.options.full_time')
-            },
-            {
-              value: 'parttime',
-              label: this.$t('work_duration.options.part_time')
-            },
-            {
-              value: 'shiftwork',
-              label: this.$t('work_duration.options.shift_work')
-            },
-          ];
-        },
-        salary:
-          {
-            get()
-            {
-              return this[GET_FORM].salary;
-            },
-            set(val)
-            {
-              this[SET_FIELD]({ salary: val });
-            }
-          },
-        salaryVisibility:
-          {
-            get()
-            {
-              return this[GET_FORM].salaryVisibility;
-            },
-            set(val)
-            {
-              this[SET_FIELD]({ salaryVisibility: val });
-            }
-          },
-
+        return this[GET_FORM].workKind;
       },
-  methods:
+      set(val)
       {
-        ...mapMutations([SET_FIELD]),
-        sliderChange()
-        {
-          const workDurationVal = this.workDuration;
-          this.workDuration = workDurationVal;
-          setTimeout(() =>
-          {
-            this.workDuration = workDurationVal;
-          }, 10);
-        }
+        this[SET_FIELD]({ workKind: val });
       }
+    },
+    workDuration:
+    {
+      get()
+      {
+        return this[GET_FORM].workDuration;
+      },
+      set(val)
+      {
+        this[SET_FIELD]({ workDuration: val });
+      }
+    },
+    partTimePercentage:
+    {
+      get()
+      {
+        return this[GET_FORM].partTimePercentage;
+      },
+      set(val)
+      {
+        this[SET_FIELD]({ partTimePercentage: val });
+      }
+    },
+    shiftWorkAmount:
+    {
+      get()
+      {
+        const shiftWorkAmount = this[GET_FORM].shiftWorkAmount;
+        return shiftWorkAmount === undefined ? 2 : shiftWorkAmount;
+      },
+      set(val)
+      {
+        this[SET_FIELD]({ shiftWorkAmount: val });
+      }
+    },
+    listKinds()
+    {
+      return [
+        {
+          value: 'freelance',
+          label: this.$t('work_kind.options.freelance')
+        },
+        {
+          value: 'contract',
+          label: this.$t('work_kind.options.contract')
+        },
+        {
+          value: 'internship',
+          label: this.$t('work_kind.options.internship')
+        },
+        {
+          value: 'apprenticeship',
+          label: this.$t('work_kind.options.apprenticeship')
+        },
+      ];
+    },
+    listDurations()
+    {
+      return [
+        {
+          value: 'fulltime',
+          label: this.$t('work_duration.options.full_time')
+        },
+        {
+          value: 'parttime',
+          label: this.$t('work_duration.options.part_time')
+        },
+        {
+          value: 'shiftwork',
+          label: this.$t('work_duration.options.shift_work')
+        },
+      ];
+    },
+    salary:
+      {
+        get()
+        {
+          return this[GET_FORM].salary;
+        },
+        set(val)
+        {
+          this[SET_FIELD]({ salary: val });
+        }
+      },
+    salaryVisibility:
+      {
+        get()
+        {
+          return this[GET_FORM].salaryVisibility;
+        },
+        set(val)
+        {
+          this[SET_FIELD]({ salaryVisibility: val });
+        }
+      },
+
+  },
+  methods:
+  {
+    ...mapMutations([SET_FIELD]),
+    sliderChange()
+    {
+      const workDurationVal = this.workDuration;
+      this.workDuration = workDurationVal;
+      setTimeout(() =>
+      {
+        this.workDuration = workDurationVal;
+      }, 10);
+    }
+  }
 };
 </script>
 
