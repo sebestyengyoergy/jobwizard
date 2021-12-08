@@ -199,15 +199,22 @@ export default
       },
       onSave()
       {
-        fetch(process.env.YAWIK_API_URL, {
+        fetch(process.env.YAWIK_STRAPI_URL + '/api/jobs', {
           method: 'POST',
           headers: {
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-Access-Token': this.$store.getters.GET_TOKEN.token,
+            accept: 'application/json',
+            Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            ...this.$store.getters.GET_FORM
+            data: {
+              title: this.$store.getters.GET_FORM.jobTitle,
+              jobId: this.$store.getters.GET_FORM.jobId,
+              job: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
+              createdBy: '1234',
+              updatedBy: '1234'
+            }
+            //...this.$store.getters.GET_FORM
           }),
         });
       },
