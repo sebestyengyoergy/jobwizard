@@ -208,14 +208,39 @@ export default
           },
           body: JSON.stringify({
             data: {
-              title: this.$store.getters.GET_FORM.jobTitle,
-              jobId: this.$store.getters.GET_FORM.jobId,
-              job: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
-              createdBy: '1234',
-              updatedBy: '1234'
+              ...this.$store.getters.GET_FORM,
             }
-            //...this.$store.getters.GET_FORM
           }),
+        }).then(response =>
+        {
+          console.log(response);
+          if (response.error)
+          {
+            this.$q.notify({
+              color: 'negative',
+              position: 'top',
+              icon: 'mdi-alert',
+              message: this.$t('job_saved_error'),
+            });
+          }
+          else if (response.ok)
+          {
+            this.$q.notify({
+              color: 'positive',
+              position: 'top',
+              icon: 'mdi-alert',
+              message: this.$t('job_saved_success'),
+            });
+          }
+          else
+          {
+            this.$q.notify({
+              color: 'negative',
+              position: 'top',
+              icon: 'mdi-alert',
+              message: this.$t('job_saved_unkown_error'),
+            });
+          }
         });
       },
       trySubmit()
@@ -293,6 +318,8 @@ export default
         "stepThree": "Categories",
         "stepFour": "Channels"
       },
+      "job_saved_success": "job posting successfully saved",
+
     },
     "de": {
       "steps": {
@@ -301,6 +328,7 @@ export default
         "stepThree": "Kategorien",
         "stepFour": "Kanäle"
       },
+      "job_saved_success": "Stellenanzeige erfolgreich gespeichert",
     }
   }
 </i18n>
