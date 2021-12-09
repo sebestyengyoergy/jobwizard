@@ -211,37 +211,32 @@ export default
               ...this.$store.getters.GET_FORM,
             }
           }),
-        }).then(response =>
-        {
-          console.log(response);
-          if (response.error)
+        }).then(response => response.json())
+          .then(data =>
           {
-            this.$q.notify({
-              color: 'negative',
-              position: 'top',
-              icon: 'mdi-alert',
-              message: this.$t('job_saved_error'),
-            });
-          }
-          else if (response.ok)
+            console.log('Data', data);
+            if (data.error)
+            {
+              this.$q.notify({
+                color: 'negative',
+                position: 'top',
+                icon: 'mdi-alert',
+                message: data.error.message || this.$t('job_saved_error'),
+              });
+            }
+            else
+            {
+              this.$q.notify({
+                color: 'positive',
+                position: 'top',
+                icon: 'mdi-alert',
+                message: this.$t('job_saved_success'),
+              });
+            }
+          }).catch(error =>
           {
-            this.$q.notify({
-              color: 'positive',
-              position: 'top',
-              icon: 'mdi-alert',
-              message: this.$t('job_saved_success'),
-            });
-          }
-          else
-          {
-            this.$q.notify({
-              color: 'negative',
-              position: 'top',
-              icon: 'mdi-alert',
-              message: this.$t('job_saved_unkown_error'),
-            });
-          }
-        });
+            console.log('Error', error);
+          });
       },
       trySubmit()
       {
