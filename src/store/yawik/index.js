@@ -67,8 +67,10 @@ const userSettings = {
   useBrowserLanguage: true,
   defaultLanguage: '',
   orgName: '',
-  orgLabel: '',
+  orgDescriptionLabel: '',
   orgDescription: '',
+  orgContactInfoLabel: '',
+  orgContactInfo: '',
   jobsStatsEnabled: true,
   formSpellcheckEnabled: true,
 };

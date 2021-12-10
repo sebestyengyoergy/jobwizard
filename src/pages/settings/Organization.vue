@@ -27,6 +27,17 @@
       :rules="[ruleRequired]"
       name="orgDesc"
     />
+    <h5>{{ $t('settings.org_contact.header') }}</h5>
+
+    {{ $t('settings.org_contact.help') }}
+    <q-space /><br>
+
+    <EditorInput
+      v-model:label="orgContactInfoLabel"
+      v-model:value="orgContactInfo"
+      :rules="[ruleRequired]"
+      name="orgContactInfo"
+    />
   </div>
 </template>
 
@@ -57,11 +68,11 @@ export default {
     orgLabel: {
       get()
       {
-        return this[GET_SETTINGS].orgLabel;
+        return this[GET_SETTINGS].orgDescriptionLabel;
       },
       set(val)
       {
-        this[SET_SETTINGS_FIELD]({ orgLabel: val });
+        this[SET_SETTINGS_FIELD]({ orgDescriptionLabel: val });
       },
     },
     orgDescription: {
@@ -72,6 +83,26 @@ export default {
       set(val)
       {
         this[SET_SETTINGS_FIELD]({ orgDescription: val });
+      },
+    },
+    orgContactInfoLabel: {
+      get()
+      {
+        return this[GET_SETTINGS].orgContactInfoLabel;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ orgContactInfoLabel: val });
+      },
+    },
+    orgContactInfo: {
+      get()
+      {
+        return this[GET_SETTINGS].orgContactInfo;
+      },
+      set(val)
+      {
+        this[SET_SETTINGS_FIELD]({ orgContactInfo: val });
       },
     },
   },
@@ -96,6 +127,11 @@ export default {
           "help": "The company description is suggested as an introduction when you enter a job ad. You can change the heading by clicking on it. It is displayed in the advertisement above the introduction.",
           "header": "Company description"
         },
+        "org_contact": {
+          "label": "Contact",
+          "help": "Die Unternehmensbeschreibung wird Ihnen bei der Eingabe einer Stellenanzeige als Einleitung vorgeschlagen. Die Überschrift können sie durch Anklicken ändern. Sie wird in der Anzeige oberhalb der Einleitung angezeigt.",
+          "header": "Contact for applicants"
+        }
       },
     },
     "de": {
@@ -108,8 +144,13 @@ export default {
         },
         "org_desc": {
           "label": "Unternehmensbeschreibung",
-          "help": "Die Unternehmensbeschreibung wird Ihnen bei der Eingabe einer Stellenanzeige als Einleitung vorgeschlagen. Die Überschrift können sie durch Anklicken ändern. Sie wird in der Anzeige oberhalb der Einleitung angezeigt.",
+          "help": "Here you can store contact information for applicants. These will be suggested to them for future advertisements.",
           "header": "Unternehmensbeschreibung"
+        },
+        "org_contact": {
+          "label": "Kontakt",
+          "help": "Hier können Sie Kontakt Informationen für Bewerber hinterlegen. Diese werden ihnen bei zukünftigen Anzeigen vorgeschlagen.",
+          "header": "Kontakt für Bewerber"
         }
       },
     }

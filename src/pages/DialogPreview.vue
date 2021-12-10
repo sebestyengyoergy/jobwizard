@@ -452,7 +452,7 @@ export default
 <i18n>
   {
     "en": {
-      "jobad_wizard": "Job ad Wizard",
+      "jobad_wizard": "Jobad Wizard",
       "intro": "Intro",
       "tasks": "Tasks",
       "profile": "Profile",
@@ -475,7 +475,7 @@ export default
       }
     },
     "de": {
-      "jobad_wizard": "Jobad Wizard",
+      "jobad_wizard": "Anzeigen Assistent",
       "intro": "Einleitung",
       "tasks": "Aufgaben",
       "profile": "Profil",

@@ -59,7 +59,7 @@
         :style="{maxWidth: (maxWidth * 2) + 'px'}"
       >
         <div style="width: 100%;" class="text-h5 q-mb-md">
-          {{ orgLabel }}
+          {{ orgDescriptionLabel }}
         </div>
         <!-- eslint-disable  vue/no-v-html -->
         <div v-html="orgDescription" />
@@ -91,11 +91,23 @@
 
       <!-- Contact info -->
       <EditorInput
+        v-if="!orgContactInfo"
         v-model:label="contactInfoLabel"
         v-model:value="contactInfo"
         :rules="applyPost ? [ruleRequired] : []"
         name="contactInfo"
       />
+      <div
+        v-if="orgContactInfo"
+        class="col-md-12"
+        :style="{maxWidth: (maxWidth * 2) + 'px'}"
+      >
+        <div style="width: 100%;" class="text-h5 q-mb-md">
+          {{ orgContactInfoLabel }}
+        </div>
+        <!-- eslint-disable  vue/no-v-html -->
+        <div v-html="orgContactInfo" />
+      </div>
     </div>
   </div>
 </template>
@@ -260,12 +272,19 @@ export default
       },
       orgDescription()
       {
-        console.log('Org description available');
         return this[GET_SETTINGS].orgDescription;
       },
-      orgLabel()
+      orgDescriptionLabel()
       {
-        return this[GET_SETTINGS].orgLabel;
+        return this[GET_SETTINGS].orgDescriptionLabel;
+      },
+      orgContactInfo()
+      {
+        return this[GET_SETTINGS].orgContactInfo;
+      },
+      orgContactInfoLabel()
+      {
+        return this[GET_SETTINGS].orgContactInfoLabel;
       }
     },
   watch:
@@ -280,7 +299,12 @@ export default
     if (this.orgDescription !== '')
     {
       this.intro = this.orgDescription;
-      this.introLabel = this.orgLabel;
+      this.introLabel = this.orgDescriptionLabel;
+    }
+    if (this.orgContactInfo !== '')
+    {
+      this.contactInfo = this.orgContactInfo;
+      this.contactInfoLabel = this.orgContactInfoLabel;
     }
   },
   mounted()
