@@ -1,6 +1,8 @@
 export default
 {
   localeName: () => 'English',
+  jobs: () => 'Jobs',
+  job_title: () => 'Job title',
   btn:
   {
     login: () => 'Login',

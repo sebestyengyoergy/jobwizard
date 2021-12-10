@@ -69,7 +69,7 @@ export default {
           {
             name: 'title',
             required: true,
-            label: this.$t('title'),
+            label: this.$t('job_title'),
             align: 'left',
             field: row => row.title,
             format: val => `${val}`,
@@ -140,16 +140,3 @@ export default {
     }
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "jobs": "Jobs",
-    "title": "Job Title"
-  },
-  "de": {
-    "jobs": "Stellenanzeigen (Demo Daten)",
-    "title": "Anzeigentitel"
-  }
-}
-</i18n>

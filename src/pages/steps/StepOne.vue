@@ -351,7 +351,6 @@ export default
 <i18n>
   {
     "en": {
-      "job_title": "Job title",
       "organization": "Organization",
       "country": "Country",
       "location": "Location",
@@ -361,10 +360,10 @@ export default
       "reference": "Reference",
       "help": {
         "reference": "You can assign a reference number to your advertisement. An applicant can refer to this.",
+        "apply_post": "Here you can specify whether you would prefer to receive applications in the traditional form by post. The application button in the job advertisement then adjusts accordingly."
       }
     },
     "de": {
-      "job_title": "Anzeigentitel",
       "organization": "Name des Unternehmens",
       "country": "Land",
       "location": "Ort",

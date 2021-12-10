@@ -183,7 +183,6 @@ export default
   {
     "en": {
       "settings": "Settings",
-      "jobs": "Jobs",
       "misc": "Misc",
       "organization": "Organization",
       "notify": {
@@ -192,7 +191,6 @@ export default
     },
     "de": {
       "settings": "Einstellungen",
-      "jobs": "Stellenanzeigen",
       "misc": "Sonstiges",
       "organization": "Organisation",
       "notify": {

@@ -259,57 +259,54 @@ export default {
 </script>
 
 <i18n>
-  {
+{
   "en": {
-  "salary": {
-  "label": "Annual salary",
-  "visibility": "Hide salary in jobad"
-  },
-  "visibility": "Visibility",
-  "work_kind": {
-  "title": "Kind of work",
-  "options": {
-  "freelance": "Freelance",
-  "contract": "Contract",
-  "internship": "Internship",
-  "apprenticeship": "Apprenticeship",
-  }
-  },
-  "work_duration": {
-  "title": "Duration",
-  "options": {
-  "full_time": "Full-time",
-  "part_time": "Part-time",
-  "shift_work": "Shift work"
-  }
-  }
+    "salary": {
+      "label": "Annual salary",
+      "visibility": "Hide salary in jobad"
+    },
+    "visibility": "Visibility",
+    "work_kind": {
+      "title": "Kind of work",
+      "options": {
+        "freelance": "Freelance",
+        "contract": "Contract",
+        "internship": "Internship",
+        "apprenticeship": "Apprenticeship",
+      }
+    },
+    "work_duration": {
+      "title": "Duration",
+      "options": {
+        "full_time": "Full-time",
+        "part_time": "Part-time",
+        "shift_work": "Shift work"
+      }
+    }
   },
   "de": {
-  "salary": {
-  "label": "Jahresgehalt",
-  "visibility": "Gehalt in Stellenanzeige ausblenden"
-  },
-  "visibility": "Sichtbarkeit",
-  "work_kind": {
-  "title": "Art der Anstellung",
-  "options": {
-  "freelance": "Freie Mitarbeit",
-  "contract": "Festanstellung",
-  "internship": "Praktikum",
-  "apprenticeship": "Ausbildungsplatz",
+    "salary": {
+      "label": "Jahresgehalt",
+      "visibility": "Gehalt in Stellenanzeige ausblenden"
+      },
+    "visibility": "Sichtbarkeit",
+    "work_kind": {
+      "title": "Art der Anstellung",
+      "options": {
+        "freelance": "Freie Mitarbeit",
+        "contract": "Festanstellung",
+        "internship": "Praktikum",
+        "apprenticeship": "Ausbildungsplatz",
+      }
+    },
+    "work_duration": {
+      "title": "Pensum",
+      "options": {
+        "full_time": "Vollzeit",
+        "part_time": "Teilzeit",
+        "shift_work": "Schichtarbeit"
+      }
+    },
   }
-  },
-  "work_duration": {
-  "title": "Pensum",
-  "options": {
-  "full_time": "Vollzeit",
-  "part_time": "Teilzeit",
-  "shift_work": "Schichtarbeit"
-  }
-  },
-  "rules": {
-  "required": "Pflichtfeld"
-  }
-  }
-  }
+}
 </i18n>

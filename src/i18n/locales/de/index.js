@@ -1,6 +1,8 @@
 export default
 {
   localeName: () => 'Deutsch',
+  jobs: () => 'Stellenanzeigen',
+  job_title: () => 'Anzeigentitel',
   btn: {
     login: () => 'Anmelden',
     logout: () => 'Abmelden',
@@ -18,6 +20,7 @@ export default
   nav: {
     settings: () => 'Einstellungen',
     jobs: () => 'Stellenanzeigen',
+    job_title: () => 'Job title',
     misc: () => 'Sonstiges',
     organization: () => 'Organisation',
   },

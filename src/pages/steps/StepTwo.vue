@@ -398,7 +398,7 @@ export default
     "en": {
       "logo": "Logo",
       "header": "Header image",
-      "intro": "Intro",
+      "intro": "Company description",
       "tasks": "Tasks",
       "profile": "Profile",
       "offer": "Offer",
@@ -418,9 +418,6 @@ export default
       "image_rejected": "Die Datei ist zu groß. über 10Mb",
       "choose_logo": "Logo wählen",
       "choose_header": "Header wählen",
-      "rules": {
-        "required": "Pflichtfeld"
-      }
     }
   }
 </i18n>
