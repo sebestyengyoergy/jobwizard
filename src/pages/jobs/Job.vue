@@ -84,7 +84,7 @@ export default {
   {
     getJob()
     {
-      this.$axios.get(`${process.env.YAWIK_API_URL}/jobs/${this.id}`,
+      this.$axios.get(`${process.env.YAWIK_API_URL}/api/jobs/${this.id}`,
         {
           headers:
               {

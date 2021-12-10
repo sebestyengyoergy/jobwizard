@@ -19,17 +19,17 @@
         <q-tr :props="props">
           <q-td key="title" :props="props">
             <span class="cursor-pointer jobtitle" @click="viewJob(props.row)">
-              {{ props.row.title }}
+              {{ props.row.attributes.jobTitle }}
             </span>
           </q-td>
           <q-td key="location" :props="props">
-            {{ props.row.location }}
+            {{ props.row.attributes.location!=null?props.row.attributes.location.streetAddress:'' }}
           </q-td>
           <q-td key="email" :props="props">
-            {{ props.row.contactEmail }}
+            {{ props.row.attributes.applyEmail }}
           </q-td>
           <q-td key="company" :props="props">
-            {{ props.row.company }}
+            {{ props.row.attributes.organization }}
           </q-td>
         </q-tr>
       </template>
@@ -45,15 +45,16 @@ export default {
   {
     return {
       rows: [],
-      jobsUrl: `${process.env.YAWIK_API_URL}/jobs?page=`,
+      jobsUrl: `${process.env.YAWIK_API_URL}/api/jobs`,
       loading: false,
       rowsPerPageOptions: [10, 25, 50, 100, 500],
-      sortBy: null,
-      descendingOrder: true,
-      itemsPerPage: 10,
-      sortByTitle: 'desc',
-      sortByLocation: 'asc',
-      sortByCompany: 'asc'
+      pagination: {
+        sortBy: 'asc',
+        descending: true,
+        rowsNumber: 10,
+        page: 1,
+        rowsPerPage: 10
+      }
     };
   },
   computed:
@@ -70,16 +71,16 @@ export default {
               required: true,
               label: this.$t('title'),
               align: 'left',
-              field: row => row.title,
+              field: row => row.attributes.jobTitle,
               format: val => `${val}`,
-              sortable: true
+              sortable: false
             },
             {
               name: 'location',
               align: 'left',
               label: this.$t('location'),
               field: 'location',
-              sortable: true
+              sortable: false
             },
             {
               name: 'email',
@@ -93,7 +94,7 @@ export default {
               align: 'left',
               label: this.$t('company'),
               field: 'company',
-              sortable: true
+              sortable: false
             }
           ];
         }
@@ -106,64 +107,27 @@ export default {
       {
         getJobs(pagination = { pagination: this.pagination })
         {
-        //  console.log("pagination " + JSON.stringify(pagination))
           this.loading = true;
-          this.itemsPerPage = pagination.pagination.rowsPerPage;
-
-          const sortBy = pagination.pagination.sortBy;
-          this.sortBy = sortBy;
-          const descendingOrder = pagination.pagination.descending;
-          this.descendingOrder = descendingOrder;
-          if (sortBy != null)
-          {
-            if (sortBy === 'title')
-            {
-              this.sortByTitle = descendingOrder ? 'asc' : 'desc';
-            }
-            else if (sortBy === 'company')
-            {
-              this.sortByCompany = descendingOrder ? 'asc' : 'desc';
-            }
-            else if (sortBy === 'location')
-            {
-              this.sortByLocation = descendingOrder ? 'asc' : 'desc';
-            }
-          }
-
           this.$axios.get(this.jobsUrl +
-              pagination.pagination.page +
-              '&itemsPerPage=' + this.itemsPerPage +
-              '&order[title]=' + this.sortByTitle +
-              '&order[company]=' + this.sortByCompany +
-              '&order[location]=' + this.sortByLocation,
+            '?pagination[page]=' + pagination.pagination.page +
+            '&pagination[pageSize]=' + pagination.pagination.rowsPerPage
+          ).then(response =>
           {
-            headers:
-                    {
-                      // Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
-                      Accept: 'application/ld+json',
-                    },
-          }).then(response =>
-          {
-            this.rows = response.data['hydra:member'];
-            this.setPagination(response.data);
+            this.rows = response.data.data;
+            this.setPagination(response.data.meta.pagination);
           }).finally(() =>
           {
             this.loading = false;
           });
         },
-        getPageNumber(str)
-        {
-          const parts = str.split('=');
-          return parseInt(parts[parts.length - 1]);
-        },
-        setPagination(data)
+        setPagination(pagination)
         {
           this.pagination = {
-            sortBy: this.sortBy,
-            descending: this.descendingOrder,
-            rowsNumber: data['hydra:totalItems'],
-            page: this.getPageNumber(data['hydra:view']['@id']),
-            rowsPerPage: this.itemsPerPage
+            sortBy: 'asc',
+            descending: true,
+            rowsNumber: pagination.total,
+            page: pagination.page,
+            rowsPerPage: pagination.pageSize
           };
         },
         viewJob(job)
@@ -176,13 +140,6 @@ export default {
               }
             });
         },
-        convertToSlug(Text)
-        {
-          return Text
-            .toLowerCase()
-            .replace(/ /g, '-')
-            .replace(/[^\w-]+/g, '');
-        }
       }
 };
 </script>
@@ -207,22 +164,22 @@ export default {
 </style>
 
 <i18n>
-{
+  {
   "en": {
-    "jobs": "Jobs",
-    "title": "Job Title",
-    "location": "Location",
-    "company": "Company",
-    "email": "E-Mail",
-    "date": "Date"
+  "jobs": "Jobs",
+  "title": "Job Title",
+  "location": "Location",
+  "company": "Company",
+  "email": "E-Mail",
+  "date": "Date"
   },
   "de": {
-    "jobs": "Stellenanzeigen",
-    "title": "Anzeigentitel",
-    "location": "Ort",
-    "company": "Firma",
-    "email": "E-Mail",
-    "date": "Datum"
+  "jobs": "Stellenanzeigen",
+  "title": "Anzeigentitel",
+  "location": "Ort",
+  "company": "Firma",
+  "email": "E-Mail",
+  "date": "Datum"
   }
-}
+  }
 </i18n>
