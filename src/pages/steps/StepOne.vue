@@ -15,7 +15,7 @@
       v-model.trim="organization"
       name="organization"
       class="col-12"
-      :label="$t('organization')"
+      :label="$t('label.organization')"
       :rules="[ruleRequired]"
       @enterPress="gotoNext"
     />
@@ -23,7 +23,7 @@
     <!-- Country and location -->
     <q-select
       v-model="country"
-      :label="$t('country')"
+      :label="$t('label.country')"
       :options="filteredCountries"
       color="primary"
       name="country"
@@ -60,7 +60,7 @@
       id="location"
       ref="location"
       v-model.trim="locationDisplay"
-      :label="$t('location')"
+      :label="$t('label.location')"
       color="primary"
       class="col-lg-11 col-md-10 col-sm-9 col-xs-8"
       name="location"
@@ -75,7 +75,7 @@
       v-model="applyUrl"
       name="apply_url"
       class="col-12"
-      :label="$t('apply_url')"
+      :label="$t('label.apply_url')"
       :rules="[validURL]"
       :disable="applyPost"
       @enterPress="gotoNext"
@@ -86,7 +86,7 @@
       v-model="applyEmail"
       name="apply_email"
       class="col-12"
-      :label="$t('apply_email')"
+      :label="$t('label.apply_email')"
       :rules="[validEmail]"
       :disable="applyPost"
       @enterPress="gotoNext"
@@ -94,7 +94,7 @@
 
     <q-checkbox
       v-model="applyPost"
-      :label="$t('apply_post')"
+      :label="$t('label.apply_post')"
       color="primary"
       name="apply_post"
     >
@@ -106,7 +106,7 @@
       v-model="reference"
       name="reference"
       class="col-12"
-      :label="$t('reference')"
+      :label="$t('label.reference')"
       @enterPress="gotoNext"
     />
   </div>
@@ -347,34 +347,3 @@ export default
     }
 };
 </script>
-
-<i18n>
-  {
-    "en": {
-      "organization": "Organization",
-      "country": "Country",
-      "location": "Location",
-      "apply_url": "Apply URL",
-      "apply_email": "Apply e-mail",
-      "apply_post": "No online application/postal application",
-      "reference": "Reference",
-      "help": {
-        "reference": "You can assign a reference number to your advertisement. An applicant can refer to this.",
-        "apply_post": "Here you can specify whether you would prefer to receive applications in the traditional form by post. The application button in the job advertisement then adjusts accordingly."
-      }
-    },
-    "de": {
-      "organization": "Name des Unternehmens",
-      "country": "Land",
-      "location": "Ort",
-      "apply_url": "Bewerbungslink",
-      "apply_email": "Bewerbungsemail",
-      "apply_post": "keine Onlinebewerbung/postalische Bewerbungen",
-      "reference": "Referenz",
-      "help": {
-        "reference": "Sie können Ihrer Anzeige eine Referenznummer zuweisen. Auf diese kann sich ein Bewerber beziehen.",
-        "apply_post": "hier können sie festlegen, ob sie Bewerbungen lieber in der traditionellen Form per Post wüschen. Der Berwerbungsbutton in der Stellenanzeige passt sich dann entsprechend an."
-      }
-    }
-  }
-</i18n>

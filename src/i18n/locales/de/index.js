@@ -3,12 +3,14 @@ export default
   localeName: () => 'Deutsch',
   jobs: () => 'Stellenanzeigen',
   job_title: () => 'Anzeigentitel',
+  settings: () => 'Einstellungen',
+  statistics: () => 'Statistiken',
   btn: {
     login: () => 'Anmelden',
     logout: () => 'Abmelden',
     close: () => 'Schliessen',
     preview: () => 'Vorschau',
-    cancel: () => 'Cancel',
+    cancel: () => 'Abbrechen',
     abort: () => 'Abbrechen',
     back: () => 'Zurück',
     continue: () => 'Weiter',
@@ -17,17 +19,46 @@ export default
     send: () => 'Senden',
     publish: () => 'Veröffentlichen',
   },
-  nav: {
+  nav:
+  {
     settings: () => 'Einstellungen',
     jobs: () => 'Stellenanzeigen',
     job_title: () => 'Job title',
     misc: () => 'Sonstiges',
     organization: () => 'Organisation',
   },
+  help: {
+    dark_mode: () => 'Nachtdarstellung ein und ausschalten',
+    visibility: () => 'Gehalt in Stellenanzeige ausblenden',
+    reference: () => 'Sie können Ihrer Anzeige eine Referenznummer zuweisen. Auf diese kann sich ein Bewerber beziehen.',
+    apply_post: () => 'hier können sie festlegen, ob sie Bewerbungen lieber in der traditionellen Form per Post wüschen. Der Berwerbungsbutton in der Stellenanzeige passt sich dann entsprechend an.'
+  },
+  label:
+  {
+    organization: () => 'Firmenname',
+    country: () => 'Land',
+    location: () => 'Ort',
+    apply_url: () => 'Bewerbungslink',
+    apply_email: () => 'Bewerbungsemail',
+    apply_post: () => 'keine Onlinebewerbung/postalische Bewerbungen',
+    reference: () => 'Referenz',
+    freelance: () => 'Freie Mitarbeit',
+    contract: () => 'Festanstellung',
+    internship: () => 'Praktikum',
+    apprenticeship: () => 'Ausbildungsplatz',
+    full_time: () => 'Vollzeit',
+    part_time: () => 'Teilzeit',
+    mini_job: () => 'Minijob',
+    shift_work: () => 'Schichtarbeit',
+    work_duration: () => 'Duration',
+    work_kind: () => 'Kind of work',
+    visibility: () => 'Visibility',
+    salary: () => 'Jahresgehalt'
+  },
   rules:
   {
     required: () => 'Pflichtfeld',
-    invalid_date: () => 'Invalid date',
+    invalid_date: () => 'ungültiges Datum',
     invalid_email:
     {
       delimiters: () => 'Die E-Mail-Adresse scheint falsch zu sein (@ und Punkte prüfen)',
@@ -39,5 +70,11 @@ export default
       hostname: () => 'Bei dieser E-Mail-Adresse fehlt ein Hostname!',
     },
     invalid_url: () => 'ungültige URL'
+  },
+  steps: {
+    stepOne: () => 'Allgemeine Daten',
+    stepTwo: () => 'Stellenanzeige anlegen',
+    stepThree: () => 'Kategorien',
+    stepFour: () => 'Kanäle'
   }
 };

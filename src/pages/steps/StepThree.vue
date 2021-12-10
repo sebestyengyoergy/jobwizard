@@ -2,7 +2,7 @@
   <div>
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
-        <div class="q-pb-sm">{{ $t('work_kind.title') }}</div>
+        <div class="q-pb-sm">{{ $t('label.work_kind') }}</div>
         <q-field :model-value="workKind" name="workKind" :rules="[ruleRequired]" borderless>
           <template #control>
             <q-option-group v-model="workKind" :options="listKinds" type="checkbox" color="primary" name="workKind" />
@@ -11,7 +11,7 @@
       </div>
 
       <div class="col-6 column">
-        <div class="q-pb-sm">{{ $t('work_duration.title') }}</div>
+        <div class="q-pb-sm">{{ $t('label.work_duration') }}</div>
         <q-field :model-value="workDuration" name="workDuration" :rules="[ruleRequired]" borderless>
           <template #control>
             <q-option-group
@@ -76,12 +76,12 @@
     </div>
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
-        <div class="q-pb-sm">{{ $t('salary.label') }}</div>
+        <div class="q-pb-sm">{{ $t('label.salary') }}</div>
         <q-select v-model="salary" :options="options" name="salary" outlined />
       </div>
       <div class="col-6 column">
-        <div class="q-pb-sm">{{ $t('salary.visibility') }}</div>
-        <q-checkbox v-model="salaryVisibility" :label="$t('salary.visibility')" name="salaryVisibility" />
+        <div class="q-pb-sm">{{ $t('label.visibility') }}</div>
+        <q-checkbox v-model="salaryVisibility" :label="$t('help.visibility')" name="salaryVisibility" />
       </div>
     </div>
   </div>
@@ -184,20 +184,20 @@ export default {
     {
       return [
         {
-          value: 'freelance',
-          label: this.$t('work_kind.options.freelance')
+          value: 'contract',
+          label: this.$t('label.contract')
         },
         {
-          value: 'contract',
-          label: this.$t('work_kind.options.contract')
+          value: 'freelance',
+          label: this.$t('label.freelance')
         },
         {
           value: 'internship',
-          label: this.$t('work_kind.options.internship')
+          label: this.$t('label.internship')
         },
         {
           value: 'apprenticeship',
-          label: this.$t('work_kind.options.apprenticeship')
+          label: this.$t('label.apprenticeship')
         },
       ];
     },
@@ -206,16 +206,21 @@ export default {
       return [
         {
           value: 'fulltime',
-          label: this.$t('work_duration.options.full_time')
+          label: this.$t('label.full_time')
         },
         {
           value: 'parttime',
-          label: this.$t('work_duration.options.part_time')
+          label: this.$t('label.part_time')
         },
         {
           value: 'shiftwork',
-          label: this.$t('work_duration.options.shift_work')
+          label: this.$t('label.shift_work')
         },
+        {
+          value: 'minijob',
+          label: this.$t('label.mini_job')
+        },
+
       ];
     },
     salary:
@@ -257,56 +262,3 @@ export default {
   }
 };
 </script>
-
-<i18n>
-{
-  "en": {
-    "salary": {
-      "label": "Annual salary",
-      "visibility": "Hide salary in jobad"
-    },
-    "visibility": "Visibility",
-    "work_kind": {
-      "title": "Kind of work",
-      "options": {
-        "freelance": "Freelance",
-        "contract": "Contract",
-        "internship": "Internship",
-        "apprenticeship": "Apprenticeship",
-      }
-    },
-    "work_duration": {
-      "title": "Duration",
-      "options": {
-        "full_time": "Full-time",
-        "part_time": "Part-time",
-        "shift_work": "Shift work"
-      }
-    }
-  },
-  "de": {
-    "salary": {
-      "label": "Jahresgehalt",
-      "visibility": "Gehalt in Stellenanzeige ausblenden"
-      },
-    "visibility": "Sichtbarkeit",
-    "work_kind": {
-      "title": "Art der Anstellung",
-      "options": {
-        "freelance": "Freie Mitarbeit",
-        "contract": "Festanstellung",
-        "internship": "Praktikum",
-        "apprenticeship": "Ausbildungsplatz",
-      }
-    },
-    "work_duration": {
-      "title": "Pensum",
-      "options": {
-        "full_time": "Vollzeit",
-        "part_time": "Teilzeit",
-        "shift_work": "Schichtarbeit"
-      }
-    },
-  }
-}
-</i18n>

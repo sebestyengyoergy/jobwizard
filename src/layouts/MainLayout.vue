@@ -270,19 +270,3 @@ export default
     transform: translate(2em, 0);
   }
 </style>
-
-<i18n>
-  {
-    "en": {
-      "help": {
-        "dark_mode": "toogle dark mode"
-      }
-
-    },
-    "de": {
-      "help": {
-        "dark_mode": "Nachtdarstellung ein und ausschalten",
-      }
-    }
-  }
-</i18n>

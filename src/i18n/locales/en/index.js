@@ -3,6 +3,8 @@ export default
   localeName: () => 'English',
   jobs: () => 'Jobs',
   job_title: () => 'Job title',
+  settings: () => 'Settings',
+  statistics: () => 'Statistcs',
   btn:
   {
     login: () => 'Login',
@@ -17,6 +19,37 @@ export default
     save: () => 'Save',
     send: () => 'Send',
     publish: () => 'Publish'
+  },
+  help: {
+    dark_mode: () => 'Switch dark display on and off',
+    visibility: () => 'Hide salary in job advertisement',
+    reference: () => 'You can assign a reference number to your advertisement. An applicant can refer to this.',
+    apply_post: () => 'Here you can specify whether you would prefer to receive applications in the traditional form by post. The application button in the job advertisement then adjusts accordingly.'
+  },
+  label:
+  {
+    organization: () => 'Organization',
+    country: () => 'Country',
+    location: () => 'Location',
+    apply_url: () => 'Apply URL',
+    apply_email: () => 'Apply e-mail',
+    apply_post: () => 'No online application/postal application',
+    reference: () => 'Reference',
+    freelance: () => 'Freelance',
+    contract: () => 'Contract',
+    internship: () => 'Internship',
+    apprenticeship: () => 'Apprenticeship',
+    full_time: () => 'Full-time',
+    part_time: () => 'Part-time',
+    mini_job: () => 'Minijob',
+    shift_work: () => 'Shift work',
+    work_duration: () => 'Duration',
+    work_kind: () => 'Kind of work',
+    visibility: () => 'Visibility',
+    salary: () => 'Annual salary'
+  },
+  msg: {
+    job_saved_success: () => 'job posting successfully saved',
   },
   rules:
   {
@@ -33,5 +66,12 @@ export default
       hostname: () => 'This email address is missing a hostname!',
     },
     invalid_url: () => 'Invalid URL'
+  },
+  steps: {
+    stepOne: () => 'General data',
+    stepTwo: () => 'Create job ad',
+    stepThree: () => 'Categories',
+    stepFour: () => 'Channels'
   }
+
 };

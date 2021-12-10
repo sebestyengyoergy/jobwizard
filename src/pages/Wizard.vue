@@ -230,7 +230,7 @@ export default
                 color: 'positive',
                 position: 'top',
                 icon: 'mdi-alert',
-                message: this.$t('job_saved_success'),
+                message: this.$t('msg.job_saved_success'),
               });
             }
           }).catch(error =>
@@ -303,27 +303,3 @@ export default
     }
 };
 </script>
-
-<i18n>
-  {
-    "en": {
-      "steps": {
-        "stepOne": "General data",
-        "stepTwo": "Create job ad",
-        "stepThree": "Categories",
-        "stepFour": "Channels"
-      },
-      "job_saved_success": "job posting successfully saved",
-
-    },
-    "de": {
-      "steps": {
-        "stepOne": "Allgemeine Daten",
-        "stepTwo": "Stellenanzeige anlegen",
-        "stepThree": "Kategorien",
-        "stepFour": "Kanäle"
-      },
-      "job_saved_success": "Stellenanzeige erfolgreich gespeichert",
-    }
-  }
-</i18n>

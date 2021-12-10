@@ -96,18 +96,3 @@ export default
     }
 };
 </script>
-
-<i18n>
-  {
-    "en": {
-      "jobs": "Jobs",
-      "statistics": "Statistics",
-      "settings": "Settings"
-    },
-    "de": {
-      "jobs": "Stellenanzeigen",
-      "statistics": "Statistiken",
-      "settings": "Einstellungen"
-    }
-  }
-</i18n>
