@@ -22,12 +22,6 @@ const routes = [
         component: () => import('pages/jobs/Index.vue'),
       },
       {
-        path: 'job/:id',
-        name: 'job',
-        props: true,
-        component: () => import('pages/jobs/Job.vue'),
-      },
-      {
         path: 'settings',
         name: 'settings',
         component: () => import('pages/Settings.vue'),
