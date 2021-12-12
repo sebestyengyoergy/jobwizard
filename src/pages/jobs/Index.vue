@@ -18,7 +18,7 @@
       <template #body="props">
         <q-tr :props="props">
           <q-td key="title" :props="props">
-            <span class="cursor-pointer jobtitle" @click="viewJob(props.row)">
+            <span class="cursor-pointer jobtitle" @click="getJob(props.row)">
               {{ props.row.attributes.jobTitle }}
             </span>
           </q-td>
@@ -34,13 +34,17 @@
         </q-tr>
       </template>
     </q-table>
+    <job-preview :model-value="modelValue" :job="job" @closed="modelValue=false" />
   </q-page>
 </template>
 
 <script>
 
+import JobPreview from './JobPreview';
+
 export default {
   name: 'Index',
+  components: { JobPreview },
   data()
   {
     return {
@@ -54,7 +58,9 @@ export default {
         rowsNumber: 10,
         page: 1,
         rowsPerPage: 10
-      }
+      },
+      modelValue: false,
+      job: null
     };
   },
   computed:
@@ -97,7 +103,7 @@ export default {
               sortable: false
             }
           ];
-        }
+        },
       },
   mounted()
   {
@@ -130,15 +136,32 @@ export default {
             rowsPerPage: pagination.pageSize
           };
         },
+        getJob(job)
+        {
+        //  this.$axios.get(`http://localhost:1337/api/jobs/1`,
+          this.$axios.get(`${process.env.YAWIK_API_URL}/api/jobs/${job.id}`,
+            {
+              headers: {
+                accept: 'application/json',
+                Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
+                'Content-Type': 'application/json',
+              }
+            }).then(response =>
+          {
+            this.job = response.data.data.attributes;
+            this.modelValue = true;
+          });
+        },
+
         viewJob(job)
         {
-          this.$router.push(
+          /*this.$router.push(
             {
               name: 'job',
               params: {
                 id: job.id
               }
-            });
+            });*/
         },
       }
 };
