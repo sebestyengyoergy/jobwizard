@@ -17,16 +17,16 @@
     >
       <template #body="props">
         <q-tr :props="props">
+          <q-td key="date" :props="props">
+            {{ props.row.attributes.publishedAt }}
+          </q-td>
           <q-td key="title" :props="props">
             <span class="cursor-pointer jobtitle" @click="getJob(props.row)">
               {{ props.row.attributes.jobTitle }}
             </span>
           </q-td>
           <q-td key="location" :props="props">
-            {{ props.row.attributes.location!=null?props.row.attributes.location.streetAddress:'' }}
-          </q-td>
-          <q-td key="email" :props="props">
-            {{ props.row.attributes.applyEmail }}
+            {{ props.row.attributes.formattedAddress }}
           </q-td>
           <q-td key="company" :props="props">
             {{ props.row.attributes.organization }}
@@ -73,9 +73,16 @@ export default {
         {
           return [
             {
+              name: 'date',
+              align: 'left',
+              label: this.$t('date'),
+              field: 'date',
+              sortable: false
+            },
+            {
               name: 'title',
               required: true,
-              label: this.$t('title'),
+              label: this.$t('job_title'),
               align: 'left',
               field: row => row.attributes.jobTitle,
               format: val => `${val}`,
@@ -86,13 +93,6 @@ export default {
               align: 'left',
               label: this.$t('location'),
               field: 'location',
-              sortable: false
-            },
-            {
-              name: 'email',
-              align: 'left',
-              label: this.$t('email'),
-              field: 'contactEmail',
               sortable: false
             },
             {
@@ -189,16 +189,12 @@ export default {
 <i18n>
   {
   "en": {
-  "jobs": "Jobs",
-  "title": "Job Title",
   "location": "Location",
   "company": "Company",
   "email": "E-Mail",
   "date": "Date"
   },
   "de": {
-  "jobs": "Stellenanzeigen",
-  "title": "Anzeigentitel",
   "location": "Ort",
   "company": "Firma",
   "email": "E-Mail",
