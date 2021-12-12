@@ -184,6 +184,7 @@
 
 export default {
   name: 'JobPreview',
+  emits: ['closed'],
   props:
       {
         modelValue:
