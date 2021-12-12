@@ -334,7 +334,7 @@ export default
           '@context': 'https://schema.org/',
           '@type': 'JobPosting',
           title: this[GET_FORM].jobTitle,
-          description: this[GET_FORM].intro,
+          description: '<p>' + this[GET_FORM].intro + '</p><p><b>' + this[GET_FORM].taskLabel + '</b><br>' + this[GET_FORM].tasks + '</p><p><br><b>' + this[GET_FORM].profileLabel + '</b><br>' + this[GET_FORM].profile + '</p><p><br><b>' + this[GET_FORM].offerLabel + '</b><br>' + this[GET_FORM].offer + '</p><p><b>' + this[GET_FORM].contactInfoLabel + '</b><br>' + this[GET_FORM].contactInfo + '</p>',
           identifier:
             {
               '@type': 'PropertyValue',
@@ -351,7 +351,9 @@ export default
             '@type': 'Place',
             address: {
               '@type': 'PostalAddress',
+              addressLocality: this[GET_FORM].location.addressLocality,
               streetAddress: this[GET_FORM].location.streetAddress,
+              addressRegion: this[GET_FORM].location.addressRegion,
               addressCountry: this[GET_FORM].country,
             }
           },
