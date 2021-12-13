@@ -3,9 +3,22 @@
 </template>
 
 <script>
+import { useMeta } from 'quasar';
+
 export default
 {
   name: 'Home',
+  setup()
+  {
+    useMeta({
+      link: {
+        material: {
+          rel: 'canonical',
+          href: 'https://jobwizard.yawik.org' + window.location.pathname
+        }
+      },
+    });
+  },
   created()
   {
     const lang = navigator.language.substr(0, 2);

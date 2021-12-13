@@ -105,6 +105,12 @@ const metaData = {
       content: 'Anzeigengenerator Stellenanzeigen Google Jobs'
     }
   },
+  link: {
+    material: {
+      rel: 'canonical',
+      href: 'https://jobwizard.yawik.org' + window.location.pathname
+    }
+  },
   noscript: {
     default: 'Der Yawik Anzeigengenerator benötigt Javascript'
   }

@@ -69,7 +69,7 @@ import Organization from './settings/Organization';
 import Misc from './settings/Misc';
 import Jobs from './settings/Jobs';
 import eventBus, { AJAX_FAILED } from 'src/lib/eventBus';
-import { Cookies } from 'quasar';
+import { Cookies, useMeta } from 'quasar';
 
 const settingsBanner = 'settings_banner';
 export default
@@ -113,6 +113,14 @@ export default
   },
   setup()
   {
+    useMeta({
+      link: {
+        material: {
+          rel: 'canonical',
+          href: 'https://jobwizard.yawik.org' + window.location.pathname
+        }
+      },
+    });
     return {
       tab: ref('organization'),
       splitterModel: ref(10),

@@ -41,10 +41,22 @@
 <script>
 
 import JobPreview from './JobPreview';
+import { useMeta } from 'quasar';
 
 export default {
   name: 'Index',
   components: { JobPreview },
+  setup()
+  {
+    useMeta({
+      link: {
+        material: {
+          rel: 'canonical',
+          href: 'https://jobwizard.yawik.org' + window.location.pathname
+        }
+      },
+    });
+  },
   data()
   {
     return {

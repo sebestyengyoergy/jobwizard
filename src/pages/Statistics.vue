@@ -25,10 +25,22 @@
 <script>
 import SupportYawik from 'src/components/SupportYawik';
 import VueApexCharts from 'vue3-apexcharts';
+import { useMeta } from 'quasar';
 
 export default
 {
   name: 'Statistics',
+  setup()
+  {
+    useMeta({
+      link: {
+        material: {
+          rel: 'canonical',
+          href: 'https://jobwizard.yawik.org' + window.location.pathname
+        }
+      },
+    });
+  },
   components: {
     apexchart: VueApexCharts,
     SupportYawik
