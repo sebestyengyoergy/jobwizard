@@ -20,49 +20,13 @@
       @enterPress="gotoNext"
     />
 
-    <!-- Country and location -->
-    <q-select
-      v-model="country"
-      :label="$t('label.country')"
-      :options="filteredCountries"
-      color="primary"
-      name="country"
-      outlined
-      dense
-      options-dense
-      use-input
-      fill-input
-      hide-selected
-      :rules="[ruleRequired]"
-      input-debounce="200"
-      class="col-lg-1 col-md-2 col-sm-3 col-xs-4"
-      @filter="countryAutocomplete"
-      @keypress.enter="gotoNext"
-    >
-      <template #option="scope">
-        <q-item v-bind="scope.itemProps">
-          <q-item-section avatar>
-            <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ scope.opt.label }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </template>
-      <!-- Current flag -->
-      <template #prepend>
-        <q-avatar v-if="country">
-          <img :src="'country/'+(country.value || '').toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
-        </q-avatar>
-      </template>
-    </q-select>
     <q-input
       id="location"
       ref="location"
       v-model.trim="locationDisplay"
       :label="$t('label.location')"
       color="primary"
-      class="col-lg-11 col-md-10 col-sm-9 col-xs-8"
+      class="col-12"
       name="location"
       outlined
       dense
@@ -116,7 +80,6 @@
 import { mapGetters, mapMutations } from 'vuex';
 import { GET_FORM, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
-import countries from 'src/countries';
 import TextInput from 'src/components/form/TextInput.vue';
 import Tooltip from 'src/components/form/Tooltip.vue';
 
@@ -133,7 +96,6 @@ export default
   {
     return {
       hideDelay: 600,
-      filteredCountries: [],
       googleSearchBox: null,
       googleMapsListener: null,
       locationForm: [
@@ -163,14 +125,6 @@ export default
   computed:
     {
       ...mapGetters([GET_FORM]),
-      countryList()
-      {
-        return Object.entries(countries).map(([code, name]) => ({
-          value: code,
-          label: name,
-          search: name.toLocaleLowerCase(),
-        }));
-      },
       jobTitle:
         {
           get()
@@ -193,22 +147,7 @@ export default
             this[SET_FIELD]({ organization: val });
           }
         },
-      country:
-        {
-          get()
-          {
-            return this[GET_FORM].country;
-          },
-          set(val)
-          {
-            this.googleSearchBox.setComponentRestrictions(
-              {
-                country: [val.value.toLocaleLowerCase()]
-              }
-            );
-            this[SET_FIELD]({ country: val });
-          }
-        },
+
       applyUrl:
         {
           get()
@@ -290,14 +229,6 @@ export default
   methods:
     {
       ...mapMutations([SET_FIELD]),
-      countryAutocomplete(val, update, abort)
-      {
-        update(() =>
-        {
-          const needle = val.toLocaleLowerCase();
-          this.filteredCountries = this.countryList.filter(v => v.search.indexOf(needle) > -1);
-        });
-      },
       gotoNext()
       {
         this.$emit('next');

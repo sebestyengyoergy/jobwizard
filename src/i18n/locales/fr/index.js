@@ -36,6 +36,7 @@ export default
   {
     organization: () => 'Organisation',
     country: () => 'Pays',
+    countries: () => 'des pays',
     location: () => 'Lieu',
     apply_url: () => 'Lien de candidature',
     apply_email: () => 'Email de candidature',

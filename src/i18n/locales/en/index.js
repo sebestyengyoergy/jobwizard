@@ -30,6 +30,7 @@ export default
   {
     organization: () => 'Organization',
     country: () => 'Country',
+    countries: () => 'Countries',
     location: () => 'Location',
     apply_url: () => 'Apply URL',
     apply_email: () => 'Apply e-mail',
