@@ -26,7 +26,7 @@
       v-model.trim="locationDisplay"
       :label="$t('label.location')"
       color="primary"
-      class="col-12"
+      class="col-lg-11 col-md-10 col-sm-9 col-xs-8"
       name="location"
       outlined
       dense
@@ -209,10 +209,16 @@ export default
     if (window.google)
     {
       const autocompleteInput = this.$refs.location.getNativeElement();
+
       this.googleSearchBox = new window.google.maps.places.Autocomplete(autocompleteInput, {
         fields: ['formatted_address', 'address_components'],
         types: ['(cities)']
       });
+      this.googleSearchBox.setComponentRestrictions(
+        {
+          country: ['de', 'ch']
+        }
+      );
       this.googleSearchBox.addListener('place_changed', () =>
       {
         const place = this.googleSearchBox.getPlace();

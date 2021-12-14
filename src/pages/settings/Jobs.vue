@@ -24,14 +24,13 @@
       name="statistics"
     />
     <!-- Country and location -->
+    <h5>{{ $t("settings.jobs_country.header") }}</h5>
+    <div>{{ $t("settings.jobs_country.help") }}</div>
     <div class="row q-mt-lg">
-      <div class="col-12">
-        <h5 style="margin: 0;">{{ $t('label.countries') }}</h5>
-      </div>
       <div class="col-4 q-mt-sm">
         <q-select
           v-model="country"
-          :label="$t('label.country')"
+          :label="$t('settings.jobs_country.header')"
           :options="filteredCountries"
           color="primary"
           name="country"
@@ -39,6 +38,7 @@
           dense
           options-dense
           use-input
+          clearable
           fill-input
           hide-selected
           input-debounce="200"
@@ -116,11 +116,6 @@ export default {
           },
           set(val)
           {
-            /* this.googleSearchBox.setComponentRestrictions(
-               {
-                 country: [val.value.toLocaleLowerCase()]
-               }
-             );*/
             this[SET_SETTINGS_FIELD]({ country: val });
           }
         },
@@ -163,37 +158,48 @@ export default {
 </script>
 
 <i18n>
-  {
+{
   "en": {
-  "settings": {
-  "jobs_title": "Jobs",
-  "jobs_location": {
-  "header": "Location",
-  "label": "",
-  "help": "If they recruit repeatedly at certain locations, they can define a list of locations here."
-  },
-  "jobs_stats": {
-  "header": "Statistics",
-  "label": "Evaluate clicks and page views in accordance with data protection regulations.",
-  "help": "with the activate, a code is built into the job advertisement that collects access figures.",
-  "placeholder": "Enter Location"
-  },
-  },
+    "settings": {
+      "jobs_title": "Jobs",
+      "jobs_location": {
+        "header": "Location",
+        "label": "",
+        "help": "If they recruit repeatedly at certain locations, they can define a list of locations here."
+      },
+      "jobs_stats": {
+        "header": "Statistics",
+        "label": "Evaluate clicks and page views in accordance with data protection regulations.",
+        "help": "with the activate, a code is built into the job advertisement that collects access figures.",
+        "placeholder": "Enter Location"
+      },
+      "jobs_country": {
+        "header": "Countries",
+        "help": "In which countries do you want to publish job advertisements? A selection restricts the automatic completion in the Google Place Search to the countries",
+        "placeholder": "Select countries"
+      }
+
+    },
   },
   "de": {
-  "settings": {
-  "jobs_title": "Stellenanzeigen",
-  "jobs_location": {
-  "header": "Dienstsitz",
-  "help": "Wenn sie immer wieder an bestimmten Orten rekrutieren, können sie hier eine Liste von Orten definieren."
-  },
-  "jobs_stats": {
-  "header": "Statistiken",
-  "label": "Klicks und Pageviews datenschutzkonform auswerten.",
-  "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt.",
-  "placeholder": "Enter Location"
+    "settings": {
+      "jobs_title": "Stellenanzeigen",
+      "jobs_location": {
+        "header": "Dienstsitz",
+        "help": "Wenn sie immer wieder an bestimmten Orten rekrutieren, können sie hier eine Liste von Orten definieren."
+      },
+      "jobs_stats": {
+        "header": "Statistiken",
+        "label": "Klicks und Pageviews datenschutzkonform auswerten.",
+        "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt.",
+        "placeholder": "Enter Location"
+      },
+      "jobs_country": {
+        "header": "Länder",
+        "help": "In welchen Ländern möchten Sie Stellenanzeigen veröffentlichen? Eine Auswahl schränkt die automatische Vervollständigung bei der Google Ort Suche auf die Länder ein.",
+        "placeholder": "Länder auswählen"
+      }
+    }
   }
-  }
-  }
-  }
+}
 </i18n>

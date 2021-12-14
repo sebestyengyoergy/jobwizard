@@ -25,7 +25,6 @@ const emptyForm = {
   step: 'stepOne',
   jobTitle: '',
   organization: '',
-  country: null,
   channels: [],
   location: {
     streetAdress: '',
@@ -64,6 +63,7 @@ const emptyForm = {
 const userSettings = {
   miscDarkmode: 'auto',
   miscTimezone: '',
+  country: null,
   useBrowserLanguage: true,
   defaultLanguage: '',
   orgName: '',
