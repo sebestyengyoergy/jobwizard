@@ -9,7 +9,8 @@
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const path = require('path');
 
-module.exports = function (ctx) {
+module.exports = function(ctx)
+{
   const variables = require('dotenv-flow').config().parsed;
 
   return {
@@ -80,7 +81,8 @@ module.exports = function (ctx) {
 
       // https://v1.quasar.dev/quasar-cli/handling-webpack
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
-      chainWebpack(chain) {
+      chainWebpack(chain)
+      {
         chain.plugin('stylelintVue')
           .use(StyleLintPlugin, [
             {
@@ -96,7 +98,8 @@ module.exports = function (ctx) {
           .type('javascript/auto')
           .use('i18n')
           .loader('@intlify/vue-i18n-loader');
-        chain.plugin('define').tap(args => {
+        chain.plugin('define').tap(args =>
+        {
           args[0].__VUE_I18N_FULL_INSTALL__ = false;
           args[0].__VUE_I18N_LEGACY_API__ = true;
           args[0].__VUE_I18N_PROD_DEVTOOLS__ = false;
@@ -104,8 +107,10 @@ module.exports = function (ctx) {
           return args;
         });
       },
-      extendWebpack(cfg) {
-        if (ctx.dev) {
+      extendWebpack(cfg)
+      {
+        if (ctx.dev)
+        {
           cfg.module.rules.push({
             enforce: 'pre',
             test: /\.(js|vue)$/,
@@ -238,7 +243,8 @@ module.exports = function (ctx) {
       // More info: https://v1.quasar.dev/quasar-cli/developing-electron-apps/node-integration
       nodeIntegration: true,
 
-      extendWebpack(/* cfg */) {
+      extendWebpack(/* cfg */)
+      {
         // do something with Electron main process Webpack cfg
         // chainWebpack also available besides this extendWebpack
       }
