@@ -21,11 +21,14 @@
             {{ props.row.attributes.publishedAt }}
           </q-td>
           <q-td key="title" :props="props">
-            <a target="_new" :href="jobDetailUrl + props.row.attributes.html.data?.attributes?.url">
+            <a v-if="props.row.attributes.html.data" target="_new" :href="jobDetailUrl + props.row.attributes.html.data?.attributes?.url">
               <span class="cursor-pointer jobtitle">
                 {{ props.row.attributes.jobTitle }}
               </span>
             </a>
+            <span v-if="!props.row.attributes.html.data" class="jobtitle">
+              {{ props.row.attributes.jobTitle }}
+            </span>
           </q-td>
           <q-td key="location" :props="props">
             {{ props.row.attributes.formattedAddress }}
@@ -63,7 +66,7 @@ export default {
       jobsUrl: `${process.env.YAWIK_API_URL}/api/jobs`,
       jobDetailUrl: `${process.env.YAWIK_JOB_URL}`,
       loading: false,
-      rowsPerPageOptions: [10, 25, 50, 100, 500],
+      rowsPerPageOptions: [10, 25, 50, 100],
       pagination: {
         sortBy: 'desc',
         descending: true,
@@ -128,7 +131,8 @@ export default {
             params: {
               'pagination[page]': pagination.pagination.page,
               'pagination[pageSize]': pagination.pagination.rowsPerPage,
-              populate: 'html'
+              populate: 'html',
+              sort: 'publishedAt:desc'
             }
           }
           ).then(response =>
@@ -176,16 +180,14 @@ export default {
 <i18n>
   {
   "en": {
-  "location": "Location",
-  "company": "Company",
-  "email": "E-Mail",
-  "date": "Date"
+    "location": "Location",
+    "company": "Company",
+    "date": "Date"
   },
   "de": {
-  "location": "Ort",
-  "company": "Firma",
-  "email": "E-Mail",
-  "date": "Datum"
+    "location": "Ort",
+    "company": "Firma",
+    "date": "Datum"
   }
   }
 </i18n>
