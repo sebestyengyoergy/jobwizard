@@ -199,7 +199,7 @@ export default
       },
       onSave()
       {
-        fetch(process.env.YAWIK_STRAPI_URL + '/api/jobs', {
+        fetch(process.env.YAWIK_API_URL + '/api/jobs', {
           method: 'POST',
           headers: {
             accept: 'application/json',

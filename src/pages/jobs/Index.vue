@@ -21,9 +21,11 @@
             {{ props.row.attributes.publishedAt }}
           </q-td>
           <q-td key="title" :props="props">
-            <span class="cursor-pointer jobtitle" @click="getJob(props.row)">
-              {{ props.row.attributes.jobTitle }}
-            </span>
+            <a target="_new" :href="jobDetailUrl + props.row.attributes.html.data?.attributes?.url">
+              <span class="cursor-pointer jobtitle">
+                {{ props.row.attributes.jobTitle }}
+              </span>
+            </a>
           </q-td>
           <q-td key="location" :props="props">
             {{ props.row.attributes.formattedAddress }}
@@ -34,18 +36,15 @@
         </q-tr>
       </template>
     </q-table>
-    <job-preview :model-value="modelValue" :job="job" @closed="modelValue=false" />
   </q-page>
 </template>
 
 <script>
 
-import JobPreview from './JobPreview';
 import { useMeta } from 'quasar';
 
 export default {
   name: 'Index',
-  components: { JobPreview },
   setup()
   {
     useMeta({
@@ -62,17 +61,16 @@ export default {
     return {
       rows: [],
       jobsUrl: `${process.env.YAWIK_API_URL}/api/jobs`,
+      jobDetailUrl: `${process.env.YAWIK_JOB_URL}`,
       loading: false,
       rowsPerPageOptions: [10, 25, 50, 100, 500],
       pagination: {
-        sortBy: 'asc',
+        sortBy: 'desc',
         descending: true,
         rowsNumber: 10,
         page: 1,
         rowsPerPage: 10
       },
-      modelValue: false,
-      job: null
     };
   },
   computed:
@@ -126,9 +124,13 @@ export default {
         getJobs(pagination = { pagination: this.pagination })
         {
           this.loading = true;
-          this.$axios.get(this.jobsUrl +
-            '?pagination[page]=' + pagination.pagination.page +
-            '&pagination[pageSize]=' + pagination.pagination.rowsPerPage
+          this.$axios.get(this.jobsUrl, {
+            params: {
+              'pagination[page]': pagination.pagination.page,
+              'pagination[pageSize]': pagination.pagination.rowsPerPage,
+              populate: 'html'
+            }
+          }
           ).then(response =>
           {
             this.rows = response.data.data;
@@ -147,33 +149,6 @@ export default {
             page: pagination.page,
             rowsPerPage: pagination.pageSize
           };
-        },
-        getJob(job)
-        {
-        //  this.$axios.get(`http://localhost:1337/api/jobs/1`,
-          this.$axios.get(`${process.env.YAWIK_API_URL}/api/jobs/${job.id}`,
-            {
-              headers: {
-                accept: 'application/json',
-                Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
-                'Content-Type': 'application/json',
-              }
-            }).then(response =>
-          {
-            this.job = response.data.data.attributes;
-            this.modelValue = true;
-          });
-        },
-
-        viewJob(job)
-        {
-          /*this.$router.push(
-            {
-              name: 'job',
-              params: {
-                id: job.id
-              }
-            });*/
         },
       }
 };

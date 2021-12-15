@@ -37,6 +37,7 @@ The form is .env-aware.
 | YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
 | YAWIK_APP_KEY                | Shared App Key                      |
 | YAWIK_API_URL                | Yawik API                           |
+| YAWIK_JOB_URL                | URL to job details                  |
 | YAWIK_ROUTER_BASE            | Router Base of the web app          |
 | YAWIK_SSO_URL                | Keycloak base URL                   |  
 | YAWIK_SSO_REALM              | Keycloak realm                      |  
