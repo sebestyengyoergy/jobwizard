@@ -28,8 +28,19 @@
     <div>{{ $t("settings.jobs_country.help") }}</div>
     <div class="row q-mt-lg">
       <div class="col-4 q-mt-sm">
-        <q-select
+        <!--
+<q-select
+          filled
           v-model="country"
+          multiple
+          :options="filteredCountries"
+          use-chips
+          stack-label
+          label="Multiple selection"
+        />
+-->
+        <q-select
+          v-model="countries"
           :label="$t('settings.jobs_country.header')"
           :options="filteredCountries"
           color="primary"
@@ -40,12 +51,13 @@
           use-input
           clearable
           fill-input
-          hide-selected
+          multiple
           input-debounce="200"
           class="col-lg-1 col-md-2 col-sm-3 col-xs-4"
           @filter="countryAutocomplete"
         >
-          <template #option="scope">
+          <!--
+ <template #option="scope">
             <q-item v-bind="scope.itemProps">
               <q-item-section avatar>
                 <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'"
@@ -57,14 +69,15 @@
               </q-item-section>
             </q-item>
           </template>
-          <!-- Current flag -->
+          &lt;!&ndash; Current flag &ndash;&gt;
           <template #prepend>
-            <q-avatar v-if="country">
-              <img :src="'country/'+(country.value || '').toLowerCase()+'.png'"
+            <q-avatar v-if="countries">
+              <img :src="'country/'+(countries.value || '').toLowerCase()+'.png'"
                    style="max-width: 48px; border: 1px solid #E5E5E5;"
               >
             </q-avatar>
           </template>
+-->
         </q-select>
       </div>
     </div>
@@ -84,6 +97,7 @@ export default {
   {
     return {
       filteredCountries: [],
+      //country:null
     };
   },
   computed: {
@@ -108,15 +122,15 @@ export default {
         this[SET_SETTINGS_FIELD]({ location: val });
       }
     },
-    country:
+    countries:
         {
           get()
           {
-            return this[GET_SETTINGS].country;
+            return this[GET_SETTINGS].countries;
           },
           set(val)
           {
-            this[SET_SETTINGS_FIELD]({ country: val });
+            this[SET_SETTINGS_FIELD]({ countries: val });
           }
         },
     countryList()

@@ -78,7 +78,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_FORM, SET_FIELD } from 'src/store/names';
+import { GET_FORM, GET_SETTINGS, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
 import TextInput from 'src/components/form/TextInput.vue';
 import Tooltip from 'src/components/form/Tooltip.vue';
@@ -124,7 +124,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_FORM]),
+      ...mapGetters([GET_FORM, GET_SETTINGS]),
       jobTitle:
         {
           get()
@@ -203,20 +203,26 @@ export default
             this[SET_FIELD]({ formattedAddress: val });
           }
         },
+      countries:
+        {
+          get()
+          {
+            return this[GET_SETTINGS].countries;
+          }
+        }
     },
   mounted()
   {
     if (window.google)
     {
       const autocompleteInput = this.$refs.location.getNativeElement();
-
       this.googleSearchBox = new window.google.maps.places.Autocomplete(autocompleteInput, {
         fields: ['formatted_address', 'address_components'],
         types: ['(cities)']
       });
       this.googleSearchBox.setComponentRestrictions(
         {
-          country: ['de', 'ch']
+          country: this.countries.map(element => element.value) //['de', 'ch']
         }
       );
       this.googleSearchBox.addListener('place_changed', () =>
