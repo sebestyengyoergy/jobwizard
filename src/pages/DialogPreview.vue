@@ -220,6 +220,9 @@ export default
       border: 1px solid ${this.color}66;
       margin: 0 auto;
       max-width:1200px;
+      -webkit-box-shadow: 0px 10px 28px 0px rgb(50 50 50 / 41%);
+      -moz-box-shadow: 0px 10px 28px 0px rgba(50, 50, 50, 0.41);
+      box-shadow: 0px 10px 28px 0px rgb(50 50 50 / 41%);
     }
     .intro {
       border: 1px solid ${this.color}66;

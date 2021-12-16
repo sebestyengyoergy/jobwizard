@@ -1,2 +1,4 @@
 https://jobwizard.yawik.org/de
 https://jobwizard.yawik.org/en
+https://jobwizard.yawik.org/de/jobs
+https://jobwizard.yawik.org/en/jobs
