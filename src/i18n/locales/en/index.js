@@ -47,7 +47,8 @@ export default
     work_duration: () => 'Duration',
     work_kind: () => 'Kind of work',
     visibility: () => 'Visibility',
-    salary: () => 'Annual salary'
+    salary: () => 'Annual salary',
+    homeoffice: () => 'Home Office',
   },
   msg: {
     job_saved_success: () => 'job posting successfully saved',
