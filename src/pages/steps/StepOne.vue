@@ -49,10 +49,11 @@
           style="margin-top: -20px;"
           name="remoteWorkPercentage"
           class="col-lg-2 col-md-2"
+          :label-value="remoteWorkPercentage + '%'"
           label-always
-          :min="1"
+          :min="10"
           :max="100"
-          :step="1"
+          :step="10"
         />
       </div>
     </div>

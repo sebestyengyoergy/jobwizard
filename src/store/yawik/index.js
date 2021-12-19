@@ -34,7 +34,7 @@ const emptyForm = {
     addressCountry: '',
   },
   remoteWork: false,
-  remoteWorkPercentage: 1,
+  remoteWorkPercentage: 50,
   formattedAddress: '',
   applyURL: '',
   applyEmail: '',

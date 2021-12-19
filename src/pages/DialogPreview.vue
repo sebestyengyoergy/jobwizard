@@ -143,6 +143,14 @@ export default
           this[GET_FORM].salary.value.split('|').map(item => item + '.000€').join(' - ') + '</li>'
           : '';
       },
+      htmlRemoteWork()
+      {
+        return this[GET_FORM].remoteWork
+          ? '<li><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22L12 3Z" /></svg>' +
+          this[GET_FORM].remoteWorkPercentage + '%</li>'
+          : '';
+      },
+
       htmlCode()
       {
         return `<!DOCTYPE html><html lang="${this.$root.$i18n.locale}">
@@ -303,6 +311,7 @@ export default
               ${this.htmlWorkKind}
             </li>
             <li>${this.htmlWorkDuration}</li>
+            ${this.htmlRemoteWork}
             ${this.htmlSalary}
           </ul>
         </div>

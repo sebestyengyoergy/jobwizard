@@ -55,7 +55,7 @@ export default
     work_kind: () => 'Kind of work',
     visibility: () => 'Visibility',
     salary: () => 'Jahresgehalt',
-    homeoffice: () => 'Heimbüro',
+    homeoffice: () => 'Homeoffice',
   },
   rules:
   {
