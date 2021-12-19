@@ -220,11 +220,14 @@ export default
         fields: ['formatted_address', 'address_components'],
         types: ['(cities)']
       });
-      this.googleSearchBox.setComponentRestrictions(
-        {
-          country: this.countries.map(element => element.value) //['de', 'ch']
-        }
-      );
+      if (this.countries)
+      {
+        this.googleSearchBox.setComponentRestrictions(
+          {
+            country: this.countries.map(element => element.value)
+          }
+        );
+      }
       this.googleSearchBox.addListener('place_changed', () =>
       {
         const place = this.googleSearchBox.getPlace();
