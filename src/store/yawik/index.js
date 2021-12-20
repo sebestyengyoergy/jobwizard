@@ -33,6 +33,8 @@ const emptyForm = {
     postalCode: '',
     addressCountry: '',
   },
+  remoteWork: false,
+  remoteWorkPercentage: 50,
   formattedAddress: '',
   applyURL: '',
   applyEmail: '',

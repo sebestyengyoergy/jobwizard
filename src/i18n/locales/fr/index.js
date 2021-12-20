@@ -53,7 +53,8 @@ export default
     work_duration: () => 'Durée',
     work_kind: () => 'Type d\'emploi',
     visibility: () => 'Visibilité',
-    salary: () => 'Salaire annuel'
+    salary: () => 'Salaire annuel',
+    homeoffice: () => 'bureau à domicile',
   },
   msg: {
     job_saved_success: () => 'l\'offre d\'emploi a été sauvegardée avec succès',

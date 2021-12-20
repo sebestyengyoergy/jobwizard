@@ -20,20 +20,43 @@
       @enterPress="gotoNext"
     />
 
-    <q-input
-      id="location"
-      ref="location"
-      v-model.trim="locationDisplay"
-      :label="$t('label.location')"
-      color="primary"
-      class="col-lg-11 col-md-10 col-sm-9 col-xs-8"
-      name="location"
-      outlined
-      dense
-      :rules="[ruleRequired]"
-      @keypress.enter="gotoNext"
-    />
-
+    <div class="col-12">
+      <div class="row">
+        <q-input
+          id="location"
+          ref="location"
+          v-model.trim="locationDisplay"
+          :label="$t('label.location')"
+          color="primary"
+          class="col-lg-8 col-md-8"
+          name="location"
+          outlined
+          dense
+          :rules="[ruleRequired]"
+          @keypress.enter="gotoNext"
+        />
+        <q-checkbox
+          v-model="remoteWork"
+          style="margin-top: -20px;"
+          :label="$t('label.homeoffice')"
+          color="primary"
+          name="apply_post"
+          class="col-lg-2 col-md-2"
+        />
+        <q-slider
+          v-if="remoteWork"
+          v-model="remoteWorkPercentage"
+          style="margin-top: -20px;"
+          name="remoteWorkPercentage"
+          class="col-lg-2 col-md-2"
+          :label-value="remoteWorkPercentage + '%'"
+          label-always
+          :min="10"
+          :max="100"
+          :step="10"
+        />
+      </div>
+    </div>
     <!-- URL -->
     <TextInput
       v-model="applyUrl"
@@ -83,8 +106,7 @@ import mixinValidations from 'src/lib/validations';
 import TextInput from 'src/components/form/TextInput.vue';
 import Tooltip from 'src/components/form/Tooltip.vue';
 
-export default
-{
+export default {
   name: 'StepOne',
   components: {
     TextInput,
@@ -119,98 +141,122 @@ export default
         administrative_area_level_1: 'short_name',
         country: 'long_name',
         postal_code: 'short_name',
-      },
+      }
     };
   },
   computed:
-    {
-      ...mapGetters([GET_FORM, GET_SETTINGS]),
-      jobTitle:
-        {
-          get()
-          {
-            return this[GET_FORM].jobTitle;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ jobTitle: val });
-          }
-        },
-      organization:
-        {
-          get()
-          {
-            return this[GET_FORM].organization;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ organization: val });
-          }
-        },
+      {
+        ...mapGetters([GET_FORM, GET_SETTINGS]),
 
-      applyUrl:
-        {
-          get()
+        jobTitle:
+
           {
-            return this[GET_FORM].applyURL;
+            get()
+            {
+              return this[GET_FORM].jobTitle;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ jobTitle: val });
+            }
           },
-          set(val)
+        remoteWork:
           {
-            this[SET_FIELD]({ applyURL: val });
-          }
-        },
-      applyEmail:
-        {
-          get()
-          {
-            return this[GET_FORM].applyEmail;
+            get()
+            {
+              return this[GET_FORM].remoteWork;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ remoteWork: val });
+            }
           },
-          set(val)
+        remoteWorkPercentage:
           {
-            this[SET_FIELD]({ applyEmail: val });
-          }
-        },
-      applyPost:
-        {
-          get()
-          {
-            return this[GET_FORM].applyPost;
+            get()
+            {
+              return this[GET_FORM].remoteWorkPercentage;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ remoteWorkPercentage: val });
+            }
           },
-          set(val)
+        organization:
           {
-            this[SET_FIELD]({ applyPost: val });
-          }
-        },
-      reference:
-        {
-          get()
-          {
-            return this[GET_FORM].reference;
+            get()
+            {
+              return this[GET_FORM].organization;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ organization: val });
+            }
           },
-          set(val)
+
+        applyUrl:
           {
-            this[SET_FIELD]({ reference: val });
-          }
-        },
-      locationDisplay:
-        {
-          get()
-          {
-            return this[GET_FORM].formattedAddress;
+            get()
+            {
+              return this[GET_FORM].applyURL;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ applyURL: val });
+            }
           },
-          set(val)
+        applyEmail:
           {
-            this[SET_FIELD]({ formattedAddress: val });
-          }
-        },
-      countries:
-        {
-          get()
+            get()
+            {
+              return this[GET_FORM].applyEmail;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ applyEmail: val });
+            }
+          },
+        applyPost:
           {
-            return this[GET_SETTINGS].countries;
+            get()
+            {
+              return this[GET_FORM].applyPost;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ applyPost: val });
+            }
+          },
+        reference:
+          {
+            get()
+            {
+              return this[GET_FORM].reference;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ reference: val });
+            }
+          },
+        locationDisplay:
+          {
+            get()
+            {
+              return this[GET_FORM].formattedAddress;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ formattedAddress: val });
+            }
+          },
+        countries:
+          {
+            get()
+            {
+              return this[GET_SETTINGS].countries;
+            }
           }
-        }
-    },
+      },
   mounted()
   {
     if (window.google)
@@ -242,54 +288,56 @@ export default
     this.googleSearchBox = null;
   },
   methods:
-    {
-      ...mapMutations([SET_FIELD]),
-      gotoNext()
       {
-        this.$emit('next');
-      },
-      getLocationComp(place, type)
-      {
-        for (const component of place)
+        ...mapMutations([SET_FIELD]),
+        gotoNext()
         {
-          if (component.types[0] === type)
-          {
-            return component[this.locationNameFormat[type]];
-          }
-        }
-        return '';
-      },
-      insertLocatationData(loc)
-      {
-        for (const component of this.locationForm)
+          this.$emit('next');
+        },
+        getLocationComp(place, type)
         {
-          switch (component)
+          for (const component of place)
           {
-            case 'location':
-              this.locationData.streetAddress = this.getLocationComp(loc, 'street_number') + ' ' + this.getLocationComp(loc, 'route');
-              break;
-            case 'locality':
-              this.locationData.addressLocality = this.getLocationComp(loc, component);
-              break;
-            case 'administrative_area_level_1':
-              this.locationData.addressRegion = this.getLocationComp(loc, component);
-              break;
-            case 'country':
-              this.locationData.addressCountry = this.getLocationComp(loc, component);
-              break;
-            case 'postal_code':
-              this.locationData.postalCode = this.getLocationComp(loc, component);
-              break;
+            if (component.types[0] === type)
+            {
+              return component[this.locationNameFormat[type]];
+            }
           }
+          return '';
+        },
+        insertLocatationData(loc)
+        {
+          for (const component of this.locationForm)
+          {
+            switch (component)
+            {
+              case 'location':
+                this.locationData.streetAddress = this.getLocationComp(loc, 'street_number') + ' ' + this.getLocationComp(loc, 'route');
+                break;
+              case 'locality':
+                this.locationData.addressLocality = this.getLocationComp(loc, component);
+                break;
+              case 'administrative_area_level_1':
+                this.locationData.addressRegion = this.getLocationComp(loc, component);
+                break;
+              case 'country':
+                this.locationData.addressCountry = this.getLocationComp(loc, component);
+                break;
+              case 'postal_code':
+                this.locationData.postalCode = this.getLocationComp(loc, component);
+                break;
+            }
+          }
+        },
+        locationChanged(place)
+        {
+          const addressComponents = place.address_components;
+          this.insertLocatationData(addressComponents);
+          this.$store.commit('SET_LOCATION', Object.assign({}, this.locationData));
+          this.locationDisplay = place.formatted_address;
         }
-      },
-      locationChanged(place)
-      {
-        const addressComponents = place.address_components;
-        this.insertLocatationData(addressComponents);
-        this.$store.commit('SET_LOCATION', Object.assign({}, this.locationData));
-        this.locationDisplay = place.formatted_address;
-      },
-    }
-};
+        ,
+      }
+}
+;
 </script>
