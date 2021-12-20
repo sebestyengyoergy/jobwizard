@@ -19,7 +19,7 @@ describe('check apply_url, apply_email and apply_post', () =>
     cy.get('input[name="apply_url"]').type('http://cross-solution.de');
     cy.get('input[name="apply_email"]').type('bleek@cross-solution.de');
     cy.get('input[name="apply_url"]').should('be.enabled');
-    cy.get('input[name="apply_post"]').get('svg').click();
+    cy.get('[aria-label="No online application/postal application"] > .q-checkbox__inner > .q-checkbox__bg > .q-checkbox__svg').click()
     cy.get('input[name="apply_url"]').should('be.disabled');
 
     cy.get('button[name="preview"]').then(($btn) => {
