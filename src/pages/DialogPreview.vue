@@ -281,7 +281,7 @@ export default
         columns: 2;
       }
       .column,
-      .columns 
+      .columns
       {
         margin-left: 1% !important;
       }
@@ -378,7 +378,8 @@ export default
               maxValue: this[GET_FORM].salary.value.split('|').map(item => item + '000')[1],
               unitText: 'YEAR'
             }
-          }
+          },
+          remoteWorkPercentage:this[GET_FORM].remoteWorkPercentage===100?'TELECOMMUTE':''
         };
         if (this.employment.length > 0) result.employmentType = this.employment;
         if (this[GET_FORM].applyURL) result.directApply = true;
