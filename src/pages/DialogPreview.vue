@@ -379,7 +379,7 @@ export default
               unitText: 'YEAR'
             }
           },
-          remoteWorkPercentage:this[GET_FORM].remoteWorkPercentage===100?'TELECOMMUTE':''
+          jobLocationType: this[GET_FORM].remoteWorkPercentage === 100 ? 'TELECOMMUTE' : ''
         };
         if (this.employment.length > 0) result.employmentType = this.employment;
         if (this[GET_FORM].applyURL) result.directApply = true;
