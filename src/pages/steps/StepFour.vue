@@ -1,12 +1,13 @@
 <template>
   <div>
     <ChooseChannel />
-    <PrivacyPolicy v-if="$yawik.isAuth()" v-model="acceptTerms" />
+    <br>
+    <AcceptTerms v-if="$yawik.isAuth()" v-model="acceptTerms" />
   </div>
 </template>
 
 <script>
-import PrivacyPolicy from 'src/components/PrivacyPolicy';
+import AcceptTerms from 'src/components/form/AcceptTerms';
 import ChooseChannel from 'src/components/ChooseChannel';
 import { GET_FORM, SET_FIELD } from 'src/store/names';
 import { mapGetters, mapMutations } from 'vuex';
@@ -16,7 +17,7 @@ export default
   name: 'StepFour',
   components:
     {
-      PrivacyPolicy,
+      AcceptTerms,
       ChooseChannel
     },
   computed:

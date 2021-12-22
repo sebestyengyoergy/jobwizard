@@ -395,30 +395,6 @@ export default
         }[item])));
       },
     },
-  watch:
-    {
-      country:
-        {
-          immediate: true,
-          handler(newVal)
-          {
-            if (newVal)
-            {
-              this.countryImage = '';
-              const img = new Image();
-              img.onload = (e) =>
-              {
-                this.canvas.width = img.naturalWidth;
-                this.canvas.height = img.naturalHeight;
-                const context = this.canvas.getContext('2d');
-                context.drawImage(img, 0, 0);
-                this.countryImage = this.canvas.toDataURL('image/png');
-              };
-              img.src = `country/${newVal.value.toLowerCase()}.png`;
-            }
-          }
-        },
-    },
   created()
   {
     this.canvas = document.createElement('canvas');
