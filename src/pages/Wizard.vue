@@ -1,6 +1,8 @@
 <template>
   <q-page class="flex">
-    <q-form ref="frm" autocomplete="false" :spellcheck="spellcheck" class="grow full-width" @submit="submitForm" @validation-error="hasErrors">
+    <q-form ref="frm" autocomplete="false" :spellcheck="spellcheck" class="grow full-width" @submit="submitForm"
+            @validation-error="hasErrors"
+    >
       <q-page-sticky style="z-index: 5900;" position="bottom-left" :offset="[18, -65]">
         <div class="justify-center q-pb-lg flex">
           <q-btn-group push>
@@ -8,7 +10,10 @@
               {{ $t('btn.preview') }}
             </q-btn>
             <SwitchLanguage v-if="!toolbar" class="q-mx-auto" />
-            <q-btn name="abort" color="negative" @click="abortForm">{{ $t($q.platform.is.mobile ? 'btn.cancel' : 'btn.abort') }}</q-btn>
+            <q-btn name="abort" color="negative" @click="abortForm">
+              {{ $t($q.platform.is.mobile ? 'btn.cancel' :
+                'btn.abort') }}
+            </q-btn>
           </q-btn-group>
         </div>
       </q-page-sticky>
@@ -25,7 +30,8 @@
         header-class="bg-third"
       >
         <!-- eslint-enable quasar/no-invalid-props -->
-        <q-step v-for="stepName in steps" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t('steps.' + stepName)"
+        <q-step v-for="stepName in steps" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1"
+                :title="$t('steps.' + stepName)"
                 done-color="positive" active-color="primary" error-color="negative"
                 :done="isCompleted(stepName)" :error="validationErrors[stepName] && isCompleted(stepName)"
         >
@@ -34,8 +40,12 @@
         <template #navigation>
           <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
-              <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('btn.back')" class="q-mr-md" @click.stop="navigate('previous')" />
-              <q-btn v-if="lastStep & !$yawik.isAuth()" color="primary" name="next" :label="$t('btn.download')" @click.stop="trySubmit" />
+              <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('btn.back')"
+                     class="q-mr-md" @click.stop="navigate('previous')"
+              />
+              <q-btn v-if="lastStep & !$yawik.isAuth()" color="primary" name="next" :label="$t('btn.download')"
+                     @click.stop="trySubmit"
+              />
               <q-btn-dropdown
                 v-if="lastStep & $yawik.isAuth()"
                 split
@@ -64,7 +74,9 @@
                   </q-item>
                 </q-list>
               </q-btn-dropdown>
-              <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('btn.continue')" @click.stop="navigate('next')" />
+              <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('btn.continue')"
+                     @click.stop="navigate('next')"
+              />
             </div>
           </q-page-sticky>
         </template>
@@ -84,28 +96,28 @@ import StepFour from './steps/StepFour';
 import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
+
 const maxContentWidth = 800; // pixels
 
-export default
-{
+export default {
   name: 'Wizard',
   components:
-    {
-      SwitchLanguage,
-      DialogPreview,
-      StepOne,
-      StepTwo,
-      StepThree,
-      StepFour,
-    },
+      {
+        SwitchLanguage,
+        DialogPreview,
+        StepOne,
+        StepTwo,
+        StepThree,
+        StepFour,
+      },
   props:
-    {
-      toolbar:
-        {
-          type: Boolean,
-          default: false
-        },
-    },
+      {
+        toolbar:
+          {
+            type: Boolean,
+            default: false
+          },
+      },
   data()
   {
     return {
@@ -114,54 +126,54 @@ export default
       dlgPreview: false,
       lastStep: false,
       validationErrors:
-        {
-          stepOne: false,
-          stepTwo: false,
-          stepThree: false,
-          stepFour: false,
-        }
+          {
+            stepOne: false,
+            stepTwo: false,
+            stepThree: false,
+            stepFour: false,
+          }
     };
   },
   computed:
-    {
-      ...mapGetters([GET_STEP, GET_FORM, GET_SETTINGS]),
-      currentStep:
-        {
-          get()
+      {
+        ...mapGetters([GET_STEP, GET_FORM, GET_SETTINGS]),
+        currentStep:
           {
-            return this[GET_STEP];
+            get()
+            {
+              return this[GET_STEP];
+            },
+            set(value)
+            {
+              this[SET_STEP](value);
+            }
           },
-          set(value)
-          {
-            this[SET_STEP](value);
-          }
-        },
-      steps()
-      {
-        return Object.keys(this.validationErrors);
-      },
-      acceptTerms()
-      {
-        return this.$store.getters.GET_FORM.acceptTerms;
-      },
-      spellcheck()
-      {
-        return this.$store.getters.GET_SETTINGS.formSpellcheckEnabled;
-      }
-    },
-  watch:
-    {
-      currentStep(newVal, oldVal)
-      {
-        this.$nextTick(() =>
+        steps()
         {
-          // Quasar is too fast - as soon as it detects MouseDown event on the CONTINUE button, it goes to the next step
-          // And on the last step the button becomes a SUBMIT type too fast, even before MouseUp - which then leads to speculative form submit
-          this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
-          this.validateStep(oldVal);
-        });
+          return Object.keys(this.validationErrors);
+        },
+        acceptTerms()
+        {
+          return this.$store.getters.GET_FORM.acceptTerms;
+        },
+        spellcheck()
+        {
+          return this.$store.getters.GET_SETTINGS.formSpellcheckEnabled;
+        }
       },
-    },
+  watch:
+      {
+        currentStep(newVal, oldVal)
+        {
+          this.$nextTick(() =>
+          {
+            // Quasar is too fast - as soon as it detects MouseDown event on the CONTINUE button, it goes to the next step
+            // And on the last step the button becomes a SUBMIT type too fast, even before MouseUp - which then leads to speculative form submit
+            this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
+            this.validateStep(oldVal);
+          });
+        },
+      },
   created()
   {
     // we have to update maxWidth on window resize
@@ -183,123 +195,127 @@ export default
     window.removeEventListener('resize', this.onResize, false);
   },
   methods:
-    {
-      ...mapMutations([SET_STEP, CLEAR_FORM]),
-      onResize()
       {
-        // limit the width of QEditor - otherwise it grows too much on typing
-        this.maxWidth = Math.min(maxContentWidth, document.body.clientWidth);
-      },
-      navigate(direction)
-      {
-        this.$nextTick(() =>
+        ...mapMutations([SET_STEP, CLEAR_FORM]),
+        onResize()
         {
-          this.$refs.stepper[direction]();
-        });
-      },
-      onSave()
-      {
-        fetch(process.env.YAWIK_API_URL + '/api/jobs', {
-          method: 'POST',
-          headers: {
-            accept: 'application/json',
-            Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            data: {
-              ...this.$store.getters.GET_FORM,
-            }
-          }),
-        }).then(response => response.json())
-          .then(data =>
+          // limit the width of QEditor - otherwise it grows too much on typing
+          this.maxWidth = Math.min(maxContentWidth, document.body.clientWidth);
+        },
+        navigate(direction)
+        {
+          this.$nextTick(() =>
           {
-            console.log('Data', data);
-            if (data.error)
-            {
-              this.$q.notify({
-                color: 'negative',
-                position: 'top',
-                icon: 'mdi-alert',
-                message: data.error.message || this.$t('job_saved_error'),
-              });
-            }
-            else
-            {
-              this.$q.notify({
-                color: 'positive',
-                position: 'top',
-                icon: 'mdi-alert',
-                message: this.$t('msg.job_saved_success'),
-              });
-            }
-          }).catch(error =>
-          {
-            console.log('Error', error);
+            this.$refs.stepper[direction]();
           });
-      },
-      trySubmit()
-      {
-        this.$refs.frm.submit();
-      },
-      hasErrors(ref)
-      {
-        // ensure the first invalid field is focused when it is on a different panel/q-step
-        let node = ref;
-        do
+        },
+        onSave()
         {
-          node = node.$parent;
-          if (node.$options.name === 'QStep')
-          {
-            if (node.name !== node.$parent.value)
+          const html = new Blob([this.$refs.preview.htmlCode], {
+            type: 'text/html',
+            name: 'job_ad.html'
+          });
+          const form = { ...this.$store.getters.GET_FORM };
+          form.html = html;
+          fetch(process.env.YAWIK_API_URL + '/api/jobs', {
+            method: 'POST',
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              data: form
+            }),
+          }).then(response => response.json())
+            .then(data =>
             {
-              const newName = node.name;
-              do
+              console.log('Data', data);
+              if (data.error)
               {
-                node = node.$parent;
-                if (node.$options.name === 'QStepper')
-                {
-                  node.$emit('update:modelValue', newName);
-                  break;
-                }
-              } while (node !== this.$root);
-              this.$nextTick(() =>
+                this.$q.notify({
+                  color: 'negative',
+                  position: 'top',
+                  icon: 'mdi-alert',
+                  message: data.error.message || this.$t('job_saved_error'),
+                });
+              }
+              else
               {
-                ref.focus();
-              });
-            }
-            break;
-          }
-        } while (node !== this.$root);
-      },
-      findStep(component)
-      {
-        let node = component;
-        do
+                this.$q.notify({
+                  color: 'positive',
+                  position: 'top',
+                  icon: 'mdi-alert',
+                  message: this.$t('msg.job_saved_success'),
+                });
+              }
+            }).catch(error =>
+            {
+              console.log('Error', error);
+            });
+        },
+        trySubmit()
         {
-          node = node.$parent;
-          if (node.$options.name === 'QStep') return node.name;
-        } while (node !== this.$root);
-      },
-      isCompleted(step)
-      {
-        return (this.steps.indexOf(this.currentStep) > this.steps.indexOf(step));
-      },
-      validateStep(step)
-      {
-        const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
-        this.validationErrors[step] = components.some(item => !item.validate()); // stop on the first validation error
-        // this.validationErrors[step] = components.filter(item => !item.validate()).length > 0; // validate all fields
-      },
-      submitForm()
-      {
-        const html = this.$refs.preview.htmlCode;
-        saveAs(new Blob([html], { type: 'text/html' }), 'job_ad.html', { autoBOM: true });
-      },
-      abortForm()
-      {
-        this[CLEAR_FORM]();
-      },
-    }
+          this.$refs.frm.submit();
+        },
+        hasErrors(ref)
+        {
+          // ensure the first invalid field is focused when it is on a different panel/q-step
+          let node = ref;
+          do
+          {
+            node = node.$parent;
+            if (node.$options.name === 'QStep')
+            {
+              if (node.name !== node.$parent.value)
+              {
+                const newName = node.name;
+                do
+                {
+                  node = node.$parent;
+                  if (node.$options.name === 'QStepper')
+                  {
+                    node.$emit('update:modelValue', newName);
+                    break;
+                  }
+                } while (node !== this.$root);
+                this.$nextTick(() =>
+                {
+                  ref.focus();
+                });
+              }
+              break;
+            }
+          } while (node !== this.$root);
+        },
+        findStep(component)
+        {
+          let node = component;
+          do
+          {
+            node = node.$parent;
+            if (node.$options.name === 'QStep') return node.name;
+          } while (node !== this.$root);
+        },
+        isCompleted(step)
+        {
+          return (this.steps.indexOf(this.currentStep) > this.steps.indexOf(step));
+        },
+        validateStep(step)
+        {
+          const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
+          this.validationErrors[step] = components.some(item => !item.validate()); // stop on the first validation error
+          // this.validationErrors[step] = components.filter(item => !item.validate()).length > 0; // validate all fields
+        },
+        submitForm()
+        {
+          const html = this.$refs.preview.htmlCode;
+          saveAs(new Blob([html], { type: 'text/html' }), 'job_ad.html', { autoBOM: true });
+        },
+        abortForm()
+        {
+          this[CLEAR_FORM]();
+        },
+      }
 };
 </script>
