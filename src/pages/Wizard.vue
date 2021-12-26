@@ -211,26 +211,33 @@ export default {
         },
         onSave()
         {
-          const html = new Blob([this.$refs.preview.htmlCode], {
+          const formData = new FormData();
+          const form = { ...this.$store.getters.GET_FORM };
+
+          this.buildFormData(formData, form);
+
+          let html = new Blob([this.$refs.preview.htmlCode], {
             type: 'text/html',
             name: 'job_ad.html'
           });
-          const form = { ...this.$store.getters.GET_FORM };
-          form.html = html;
-          fetch(process.env.YAWIK_API_URL + '/api/jobs', {
+          html = JSON.stringify(html);
+          html = new Blob([html], {
+            type: 'application/json',
+          });
+
+          formData.append('html', html);
+          this.$axios({
             method: 'POST',
+            url: process.env.YAWIK_API_URL + '/api/jobs',
             headers: {
               accept: 'application/json',
               Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              data: form
-            }),
-          }).then(response => response.json())
+            data: formData
+          })
             .then(data =>
             {
-              console.log('Data', data);
               if (data.error)
               {
                 this.$q.notify({
@@ -252,7 +259,34 @@ export default {
             }).catch(error =>
             {
               console.log('Error', error);
+            }); ;
+          // fetch(process.env.YAWIK_API_URL + '/api/jobs', {
+          //   method: 'POST',
+          //   headers: {
+          //     accept: 'application/json',
+          //     Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
+          //     'Content-Type': 'application/json'
+          //   },
+          //   body: JSON.stringify({
+          //     data: data
+          //   }),
+          // }).
+        },
+        buildFormData(formData, data, parentKey)
+        {
+          if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File))
+          {
+            Object.keys(data).forEach(key =>
+            {
+              this.buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
             });
+          }
+          else
+          {
+            const value = data == null ? '' : data;
+
+            formData.append(parentKey, value);
+          }
         },
         trySubmit()
         {
