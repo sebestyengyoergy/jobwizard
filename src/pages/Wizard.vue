@@ -182,7 +182,6 @@ export default {
   },
   mounted()
   {
-    console.log('is auth ' + this.$yawik.isAuth());
     this.stepper = this.$refs.stepper; // used by steps to navigate to next step by ENTER key inside any input field
     this.onResize();
     this.steps.slice(0, this.steps.indexOf(this.currentStep)).forEach(step =>
@@ -225,7 +224,8 @@ export default {
             type: 'application/json',
           });
 
-          formData.append('html', html);
+          formData.append('data[html]', html);
+
           this.$axios({
             method: 'POST',
             url: process.env.YAWIK_API_URL + '/api/jobs',
@@ -278,7 +278,7 @@ export default {
           {
             Object.keys(data).forEach(key =>
             {
-              this.buildFormData(formData, data[key], parentKey ? `${parentKey}[${key}]` : key);
+              this.buildFormData(formData, data[key], parentKey ? `data[${parentKey}[${key}]]` : `data[${key}]`);
             });
           }
           else
