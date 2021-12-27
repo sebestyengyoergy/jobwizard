@@ -212,19 +212,17 @@ export default {
         {
           const formData = new FormData();
           const form = { ...this.$store.getters.GET_FORM };
+          const form1 = JSON.parse(JSON.stringify(form));
 
-          this.buildFormData(formData, form);
-
-          let html = new Blob([this.$refs.preview.htmlCode], {
+          const html = new Blob([this.$refs.preview.htmlCode], {
             type: 'text/html',
             name: 'job_ad.html'
           });
-          html = JSON.stringify(html);
-          html = new Blob([html], {
-            type: 'application/json',
-          });
 
-          formData.append('data[html]', html);
+          form1.html = html;
+          formData.append('html', html, 'job_ad.html');
+
+          formData.append('data', JSON.stringify(form1));
 
           this.$axios({
             method: 'POST',
@@ -232,7 +230,7 @@ export default {
             headers: {
               accept: 'application/json',
               Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
-              'Content-Type': 'application/json'
+              'Content-Type': 'multipart/form-data'
             },
             data: formData
           })
