@@ -236,9 +236,12 @@ export default
       border: 1px solid ${this.color}66;
       background-color: ${this.color}11;
     }
+    .intro ul {
+      list-style-type: none;
+    }
     ul {
       list-style: inside;
-      list-style-type: none;
+      list-style-type: disc;
     }
     li {
       margin-bottom: 0;
@@ -277,7 +280,7 @@ export default
       .row.details {
         padding: 0 24px;
       }
-      ul {
+      .intro ul {
         columns: 2;
       }
       .column,
