@@ -132,6 +132,7 @@ export default
         for (const key in emptyForm) state.form[key] = emptyForm[key];
         state.logo = '';
         state.header = '';
+        state.jobId = uid();
       },
       [SET_STEP](state, value)
       {

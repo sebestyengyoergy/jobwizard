@@ -212,17 +212,17 @@ export default {
         {
           const formData = new FormData();
           const form = { ...this.$store.getters.GET_FORM };
-          const form1 = JSON.parse(JSON.stringify(form));
+          const formObj = JSON.parse(JSON.stringify(form));
 
           const html = new Blob([this.$refs.preview.htmlCode], {
             type: 'text/html',
             name: 'job_ad.html'
           });
 
-          form1.html = html;
+          formObj.html = html;
           formData.append('html', html, 'job_ad.html');
 
-          formData.append('data', JSON.stringify(form1));
+          formData.append('data', JSON.stringify(formObj));
 
           this.$axios({
             method: 'POST',
@@ -236,13 +236,13 @@ export default {
           })
             .then(data =>
             {
-              if (data.error)
+              if (data.data.error)
               {
                 this.$q.notify({
                   color: 'negative',
                   position: 'top',
                   icon: 'mdi-alert',
-                  message: data.error.message || this.$t('job_saved_error'),
+                  message: data.data.error.message || this.$t('job_saved_error'),
                 });
               }
               else
@@ -253,38 +253,12 @@ export default {
                   icon: 'mdi-alert',
                   message: this.$t('msg.job_saved_success'),
                 });
+                this[CLEAR_FORM]();
               }
             }).catch(error =>
             {
               console.log('Error', error);
-            }); ;
-          // fetch(process.env.YAWIK_API_URL + '/api/jobs', {
-          //   method: 'POST',
-          //   headers: {
-          //     accept: 'application/json',
-          //     Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
-          //     'Content-Type': 'application/json'
-          //   },
-          //   body: JSON.stringify({
-          //     data: data
-          //   }),
-          // }).
-        },
-        buildFormData(formData, data, parentKey)
-        {
-          if (data && typeof data === 'object' && !(data instanceof Date) && !(data instanceof File))
-          {
-            Object.keys(data).forEach(key =>
-            {
-              this.buildFormData(formData, data[key], parentKey ? `data[${parentKey}[${key}]]` : `data[${key}]`);
             });
-          }
-          else
-          {
-            const value = data == null ? '' : data;
-
-            formData.append(parentKey, value);
-          }
         },
         trySubmit()
         {
