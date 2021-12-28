@@ -67,8 +67,14 @@ export default
       {
         return [
           {
+            icon: 'mdi-earth',
+            label: this.$t('jobboard'),
+            to: '/' + this.$yawik.lang() + '/jobboard',
+            separator: true
+          },
+          {
             icon: 'mdi-view-list',
-            label: this.$t('jobs'),
+            label: this.$t('ad_management'),
             to: '/' + this.$yawik.lang() + '/jobs',
             separator: true
           },

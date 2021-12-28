@@ -2,7 +2,10 @@ export default
 {
   localeName: () => 'French',
   jobs: () => 'Offres d\'emploi',
+  jobboard: () => '  Bourse d\'emploi',
   job_title: () => 'Titre de l\'annonce',
+  public_jobs: () => 'annonces d\'emploi actuelles',
+  ad_management: () => 'Gestion d\'annonces',
   settings: () => 'Réglages',
   statistics: () => 'Statistiques',
   btn: {

@@ -1,9 +1,8 @@
 <template>
   <q-page class="flex">
     <q-table
-      v-if="$yawik.isAuth()"
       v-model:pagination="pagination"
-      :title="$t('ad_management')"
+      :title="$t('public_jobs')"
       :rows="rows"
       :grid="grid"
       :columns="columns"
@@ -40,7 +39,6 @@
         </q-tr>
       </template>
     </q-table>
-    <h1 v-if="!$yawik.isAuth()">{{ $t('please_register') }}</h1>
   </q-page>
 </template>
 
@@ -184,14 +182,12 @@ export default {
   "en": {
     "location": "Location",
     "company": "Company",
-    "date": "Date",
-    "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge."
+    "date": "Date"
   },
   "de": {
     "location": "Ort",
     "company": "Firma",
-    "date": "Datum",
-    "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos."
+    "date": "Datum"
   }
   }
 </i18n>

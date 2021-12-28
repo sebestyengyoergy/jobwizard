@@ -2,7 +2,10 @@ export default
 {
   localeName: () => 'English',
   jobs: () => 'Jobs',
+  jobboard: () => 'Jobboard',
   job_title: () => 'Job title',
+  ad_management: () => 'Ad management',
+  public_jobs: () => 'Current job offers',
   settings: () => 'Settings',
   statistics: () => 'Statistcs',
   btn:
@@ -19,6 +22,14 @@ export default
     save: () => 'Save',
     send: () => 'Send',
     publish: () => 'Publish'
+  },
+  nav:
+  {
+    settings: () => 'Settings',
+    jobs: () => 'Jobs',
+    job_title: () => 'Job title',
+    misc: () => 'Misc',
+    organization: () => 'Organisation',
   },
   help: {
     dark_mode: () => 'Switch dark display on and off',
