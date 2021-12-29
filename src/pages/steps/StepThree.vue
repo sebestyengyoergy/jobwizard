@@ -206,19 +206,19 @@ export default {
       return [
         {
           value: 'fulltime',
-          label: this.$t('label.full_time')
+          label: this.$t('label.fulltime')
         },
         {
           value: 'parttime',
-          label: this.$t('label.part_time')
+          label: this.$t('label.parttime')
         },
         {
           value: 'shiftwork',
-          label: this.$t('label.shift_work')
+          label: this.$t('label.shiftwork')
         },
         {
           value: 'minijob',
-          label: this.$t('label.mini_job')
+          label: this.$t('label.minijob')
         },
 
       ];

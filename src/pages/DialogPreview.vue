@@ -126,14 +126,14 @@ export default
       htmlWorkKind()
       {
         return this[GET_FORM].workKind.length > 0
-          ? this[GET_FORM].workKind.map(item => `${this.$t(item)}`).join(', ')
+          ? this[GET_FORM].workKind.map(item => `${this.$t('label.' + item)}`).join(', ')
           : '';
       },
       htmlWorkDuration()
       {
         return this[GET_FORM].workDuration.length > 0
           ? '<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M17 11.5V13H11V7H12.5V11.5H17Z" /></svg>' +
-          this[GET_FORM].workDuration.map(item => `${this.$t(item)}`).join(', ')
+          this[GET_FORM].workDuration.map(item => `${this.$t('label.' + item)}`).join(', ')
           : '';
       },
       htmlSalary()
@@ -452,13 +452,6 @@ export default
       "profile": "Profile",
       "offer": "Offer",
       "contacts": "Contact info",
-      "freelance": "Freelance",
-      "contract": "Contract",
-      "internship": "Internship",
-      "apprenticeship": "Apprenticeship",
-      "fulltime": "Full-time",
-      "parttime": "Part-time",
-      "shiftwork": "Shift work",
       "apply_postmail": "Apply by regular post",
       "apply_text": "apply now",
       "tooltip": {
@@ -475,13 +468,6 @@ export default
       "profile": "Profil",
       "offer": "Angebot",
       "contacts": "Kontakt Info",
-      "freelance": "Freie Mitarbeit",
-      "contract": "Festanstellung",
-      "internship": "Praktikum",
-      "apprenticeship": "Ausbildung",
-      "fulltime": "Vollzeit",
-      "parttime": "Teilzeit",
-      "shiftwork": "Schichtarbeit",
       "apply_postmail": "Bewerbung per Post",
       "apply_text": "jetzt bewerben",
       "tooltip": {
