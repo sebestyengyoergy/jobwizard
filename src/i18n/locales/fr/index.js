@@ -53,7 +53,7 @@ export default
     part_time: () => 'Temps partiel',
     mini_job: () => 'Minijob',
     shift_work: () => 'Travail en équipe',
-    work_duration: () => 'Durée',
+    work_duration: () => 'Taux d\'occupation',
     work_kind: () => 'Type d\'emploi',
     visibility: () => 'Visibilité',
     salary: () => 'Salaire annuel',

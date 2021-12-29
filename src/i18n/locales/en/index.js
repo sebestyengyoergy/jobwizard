@@ -55,7 +55,7 @@ export default
     part_time: () => 'Part-time',
     mini_job: () => 'Minijob',
     shift_work: () => 'Shift work',
-    work_duration: () => 'Duration',
+    work_duration: () => 'Workload',
     work_kind: () => 'Kind of work',
     visibility: () => 'Visibility',
     salary: () => 'Annual salary',
