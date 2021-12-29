@@ -201,6 +201,24 @@ export default
         this.user.lastName = cloak.tokenParsed.family_name;
       }
     });
+    cloak.onTokenExpired = () =>
+    {
+      console.log('expired at' + new Date());
+      cloak.updateToken(70).success((refreshed) =>
+      {
+        if (refreshed)
+        {
+          console.log('refreshed at ' + new Date());
+        }
+        else
+        {
+          console.log('not refreshed at ' + new Date());
+        }
+      }).error(() =>
+      {
+        console.error('Failed to refresh token ' + new Date());
+      });
+    };
   },
   mounted()
   {
