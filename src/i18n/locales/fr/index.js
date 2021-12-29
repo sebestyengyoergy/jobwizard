@@ -5,6 +5,7 @@ export default
   jobboard: () => '  Bourse d\'emploi',
   job_title: () => 'Titre de l\'annonce',
   public_jobs: () => 'annonces d\'emploi actuelles',
+  create_job: () => 'Saisir une nouvelle annonce',
   ad_management: () => 'Gestion d\'annonces',
   settings: () => 'Réglages',
   statistics: () => 'Statistiques',

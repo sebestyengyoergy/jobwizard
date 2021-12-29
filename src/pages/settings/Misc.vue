@@ -11,7 +11,8 @@
       @click="$q.dark.toggle()"
     />
     <h5>{{ $t('settings.locale.header') }}</h5>
-    {{ $t('settings.locale.help') }}<br>
+    {{ $t('settings.locale.help') }}
+    <q-space /><br>
     <SwitchLanguage :disabled="browserLanguage" />
     <br>
     <q-checkbox
@@ -22,7 +23,7 @@
     />
     <h5>{{ $t("settings.form.header") }}</h5>
     <div>{{ $t("settings.form.help") }}</div>
-
+    <q-space /><br>
     <q-checkbox
       v-model="spellcheck"
       :label="$t('settings.form.spellcheck')"

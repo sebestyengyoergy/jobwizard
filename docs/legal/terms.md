@@ -14,7 +14,7 @@ Der Vertrag kommt durch das Schalten einer Stellenanzeige per Jobwizard zu stand
 2. CROSS Solution ist berechtigt Stellenanzeigen, deren Inhalte gegen gesetzliche oder behördliche Verbote oder gegen die guten Sitten verstoßen, sofort und ohne Ankündigung zu löschen. Der Auftraggeber wird von einer solchen Maßnahme unterrichtet. Etwaige Erstattungsansprüche entstehen für den Auftraggebers hierdurch nicht.
 
 ## § 4 Inhalte der Anzeige, Rechte Dritter 
-1.  Für den Inhalt, insbesondere dessen Richtigkeit und rechtliche Zulässigkeit, der zur Schaltung der Anzeigen zur Verfügung gestellten Text- und Bildunterlagen trägt allein der Auftraggeber die Verantwortung. CROSS Solution ist nicht verpflichtet, die Anzeige auf die Beeinträchtigung der Rechte Dritter hin zu überprüfen. Der Auftraggeber ist verpflichtet, den CROSS Solution von Ansprüchen Dritter freizustellen, die in irgendeiner Weise aus der Ausführung des Anzeigenauftrages gegen ihn erwachsen könnten.
+1. Für den Inhalt, insbesondere dessen Richtigkeit und rechtliche Zulässigkeit, der zur Schaltung der Anzeigen zur Verfügung gestellten Text- und Bildunterlagen trägt allein der Auftraggeber die Verantwortung. CROSS Solution ist nicht verpflichtet, die Anzeige auf die Beeinträchtigung der Rechte Dritter hin zu überprüfen. Der Auftraggeber ist verpflichtet, den CROSS Solution von Ansprüchen Dritter freizustellen, die in irgendeiner Weise aus der Ausführung des Anzeigenauftrages gegen ihn erwachsen könnten.
 
 2. Sofern im Rahmen der Veröffentlichung der Anzeige geschützte Markenrechte benutzt werden, wird hiermit die Genehmigung zu deren Nutzung erteilt. Der Auftraggeber sichert zu, dass er zur Erteilung der Genehmigung berechtigt ist.
 

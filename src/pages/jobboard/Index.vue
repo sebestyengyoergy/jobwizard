@@ -38,6 +38,9 @@
           </q-td>
         </q-tr>
       </template>
+      <template #top-right>
+        <q-btn color="primary" :disable="loading" :label="$t('create_job')" :to="'/' + $yawik.lang()" />
+      </template>
     </q-table>
   </q-page>
 </template>

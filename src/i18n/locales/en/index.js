@@ -4,6 +4,7 @@ export default
   jobs: () => 'Jobs',
   jobboard: () => 'Jobboard',
   job_title: () => 'Job title',
+  create_job: () => 'Create new Jobad',
   ad_management: () => 'Ad management',
   public_jobs: () => 'Current job offers',
   settings: () => 'Settings',
@@ -59,7 +60,7 @@ export default
     work_kind: () => 'Kind of work',
     visibility: () => 'Visibility',
     salary: () => 'Annual salary',
-    homeoffice: () => 'Home Office',
+    homeoffice: () => 'Home office',
   },
   msg: {
     job_saved_success: () => 'job posting successfully saved',

@@ -2,6 +2,7 @@ export default
 {
   localeName: () => 'Deutsch',
   jobs: () => 'Stellenanzeigen',
+  create_job: () => 'Neue Stellenanzeige eingeben',
   jobboard: () => 'Stellenbörse',
   public_jobs: () => 'aktuelle Stellenanzeigen',
   ad_management: () => 'Anzeigenverwaltung',
