@@ -46,7 +46,6 @@
         <q-slider
           v-if="remoteWork"
           v-model="remoteWorkPercentage"
-          style="margin-top: -20px;"
           name="remoteWorkPercentage"
           class="col-lg-2 col-md-2"
           :label-value="remoteWorkPercentage + '%'"
