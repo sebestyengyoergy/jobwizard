@@ -6,6 +6,7 @@ import {
   GET_STEP,
   GET_LANG,
   GET_LOGO,
+  GET_META,
   GET_HEADER,
   GET_TOKEN,
   HAS_AUTH,
@@ -15,6 +16,7 @@ import {
   SET_FIELD,
   SET_LANG,
   SET_LOGO,
+  SET_META,
   SET_HEADER,
   SET_TOKEN,
   SET_LOCATION
@@ -32,6 +34,11 @@ const emptyForm = {
     addressRegion: '',
     postalCode: '',
     addressCountry: '',
+  },
+  meta: {
+    publishImmediately: true,
+    publishStart: '',
+    publishDays: 30
   },
   remoteWork: false,
   remoteWorkPercentage: 50,
@@ -108,6 +115,10 @@ export default
       {
         return state.lang;
       },
+      [GET_META](state)
+      {
+        return state.form.meta;
+      },
       [GET_LOGO](state)
       {
         return state.logo;
@@ -145,6 +156,10 @@ export default
       [SET_LANG](state, value)
       {
         state.lang = value;
+      },
+      [SET_META](state, obj)
+      {
+        state.form.meta[Object.keys(obj)[0]] = Object.values(obj)[0];
       },
       [SET_LOCATION](state, obj)
       {
