@@ -19,7 +19,7 @@
       <template #body="props">
         <q-tr :props="props">
           <q-td key="action" :props="props">
-            <span style="cursor: pointer; color: blue;" @click="editJob(props.row)">Edit Job</span>
+            <span style="cursor: pointer; color: blue;" @click="editJob(props.row)">{{ $t('edit_job') }}</span>
           </q-td>
           <q-td key="date" :props="props">
             {{ props.row.attributes.publishedAt }}
@@ -165,14 +165,15 @@ export default {
             rowsPerPage: pagination.pageSize
           };
         },
-        editJob(job){
+        editJob(job)
+        {
           this.$router.push({
-            name:'job',
-            params:{
+            name: 'job',
+            params: {
               id: job.id,
               job: JSON.stringify(job)
             }
-          })
+          });
         }
       }
 };
@@ -200,6 +201,7 @@ export default {
 <i18n>
   {
   "en": {
+  "edit_job":"Edit Job",
     "action": "Action",
     "location": "Location",
     "company": "Company",
@@ -207,6 +209,7 @@ export default {
     "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge."
   },
   "de": {
+  "edit_job":"Edit Job",
     "action": "Action",
     "location": "Ort",
     "company": "Firma",

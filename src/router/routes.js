@@ -22,10 +22,10 @@ const routes = [
         component: () => import('pages/jobs/Index.vue'),
       },
       {
-        path: "edit/job/:id",
-        name: "job",
+        path: 'edit/job/:id',
+        name: 'job',
         props: true,
-        component: () =>  import('pages/Wizard.vue'),
+        component: () => import('pages/Wizard.vue'),
 
       },
       {

@@ -5,5 +5,5 @@
 /src-cordova
 /.quasar
 /node_modules
-/src
+
 .eslintrc.js
