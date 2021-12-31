@@ -77,13 +77,14 @@
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('label.salary') }}</div>
-        <q-select v-model="salary" :options="options" name="salary" outlined />
+        <q-select v-model="salary" :options="options" name="salary" dense outlined />
       </div>
       <div class="col-6 column">
         <div class="q-pb-sm">{{ $t('label.visibility') }}</div>
         <q-checkbox v-model="salaryVisibility" :label="$t('help.visibility')" name="salaryVisibility" />
       </div>
     </div>
+    <PublicationTime />
   </div>
 </template>
 
@@ -91,15 +92,17 @@
 import mixinValidations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
 import { GET_FORM, SET_FIELD } from 'src/store/names';
+import PublicationTime from 'src/components/form/PublicationTime.vue';
 
 export default {
   name: 'StepThree',
+  components: {
+    PublicationTime
+  },
   mixins: [mixinValidations],
   data()
   {
     return {
-      //  partTimePercentage: 50,
-      //  shiftWorkAmount: 2,
       options: [
         {
           label: '<20.000€',

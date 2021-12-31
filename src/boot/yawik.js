@@ -6,6 +6,10 @@ const yawik = {
     const $q = useQuasar();
     return $q.lang.isoName === 'en-GB' ? 'en' : $q.lang.isoName;
   },
+  dateFormat()
+  {
+    return this.lang() === 'de' ? 'DD.MM.YYYY' : 'MM-DD-YYYY';
+  },
   isAuth()
   {
     return store.getters.HAS_AUTH;
