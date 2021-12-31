@@ -100,7 +100,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_FORM, GET_SETTINGS, SET_FIELD } from 'src/store/names';
+import {GET_FORM, GET_SETTINGS, SET_FIELD} from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
 import TextInput from 'src/components/form/TextInput.vue';
 import Tooltip from 'src/components/form/Tooltip.vue';

@@ -9,10 +9,10 @@
             <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
               {{ $t('btn.preview') }}
             </q-btn>
-            <SwitchLanguage v-if="!toolbar" class="q-mx-auto" />
+            <SwitchLanguage v-if="!toolbar" class="q-mx-auto"/>
             <q-btn name="abort" color="negative" @click="abortForm">
               {{ $t($q.platform.is.mobile ? 'btn.cancel' :
-                'btn.abort') }}
+              'btn.abort') }}
             </q-btn>
           </q-btn-group>
         </div>
@@ -35,7 +35,7 @@
                 done-color="positive" active-color="primary" error-color="negative"
                 :done="isCompleted(stepName)" :error="validationErrors[stepName] && isCompleted(stepName)"
         >
-          <component :is="stepName" style="min-height: 500px;" @next="navigate('next')" />
+          <component :is="stepName" style="min-height: 500px;" @next="navigate('next')"/>
         </q-step>
         <template #navigation>
           <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
@@ -58,7 +58,7 @@
                 <q-list>
                   <q-item v-close-popup clickable :disable="!acceptTerms" @click.stop="onSave">
                     <q-item-section side>
-                      <q-icon name="mdi-content-save" color="secondary" />
+                      <q-icon name="mdi-content-save" color="secondary"/>
                     </q-item-section>
                     <q-item-section>
                       <q-item-label>{{ $t('btn.save') }}</q-item-label>
@@ -66,7 +66,7 @@
                   </q-item>
                   <q-item v-close-popup clickable @click.stop="trySubmit">
                     <q-item-section side>
-                      <q-icon name="mdi-download" color="secondary" />
+                      <q-icon name="mdi-download" color="secondary"/>
                     </q-item-section>
                     <q-item-section>
                       <q-item-label>{{ $t('btn.download') }}</q-item-label>
@@ -82,26 +82,26 @@
         </template>
       </q-stepper>
     </q-form>
-    <DialogPreview ref="preview" v-model="dlgPreview" />
+    <DialogPreview ref="preview" v-model="dlgPreview"/>
   </q-page>
 </template>
 
 <script>
-import SwitchLanguage from 'src/components/SwitchLanguage';
-import DialogPreview from './DialogPreview';
-import StepOne from './steps/StepOne';
-import StepTwo from './steps/StepTwo';
-import StepThree from './steps/StepThree';
-import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS } from '../store/names';
-import { mapGetters, mapMutations } from 'vuex';
-import saveAs from 'src/lib/FileSaver';
+  import SwitchLanguage from 'src/components/SwitchLanguage';
+  import DialogPreview from './DialogPreview';
+  import StepOne from './steps/StepOne';
+  import StepTwo from './steps/StepTwo';
+  import StepThree from './steps/StepThree';
+  import StepFour from './steps/StepFour';
+  import {GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS, SET_FIELD} from '../store/names';
+  import {mapGetters, mapMutations} from 'vuex';
+  import saveAs from 'src/lib/FileSaver';
 
-const maxContentWidth = 800; // pixels
+  const maxContentWidth = 800; // pixels
 
-export default {
-  name: 'Wizard',
-  components:
+  export default {
+    name: 'Wizard',
+    components:
       {
         SwitchLanguage,
         DialogPreview,
@@ -110,63 +110,67 @@ export default {
         StepThree,
         StepFour,
       },
-  props:
+    props:
       {
         toolbar:
           {
             type: Boolean,
             default: false
           },
+        id:
+          {
+            type: Number,
+            required: false,
+            default: null
+          },
+        job:
+          {
+            type: Object,
+            require: false,
+            default: null
+          }
       },
-  data()
-  {
-    return {
-      stepper: null, // used by steps to navigate to next step on ENTER key in any input field
-      maxWidth: 1024, // used to limit the width of QEditor, otherwise it grows too much when you type text
-      dlgPreview: false,
-      lastStep: false,
-      validationErrors:
+    data() {
+      return {
+        stepper: null, // used by steps to navigate to next step on ENTER key in any input field
+        maxWidth: 1024, // used to limit the width of QEditor, otherwise it grows too much when you type text
+        dlgPreview: false,
+        lastStep: false,
+        validationErrors:
           {
             stepOne: false,
             stepTwo: false,
             stepThree: false,
             stepFour: false,
           }
-    };
-  },
-  computed:
+      };
+    },
+    computed:
       {
         ...mapGetters([GET_STEP, GET_FORM, GET_SETTINGS]),
         currentStep:
           {
-            get()
-            {
+            get() {
               return this[GET_STEP];
             },
-            set(value)
-            {
+            set(value) {
               this[SET_STEP](value);
             }
           },
-        steps()
-        {
+        steps() {
           return Object.keys(this.validationErrors);
         },
-        acceptTerms()
-        {
+        acceptTerms() {
           return this.$store.getters.GET_FORM.acceptTerms;
         },
-        spellcheck()
-        {
+        spellcheck() {
           return this.$store.getters.GET_SETTINGS.formSpellcheckEnabled;
         }
       },
-  watch:
+    watch:
       {
-        currentStep(newVal, oldVal)
-        {
-          this.$nextTick(() =>
-          {
+        currentStep(newVal, oldVal) {
+          this.$nextTick(() => {
             // Quasar is too fast - as soon as it detects MouseDown event on the CONTINUE button, it goes to the next step
             // And on the last step the button becomes a SUBMIT type too fast, even before MouseUp - which then leads to speculative form submit
             this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
@@ -174,59 +178,83 @@ export default {
           });
         },
       },
-  created()
-  {
-    // we have to update maxWidth on window resize
-    window.addEventListener('resize', this.onResize, false);
-    this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
-  },
-  mounted()
-  {
-    this.stepper = this.$refs.stepper; // used by steps to navigate to next step by ENTER key inside any input field
-    this.onResize();
-    this.steps.slice(0, this.steps.indexOf(this.currentStep)).forEach(step =>
-    {
-      this.validateStep(step);
-    });
-  },
-  beforeUnmount()
-  {
-    window.removeEventListener('resize', this.onResize, false);
-  },
-  methods:
+    created() {
+      // we have to update maxWidth on window resize
+      window.addEventListener('resize', this.onResize, false);
+      this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
+      this.setForm()
+    },
+    mounted() {
+      this.stepper = this.$refs.stepper; // used by steps to navigate to next step by ENTER key inside any input field
+      this.onResize();
+      this.steps.slice(0, this.steps.indexOf(this.currentStep)).forEach(step => {
+        this.validateStep(step);
+      });
+    },
+    beforeUnmount() {
+      window.removeEventListener('resize', this.onResize, false);
+    },
+    methods:
       {
-        ...mapMutations([SET_STEP, CLEAR_FORM]),
-        onResize()
-        {
+        ...mapMutations([SET_STEP, CLEAR_FORM, SET_FIELD]),
+        setForm() {
+          if (this.id != null) {
+            console.log("Job ID " + this.id);
+            if (this.job != null) {
+              let attributes = JSON.parse(this.job).attributes;
+              attributes.step = 'stepOne';
+              var yawik = JSON.parse(localStorage.getItem('yawik')).yawik;
+              yawik.form = attributes;
+              localStorage.setItem('yawik', JSON.stringify({yawik: yawik}));
+              /* for (var key in attributes) {
+                 console.log("Key " + key + " value " + attributes[key])
+                 //  this[SET_FIELD]({key: attributes[key]})
+               }*/
+            }
+          }
+        },
+        /*   getJob() {
+             this.$axios({
+               method: 'GET',
+               url: process.env.YAWIK_API_URL + '/api/jobs/' + this.id,
+               headers: {
+                 accept: 'application/json',
+                 Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token
+               }
+             }).then(response => {
+               console.log("JOb " + JSON.stringify(response))
+             })
+           },*/
+        onResize() {
           // limit the width of QEditor - otherwise it grows too much on typing
           this.maxWidth = Math.min(maxContentWidth, document.body.clientWidth);
         },
-        navigate(direction)
-        {
-          this.$nextTick(() =>
-          {
+        navigate(direction) {
+          this.$nextTick(() => {
             this.$refs.stepper[direction]();
           });
         },
-        onSave()
-        {
-          const formData = new FormData();
-          const form = { ...this.$store.getters.GET_FORM };
-          const formObj = JSON.parse(JSON.stringify(form));
+        onSave() {
+          var methodType = 'POST';
+          var url = process.env.YAWIK_API_URL + '/api/jobs';
+          if (this.id != null) {
+            methodType = 'PUT';
+            url = process.env.YAWIK_API_URL + '/api/jobs/' + this.id;
+          }
 
+          const formData = new FormData();
+          const form = {...this.$store.getters.GET_FORM};
+          const formObj = JSON.parse(JSON.stringify(form));
           const html = new Blob([this.$refs.preview.htmlCode], {
             type: 'text/html',
             name: 'job_ad.html'
           });
-
           formObj.html = html;
           formData.append('html', html, 'job_ad.html');
-
           formData.append('data', JSON.stringify(formObj));
-
           this.$axios({
-            method: 'POST',
-            url: process.env.YAWIK_API_URL + '/api/jobs',
+            method: methodType,
+            url: url,
             headers: {
               accept: 'application/json',
               Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token,
@@ -234,19 +262,15 @@ export default {
             },
             data: formData
           })
-            .then(data =>
-            {
-              if (data.data.error)
-              {
+            .then(data => {
+              if (data.data.error) {
                 this.$q.notify({
                   color: 'negative',
                   position: 'top',
                   icon: 'mdi-alert',
                   message: data.data.error.message || this.$t('job_saved_error'),
                 });
-              }
-              else
-              {
+              } else {
                 this.$q.notify({
                   color: 'positive',
                   position: 'top',
@@ -255,38 +279,29 @@ export default {
                 });
                 this[CLEAR_FORM]();
               }
-            }).catch(error =>
-            {
-              console.log('Error', error);
-            });
+            }).catch(error => {
+            console.log('Error', error);
+          });
         },
-        trySubmit()
-        {
+        trySubmit() {
           this.$refs.frm.submit();
         },
-        hasErrors(ref)
-        {
+        hasErrors(ref) {
           // ensure the first invalid field is focused when it is on a different panel/q-step
           let node = ref;
-          do
-          {
+          do {
             node = node.$parent;
-            if (node.$options.name === 'QStep')
-            {
-              if (node.name !== node.$parent.value)
-              {
+            if (node.$options.name === 'QStep') {
+              if (node.name !== node.$parent.value) {
                 const newName = node.name;
-                do
-                {
+                do {
                   node = node.$parent;
-                  if (node.$options.name === 'QStepper')
-                  {
+                  if (node.$options.name === 'QStepper') {
                     node.$emit('update:modelValue', newName);
                     break;
                   }
                 } while (node !== this.$root);
-                this.$nextTick(() =>
-                {
+                this.$nextTick(() => {
                   ref.focus();
                 });
               }
@@ -294,34 +309,29 @@ export default {
             }
           } while (node !== this.$root);
         },
-        findStep(component)
-        {
+        findStep(component) {
           let node = component;
-          do
-          {
+          do {
             node = node.$parent;
             if (node.$options.name === 'QStep') return node.name;
           } while (node !== this.$root);
         },
-        isCompleted(step)
-        {
+        isCompleted(step) {
           return (this.steps.indexOf(this.currentStep) > this.steps.indexOf(step));
         },
-        validateStep(step)
-        {
+        validateStep(step) {
           const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
           this.validationErrors[step] = components.some(item => !item.validate()); // stop on the first validation error
           // this.validationErrors[step] = components.filter(item => !item.validate()).length > 0; // validate all fields
         },
-        submitForm()
-        {
+        submitForm() {
           const html = this.$refs.preview.htmlCode;
-          saveAs(new Blob([html], { type: 'text/html' }), 'job_ad.html', { autoBOM: true });
+          saveAs(new Blob([html], {type: 'text/html'}), 'job_ad.html', {autoBOM: true});
         },
-        abortForm()
-        {
+        abortForm() {
           this[CLEAR_FORM]();
-        },
+        }
       }
-};
+  }
+  ;
 </script>
