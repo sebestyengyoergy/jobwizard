@@ -17,6 +17,7 @@ currently under development. But the following is already working
 * Login, register and everything related to authentication (Thanks to [Keycloak](https://www.keycloak.org/))
 * Entering a job ad (Thanks to [Quasar](https://quasar.dev))
 * Download of a job ad with Google for Jobs Markup.
+* Create a job [which can be used by Google Jobs](https://yawik.org/2021/12/unabhaengiges-eingabeformular-fuer-google-jobs/)
 * Choose Channels. Post you Job on Google for Jobs.
 * Integration of Google Places API
 * configure colors and layout
@@ -26,7 +27,7 @@ currently under development. But the following is already working
 
 There is [Google Jobs](https://de.wikipedia.org/wiki/Google_for_Jobs). A great service that makes job ads findable via Google. But there is no entry tool for ads. We want to close this gap.
 
-* save Jobs (give jobs an URI)
+* create organisations. 
 * integrate https://form.yawik.org
 * create templates for job postings
 * Invite Coworkers
