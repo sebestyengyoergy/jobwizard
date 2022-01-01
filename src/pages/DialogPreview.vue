@@ -205,10 +205,6 @@ export default
       text-align: center;
       max-height: 220px;
     }
-    .bold
-    {
-      font-weight: bold;
-    }
     section
     {
       padding-bottom: 16px;
@@ -338,6 +334,7 @@ export default
       </article>
     </div>
   </div>
+  <div align="center">powered by <a href="https://jobwizard.yawik.org">jobwizard</a></div>
 </body>
 </html>`;
       },
