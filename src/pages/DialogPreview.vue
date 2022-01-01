@@ -344,7 +344,7 @@ export default
       jsonLD()
       {
         const today = new Date();
-        const expires = new Date(today.getFullYear(), today.getMonth() + 1, today.getDate());
+        const expires = this.addDays(today, this[GET_FORM].meta.publishDays);
         const result = {
           '@context': 'https://schema.org/',
           '@type': 'JobPosting',
@@ -411,7 +411,13 @@ export default
       },
       dateText(value)
       {
-        return value.getFullYear() + '-' + String(value.getMonth() + 1).padStart(2, '0') + '-' + String(value.getDate()).padStart(2, '0');
+        return value.toISOString().slice(0, 10);
+      },
+      addDays(date, days)
+      {
+        const result = new Date(date);
+        result.setDate(result.getDate() + days);
+        return result;
       }
     }
 };
