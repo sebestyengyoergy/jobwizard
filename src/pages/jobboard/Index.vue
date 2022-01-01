@@ -18,7 +18,7 @@
       <template #body="props">
         <q-tr :props="props">
           <q-td key="date" :props="props">
-            {{ props.row.attributes.publishedAt }}
+            {{ new Date(props.row.attributes.publishedAt).toLocaleString($yawik.lang()) }}
           </q-td>
           <q-td key="title" :props="props">
             <a v-if="props.row.attributes.html.data" target="_new" :href="jobDetailUrl + props.row.attributes.html.data?.attributes?.url">
