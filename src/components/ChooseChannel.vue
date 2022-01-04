@@ -45,8 +45,8 @@ export default
       "anonymous": "You are not logged in. As an anonymous user, you can only download your job ad. To save the ad and publish it on different channels, you need to register. Registration is free of charge.",
     },
     "de": {
-      "channel": "Wo möchten Sie ihre Stellenanzeige veröffentlichen?",
-      "anonymous": "Sie sind nicht angemeldet. Als anonymer Benutzer können Sie ihre Stellenanzeige nur downloaden. Um die anzeige zu speichern und auf unterschiedlichen Kanälen zu veröffentlichen, müssen Sie sich anmelden. Die Registrierung ist kostenlos.",
+      "channel": "Wo möchten sie ihre Stellenanzeige veröffentlichen?",
+      "anonymous": "Sie sind nicht angemeldet. Als anonymer Benutzer können sie ihre Stellenanzeige nur downloaden. Um die Anzeige zu speichern und auf unterschiedlichen Kanälen zu veröffentlichen, müssen sie sich anmelden. Die Registrierung ist kostenlos.",
     },
     "fr": {
       "channel": "Où souhaitez-vous publier votre offre d'emploi ?",

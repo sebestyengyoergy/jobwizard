@@ -9,6 +9,7 @@ export default
   public_jobs: () => 'Current job offers',
   settings: () => 'Settings',
   statistics: () => 'Statistcs',
+  templates: () => 'Templates',
   btn:
   {
     login: () => 'Login',

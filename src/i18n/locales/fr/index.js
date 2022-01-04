@@ -9,6 +9,7 @@ export default
   ad_management: () => 'Gestion d\'annonces',
   settings: () => 'Réglages',
   statistics: () => 'Statistiques',
+  templates: () => 'Modèles',
   btn: {
     login: () => 'Connexion',
     logout: () => 'Déconnexion',

@@ -43,6 +43,11 @@ const routes = [
         name: 'statistics',
         component: () => import('pages/Statistics.vue'),
       },
+      {
+        path: 'templates',
+        name: 'templates',
+        component: () => import('pages/Templates.vue'),
+      },
     ],
   },
 

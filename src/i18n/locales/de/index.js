@@ -9,6 +9,7 @@ export default
   job_title: () => 'Anzeigentitel',
   settings: () => 'Einstellungen',
   statistics: () => 'Statistiken',
+  templates: () => 'Vorlagen',
   btn: {
     login: () => 'Anmelden',
     logout: () => 'Abmelden',

@@ -79,6 +79,12 @@ export default
             separator: true
           },
           {
+            icon: 'mdi-content-copy',
+            label: this.$t('templates'),
+            to: '/' + this.$yawik.lang() + '/templates',
+            separator: true
+          },
+          {
             icon: 'mdi-poll',
             label: this.$t('statistics'),
             to: '/' + this.$yawik.lang() + '/statistics',
