@@ -18,19 +18,19 @@
     >
       <template #body="props">
         <q-tr :props="props">
+          <q-td key="date" :props="props">
+            {{ new Date(props.row.attributes.publishedAt).toLocaleString($yawik.lang()) }}
+          </q-td>
           <q-td key="action" :props="props">
             <span style="cursor: pointer; color: blue;" @click="editJob(props.row)">{{ $t('edit_job') }}</span>
           </q-td>
-          <q-td key="date" :props="props">
-            {{ props.row.attributes.publishedAt }}
-          </q-td>
           <q-td key="title" :props="props">
-            <a v-if="props.row.attributes.html.data" target="_new" :href="jobDetailUrl + props.row.attributes.html.data?.attributes?.url">
+            <a v-if="props.row.attributes.html.url" target="_new" :href="jobDetailUrl + props.row.attributes.html.url">
               <span class="cursor-pointer jobtitle">
                 {{ props.row.attributes.jobTitle }}
               </span>
             </a>
-            <span v-if="!props.row.attributes.html.data" class="jobtitle">
+            <span v-if="!props.row.attributes.html.url" class="jobtitle">
               {{ props.row.attributes.jobTitle }}
             </span>
           </q-td>
@@ -144,10 +144,15 @@ export default {
               'pagination[pageSize]': pagination.pagination.rowsPerPage,
               populate: 'html',
               sort: 'publishedAt:desc'
+            },
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token
             }
           }
           ).then(response =>
           {
+            console.log(response);
             this.rows = response.data.data;
             this.setPagination(response.data.meta.pagination);
           }).finally(() =>
@@ -167,6 +172,18 @@ export default {
         },
         editJob(job)
         {
+          this.$axios({
+            method: 'GET',
+            url: process.env.YAWIK_API_URL + '/api/jobs/' + job.id,
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token
+            }
+          }).then(response =>
+          {
+            console.log('Job ' + JSON.stringify(response));
+          });
+          /*
           this.$router.push({
             name: 'job',
             params: {
@@ -174,6 +191,7 @@ export default {
               job: JSON.stringify(job)
             }
           });
+          */
         }
       }
 };

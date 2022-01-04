@@ -21,12 +21,12 @@
             {{ new Date(props.row.attributes.publishedAt).toLocaleString($yawik.lang()) }}
           </q-td>
           <q-td key="title" :props="props">
-            <a v-if="props.row.attributes.html.data" target="_new" :href="jobDetailUrl + props.row.attributes.html.data?.attributes?.url">
+            <a v-if="props.row.attributes.html.url" target="_new" :href="jobDetailUrl + props.row.attributes.html.url">
               <span class="cursor-pointer jobtitle">
                 {{ props.row.attributes.jobTitle }}
               </span>
             </a>
-            <span v-if="!props.row.attributes.html.data" class="jobtitle">
+            <span v-if="!props.row.attributes.html.url" class="jobtitle">
               {{ props.row.attributes.jobTitle }}
             </span>
           </q-td>
