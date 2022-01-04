@@ -23,22 +23,21 @@
       color="primary"
       name="statistics"
     />
+
+    <h5>{{ $t("settings.jobs_powered.header") }}</h5>
+    <div>{{ $t("settings.jobs_powered.help") }}</div>
+    <q-checkbox
+      v-model="powered"
+      disable
+      :label="$t('settings.jobs_powered.label')"
+      color="primary"
+      name="statistics"
+    />
     <!-- Country and location -->
     <h5>{{ $t("settings.jobs_country.header") }}</h5>
     <div>{{ $t("settings.jobs_country.help") }}</div>
     <div class="row q-mt-lg">
       <div class="col-4 q-mt-sm">
-        <!--
-<q-select
-          filled
-          v-model="country"
-          multiple
-          :options="filteredCountries"
-          use-chips
-          stack-label
-          label="Multiple selection"
-        />
--->
         <q-select
           v-model="countries"
           :label="$t('settings.jobs_country.header')"
@@ -55,30 +54,7 @@
           input-debounce="200"
           class="col-lg-1 col-md-2 col-sm-3 col-xs-4"
           @filter="countryAutocomplete"
-        >
-          <!--
- <template #option="scope">
-            <q-item v-bind="scope.itemProps">
-              <q-item-section avatar>
-                <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'"
-                     style="max-width: 48px; border: 1px solid #E5E5E5;"
-                >
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>{{ scope.opt.label }}</q-item-label>
-              </q-item-section>
-            </q-item>
-          </template>
-          &lt;!&ndash; Current flag &ndash;&gt;
-          <template #prepend>
-            <q-avatar v-if="countries">
-              <img :src="'country/'+(countries.value || '').toLowerCase()+'.png'"
-                   style="max-width: 48px; border: 1px solid #E5E5E5;"
-              >
-            </q-avatar>
-          </template>
--->
-        </q-select>
+        />
       </div>
     </div>
   </div>
@@ -97,7 +73,7 @@ export default {
   {
     return {
       filteredCountries: [],
-      //country:null
+      powered: false
     };
   },
   computed: {
@@ -187,6 +163,13 @@ export default {
         "help": "with the activate, a code is built into the job advertisement that collects access figures.",
         "placeholder": "Enter Location"
       },
+      "jobs_powered": {
+        "header": "Powered By Jobwizard",
+        "label": "Remove reference to Jobwizard in job advertisement",
+        "help": "The job ads contain a Powered by Jobwizard link at the end. Sponsors have the option to hide this link. Become a sponsor!",
+        "placeholder": "Enter Location"
+      },
+
       "jobs_country": {
         "header": "Countries",
         "help": "In which countries do you want to publish job advertisements? A selection restricts the automatic completion in the Google Place Search to the countries",
@@ -206,12 +189,44 @@ export default {
         "header": "Statistiken",
         "label": "Klicks und Pageviews datenschutzkonform auswerten.",
         "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt.",
+       "placeholder": "Enter Location"
+      },
+      "jobs_powered": {
+        "header": "Powered By Jobwizard",
+        "label": "Hinweis auf Jobwizard in Stellenanzeige entfernen",
+        "help": "Die Stellenanzeigen anthalten am Ende einen Powered by Jobwizard Link. Sponsoren haben die Möglichkeit diesen Link auszublenden. Werden Sie ein Sponsor!",
         "placeholder": "Enter Location"
       },
       "jobs_country": {
         "header": "Länder",
         "help": "In welchen Ländern möchten Sie Stellenanzeigen veröffentlichen? Eine Auswahl schränkt die automatische Vervollständigung bei der Google Ort Suche auf die Länder ein.",
         "placeholder": "Länder auswählen"
+      }
+    }
+  },
+  "fr": {
+    "settings": {
+      "jobs_title": "Offres d'emploi",
+      "jobs_location": {
+        "header": "Lieu de travail",
+        "help": "S'ils recrutent toujours à certains endroits, ils peuvent définir ici une liste de lieux."
+      },
+      "jobs_stats": {
+        "header": "Statistiques",
+        "label": "Evaluer les clics et les pages vues conformément à la protection des données.",
+        "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt.",
+        "placeholder": "Enter Location"
+      },
+      "jobs_powered": {
+        "header": "Powered By Jobwizard",
+        "label": "Supprimer la référence à Jobwizard dans l'offre d'emploi",
+        "help": "Les offres d'emploi contiennent un lien Powered by Jobwizard à la fin. Les sponsors ont la possibilité de masquer ce lien. Devenez un sponsor !",
+        "placeholder": "Enter Location"
+      },
+      "jobs_country": {
+        "header": "Pays",
+        "help": "Dans quels pays souhaitez-vous publier des offres d'emploi ? Une sélection limite la complétion automatique lors de la recherche Google Lieu aux pays.",
+        "placeholder": "Sélectionner les pays"
       }
     }
   }
