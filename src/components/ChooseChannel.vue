@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h5>{{ $t('channel') }}</h5>
-    <div class="row justify-center q-gutter-lg">
+    <h5 v-if="!$yawik.isAuth()">{{ $t('anonymous') }}</h5>
+    <h5 v-if="$yawik.isAuth()">{{ $t('channel') }}</h5>
+
+    <div class="row justify-center q-gutter-lg" :style="'opacity: ' + ($yawik.isAuth() ? '1;' : '0.2;')">
       <Channel v-for="c in data" :key="c.id" v-bind="c" />
     </div>
   </div>
@@ -40,11 +42,16 @@ export default
   {
     "en": {
       "channel": "Where would you like to publish your job advertisement?",
-      "privacy_policy": "Note on data protection: After sending the entered data, it will be processed on our server and forwarded in an email to the person responsible for processing. We assure you of the highest level of confidentiality and compliance with all legal requirements. For more information on data processing, please refer to our <a href='{url}' target='_blank' rel='noopener noreferrer'>Privacy policy</a>."
+      "anonymous": "You are not logged in. As an anonymous user, you can only download your job ad. To save the ad and publish it on different channels, you need to register. Registration is free of charge.",
     },
     "de": {
       "channel": "Wo möchten Sie ihre Stellenanzeige veröffentlichen?",
-      "privacy_policy": "Hinweis zum Datenschutz: Nach dem Absenden der eingegebenen Daten werden diese auf unserem Server verarbeitet und in einer Mail an die für die Bearbeitung zuständige Person weitergeleitet. Wir sichern Ihnen dabei ein Höchstmaß an Vertraulichkeit zu und versichern die Einhaltung aller gesetzlichen Vorschriften. Weitere Informationen zur Datenverarbeitung erhalten Sie auf unserer <a href='{url}' target='_blank' rel='noopener noreferrer'>Datenschutzbestimmungen</a>.",
+      "anonymous": "Sie sind nicht angemeldet. Als anonymer Benutzer können Sie ihre Stellenanzeige nur downloaden. Um die anzeige zu speichern und auf unterschiedlichen Kanälen zu veröffentlichen, müssen Sie sich anmelden. Die Registrierung ist kostenlos.",
+    },
+    "fr": {
+      "channel": "Où souhaitez-vous publier votre offre d'emploi ?",
+      "anonymous": "Vous n'êtes pas connecté. En tant qu'utilisateur anonyme, vous pouvez uniquement télécharger votre annonce d'emploi. Pour enregistrer l'annonce et la publier sur différents canaux, vous devez vous inscrire. L'inscription est gratuite.",
     }
+
   }
 </i18n>
