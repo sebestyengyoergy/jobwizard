@@ -197,6 +197,10 @@ export default
         {
           state.form.remoteWork = false;
         }
+        if (!state.form.acceptTerms)
+        {
+          state.form.acceptTerms = true;
+        }
       },
       [SET_SETTINGS_FIELD](state, obj)
       {

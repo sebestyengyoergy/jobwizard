@@ -22,7 +22,7 @@
             {{ props.row.attributes.publishedAt ? new Date(props.row.attributes.publishedAt).toLocaleString($yawik.lang()) : $t('unpublished') }}
           </q-td>
           <q-td key="title" :props="props">
-            <a v-if="props.row.attributes.html.url" target="_new" :href="jobDetailUrl + props.row.attributes.html.url">
+            <a v-if="props.row.attributes.html" target="_new" :href="jobDetailUrl + props.row.attributes.html.url">
               <span class="cursor-pointer jobtitle">
                 {{ props.row.attributes.jobTitle }}
                 <q-tooltip :delay="500">
@@ -30,7 +30,7 @@
                 </q-tooltip>
               </span>
             </a>
-            <span v-if="!props.row.attributes.html.url" class="jobtitle">
+            <span v-if="!props.row.attributes.html" class="jobtitle">
               {{ props.row.attributes.jobTitle }}
             </span>
           </q-td>

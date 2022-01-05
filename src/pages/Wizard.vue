@@ -37,9 +37,6 @@
         >
           <component :is="stepName" style="min-height: 500px;" @next="navigate('next')" />
         </q-step>
-        <template #message>
-          {{ mode }}
-        </template>
         <template #navigation>
           <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
@@ -219,14 +216,14 @@ export default {
         {
           let methodType = 'POST';
           let url = process.env.YAWIK_API_URL + '/api/jobs';
-          if (this.id != null)
+          const form = { ...this.$store.getters.GET_FORM };
+          if (form.id != null)
           {
             methodType = 'PUT';
-            url = process.env.YAWIK_API_URL + '/api/jobs/' + this.id;
+            url = process.env.YAWIK_API_URL + '/api/jobs/' + form.id;
           }
 
           const formData = new FormData();
-          const form = { ...this.$store.getters.GET_FORM };
           const formObj = JSON.parse(JSON.stringify(form));
           const html = new Blob([this.$refs.preview.htmlCode], {
             type: 'text/html',
