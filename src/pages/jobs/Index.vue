@@ -19,7 +19,7 @@
       <template #body="props">
         <q-tr :props="props">
           <q-td key="date" :props="props">
-            {{ new Date(props.row.attributes.publishedAt).toLocaleString($yawik.lang()) }}
+            {{ props.row.attributes.publishedAt ? new Date(props.row.attributes.publishedAt).toLocaleString($yawik.lang()) : $t('unpublished') }}
           </q-td>
           <q-td key="action" :props="props">
             <span style="cursor: pointer; color: blue;" @click="editJob(props.row)">{{ $t('edit_job') }}</span>
@@ -43,7 +43,31 @@
         </q-tr>
       </template>
     </q-table>
-    <h1 v-if="!$yawik.isAuth()">{{ $t('please_register') }}</h1>
+    <q-card v-if="!$yawik.isAuth()" class="absolute-center channel">
+      <div class="text-h4 q-mb-md full-width">{{ $t('title') }}</div>
+      <p>{{ $t('please_register') }}</p>
+
+      <q-card-section class="q-pt-none">
+        <div class="text-subtitle1">
+          <q-icon name="mdi-content-copy" /> &nbsp; {{ $t("ad_management") }}
+        </div>
+        <div class="text-caption text-grey">
+          {{ $t('ad-management-description') }}
+        </div>
+      </q-card-section>
+
+      <q-separator />
+
+      <div class="text-center text-h4 q-mb-md full-width">{{ $t('preis1') }}</div>
+      <q-card-actions>
+        <q-btn type="a" href="https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/auth?client_id=demo&response_mode=fragment&response_type=code&login=true&redirect_uri=https://jobwizard.yawik.org" no-caps color="primary">
+          {{ $t('login') }}
+        </q-btn>
+        <q-btn type="a" href="https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/registrations?client_id=demo&response_mode=fragment&response_type=code&redirect_uri=https://jobwizard.yawik.org/de" no-caps color="primary">
+          {{ $t('register') }}
+        </q-btn>
+      </q-card-actions>
+    </q-card>
   </q-page>
 </template>
 
@@ -131,7 +155,10 @@ export default {
       },
   mounted()
   {
-    this.getJobs();
+    if (this.$yawik.isAuth())
+    {
+      this.getJobs();
+    }
   },
   methods:
       {
@@ -217,22 +244,48 @@ export default {
 </style>
 
 <i18n>
-  {
+{
   "en": {
-  "edit_job":"Edit Job",
+    "edit_job":"Edit Job",
+    "title": "Please register",
     "action": "Action",
+    "unpublished": "unpublished",
     "location": "Location",
     "company": "Company",
+    "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
     "date": "Date",
-    "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge."
+    "preis1": "Registration is free of charge",
+    "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
+    "register": "Register",
+    "login": "Login",
+
   },
   "de": {
-  "edit_job":"Edit Job",
-    "action": "Action",
+    "edit_job":"Anzeige bearbeiten",
+    "unpublished": "unveröffentlicht",
+    "title": "Bitte melden Sie sich an",
+    "action": "Aktion",
     "location": "Ort",
     "company": "Firma",
+    "ad-management-description": "Mit der Anzeigenverwaltung können die Stellenanzeigen speichern, bearbeiten und löschen. Die Anzeigenverwaltung wird auch benötigt, um Stellenanzeigen in ihre Homepage zu integrieren.",
     "date": "Datum",
-    "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos."
+    "preis1": "Die Anmeldung ist kostenlos",
+    "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
+    "register": "Registrieren",
+    "login": "Einloggen",
+  },
+  "fr": {
+    "edit_job": "Modifier l'annonce",
+    "title": "Veuillez vous identifier.",
+    "unpublished": "non publié",
+    "action": "Action",
+    "company": "Entreprise",
+    "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
+    "date": "Date",
+    "location": "Lieu",
+    "preis1": "L'inscription est gratuite",
+    "register": "S'inscrire",
+    "login": "Se connecter",
   }
-  }
+}
 </i18n>
