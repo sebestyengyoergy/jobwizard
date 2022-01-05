@@ -42,6 +42,9 @@
           </q-td>
         </q-tr>
       </template>
+      <template #top-right>
+        <q-btn no-caps color="primary" :disable="loading" :label="$t('create_job')" :to="'/' + $yawik.lang()" />
+      </template>
     </q-table>
     <q-card v-if="!$yawik.isAuth()" class="absolute-center channel">
       <div class="text-h4 q-mb-md full-width">{{ $t('title') }}</div>
@@ -60,10 +63,10 @@
 
       <div class="text-center text-h4 q-mb-md full-width">{{ $t('preis1') }}</div>
       <q-card-actions>
-        <q-btn type="a" href="https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/auth?client_id=demo&response_mode=fragment&response_type=code&login=true&redirect_uri=https://jobwizard.yawik.org" no-caps color="primary">
-          {{ $t('login') }}
+        <q-btn type="a" :href="'https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/auth?client_id=demo&response_mode=fragment&response_type=code&login=true&redirect_uri=https://jobwizard.yawik.org/' + $yawik.lang() + '/jobs'" no-caps color="primary">
+          {{ $t('btn.login') }}
         </q-btn>
-        <q-btn type="a" href="https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/registrations?client_id=demo&response_mode=fragment&response_type=code&redirect_uri=https://jobwizard.yawik.org/de" no-caps color="primary">
+        <q-btn type="a" :href="'https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/registrations?client_id=demo&response_mode=fragment&response_type=code&redirect_uri=https://jobwizard.yawik.org/' + $yawik.lang() + '/jobs'" no-caps color="primary">
           {{ $t('register') }}
         </q-btn>
       </q-card-actions>
@@ -250,42 +253,30 @@ export default {
     "title": "Please register",
     "action": "Action",
     "unpublished": "unpublished",
-    "location": "Location",
-    "company": "Company",
     "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
-    "date": "Date",
     "preis1": "Registration is free of charge",
     "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
     "register": "Register",
-    "login": "Login",
-
   },
   "de": {
     "edit_job":"Anzeige bearbeiten",
     "unpublished": "unveröffentlicht",
     "title": "Bitte melden Sie sich an",
     "action": "Aktion",
-    "location": "Ort",
-    "company": "Firma",
     "ad-management-description": "Mit der Anzeigenverwaltung können die Stellenanzeigen speichern, bearbeiten und löschen. Die Anzeigenverwaltung wird auch benötigt, um Stellenanzeigen in ihre Homepage zu integrieren.",
     "date": "Datum",
     "preis1": "Die Anmeldung ist kostenlos",
     "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
     "register": "Registrieren",
-    "login": "Einloggen",
   },
   "fr": {
     "edit_job": "Modifier l'annonce",
     "title": "Veuillez vous identifier.",
     "unpublished": "non publié",
     "action": "Action",
-    "company": "Entreprise",
     "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
-    "date": "Date",
-    "location": "Lieu",
     "preis1": "L'inscription est gratuite",
     "register": "S'inscrire",
-    "login": "Se connecter",
   }
 }
 </i18n>

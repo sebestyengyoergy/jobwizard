@@ -54,7 +54,7 @@
             {{ $t('notify.please_login') }}
             <template #action>
               <q-btn flat :label="$t('btn.close')" @click="closeBanner" />
-              <q-btn flat :label="$t('btn.login')" @click="login" />
+              <q-btn flat :label="$t('btn.login')" type="a" :href="'https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/auth?client_id=demo&response_mode=fragment&response_type=code&login=true&redirect_uri=https://jobwizard.yawik.org/' + $yawik.lang() + '/settings'" />
             </template>
           </q-banner>
         </q-page>
@@ -68,7 +68,6 @@ import { ref } from 'vue';
 import Organization from './settings/Organization';
 import Misc from './settings/Misc';
 import Jobs from './settings/Jobs';
-import eventBus, { AJAX_FAILED } from 'src/lib/eventBus';
 import { Cookies, useMeta } from 'quasar';
 
 const settingsBanner = 'settings_banner';
@@ -132,38 +131,6 @@ export default
     this.showBanner = !Cookies.has(settingsBanner);
   },
   methods: {
-    login()
-    {
-      const cloak = new window.Keycloak({
-        url: process.env.YAWIK_SSO_URL,
-        realm: process.env.YAWIK_SSO_REALM,
-        clientId: process.env.YAWIK_SSO_CLIENT,
-      });
-      cloak.init({
-        onLoad: 'login-required',
-      }).then(authenticated =>
-      {
-        if (authenticated)
-        {
-          setInterval(() =>
-          {
-            cloak.updateToken(70).then((refreshed) =>
-            {
-              if (!refreshed)
-              {
-                console.warn('Token not refreshed, valid for ' + Math.round(cloak.tokenParsed.exp + cloak.timeSkew - new Date().getTime() / 1000) + ' seconds');
-              }
-            }).catch(() =>
-            {
-              console.error('Failed to refresh token');
-            });
-          }, 6000);
-        }
-      }).catch(err =>
-      {
-        eventBus.emit(AJAX_FAILED, err);
-      });
-    },
     closeBanner()
     {
       this.$yawik.setCookies(settingsBanner, '1d');

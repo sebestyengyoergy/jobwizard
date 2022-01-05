@@ -10,6 +10,9 @@ export default
   settings: () => 'Einstellungen',
   statistics: () => 'Statistiken',
   templates: () => 'Vorlagen',
+  date: () => 'Datum',
+  location: () => 'Ort',
+  company: () => 'Firma',
   btn: {
     login: () => 'Anmelden',
     logout: () => 'Abmelden',

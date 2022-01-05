@@ -179,18 +179,3 @@ export default {
   }
 
 </style>
-
-<i18n>
-  {
-  "en": {
-    "location": "Location",
-    "company": "Company",
-    "date": "Date"
-  },
-  "de": {
-    "location": "Ort",
-    "company": "Firma",
-    "date": "Datum"
-  }
-  }
-</i18n>
