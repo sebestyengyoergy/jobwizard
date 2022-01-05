@@ -21,13 +21,13 @@
           <q-td key="date" :props="props">
             {{ props.row.attributes.publishedAt ? new Date(props.row.attributes.publishedAt).toLocaleString($yawik.lang()) : $t('unpublished') }}
           </q-td>
-          <q-td key="action" :props="props">
-            <span style="cursor: pointer; color: blue;" @click="editJob(props.row)">{{ $t('edit_job') }}</span>
-          </q-td>
           <q-td key="title" :props="props">
             <a v-if="props.row.attributes.html.url" target="_new" :href="jobDetailUrl + props.row.attributes.html.url">
               <span class="cursor-pointer jobtitle">
-                {{ props.row.attributes.jobTitle }} {{ props.row.attributes.id }}
+                {{ props.row.attributes.jobTitle }}
+                <q-tooltip :delay="500">
+                  {{ $t('job') }} {{ props.row.attributes.id }}
+                </q-tooltip>
               </span>
             </a>
             <span v-if="!props.row.attributes.html.url" class="jobtitle">
@@ -39,6 +39,18 @@
           </q-td>
           <q-td key="company" :props="props">
             {{ props.row.attributes.organization }}
+          </q-td>
+          <q-td key="action" :props="props">
+            <q-btn size="sm" dense class="cursor-pointer" icon="mdi-pencil" @click="editJob(props.row)">
+              <q-tooltip :delay="500">
+                {{ $t('edit_job') }}
+              </q-tooltip>
+            </q-btn>
+            <q-btn size="sm" dense class="cursor-pointer" icon="mdi-delete" @click="editJob(props.row)">
+              <q-tooltip :delay="500">
+                {{ $t('del_job') }}
+              </q-tooltip>
+            </q-btn>
           </q-td>
         </q-tr>
       </template>
@@ -127,12 +139,6 @@ export default {
               sortable: false
             },
             {
-              name: 'action',
-              align: 'left',
-              label: this.$t('action'),
-              sortable: false
-            },
-            {
               name: 'title',
               required: true,
               label: this.$t('job_title'),
@@ -154,7 +160,13 @@ export default {
               label: this.$t('company'),
               field: 'company',
               sortable: false
-            }
+            },
+            {
+              name: 'action',
+              align: 'left',
+              label: this.$t('action'),
+              sortable: false
+            },
           ];
         },
       },
@@ -255,6 +267,7 @@ export default {
     "preis1": "Registration is free of charge",
     "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
     "register": "Register",
+    "del_job": "Delete job ad"
   },
   "de": {
     "edit_job":"Anzeige bearbeiten",
@@ -266,6 +279,7 @@ export default {
     "preis1": "Die Anmeldung ist kostenlos",
     "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
     "register": "Registrieren",
+    "del_job": "Stellenanzeige löschen"
   },
   "fr": {
     "edit_job": "Modifier l'annonce",
@@ -275,6 +289,7 @@ export default {
     "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
     "preis1": "L'inscription est gratuite",
     "register": "S'inscrire",
+    "del_job": "Supprimer une offre d'emploi"
   }
 }
 </i18n>

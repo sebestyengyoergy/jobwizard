@@ -37,17 +37,20 @@
         >
           <component :is="stepName" style="min-height: 500px;" @next="navigate('next')" />
         </q-step>
+        <template #message>
+          {{ mode }}
+        </template>
         <template #navigation>
           <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
-              <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('btn.back')"
+              <q-btn v-if="steps.indexOf(currentStep) > 0 && mode==='insert'" name="prev" outline color="primary" :label="$t('btn.back')"
                      class="q-mr-md" @click.stop="navigate('previous')"
               />
               <q-btn v-if="lastStep & !$yawik.isAuth()" color="primary" name="next" :label="$t('btn.download')"
                      @click.stop="trySubmit"
               />
               <q-btn-dropdown
-                v-if="lastStep & $yawik.isAuth()"
+                v-if="lastStep & $yawik.isAuth() | mode==='edit'"
                 split
                 color="primary"
                 name="next"
@@ -74,7 +77,7 @@
                   </q-item>
                 </q-list>
               </q-btn-dropdown>
-              <q-btn v-if="!lastStep" color="primary" name="next" :label="$t('btn.continue')"
+              <q-btn v-if="!lastStep && mode==='insert'" color="primary" name="next" :label="$t('btn.continue')"
                      @click.stop="navigate('next')"
               />
             </div>
@@ -159,7 +162,11 @@ export default {
         spellcheck()
         {
           return this.$store.getters.GET_SETTINGS.formSpellcheckEnabled;
-        }
+        },
+        mode()
+        {
+          return this.$store.getters.GET_FORM.id ? 'edit' : 'insert';
+        },
       },
   watch:
       {

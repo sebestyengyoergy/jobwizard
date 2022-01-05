@@ -61,7 +61,7 @@ export default
     minijob: () => 'Minijob',
     shiftwork: () => 'Schichtarbeit',
     work_duration: () => 'Pensum',
-    work_kind: () => 'Art der Astellung',
+    work_kind: () => 'Art der Anstellung',
     visibility: () => 'Sichtbarkeit',
     salary: () => 'Jahresgehalt',
     homeoffice: () => 'Homeoffice',

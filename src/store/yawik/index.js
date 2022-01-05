@@ -193,6 +193,10 @@ export default
             publishDays: 30
           };
         }
+        if (!state.form.remoteWork)
+        {
+          state.form.remoteWork = false;
+        }
       },
       [SET_SETTINGS_FIELD](state, obj)
       {
