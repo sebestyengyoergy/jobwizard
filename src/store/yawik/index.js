@@ -16,6 +16,7 @@ import {
   SET_FIELD,
   SET_LANG,
   SET_LOGO,
+  SET_JOB,
   SET_META,
   SET_HEADER,
   SET_TOKEN,
@@ -143,7 +144,10 @@ export default
         for (const key in emptyForm) state.form[key] = emptyForm[key];
         state.logo = '';
         state.header = '';
-        state.jobId = uid();
+        if (state.form.id)
+        {
+          delete state.form.id;
+        }
       },
       [SET_STEP](state, value)
       {
@@ -176,6 +180,19 @@ export default
       [SET_TOKEN](state, token)
       {
         state.token = token;
+      },
+      [SET_JOB](state, data)
+      {
+        state.form = { ...Object.values(data)[0] };
+        state.form.step = 'stepOne';
+        if (!state.form.meta)
+        {
+          state.form.meta = {
+            publishImmediately: true,
+            publishStart: '',
+            publishDays: 30
+          };
+        }
       },
       [SET_SETTINGS_FIELD](state, obj)
       {

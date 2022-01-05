@@ -8,7 +8,7 @@
         <q-card-section>
           <div class="row no-wrap">
             <div class="col text-h6 ellipsis">
-              {{ name }}
+              {{ $t('name') }}
             </div>
             <div class="col-auto text-grey text-caption q-pt-md row no-wrap">
               <q-icon name="mdi-content-copy" />

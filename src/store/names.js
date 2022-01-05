@@ -20,6 +20,7 @@ export const HAS_AUTH = 'HAS_AUTH';
 export const SET_STEP = 'SET_STEP';
 export const CLEAR_FORM = 'CLEAR_FORM';
 export const SET_FIELD = 'SET_FIELD';
+export const SET_JOB = 'SET_JOB';
 export const SET_SETTINGS_FIELD = 'SET_SETTINGS_FIELD';
 export const SET_LANG = 'SET_LANG';
 export const SET_LOGO = 'SET_LOGO';

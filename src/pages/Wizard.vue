@@ -93,7 +93,7 @@ import StepOne from './steps/StepOne';
 import StepTwo from './steps/StepTwo';
 import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS, SET_FIELD } from '../store/names';
+import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
 
@@ -116,18 +116,6 @@ export default {
           {
             type: Boolean,
             default: false
-          },
-        id:
-          {
-            type: Number,
-            required: false,
-            default: null
-          },
-        job:
-          {
-            type: Object,
-            require: false,
-            default: null
           }
       },
   data()
@@ -191,7 +179,6 @@ export default {
     // we have to update maxWidth on window resize
     window.addEventListener('resize', this.onResize, false);
     this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
-    this.setForm();
   },
   mounted()
   {
@@ -208,38 +195,7 @@ export default {
   },
   methods:
       {
-        ...mapMutations([SET_STEP, CLEAR_FORM, SET_FIELD]),
-        setForm()
-        {
-          if (this.id != null)
-          {
-            console.log('Job ID ' + this.id);
-            if (this.job != null)
-            {
-              const attributes = JSON.parse(this.job).attributes;
-              attributes.step = 'stepOne';
-              const yawik = JSON.parse(localStorage.getItem('yawik')).yawik;
-              yawik.form = attributes;
-              localStorage.setItem('yawik', JSON.stringify({ yawik: yawik }));
-              /* for (var key in attributes) {
-                 console.log("Key " + key + " value " + attributes[key])
-                 //  this[SET_FIELD]({key: attributes[key]})
-               }*/
-            }
-          }
-        },
-        /*   getJob() {
-             this.$axios({
-               method: 'GET',
-               url: process.env.YAWIK_API_URL + '/api/jobs/' + this.id,
-               headers: {
-                 accept: 'application/json',
-                 Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token
-               }
-             }).then(response => {
-               console.log("JOb " + JSON.stringify(response))
-             })
-           },*/
+        ...mapMutations([SET_STEP, CLEAR_FORM]),
         onResize()
         {
           // limit the width of QEditor - otherwise it grows too much on typing

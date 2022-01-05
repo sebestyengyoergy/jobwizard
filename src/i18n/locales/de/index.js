@@ -13,6 +13,7 @@ export default
   date: () => 'Datum',
   location: () => 'Ort',
   company: () => 'Firma',
+  recruiter: () => 'Rekruter',
   btn: {
     login: () => 'Anmelden',
     logout: () => 'Abmelden',

@@ -51,6 +51,7 @@
               <q-item-section>
                 <q-item-label>{{ user.firstName }} {{ user.lastName }}</q-item-label>
                 <q-item-label caption>{{ user.email }}</q-item-label>
+                <q-item-label caption>{{ user.role.includes('recruiter') ? $t('recruiter') : '' }}</q-item-label>
               </q-item-section>
             </q-item>
             <q-item v-close-popup clickable>
@@ -140,7 +141,8 @@ export default
       user: {
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        role: ''
       }
     };
   },
@@ -199,6 +201,7 @@ export default
         this.user.email = cloak.tokenParsed.email;
         this.user.firstName = cloak.tokenParsed.given_name;
         this.user.lastName = cloak.tokenParsed.family_name;
+        this.user.role = cloak.tokenParsed.realm_access?.roles;
       }
     });
     cloak.onTokenExpired = () =>
@@ -279,18 +282,3 @@ export default
     }
 };
 </script>
-
-<style>
-  .fade-enter-active,
-  .fade-leave-active
-  {
-    transition: all 0.2s cubic-bezier(0.55, 0, 0.1, 1);
-  }
-
-  .fade-enter,
-  .fade-leave-active
-  {
-    opacity: 0;
-    transform: translate(2em, 0);
-  }
-</style>

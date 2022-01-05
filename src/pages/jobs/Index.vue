@@ -27,7 +27,7 @@
           <q-td key="title" :props="props">
             <a v-if="props.row.attributes.html.url" target="_new" :href="jobDetailUrl + props.row.attributes.html.url">
               <span class="cursor-pointer jobtitle">
-                {{ props.row.attributes.jobTitle }}
+                {{ props.row.attributes.jobTitle }} {{ props.row.attributes.id }}
               </span>
             </a>
             <span v-if="!props.row.attributes.html.url" class="jobtitle">
@@ -77,6 +77,8 @@
 <script>
 
 import { useMeta } from 'quasar';
+import { SET_JOB } from 'src/store/names';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'Index',
@@ -165,6 +167,7 @@ export default {
   },
   methods:
       {
+        ...mapMutations([SET_JOB]),
         getJobs(pagination = { pagination: this.pagination })
         {
           this.loading = true;
@@ -211,17 +214,12 @@ export default {
             }
           }).then(response =>
           {
-            console.log('Job ' + JSON.stringify(response));
+            this[SET_JOB]({ data: response.data.success.job });
           });
-          /*
+
           this.$router.push({
-            name: 'job',
-            params: {
-              id: job.id,
-              job: JSON.stringify(job)
-            }
+            name: 'wizard',
           });
-          */
         }
       }
 };
