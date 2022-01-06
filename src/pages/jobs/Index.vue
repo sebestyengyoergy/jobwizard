@@ -46,7 +46,7 @@
                 {{ $t('edit_job') }}
               </q-tooltip>
             </q-btn>
-            <q-btn size="sm" dense class="cursor-pointer" icon="mdi-delete" @click="editJob(props.row)">
+            <q-btn size="sm" dense class="cursor-pointer" icon="mdi-delete" @click="deleteJob(props.row)">
               <q-tooltip :delay="500">
                 {{ $t('del_job') }}
               </q-tooltip>
@@ -89,7 +89,7 @@
 <script>
 
 import { useMeta } from 'quasar';
-import { SET_JOB } from 'src/store/names';
+import { SET_JOB, SET_LOGO } from 'src/store/names';
 import { mapMutations } from 'vuex';
 
 export default {
@@ -179,7 +179,7 @@ export default {
   },
   methods:
       {
-        ...mapMutations([SET_JOB]),
+        ...mapMutations([SET_JOB, SET_LOGO]),
         getJobs(pagination = { pagination: this.pagination })
         {
           this.loading = true;
@@ -220,6 +220,9 @@ export default {
           this.$axios({
             method: 'GET',
             url: process.env.YAWIK_API_URL + '/api/jobs/' + job.id,
+            params: {
+              populate: 'logo',
+            },
             headers: {
               accept: 'application/json',
               Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token
@@ -227,10 +230,33 @@ export default {
           }).then(response =>
           {
             this[SET_JOB]({ data: response.data.success.job });
+            console.log(response.data.success.job);
+            if (response.data.success.job.logo)
+            {
+              this[SET_LOGO]({ data: response.data.success.job.logo });
+            }
           });
 
           this.$router.push({
             name: 'wizard',
+          });
+        },
+        deleteJob(job)
+        {
+          this.$axios({
+            method: 'DELETE',
+            url: process.env.YAWIK_API_URL + '/api/jobs/' + job.id,
+            headers: {
+              accept: 'application/json',
+              Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token
+            }
+          }).then(response =>
+          {
+
+          });
+
+          this.$router.push({
+            name: 'jobs',
           });
         }
       }
@@ -252,6 +278,20 @@ export default {
   .body--light .jobtitle
   {
     color: #5498D7;
+  }
+
+  .channel
+  {
+    padding: 10px;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .channel-logo
+  {
+    max-height: 92px;
+    width: auto;
+    display: block;
   }
 
 </style>

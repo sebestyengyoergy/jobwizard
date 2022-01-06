@@ -2,20 +2,23 @@
   <div class="q-gutter-md">
     <!-- Logo -->
     <div class="jobintro row q-col-gutter-md justify-center">
-      <div class="col-lg-2 col-md-3">
+      <div v-if="!imageLogo" class="col-lg-2 col-md-3">
         <q-uploader
           hide-upload-btn
           :color="$q.dark.mode ? 'black' : 'grey-2' "
           :text-color="$q.dark.mode ? 'white' : 'dark'"
           accept="image/*"
           style="max-width: 220px; height: 220px;"
-          :max-total-size="1e7"
+          :max-total-size="2e5"
           :max-files="1"
           :label="$t('choose_logo')"
           @rejected="rejectedFiles"
           @added="logoAdded"
           @removed="logoRemoved"
         />
+      </div>
+      <div v-if="imageLogo" class="col-lg-2 col-md-3">
+        <q-img :src="jobDetailUrl + imageLogo.data.url" />
       </div>
       <div class="col-lg-10 col-md-9" :style="{maxWidth: (maxWidth * 2 * 0.8) + 'px'}">
         <q-item>
@@ -34,7 +37,7 @@
           :text-color="$q.dark.mode ? 'white' : 'dark'"
           accept="image/*"
           style="max-height: 400px; min-height: 200px; width: 100%;"
-          :max-total-size="1e7"
+          :max-total-size="2e6"
           :max-files="1"
           :label="$t('choose_header')"
           @rejected="rejectedFiles"
@@ -129,6 +132,7 @@ export default
   {
     return {
       maxWidth: 800,
+      jobDetailUrl: `${process.env.YAWIK_JOB_URL}`,
     };
   },
   computed:

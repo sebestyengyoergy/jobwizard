@@ -38,7 +38,7 @@
           <component :is="stepName" style="min-height: 500px;" @next="navigate('next')" />
         </q-step>
         <template #navigation>
-          <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
+          <q-page-sticky class="z-top" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
               <q-btn v-if="steps.indexOf(currentStep) > 0 && mode==='insert'" name="prev" outline color="primary" :label="$t('btn.back')"
                      class="q-mr-md" @click.stop="navigate('previous')"
@@ -93,7 +93,7 @@ import StepOne from './steps/StepOne';
 import StepTwo from './steps/StepTwo';
 import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_SETTINGS } from '../store/names';
+import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_META, GET_LOGO, GET_SETTINGS } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
 
@@ -136,7 +136,7 @@ export default {
   },
   computed:
       {
-        ...mapGetters([GET_STEP, GET_FORM, GET_SETTINGS]),
+        ...mapGetters([GET_STEP, GET_FORM, GET_META, GET_SETTINGS, GET_LOGO]),
         currentStep:
           {
             get()
@@ -154,16 +154,36 @@ export default {
         },
         acceptTerms()
         {
-          return this.$store.getters.GET_FORM.acceptTerms;
+          return this[GET_META].acceptTerms;
         },
         spellcheck()
         {
-          return this.$store.getters.GET_SETTINGS.formSpellcheckEnabled;
+          return this[GET_SETTINGS].formSpellcheckEnabled;
         },
         mode()
         {
-          return this.$store.getters.GET_FORM.id ? 'edit' : 'insert';
+          return this[GET_FORM].id ? 'edit' : 'insert';
         },
+        logo()
+        {
+          return this[GET_LOGO];
+        },
+        buttons()
+        {
+          // not in use yet
+          return [
+            {
+              icon: 'mdi-content-save',
+              text: this.$t('btn.save'),
+              disabled: !this.acceptTerms
+            },
+            {
+              icon: 'mdi-download',
+              text: this.$t('btn.download'),
+              disabled: !this.acceptTerms
+            }
+          ];
+        }
       },
   watch:
       {
@@ -230,6 +250,17 @@ export default {
             name: 'job_ad.html'
           });
           formObj.html = html;
+
+          const logo = this[GET_LOGO];
+          if (logo)
+          {
+            const binary = fetch(logo).then(res => res.blob());
+            formData.append('logo', binary);
+          }
+
+          this.progress = 0;
+          this.sending = true;
+
           formData.append('html', html, 'job_ad.html');
           formData.append('data', JSON.stringify(formObj));
           this.$axios({
@@ -261,12 +292,18 @@ export default {
                   icon: 'mdi-alert',
                   message: this.$t('msg.job_saved_success'),
                 });
-                this[CLEAR_FORM]();
+                if (this.mode === 'insert')
+                {
+                  this[CLEAR_FORM]();
+                }
               }
             }).catch(error =>
             {
               console.log('Error', error);
             });
+          this.$router.push({
+            name: 'jobs',
+          });
         },
         trySubmit()
         {

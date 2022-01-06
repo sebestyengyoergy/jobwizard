@@ -91,7 +91,7 @@
 <script>
 import mixinValidations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_FORM, SET_FIELD } from 'src/store/names';
+import { GET_META, SET_META } from 'src/store/names';
 import PublicationTime from 'src/components/form/PublicationTime.vue';
 
 export default {
@@ -137,50 +137,50 @@ export default {
   },
   computed:
   {
-    ...mapGetters([GET_FORM]),
+    ...mapGetters([GET_META]),
     workKind:
     {
       get()
       {
-        return this[GET_FORM].workKind;
+        return this[GET_META].workKind;
       },
       set(val)
       {
-        this[SET_FIELD]({ workKind: val });
+        this[SET_META]({ workKind: val });
       }
     },
     workDuration:
     {
       get()
       {
-        return this[GET_FORM].workDuration;
+        return this[GET_META].workDuration;
       },
       set(val)
       {
-        this[SET_FIELD]({ workDuration: val });
+        this[SET_META]({ workDuration: val });
       }
     },
     partTimePercentage:
     {
       get()
       {
-        return this[GET_FORM].partTimePercentage;
+        return this[GET_META].partTimePercentage;
       },
       set(val)
       {
-        this[SET_FIELD]({ partTimePercentage: val });
+        this[SET_META]({ partTimePercentage: val });
       }
     },
     shiftWorkAmount:
     {
       get()
       {
-        const shiftWorkAmount = this[GET_FORM].shiftWorkAmount;
+        const shiftWorkAmount = this[GET_META].shiftWorkAmount;
         return shiftWorkAmount === undefined ? 2 : shiftWorkAmount;
       },
       set(val)
       {
-        this[SET_FIELD]({ shiftWorkAmount: val });
+        this[SET_META]({ shiftWorkAmount: val });
       }
     },
     listKinds()
@@ -230,29 +230,29 @@ export default {
       {
         get()
         {
-          return this[GET_FORM].salary;
+          return this[GET_META].salary;
         },
         set(val)
         {
-          this[SET_FIELD]({ salary: val });
+          this[SET_META]({ salary: val });
         }
       },
     salaryVisibility:
       {
         get()
         {
-          return this[GET_FORM].salaryVisibility;
+          return this[GET_META].salaryVisibility;
         },
         set(val)
         {
-          this[SET_FIELD]({ salaryVisibility: val });
+          this[SET_META]({ salaryVisibility: val });
         }
       },
 
   },
   methods:
   {
-    ...mapMutations([SET_FIELD]),
+    ...mapMutations([SET_META]),
     sliderChange()
     {
       const workDurationVal = this.workDuration;

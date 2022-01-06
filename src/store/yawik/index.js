@@ -39,7 +39,20 @@ const emptyForm = {
   meta: {
     publishImmediately: true,
     publishStart: '',
-    publishDays: 30
+    publishDays: 30,
+    acceptTerms: false,
+    workKind: [],
+    workDuration: [],
+    partTimePercentage: 50,
+    shiftWorkAmount: 2,
+    remoteWork: false,
+    remoteWorkPercentage: 50,
+    salary: {
+      label: '40.000€ - 60.000€',
+      value: '40|60'
+    },
+    salaryVisibility: true,
+    formattedAddress: '',
   },
   remoteWork: false,
   remoteWorkPercentage: 50,
@@ -163,6 +176,7 @@ export default
       },
       [SET_META](state, obj)
       {
+        console.log(Object.values(obj)[0]);
         state.form.meta[Object.keys(obj)[0]] = Object.values(obj)[0];
       },
       [SET_LOCATION](state, obj)
@@ -190,7 +204,8 @@ export default
           state.form.meta = {
             publishImmediately: true,
             publishStart: '',
-            publishDays: 30
+            publishDays: 30,
+            acceptTerms: false,
           };
         }
         if (!state.form.remoteWork)
@@ -200,6 +215,13 @@ export default
         if (!state.form.acceptTerms)
         {
           state.form.acceptTerms = true;
+        }
+        if (!state.form.salary)
+        {
+          state.form.salary = {
+            label: '40.000€ - 60.000€',
+            value: '40|60'
+          };
         }
       },
       [SET_SETTINGS_FIELD](state, obj)

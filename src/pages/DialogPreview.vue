@@ -13,24 +13,24 @@
           class="preview-buttons"
         >
           <template #one>
-            <q-tooltip delay="400">{{ $t('tooltip.mobile') }}</q-tooltip>
+            <q-tooltip :delay="400">{{ $t('tooltip.mobile') }}</q-tooltip>
           </template>
           <template #two>
-            <q-tooltip delay="400">{{ $t('tooltip.desktop') }}</q-tooltip>
+            <q-tooltip :delay="400">{{ $t('tooltip.desktop') }}</q-tooltip>
           </template>
           <template #three>
-            <q-tooltip delay="400">{{ $t('tooltip.fullscreen') }}</q-tooltip>
+            <q-tooltip :delay="400">{{ $t('tooltip.fullscreen') }}</q-tooltip>
           </template>
         </q-btn-toggle>
         <q-btn class="z-top" dense icon="mdi-eyedropper-variant">
           <q-popup-proxy v-model="dlgColor" transition-show="scale" transition-hide="scale" style="max-height: none !important; transform: translateY(50px);">
             <q-color v-model="color" no-header no-footer class="z-top" default-view="palette" style="max-width: 250px;" @change="dlgColor = false" />
           </q-popup-proxy>
-          <q-tooltip delay="400">{{ $t('tooltip.colorize') }}</q-tooltip>
+          <q-tooltip :delay="400">{{ $t('tooltip.colorize') }}</q-tooltip>
         </q-btn>
         <q-space />
         <q-btn v-close-popup dense icon="mdi-close" class="z-top" name="close">
-          <q-tooltip delay="400">{{ $t('btn.close') }}</q-tooltip>
+          <q-tooltip :delay="400">{{ $t('btn.close') }}</q-tooltip>
         </q-btn>
       </q-bar>
       <q-card-section :class="'col-grow overflow-hidden row q-pa-md mx-auto '+mode">
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { GET_FORM, GET_LOGO, GET_HEADER } from 'src/store/names';
+import { GET_FORM, GET_LOGO, GET_HEADER, GET_META } from 'src/store/names';
 import { mapGetters } from 'vuex';
 import { DEFAULT_LOGO } from 'src/assets/default_logo_base64.js';
 
@@ -69,10 +69,10 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER]),
+      ...mapGetters([GET_FORM, GET_LOGO, GET_HEADER, GET_META]),
       country()
       {
-        return this[GET_FORM].country;
+        return this[GET_META].country;
       },
       frameStyle()
       {
@@ -84,9 +84,11 @@ export default
       },
       htmlLogo()
       {
-        return this[GET_LOGO]
-          ? `<img src="${this[GET_LOGO]}" class="img_logo">`
-          : `<img src="${DEFAULT_LOGO}" class="img_logo">`;
+        return (typeof this[GET_LOGO] === 'object')
+          ? `<img src="${process.env.YAWIK_JOB_URL}${this[GET_LOGO].data.url}" class="img_logo">`
+          : this[GET_LOGO]
+            ? `<img src="${this[GET_LOGO]}" class="img_logo">`
+            : `<img src="${DEFAULT_LOGO}" class="img_logo">`;
       },
       htmlHeaderImage()
       {
@@ -125,29 +127,29 @@ export default
       },
       htmlWorkKind()
       {
-        return this[GET_FORM].workKind.length > 0
-          ? this[GET_FORM].workKind.map(item => `${this.$t('label.' + item)}`).join(', ')
+        return this[GET_META].workKind.length > 0
+          ? this[GET_META].workKind.map(item => `${this.$t('label.' + item)}`).join(', ')
           : '';
       },
       htmlWorkDuration()
       {
-        return this[GET_FORM].workDuration.length > 0
+        return this[GET_META].workDuration.length > 0
           ? '<svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M17 11.5V13H11V7H12.5V11.5H17Z" /></svg>' +
-          this[GET_FORM].workDuration.map(item => `${this.$t('label.' + item)}`).join(', ')
+          this[GET_META].workDuration.map(item => `${this.$t('label.' + item)}`).join(', ')
           : '';
       },
       htmlSalary()
       {
-        return !this[GET_FORM].salaryVisibility
+        return !this[GET_META].salaryVisibility
           ? '<li><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M5,6H23V18H5V6M14,9A3,3 0 0,1 17,12A3,3 0 0,1 14,15A3,3 0 0,1 11,12A3,3 0 0,1 14,9M9,8A2,2 0 0,1 7,10V14A2,2 0 0,1 9,16H19A2,2 0 0,1 21,14V10A2,2 0 0,1 19,8H9M1,10H3V20H19V22H1V10Z" /></svg>' +
-          this[GET_FORM].salary.value.split('|').map(item => item + '.000€').join(' - ') + '</li>'
+          this[GET_META].salary.value.split('|').map(item => item + '.000€').join(' - ') + '</li>'
           : '';
       },
       htmlRemoteWork()
       {
-        return this[GET_FORM].remoteWork
+        return this[GET_META].remoteWork
           ? '<li><svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12 5.69L17 10.19V18H15V12H9V18H7V10.19L12 5.69M12 3L2 12H5V20H11V14H13V20H19V12H22L12 3Z" /></svg>' +
-          this[GET_FORM].remoteWorkPercentage + '%</li>'
+          this[GET_META].remoteWorkPercentage + '%</li>'
           : '';
       },
 
@@ -303,7 +305,7 @@ export default
           <ul class="info">
             <li>
               <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z" /></svg>
-              ${[this[GET_FORM].country?.label || '', this[GET_FORM].location.addressLocality ? this[GET_FORM].location.addressLocality : (this[GET_FORM].location.addressRegion ? this[GET_FORM].location.addressRegion : this[GET_FORM].location.addressCountry) || ''].filter(val => val).join(', ')}
+              ${[this[GET_META].country?.label || '', this[GET_FORM].location.addressLocality ? this[GET_FORM].location.addressLocality : (this[GET_FORM].location.addressRegion ? this[GET_FORM].location.addressRegion : this[GET_FORM].location.addressCountry) || ''].filter(val => val).join(', ')}
             </li>
             <li>
               <svg style="width:24px;height:24px" viewBox="0 0 24 24"><path fill="currentColor" d="M6,2C4.89,2 4,2.89 4,4V20A2,2 0 0,0 6,22H10V20.09L12.09,18H6V16H14.09L16.09,14H6V12H18.09L20,10.09V8L14,2H6M13,3.5L18.5,9H13V3.5M20.15,13C20,13 19.86,13.05 19.75,13.16L18.73,14.18L20.82,16.26L21.84,15.25C22.05,15.03 22.05,14.67 21.84,14.46L20.54,13.16C20.43,13.05 20.29,13 20.15,13M18.14,14.77L12,20.92V23H14.08L20.23,16.85L18.14,14.77Z" /></svg>
@@ -366,7 +368,7 @@ export default
               addressLocality: this[GET_FORM].location.addressLocality,
               streetAddress: this[GET_FORM].location.streetAddress,
               addressRegion: this[GET_FORM].location.addressRegion,
-              addressCountry: this[GET_FORM].country,
+              addressCountry: this[GET_META].country,
             }
           },
           baseSalary: {
@@ -374,12 +376,12 @@ export default
             currency: 'EUR',
             value: {
               '@type': 'QuantitativeValue',
-              minValue: this[GET_FORM].salary.value.split('|').map(item => item + '000')[0],
-              maxValue: this[GET_FORM].salary.value.split('|').map(item => item + '000')[1],
+              minValue: this[GET_META].salary.value.split('|').map(item => item + '000')[0],
+              maxValue: this[GET_META].salary.value.split('|').map(item => item + '000')[1],
               unitText: 'YEAR'
             }
           },
-          jobLocationType: this[GET_FORM].remoteWorkPercentage === 100 ? 'TELECOMMUTE' : ''
+          jobLocationType: this[GET_META].remoteWorkPercentage === 100 ? 'TELECOMMUTE' : ''
         };
         if (this.employment.length > 0) result.employmentType = this.employment;
         if (this[GET_FORM].applyURL) result.directApply = true;
@@ -387,10 +389,10 @@ export default
       },
       employment()
       {
-        return this[GET_FORM].workKind.map(item => ({
+        return this[GET_META].workKind.map(item => ({
           freelance: 'OTHER',
           contract: 'CONTRACTOR',
-        }[item])).concat(this[GET_FORM].workDuration.map(item => ({
+        }[item])).concat(this[GET_META].workDuration.map(item => ({
           fulltime: 'FULL_TIME',
           parttime: 'PART_TIME',
         }[item])));

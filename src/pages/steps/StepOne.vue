@@ -100,7 +100,7 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_FORM, GET_SETTINGS, SET_FIELD } from 'src/store/names';
+import { GET_FORM, GET_SETTINGS, SET_META, GET_META, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
 import TextInput from 'src/components/form/TextInput.vue';
 import Tooltip from 'src/components/form/Tooltip.vue';
@@ -145,7 +145,7 @@ export default {
   },
   computed:
       {
-        ...mapGetters([GET_FORM, GET_SETTINGS]),
+        ...mapGetters([GET_FORM, GET_META, GET_SETTINGS]),
 
         jobTitle:
 
@@ -163,22 +163,22 @@ export default {
           {
             get()
             {
-              return this[GET_FORM].remoteWork;
+              return this[GET_META].remoteWork;
             },
             set(val)
             {
-              this[SET_FIELD]({ remoteWork: val });
+              this[SET_META]({ remoteWork: val });
             }
           },
         remoteWorkPercentage:
           {
             get()
             {
-              return this[GET_FORM].remoteWorkPercentage;
+              return this[GET_META].remoteWorkPercentage;
             },
             set(val)
             {
-              this[SET_FIELD]({ remoteWorkPercentage: val });
+              this[SET_META]({ remoteWorkPercentage: val });
             }
           },
         organization:
@@ -288,7 +288,7 @@ export default {
   },
   methods:
       {
-        ...mapMutations([SET_FIELD]),
+        ...mapMutations([SET_FIELD, SET_META]),
         gotoNext()
         {
           this.$emit('next');
