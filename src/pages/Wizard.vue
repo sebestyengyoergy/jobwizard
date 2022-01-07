@@ -38,7 +38,7 @@
           <component :is="stepName" style="min-height: 500px;" @next="navigate('next')" />
         </q-step>
         <template #navigation>
-          <q-page-sticky class="z-top" position="bottom-right" :offset="[18, -65]">
+          <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
               <q-btn v-if="steps.indexOf(currentStep) > 0 && mode==='insert'" name="prev" outline color="primary" :label="$t('btn.back')"
                      class="q-mr-md" @click.stop="navigate('previous')"
