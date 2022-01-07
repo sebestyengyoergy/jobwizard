@@ -24,6 +24,7 @@ export default
     back: () => 'Zurück',
     continue: () => 'Weiter',
     download: () => 'Download',
+    register: () => 'Registrieren',
     save: () => 'Speichern',
     send: () => 'Senden',
     publish: () => 'Veröffentlichen',

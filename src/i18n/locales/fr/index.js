@@ -25,6 +25,7 @@ export default
     continue: () => 'Continuer',
     download: () => 'Téléchargement',
     save: () => 'Sauver',
+    register: () => 'S\'inscrire',
     send: () => 'Envoyer',
     publish: () => 'Publier',
   },

@@ -54,7 +54,8 @@
             {{ $t('notify.please_login') }}
             <template #action>
               <q-btn flat :label="$t('btn.close')" @click="closeBanner" />
-              <q-btn flat :label="$t('btn.login')" type="a" :href="'https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/auth?client_id=demo&response_mode=fragment&response_type=code&login=true&redirect_uri=https://jobwizard.yawik.org/' + $yawik.lang() + '/settings'" />
+              <q-btn flat :label="$t('btn.login')" type="a" :href="$yawik.loginUrl('settings')" />
+              <q-btn flat :label="$t('btn.register')" type="a" :href="$yawik.registerUrl('settings')" />
             </template>
           </q-banner>
         </q-page>

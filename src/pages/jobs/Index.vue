@@ -75,11 +75,11 @@
 
       <div class="text-center text-h4 q-mb-md full-width">{{ $t('preis1') }}</div>
       <q-card-actions>
-        <q-btn type="a" :href="'https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/auth?client_id=demo&response_mode=fragment&response_type=code&login=true&redirect_uri=https://jobwizard.yawik.org/' + $yawik.lang() + '/jobs'" no-caps color="primary">
+        <q-btn type="a" :href="$yawik.loginUrl('jobs')" no-caps color="primary">
           {{ $t('btn.login') }}
         </q-btn>
-        <q-btn type="a" :href="'https://sso.cross-solution.de/auth/realms/YAWIK/protocol/openid-connect/registrations?client_id=demo&response_mode=fragment&response_type=code&redirect_uri=https://jobwizard.yawik.org/' + $yawik.lang() + '/jobs'" no-caps color="primary">
-          {{ $t('register') }}
+        <q-btn type="a" :href="$yawik.registerUrl('jobs')" no-caps color="primary">
+          {{ $t('btn.register') }}
         </q-btn>
       </q-card-actions>
     </q-card>
@@ -306,7 +306,6 @@ export default {
     "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
     "preis1": "Registration is free of charge",
     "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
-    "register": "Register",
     "del_job": "Delete job ad"
   },
   "de": {
@@ -318,7 +317,6 @@ export default {
     "date": "Datum",
     "preis1": "Die Anmeldung ist kostenlos",
     "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
-    "register": "Registrieren",
     "del_job": "Stellenanzeige löschen"
   },
   "fr": {
@@ -328,7 +326,6 @@ export default {
     "action": "Action",
     "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
     "preis1": "L'inscription est gratuite",
-    "register": "S'inscrire",
     "del_job": "Supprimer une offre d'emploi"
   }
 }
