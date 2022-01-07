@@ -117,20 +117,10 @@ export default
         }
       });
     },
-    alert(newVal, oldVal)
-    {
-      this.$nextTick(() =>
-      {
-        if (newVal)
-        {
-          this[SET_SETTINGS_FIELD]({ hideCongratulations: false });
-        }
-      });
-    },
   },
   mounted()
   {
-    this.alert = this.$yawik.isAuth() || this.checkTimer();
+    this.alert = !this.$yawik.isAuth() && this.checkTimer();
   },
   methods:
   {

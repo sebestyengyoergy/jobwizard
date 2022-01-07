@@ -51,12 +51,11 @@
                 split
                 color="primary"
                 name="next"
-                :disable-main-btn="!acceptTerms"
                 :label="$t('btn.publish')"
                 @click.stop="onSave"
               >
                 <q-list>
-                  <q-item v-close-popup clickable :disable="!acceptTerms" @click.stop="onSave">
+                  <q-item v-close-popup clickable @click.stop="onSave">
                     <q-item-section side>
                       <q-icon name="mdi-content-save" color="secondary" />
                     </q-item-section>
@@ -152,10 +151,6 @@ export default {
         {
           return Object.keys(this.validationErrors);
         },
-        acceptTerms()
-        {
-          return this[GET_META].acceptTerms;
-        },
         spellcheck()
         {
           return this[GET_SETTINGS].formSpellcheckEnabled;
@@ -168,22 +163,6 @@ export default {
         {
           return this[GET_LOGO];
         },
-        buttons()
-        {
-          // not in use yet
-          return [
-            {
-              icon: 'mdi-content-save',
-              text: this.$t('btn.save'),
-              disabled: !this.acceptTerms
-            },
-            {
-              icon: 'mdi-download',
-              text: this.$t('btn.download'),
-              disabled: !this.acceptTerms
-            }
-          ];
-        }
       },
   watch:
       {
@@ -356,7 +335,7 @@ export default {
         {
           const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
           this.validationErrors[step] = components.some(item => !item.validate()); // stop on the first validation error
-          // this.validationErrors[step] = components.filter(item => !item.validate()).length > 0; // validate all fields
+          //this.validationErrors[step] = components.filter(item => !item.validate()).length > 0; // validate all fields
         },
         submitForm()
         {

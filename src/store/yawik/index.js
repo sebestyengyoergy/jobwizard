@@ -41,6 +41,7 @@ const emptyForm = {
     publishStart: '',
     publishDays: 30,
     acceptTerms: false,
+    channels: [],
     workKind: [],
     workDuration: [],
     partTimePercentage: 50,
@@ -213,9 +214,13 @@ export default
         {
           state.form.remoteWork = false;
         }
-        if (!state.form.acceptTerms)
+        if (!state.form.meta.remoteWork)
         {
-          state.form.acceptTerms = true;
+          state.form.meta.remoteWork = false;
+        }
+        if (!state.form.meta.partTimePercentage)
+        {
+          state.form.meta.partTimePercentage = 50;
         }
         if (!state.form.salary)
         {
@@ -223,6 +228,10 @@ export default
             label: '40.000€ - 60.000€',
             value: '40|60'
           };
+        }
+        if (!state.form.meta.channels)
+        {
+          state.form.meta.channels = [];
         }
       },
       [SET_SETTINGS_FIELD](state, obj)
