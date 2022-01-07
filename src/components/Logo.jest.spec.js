@@ -1,7 +1,18 @@
 import { describe, expect, it } from '@jest/globals';
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
-import { mount } from '@vue/test-utils';
+import { config, mount } from '@vue/test-utils';
 import Logo from 'src/components/Logo';
+
+
+const $yawik = jest.fn({
+  lang() {
+    return 'de'
+  }
+});
+
+// Global mock
+config.global.mocks.$yawik = $yawik;
+
 
 /*
  * You can provide a config object as param like such:
@@ -19,10 +30,9 @@ describe('Logo', () =>
   beforeEach(() =>
   {
     cmp = mount(Logo, {
-      props: {
-        logoUrl: 'logo.png',
-        orgName: 'CROSS'
-      }
+      global: { 
+        mocks: { $yawik }
+      },
     });
   });
 
@@ -31,9 +41,4 @@ describe('Logo', () =>
     expect(cmp).toBeTruthy();
   });
 
-  it('check property', () =>
-  {
-    expect(cmp.vm.logoUrl).toBe('logo.png');
-    expect(cmp.vm.orgName).toBe('CROSS');
-  });
 });
