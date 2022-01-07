@@ -19,6 +19,7 @@ export default
     login: () => 'Login',
     logout: () => 'Logout',
     close: () => 'Close',
+    email: () => 'Email',
     preview: () => 'Preview',
     cancel: () => 'Cancel',
     abort: () => 'Abort',

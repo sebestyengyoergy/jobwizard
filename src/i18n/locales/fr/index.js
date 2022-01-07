@@ -18,6 +18,7 @@ export default
     login: () => 'Connexion',
     logout: () => 'Déconnexion',
     close: () => 'Fermez',
+    email: () => 'Email',
     preview: () => 'Aperçu',
     cancel: () => 'Annuler',
     abort: () => 'Annuler',
