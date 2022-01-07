@@ -2,43 +2,19 @@
   <div>
     <ChooseChannel />
     <br>
-    <AcceptTerms v-if="$yawik.isAuth()" v-model="acceptTerms" />
   </div>
 </template>
 
 <script>
-import AcceptTerms from 'src/components/form/AcceptTerms';
 import ChooseChannel from 'src/components/ChooseChannel';
-import { GET_META, SET_META } from 'src/store/names';
-import { mapGetters, mapMutations } from 'vuex';
 
 export default
 {
   name: 'StepFour',
   components:
     {
-      AcceptTerms,
       ChooseChannel
     },
-  computed:
-    {
-      ...mapGetters([GET_META]),
-      acceptTerms:
-        {
-          get()
-          {
-            return this[GET_META].acceptTerms;
-          },
-          set(val)
-          {
-            this[SET_META]({ acceptTerms: val });
-          }
-        }
-    },
-  methods:
-    {
-      ...mapMutations([SET_META]),
-    }
 };
 </script>
 
