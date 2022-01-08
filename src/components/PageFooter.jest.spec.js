@@ -34,5 +34,7 @@ describe('PageFooter', () =>
     expect(cmp.vm.urlPrivacy).toBe('test');
     process.env.YAWIK_URL_IMPRINT = 'test';
     expect(cmp.vm.urlImprint).toBe('test');
+    process.env.YAWIK_URL_DOCS = 'test';
+    expect(cmp.vm.urlDocs).toBe('test');
   });
 });
