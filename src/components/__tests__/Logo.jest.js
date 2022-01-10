@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
 import { config, shallowMount } from '@vue/test-utils';
-import Logo from './Logo';
+import Logo from '../Logo';
 
 /*
  * You can provide a config object as param like such:

@@ -2,7 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
 import { shallowMount } from '@vue/test-utils';
 import Vuex from 'vuex';
-import Drawer from './Drawer';
+import Drawer from '../Drawer';
 
 /*
  * You can provide a config object as param like such:

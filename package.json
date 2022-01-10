@@ -99,11 +99,6 @@
       ]
     ]
   },
-  "jest": {
-    "setupFiles": [
-      "test/jest/setEnvVars.js"
-    ]
-  },
   "browserslist": [
     "last 2 years, >3%, not dead"
   ],

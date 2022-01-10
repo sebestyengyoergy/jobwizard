@@ -32,8 +32,8 @@ module.exports = {
     },
   },
   testMatch: [
-//    '<rootDir>/test/jest/__tests__/**/*.(spec|test).js',
-    '<rootDir>/src/**/*.jest.(spec|test).js',
+    '<rootDir>/src/**/__tests__/**/*.jest.js',
+//    '<rootDir>/src/**/*.jest.(spec|test).js',
   ],
   moduleFileExtensions: ['vue', 'js', 'jsx', 'json'],
   moduleNameMapper: {
