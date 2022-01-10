@@ -19,6 +19,7 @@ export default {
   props: {
     text: {
       required: true,
+      default: '',
       type: String
     },
     delay: {
