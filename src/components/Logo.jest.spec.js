@@ -1,8 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
-import { config, mount } from '@vue/test-utils';
-import Logo from 'src/components/Logo';
-import yawik from 'src/boot/yawik.js';
+import { config, shallowMount } from '@vue/test-utils';
+import Logo from './Logo';
 
 /*
  * You can provide a config object as param like such:
@@ -15,11 +14,17 @@ installQuasarPlugin();
 
 describe('Logo', () =>
 {
+
+  const OLD_ENV = process.env;
+
   let cmp;
 
   beforeEach(() =>
   {
-    cmp = mount(Logo, {
+    jest.resetModules() // Most important - it clears the cache
+    process.env = { ...OLD_ENV }; // Make a copy
+    process.env.VUE_ROUTER_BASE = 'yawik/';
+    cmp = shallowMount(Logo, {
       global: {
         mocks: {
           $yawik: {
@@ -30,10 +35,20 @@ describe('Logo', () =>
       }
     });
   });
+  
+  afterAll(() => {
+    process.env = OLD_ENV; // Restore old environment
+  });
 
   it('mounts without errors', () =>
   {
     expect(cmp).toBeTruthy();
+  });
+
+
+  it('check urlHome', () =>
+  {
+    expect(cmp.vm.urlHome).toBe('yawik/de');
   });
 
 });

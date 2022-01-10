@@ -28,13 +28,13 @@ describe('PageFooter', () =>
 
   it('check enviroment properties', () =>
   {
-    process.env.YAWIK_URL_OPERATOR = 'test';
-    expect(cmp.vm.urlOperator).toBe('test');
-    process.env.YAWIK_URL_PRIVACY = 'test';
-    expect(cmp.vm.urlPrivacy).toBe('test');
-    process.env.YAWIK_URL_IMPRINT = 'test';
-    expect(cmp.vm.urlImprint).toBe('test');
-    process.env.YAWIK_URL_DOCS = 'test';
-    expect(cmp.vm.urlDocs).toBe('test');
+    process.env.YAWIK_URL_OPERATOR = 'test1';
+    expect(cmp.vm.urlOperator).toBe('test1');
+    process.env.YAWIK_URL_PRIVACY = 'test2';
+    expect(cmp.vm.urlPrivacy).toBe('test2');
+    process.env.YAWIK_URL_IMPRINT = 'test3';
+    expect(cmp.vm.urlImprint).toBe('test3');
+    process.env.YAWIK_URL_DOCS = 'test4';
+    expect(cmp.vm.urlDocs).toBe('test4');
   });
 });
