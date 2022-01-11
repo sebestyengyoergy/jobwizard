@@ -83,7 +83,7 @@ export default
     "en": {
       "name": "Template",
       "offer": "Would you like to place job advertisements in your corporate design? Just send us an email with what you have. We will build a template for you and store it in your job wizard.",
-      "preis1": "1,998.00 € plux VAT",
+      "preis1": "1,998.00 € plus VAT",
       "templates-slug": "Template in corporate design",
       "sponsoren": "Sponsors receive a 50% discount.",
       "mail": "Mail to Yawik",
