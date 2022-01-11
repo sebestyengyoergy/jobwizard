@@ -29,9 +29,15 @@
             <span v-if="!props.row.attributes.html" class="jobtitle">
               {{ props.row.attributes.jobTitle }}
             </span>
+            <div v-if="props.row.attributes.meta?.salary">
+              <q-badge>{{ props.row.attributes.meta?.salary.label }}</q-badge>
+            </div>
           </q-td>
           <q-td key="location" :props="props">
             {{ props.row.attributes.formattedAddress }}
+            <div v-if="props.row.attributes.meta?.remoteWork">
+              <q-badge>{{ $t('label.homeoffice') }}</q-badge>
+            </div>
           </q-td>
           <q-td key="company" :props="props">
             <q-img v-if="props.row.attributes.logo" class="companylogo" :src="jobDetailUrl + props.row.attributes.logo.formats.thumbnail.url" spinner-color="primary" />
