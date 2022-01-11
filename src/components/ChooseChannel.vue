@@ -8,7 +8,7 @@
           <div class="text-h6">{{ $t('congratulations') }}</div>
           <q-space />
 
-          <q-btn v-close-popup dense flat icon="mdi-close">
+          <q-btn dense flat icon="mdi-close" @click="closeDialog">
             <q-tooltip :delay="400">{{ $t('btn.close') }}</q-tooltip>
           </q-btn>
         </q-bar>
@@ -20,14 +20,14 @@
         </q-card-section>
 
         <q-card-section class="q-pt-none">
-          <q-checkbox v-model="hide" :label="$t('hide')" />
+          <q-checkbox v-model="hide" :label="$t('hide')" @click.stop="closeDialog" />
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn type="a" :href="$yawik.loginUrl()" no-caps color="primary">
+          <q-btn type="a" :href="$yawik.loginUrl()" no-caps color="info">
             {{ $t('btn.login') }}
           </q-btn>
-          <q-btn type="a" :href="$yawik.registerUrl()" no-caps color="primary">
+          <q-btn type="a" :href="$yawik.registerUrl()" no-caps color="info">
             {{ $t('btn.register') }}
             <q-tooltip>
               {{ $t('job-wont-be-lost') }}
@@ -36,17 +36,10 @@
           <q-btn type="a" no-caps color="primary">
             {{ $t('btn.download') }}
           </q-btn>
-          <q-btn type="a" disable no-caps color="primary">
-            {{ $t('btn.email') }}
-            <q-tooltip :delay="400">
-              {{ $t('coming-soon') }}
-            </q-tooltip>
-          </q-btn>
         </q-card-actions>
       </q-card>
     </q-dialog>
-
-    <div class="row justify-center q-gutter-lg" :style="'opacity: ' + ($yawik.isAuth() ? '1;' : '0.2;')">
+    <div class="row justify-center q-gutter-lg" :style="'opacity: ' + ( !alert ? '1;' : '0.2;')">
       <Channel v-for="c in data" :key="c.id" v-bind="c" />
     </div>
   </div>
@@ -54,10 +47,11 @@
 
 <script>
 import { ref } from 'vue';
-import { mapGetters, mapMutations } from 'vuex';
-import { GET_SETTINGS, SET_SETTINGS_FIELD } from 'src/store/names';
 import Channel from 'src/components/Channel.vue';
-import Data from 'src/channels.json';
+import Channels from 'src/channels.json';
+import { Cookies } from 'quasar';
+
+const settingsBanner = 'please_register';
 
 export default
 {
@@ -65,7 +59,9 @@ export default
   setup()
   {
     return {
-      alert: ref(false),
+      alert: ref(true),
+      settingsBanner: ref(false),
+      hide: ref(false),
     };
   },
   components: {
@@ -73,62 +69,22 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_SETTINGS]),
-      hide:
-      {
-        get()
-        {
-          return this[GET_SETTINGS].hideCongratulations;
-        },
-        set(val)
-        {
-          this[SET_SETTINGS_FIELD]({ hideCongratulations: val });
-        }
-      },
-      hideTime:
-      {
-        get()
-        {
-          return this[GET_SETTINGS].hideCongratulationsTime;
-        },
-        set(val)
-        {
-          this[SET_SETTINGS_FIELD]({ hideCongratulationsTime: val });
-        }
-      },
       data()
       {
-        return Data;
+        return Channels;
       }
     },
-  watch:
-  {
-    hide(newVal, oldVal)
-    {
-      this.$nextTick(() =>
-      {
-        if (newVal)
-        {
-          this[SET_SETTINGS_FIELD]({ hideCongratulationsTime: Date.now() });
-        }
-        else
-        {
-          delete this.hideTime;
-        }
-      });
-    },
-  },
   mounted()
   {
-    this.alert = !this.$yawik.isAuth() && this.checkTimer();
+    this.alert = !Cookies.has(settingsBanner);
   },
   methods:
   {
-    ...mapMutations([SET_SETTINGS_FIELD]),
-    checkTimer()
+    closeDialog()
     {
-      return this.hideTime ? (Date.now() - this.hideTime) > 86400000 : true;
-    },
+      this.$yawik.setCookies(settingsBanner, '1d');
+      this.alert = false;
+    }
   },
 
 };

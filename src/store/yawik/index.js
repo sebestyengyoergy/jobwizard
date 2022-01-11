@@ -97,7 +97,6 @@ const userSettings = {
   orgContactInfo: '',
   jobsStatsEnabled: true,
   formSpellcheckEnabled: true,
-  hideCongratulations: false
 };
 
 export default
