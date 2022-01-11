@@ -5,9 +5,9 @@
         <q-breadcrumbs-el label="Home" icon="mdi-home" :to="home" />
         <q-breadcrumbs-el
           v-if="!(route == 'wizard')"
-          :label="$t(route == 'job' ? 'jobs' : route )"
+          :label="$t(route == 'jobs' ? 'ad_management' : route )"
           :icon="'mdi-' + icon"
-          :to="jobs"
+          :to="route"
         />
         <q-breadcrumbs-el
           v-if="route == 'job'"
@@ -35,7 +35,7 @@ export default
     },
     home()
     {
-      return process.env.VUE_ROUTER_BASE + this.$yawik.lang();
+      return process.env.VUE_ROUTER_BASE + this.$yawik.lang() + '/';
     },
     icon()
     {
@@ -51,6 +51,9 @@ export default
         case 'jobboard':
           mdi = 'earth';
           break;
+        case 'templates':
+          mdi = 'content-copy';
+          break;
         case 'statistics':
           mdi = 'poll';
           break;
@@ -59,10 +62,6 @@ export default
       }
       return mdi;
     },
-    jobs()
-    {
-      return process.env.VUE_ROUTER_BASE + this.$yawik.lang() + '/jobs';
-    }
   }
 };
 </script>
