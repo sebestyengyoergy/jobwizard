@@ -361,6 +361,7 @@ export default
       {
         this.readFile(files[0]).then(b64 =>
         {
+          console.log('Image ' + b64);
           this.imageHeader = b64;
         });
       },
