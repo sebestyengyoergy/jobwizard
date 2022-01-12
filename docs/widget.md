@@ -1,8 +1,9 @@
 # Widget
 
-With the Jobboard Widget you can integrate the Jobwizard into your own homepage. All you have to do is load a Javascript and set an HTML tag.
+With the Jobboard Widget you can integrate the Jobwizard into your own homepage. All you have to do is load a Javascript and set an HTML tag. The widget loads job ads via the [Yawik API](https://api.yawik.org/documentation) 
+and renders a table.
 
-Exymple
+Example
 
 ``` html
 <link rel="stylesheet" href="https://yawik.gitlab.io/jobboard-widget/yawik-job-list.css"/>

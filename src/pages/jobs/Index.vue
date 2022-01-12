@@ -26,7 +26,7 @@
               <span class="cursor-pointer jobtitle">
                 {{ props.row.attributes.jobTitle }}
                 <q-tooltip :delay="500">
-                  {{ $t('job') }} {{ props.row.attributes.id }}
+                  {{ props.row.attributes.id }}
                 </q-tooltip>
               </span>
             </a>
@@ -41,12 +41,12 @@
             {{ props.row.attributes.organization }}
           </q-td>
           <q-td key="action" :props="props">
-            <q-btn size="sm" dense class="cursor-pointer" icon="mdi-pencil" @click="editJob(props.row)">
+            <q-btn size="sm" color="primary" dense class="cursor-pointer" icon="mdi-pencil" @click="editJob(props.row)">
               <q-tooltip :delay="500">
                 {{ $t('edit_job') }}
               </q-tooltip>
             </q-btn>
-            <q-btn size="sm" dense class="cursor-pointer" icon="mdi-delete" @click="deleteJob(props.row)">
+            <q-btn size="sm" color="negative" dense class="cursor-pointer" icon="mdi-delete" @click="deleteJob(props.row)">
               <q-tooltip :delay="500">
                 {{ $t('del_job') }}
               </q-tooltip>
