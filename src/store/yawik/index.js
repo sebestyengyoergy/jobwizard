@@ -42,8 +42,8 @@ const emptyForm = {
     publishDays: 30,
     acceptTerms: false,
     channels: [],
-    workKind: [],
-    workDuration: [],
+    workKind: ['contract'],
+    workDuration: ['fulltime'],
     partTimePercentage: 50,
     shiftWorkAmount: 2,
     remoteWork: false,
@@ -55,9 +55,6 @@ const emptyForm = {
     salaryVisibility: true,
     formattedAddress: '',
   },
-  remoteWork: false,
-  remoteWorkPercentage: 50,
-  formattedAddress: '',
   applyURL: '',
   applyEmail: '',
   applyPost: false,
@@ -72,16 +69,7 @@ const emptyForm = {
   offer: '',
   contactInfoLabel: '',
   contactInfo: '',
-  workKind: [],
-  workDuration: [],
-  partTimePercentage: 50,
-  shiftWorkAmount: 2,
   acceptTerms: false,
-  salary: {
-    label: '40.000€ - 60.000€',
-    value: '40|60'
-  },
-  salaryVisibility: true
 };
 
 const userSettings = {

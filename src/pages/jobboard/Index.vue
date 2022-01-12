@@ -25,12 +25,21 @@
               <span class="cursor-pointer jobtitle">
                 {{ props.row.attributes.jobTitle }}
               </span>
+              <q-tooltip> {{ props.row.attributes.tasks }}</q-tooltip>
             </a>
             <span v-if="!props.row.attributes.html" class="jobtitle">
               {{ props.row.attributes.jobTitle }}
             </span>
-            <div v-if="props.row.attributes.meta?.salary">
-              <q-badge>{{ props.row.attributes.meta?.salary.label }}</q-badge>
+            <div>
+              <span v-if="props.row.attributes.meta?.salary">
+                <q-badge>{{ props.row.attributes.meta?.salary.label }}</q-badge>
+              </span>
+              <span v-if="props.row.attributes.meta?.workKind && props.row.attributes.meta?.workKind.length > 0">
+                <q-badge color="secondary">{{ props.row.attributes.meta?.workKind.map(item => `${$t('label.' + item)}`).join(', ') }}</q-badge>
+              </span>
+              <span v-if="props.row.attributes.meta?.workDuration && props.row.attributes.meta?.workDuration.length > 0">
+                <q-badge color="green">{{ props.row.attributes.meta?.workDuration.map(item => `${$t('label.' + item)}`).join(', ') }}</q-badge>
+              </span>
             </div>
           </q-td>
           <q-td key="location" :props="props">
@@ -45,7 +54,7 @@
               <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M18,15H16V17H18M18,11H16V13H18M20,19H12V17H14V15H12V13H14V11H12V9H20M10,7H8V5H10M10,11H8V9H10M10,15H8V13H10M10,19H8V17H10M6,7H4V5H6M6,11H4V9H6M6,15H4V13H6M6,19H4V17H6M12,7V3H2V21H22V7H12Z" />
               </svg>
-            </q-img>
+            </q-img><q-tooltip> {{ props.row.attributes.intro }}</q-tooltip>
             {{ props.row.attributes.organization }}
           </q-td>
         </q-tr>
@@ -60,9 +69,13 @@
 <script>
 
 import { useMeta } from 'quasar';
+import Tooltip from 'src/components/form/Tooltip.vue';
 
 export default {
   name: 'Index',
+  components: [
+    Tooltip
+  ],
   setup()
   {
     useMeta({
