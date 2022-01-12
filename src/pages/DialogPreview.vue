@@ -336,7 +336,7 @@ export default
       </article>
     </div>
   </div>
-  <div align="center">powered by <a href="https://jobwizard.yawik.org">jobwizard</a></div>
+  <div align="center">powered by <a href="https://jobwizard.yawik.org" target="_blank">jobwizard</a></div>
 </body>
 </html>`;
       },
