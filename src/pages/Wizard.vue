@@ -40,7 +40,8 @@
         <template #navigation>
           <q-page-sticky style="z-index: 5900;" position="bottom-right" :offset="[18, -65]">
             <div class="row justify-end q-px-lg q-pb-lg">
-              <q-btn v-if="steps.indexOf(currentStep) > 0 && mode==='insert'" name="prev" outline color="primary" :label="$t('btn.back')"
+              <q-btn v-if="steps.indexOf(currentStep) > 0 && mode==='insert'" name="prev" outline color="primary"
+                     :label="$t('btn.back')"
                      class="q-mr-md" @click.stop="navigate('previous')"
               />
               <q-btn v-if="lastStep & !$yawik.isAuth()" color="primary" name="next" :label="$t('btn.download')"
@@ -92,7 +93,7 @@ import StepOne from './steps/StepOne';
 import StepTwo from './steps/StepTwo';
 import StepThree from './steps/StepThree';
 import StepFour from './steps/StepFour';
-import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_META, GET_LOGO, GET_SETTINGS } from '../store/names';
+import { GET_STEP, SET_STEP, CLEAR_FORM, GET_FORM, GET_META, GET_LOGO, GET_HEADER, GET_SETTINGS } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import saveAs from 'src/lib/FileSaver';
 
@@ -135,7 +136,7 @@ export default {
   },
   computed:
       {
-        ...mapGetters([GET_STEP, GET_FORM, GET_META, GET_SETTINGS, GET_LOGO]),
+        ...mapGetters([GET_STEP, GET_FORM, GET_META, GET_SETTINGS, GET_LOGO, GET_HEADER]),
         currentStep:
           {
             get()
@@ -162,6 +163,10 @@ export default {
         logo()
         {
           return this[GET_LOGO];
+        },
+        header()
+        {
+          return this[GET_HEADER];
         },
       },
   watch:
@@ -214,7 +219,7 @@ export default {
         onSave()
         {
           let methodType = 'POST';
-          let url = process.env.YAWIK_API_URL + '/api/jobs';
+          let url = process.env.YAWIK_STRAPI_URL + '/api/jobs';
           const form = { ...this.$store.getters.GET_FORM };
           if (form.id != null)
           {
@@ -230,11 +235,17 @@ export default {
           });
           formObj.html = html;
 
-          const logo = this[GET_LOGO];
+          const logo = this.logo;
+          const header = this.header;
           if (logo)
           {
-            const binary = fetch(logo).then(res => res.blob());
+            const binary = this.base64toBlob(logo);
             formData.append('logo', binary);
+          }
+          if (header)
+          {
+            const binary = this.base64toBlob(header);
+            formData.append('header', binary);
           }
 
           this.progress = 0;
@@ -345,6 +356,31 @@ export default {
         abortForm()
         {
           this[CLEAR_FORM]();
+        },
+        base64toBlob(dataURI)
+        {
+          // convert base64/URLEncoded data component to raw binary data held in a string
+          let byteString;
+          if (dataURI.split(',')[0].indexOf('base64') >= 0)
+          {
+            byteString = atob(dataURI.split(',')[1]);
+          }
+          else
+          {
+            byteString = unescape(dataURI.split(',')[1]);
+          }
+
+          // separate out the mime component
+          const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+          // write the bytes of the string to a typed array
+          const ia = new Uint8Array(byteString.length);
+          for (let i = 0; i < byteString.length; i++)
+          {
+            ia[i] = byteString.charCodeAt(i);
+          }
+
+          return new Blob([ia], { type: mimeString });
         }
       }
 }
