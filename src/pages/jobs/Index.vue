@@ -46,7 +46,7 @@
                 {{ $t('edit_job') }}
               </q-tooltip>
             </q-btn>
-            <q-btn size="sm" color="negative" dense class="cursor-pointer" icon="mdi-delete" @click="deleteJob(props.row)">
+            <q-btn size="sm" color="negative" style="margin-left: 5px;" dense class="cursor-pointer" icon="mdi-delete" @click="confirm(props.row.id,props.row.attributes.jobTitle)">
               <q-tooltip :delay="500">
                 {{ $t('del_job') }}
               </q-tooltip>
@@ -102,7 +102,7 @@ export default {
           rel: 'canonical',
           href: 'https://jobwizard.yawik.org' + window.location.pathname
         }
-      },
+      }
     });
   },
   data()
@@ -241,24 +241,50 @@ export default {
             name: 'wizard',
           });
         },
-        deleteJob(job)
+        deleteJob(id)
         {
           this.$axios({
             method: 'DELETE',
-            url: process.env.YAWIK_API_URL + '/api/jobs/' + job.id,
+            url: process.env.YAWIK_STRAPI_URL + '/api/jobs/' + id,
             headers: {
               accept: 'application/json',
               Authorization: 'Bearer ' + this.$store.getters.GET_TOKEN.token
             }
           }).then(response =>
           {
-
+            this.getJobs();
+            this.$q.notify({
+              type: 'positive',
+              message: `Job deleted successfully.`
+            });
           });
 
           this.$router.push({
             name: 'jobs',
           });
-        }
+        },
+        confirm(id, title)
+        {
+          this.$q.dialog({
+            title: 'Alert',
+            message: 'Do you really want to delete the job advertisement ' + title + '?',
+            cancel: true,
+            persistent: true
+          }).onOk(() =>
+          {
+            this.deleteJob(id);
+            console.log('>>>> OK');
+          }).onOk(() =>
+          {
+            console.log('>>>> second OK catcher');
+          }).onCancel(() =>
+          {
+            console.log('>>>> Cancel');
+          }).onDismiss(() =>
+          {
+            console.log('I am triggered on both OK and Cancel');
+          });
+        },
       }
 };
 </script>
@@ -297,36 +323,36 @@ export default {
 </style>
 
 <i18n>
-{
+  {
   "en": {
-    "edit_job":"Edit Job",
-    "title": "Please register",
-    "action": "Action",
-    "unpublished": "unpublished",
-    "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
-    "preis1": "Registration is free of charge",
-    "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
-    "del_job": "Delete job ad"
+  "edit_job":"Edit Job",
+  "title": "Please register",
+  "action": "Action",
+  "unpublished": "unpublished",
+  "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
+  "preis1": "Registration is free of charge",
+  "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
+  "del_job": "Delete job ad"
   },
   "de": {
-    "edit_job":"Anzeige bearbeiten",
-    "unpublished": "unveröffentlicht",
-    "title": "Bitte melden Sie sich an",
-    "action": "Aktion",
-    "ad-management-description": "Mit der Anzeigenverwaltung können die Stellenanzeigen speichern, bearbeiten und löschen. Die Anzeigenverwaltung wird auch benötigt, um Stellenanzeigen in ihre Homepage zu integrieren.",
-    "date": "Datum",
-    "preis1": "Die Anmeldung ist kostenlos",
-    "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
-    "del_job": "Stellenanzeige löschen"
+  "edit_job":"Anzeige bearbeiten",
+  "unpublished": "unveröffentlicht",
+  "title": "Bitte melden Sie sich an",
+  "action": "Aktion",
+  "ad-management-description": "Mit der Anzeigenverwaltung können die Stellenanzeigen speichern, bearbeiten und löschen. Die Anzeigenverwaltung wird auch benötigt, um Stellenanzeigen in ihre Homepage zu integrieren.",
+  "date": "Datum",
+  "preis1": "Die Anmeldung ist kostenlos",
+  "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
+  "del_job": "Stellenanzeige löschen"
   },
   "fr": {
-    "edit_job": "Modifier l'annonce",
-    "title": "Veuillez vous identifier.",
-    "unpublished": "non publié",
-    "action": "Action",
-    "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
-    "preis1": "L'inscription est gratuite",
-    "del_job": "Supprimer une offre d'emploi"
+  "edit_job": "Modifier l'annonce",
+  "title": "Veuillez vous identifier.",
+  "unpublished": "non publié",
+  "action": "Action",
+  "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
+  "preis1": "L'inscription est gratuite",
+  "del_job": "Supprimer une offre d'emploi"
   }
-}
+  }
 </i18n>
