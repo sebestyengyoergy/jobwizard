@@ -32,6 +32,7 @@ export default
   },
   nav:
   {
+    applications: () => 'Bewerbungen',
     settings: () => 'Einstellungen',
     jobs: () => 'Stellenanzeigen',
     job_title: () => 'Job title',

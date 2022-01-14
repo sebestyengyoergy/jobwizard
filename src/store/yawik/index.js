@@ -1,4 +1,5 @@
 import { uid } from 'quasar';
+import userSettings from 'src/settings/user';
 
 import {
   GET_FORM,
@@ -70,21 +71,6 @@ const emptyForm = {
   contactInfoLabel: '',
   contactInfo: '',
   acceptTerms: false,
-};
-
-const userSettings = {
-  miscDarkmode: 'auto',
-  miscTimezone: '',
-  country: null,
-  useBrowserLanguage: true,
-  defaultLanguage: '',
-  orgName: '',
-  orgDescriptionLabel: '',
-  orgDescription: '',
-  orgContactInfoLabel: '',
-  orgContactInfo: '',
-  jobsStatsEnabled: true,
-  formSpellcheckEnabled: true,
 };
 
 export default

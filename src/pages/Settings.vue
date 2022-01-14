@@ -41,6 +41,9 @@
             <Jobs />
           </div>
           <div v-else-if="selectedIndex===2">
+            <Applications />
+          </div>
+          <div v-else-if="selectedIndex===3">
             <Misc />
           </div>
           <q-banner
@@ -69,6 +72,7 @@ import { ref } from 'vue';
 import Organization from './settings/Organization';
 import Misc from './settings/Misc';
 import Jobs from './settings/Jobs';
+import Applications from './settings/Applications';
 import { Cookies, useMeta } from 'quasar';
 
 const settingsBanner = 'settings_banner';
@@ -79,6 +83,7 @@ export default
   {
     Organization,
     Jobs,
+    Applications,
     Misc
   },
   data()
@@ -95,17 +100,22 @@ export default
       return [
         {
           icon: 'mdi-domain',
-          label: this.$t('organization'),
+          label: this.$t('nav.organization'),
           separator: true
         },
         {
           icon: 'mdi-newspaper-variant-outline',
-          label: this.$t('jobs'),
+          label: this.$t('nav.jobs'),
+          separator: true
+        },
+        {
+          icon: 'mdi-account-box-multiple-outline',
+          label: this.$t('nav.applications'),
           separator: true
         },
         {
           icon: 'mdi-cog',
-          label: this.$t('misc'),
+          label: this.$t('nav.misc'),
           separator: false
         }
       ];
