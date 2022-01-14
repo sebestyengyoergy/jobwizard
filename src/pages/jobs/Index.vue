@@ -46,7 +46,7 @@
                 {{ $t('edit_job') }}
               </q-tooltip>
             </q-btn>
-            <q-btn size="sm" color="negative" dense class="cursor-pointer" icon="mdi-delete" @click="confirm(props.row.id,props.row.attributes.jobTitle)">
+            <q-btn size="sm" color="negative" style="margin-left: 5px;" dense class="cursor-pointer" icon="mdi-delete" @click="confirm(props.row.id,props.row.attributes.jobTitle)">
               <q-tooltip :delay="500">
                 {{ $t('del_job') }}
               </q-tooltip>
