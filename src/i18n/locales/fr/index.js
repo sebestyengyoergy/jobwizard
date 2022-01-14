@@ -31,6 +31,7 @@ export default
     publish: () => 'Publier',
   },
   nav: {
+    applications: () => 'Candidatures',
     settings: () => 'Réglages',
     jobs: () => 'Offres d\'emploi',
     job_title: () => 'Titre de l\'annonce',

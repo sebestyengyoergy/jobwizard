@@ -1,6 +1,6 @@
 <template>
   <div class="full-width">
-    <div class="text-h4 q-mb-md">{{ $t("settings.jobs_title") }}</div>
+    <div class="text-h4 q-mb-md">{{ $t("nav.jobs") }}</div>
     <h5>{{ $t("settings.jobs_location.header") }}</h5>
     <div>{{ $t("settings.jobs_location.help") }}</div>
     <div class="q-mt-md">
@@ -151,7 +151,6 @@ export default {
 {
   "en": {
     "settings": {
-      "jobs_title": "Jobs",
       "jobs_location": {
         "header": "Location",
         "label": "",
@@ -180,7 +179,6 @@ export default {
   },
   "de": {
     "settings": {
-      "jobs_title": "Stellenanzeigen",
       "jobs_location": {
         "header": "Dienstsitz",
         "help": "Wenn sie immer wieder an bestimmten Orten rekrutieren, können sie hier eine Liste von Orten definieren."
@@ -206,7 +204,6 @@ export default {
   },
   "fr": {
     "settings": {
-      "jobs_title": "Offres d'emploi",
       "jobs_location": {
         "header": "Lieu de travail",
         "help": "S'ils recrutent toujours à certains endroits, ils peuvent définir ici une liste de lieux."
