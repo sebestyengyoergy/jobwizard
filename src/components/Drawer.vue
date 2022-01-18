@@ -63,29 +63,37 @@ export default
             this.$emit('update:modelValue', val);
           }
         },
-      lang()
-      {
-        return this.$q.lang.isoName === 'en-GB' ? 'en' : this.$q.lang.isoName;
-      },
       menuList()
       {
         return [
           {
+            icon: 'mdi-earth',
+            label: this.$t('jobboard'),
+            to: '/' + this.$yawik.lang() + '/jobboard',
+            separator: true
+          },
+          {
             icon: 'mdi-view-list',
-            label: this.$t('jobs'),
-            to: '/' + this.lang + '/jobs',
+            label: this.$t('ad_management'),
+            to: '/' + this.$yawik.lang() + '/jobs',
+            separator: true
+          },
+          {
+            icon: 'mdi-content-copy',
+            label: this.$t('templates'),
+            to: '/' + this.$yawik.lang() + '/templates',
             separator: true
           },
           {
             icon: 'mdi-poll',
             label: this.$t('statistics'),
-            to: '/' + this.lang + '/statistics',
+            to: '/' + this.$yawik.lang() + '/statistics',
             separator: true
           },
           {
             icon: 'mdi-cogs',
             label: this.$t('settings'),
-            to: '/' + this.lang + '/settings',
+            to: '/' + this.$yawik.lang() + '/settings',
             separator: false
           }
         ];
@@ -100,18 +108,3 @@ export default
     }
 };
 </script>
-
-<i18n>
-  {
-    "en": {
-      "jobs": "Jobs",
-      "statistics": "Statistics",
-      "settings": "Settings"
-    },
-    "de": {
-      "jobs": "Stellenanzeigen",
-      "statistics": "Statistiken",
-      "settings": "Einstellungen"
-    }
-  }
-</i18n>

@@ -15,67 +15,53 @@
       v-model.trim="organization"
       name="organization"
       class="col-12"
-      :label="$t('organization')"
+      :label="$t('label.organization')"
       :rules="[ruleRequired]"
       @enterPress="gotoNext"
     />
 
-    <!-- Country and location -->
-    <q-select
-      v-model="country"
-      :label="$t('country')"
-      :options="filteredCountries"
-      color="primary"
-      name="country"
-      outlined
-      dense
-      options-dense
-      use-input
-      fill-input
-      hide-selected
-      :rules="[ruleRequired]"
-      input-debounce="200"
-      class="col-lg-1 col-md-2 col-sm-3 col-xs-4"
-      @filter="countryAutocomplete"
-      @keypress.enter="gotoNext"
-    >
-      <template #option="scope">
-        <q-item v-bind="scope.itemProps">
-          <q-item-section avatar>
-            <img :src="'country/'+scope.opt.value.toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>{{ scope.opt.label }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </template>
-      <!-- Current flag -->
-      <template #prepend>
-        <q-avatar v-if="country">
-          <img :src="'country/'+(country.value || '').toLowerCase()+'.png'" style="max-width: 48px; border: 1px solid #E5E5E5;">
-        </q-avatar>
-      </template>
-    </q-select>
-    <q-input
-      id="location"
-      ref="location"
-      v-model.trim="locationDisplay"
-      :label="$t('location')"
-      color="primary"
-      class="col-lg-11 col-md-10 col-sm-9 col-xs-8"
-      name="location"
-      outlined
-      dense
-      :rules="[ruleRequired]"
-      @keypress.enter="gotoNext"
-    />
-
+    <div class="col-12">
+      <div class="row">
+        <q-input
+          id="location"
+          ref="location"
+          v-model.trim="locationDisplay"
+          :label="$t('label.location')"
+          color="primary"
+          class="col-lg-8 col-md-8"
+          name="location"
+          outlined
+          dense
+          :rules="[ruleRequired]"
+          @keypress.enter="gotoNext"
+        />
+        <q-checkbox
+          v-model="remoteWork"
+          style="margin-top: -20px;"
+          :label="$t('label.homeoffice')"
+          color="primary"
+          name="apply_post"
+          class="col-lg-2 col-md-2"
+        />
+        <q-slider
+          v-if="remoteWork"
+          v-model="remoteWorkPercentage"
+          name="remoteWorkPercentage"
+          class="col-lg-2 col-md-2"
+          :label-value="remoteWorkPercentage + '%'"
+          label-always
+          :min="10"
+          :max="100"
+          :step="10"
+        />
+      </div>
+    </div>
     <!-- URL -->
     <TextInput
       v-model="applyUrl"
       name="apply_url"
       class="col-12"
-      :label="$t('apply_url')"
+      :label="$t('label.apply_url')"
       :rules="[validURL]"
       :disable="applyPost"
       @enterPress="gotoNext"
@@ -86,7 +72,7 @@
       v-model="applyEmail"
       name="apply_email"
       class="col-12"
-      :label="$t('apply_email')"
+      :label="$t('label.apply_email')"
       :rules="[validEmail]"
       :disable="applyPost"
       @enterPress="gotoNext"
@@ -94,7 +80,7 @@
 
     <q-checkbox
       v-model="applyPost"
-      :label="$t('apply_post')"
+      :label="$t('label.apply_post')"
       color="primary"
       name="apply_post"
     >
@@ -106,7 +92,7 @@
       v-model="reference"
       name="reference"
       class="col-12"
-      :label="$t('reference')"
+      :label="$t('label.reference')"
       @enterPress="gotoNext"
     />
   </div>
@@ -114,14 +100,12 @@
 
 <script>
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_FORM, SET_FIELD } from 'src/store/names';
+import { GET_FORM, GET_SETTINGS, SET_META, GET_META, SET_FIELD } from 'src/store/names';
 import mixinValidations from 'src/lib/validations';
-import countries from 'src/countries';
 import TextInput from 'src/components/form/TextInput.vue';
 import Tooltip from 'src/components/form/Tooltip.vue';
 
-export default
-{
+export default {
   name: 'StepOne',
   components: {
     TextInput,
@@ -133,7 +117,6 @@ export default
   {
     return {
       hideDelay: 600,
-      filteredCountries: [],
       googleSearchBox: null,
       googleMapsListener: null,
       locationForm: [
@@ -157,114 +140,122 @@ export default
         administrative_area_level_1: 'short_name',
         country: 'long_name',
         postal_code: 'short_name',
-      },
+      }
     };
   },
   computed:
-    {
-      ...mapGetters([GET_FORM]),
-      countryList()
       {
-        return Object.entries(countries).map(([code, name]) => ({
-          value: code,
-          label: name,
-          search: name.toLocaleLowerCase(),
-        }));
+        ...mapGetters([GET_FORM, GET_META, GET_SETTINGS]),
+
+        jobTitle:
+
+          {
+            get()
+            {
+              return this[GET_FORM].jobTitle;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ jobTitle: val });
+            }
+          },
+        remoteWork:
+          {
+            get()
+            {
+              return this[GET_META].remoteWork;
+            },
+            set(val)
+            {
+              this[SET_META]({ remoteWork: val });
+            }
+          },
+        remoteWorkPercentage:
+          {
+            get()
+            {
+              return this[GET_META].remoteWorkPercentage;
+            },
+            set(val)
+            {
+              this[SET_META]({ remoteWorkPercentage: val });
+            }
+          },
+        organization:
+          {
+            get()
+            {
+              return this[GET_FORM].organization;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ organization: val });
+            }
+          },
+
+        applyUrl:
+          {
+            get()
+            {
+              return this[GET_FORM].applyURL;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ applyURL: val });
+            }
+          },
+        applyEmail:
+          {
+            get()
+            {
+              return this[GET_FORM].applyEmail;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ applyEmail: val });
+            }
+          },
+        applyPost:
+          {
+            get()
+            {
+              return this[GET_FORM].applyPost;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ applyPost: val });
+            }
+          },
+        reference:
+          {
+            get()
+            {
+              return this[GET_FORM].reference;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ reference: val });
+            }
+          },
+        locationDisplay:
+          {
+            get()
+            {
+              return this[GET_FORM].formattedAddress;
+            },
+            set(val)
+            {
+              this[SET_FIELD]({ formattedAddress: val });
+            }
+          },
+        countries:
+          {
+            get()
+            {
+              return this[GET_SETTINGS].countries;
+            }
+          }
       },
-      jobTitle:
-        {
-          get()
-          {
-            return this[GET_FORM].jobTitle;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ jobTitle: val });
-          }
-        },
-      organization:
-        {
-          get()
-          {
-            return this[GET_FORM].organization;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ organization: val });
-          }
-        },
-      country:
-        {
-          get()
-          {
-            return this[GET_FORM].country;
-          },
-          set(val)
-          {
-            this.googleSearchBox.setComponentRestrictions(
-              {
-                country: [val.value.toLocaleLowerCase()]
-              }
-            );
-            this[SET_FIELD]({ country: val });
-          }
-        },
-      applyUrl:
-        {
-          get()
-          {
-            return this[GET_FORM].applyURL;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ applyURL: val });
-          }
-        },
-      applyEmail:
-        {
-          get()
-          {
-            return this[GET_FORM].applyEmail;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ applyEmail: val });
-          }
-        },
-      applyPost:
-        {
-          get()
-          {
-            return this[GET_FORM].applyPost;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ applyPost: val });
-          }
-        },
-      reference:
-        {
-          get()
-          {
-            return this[GET_FORM].reference;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ reference: val });
-          }
-        },
-      locationDisplay:
-        {
-          get()
-          {
-            return this[GET_FORM].formattedAddress;
-          },
-          set(val)
-          {
-            this[SET_FIELD]({ formattedAddress: val });
-          }
-        },
-    },
   mounted()
   {
     if (window.google)
@@ -274,6 +265,14 @@ export default
         fields: ['formatted_address', 'address_components'],
         types: ['(cities)']
       });
+      if (this.countries)
+      {
+        this.googleSearchBox.setComponentRestrictions(
+          {
+            country: this.countries.map(element => element.value)
+          }
+        );
+      }
       this.googleSearchBox.addListener('place_changed', () =>
       {
         const place = this.googleSearchBox.getPlace();
@@ -288,103 +287,56 @@ export default
     this.googleSearchBox = null;
   },
   methods:
-    {
-      ...mapMutations([SET_FIELD]),
-      countryAutocomplete(val, update, abort)
       {
-        update(() =>
+        ...mapMutations([SET_FIELD, SET_META]),
+        gotoNext()
         {
-          const needle = val.toLocaleLowerCase();
-          this.filteredCountries = this.countryList.filter(v => v.search.indexOf(needle) > -1);
-        });
-      },
-      gotoNext()
-      {
-        this.$emit('next');
-      },
-      getLocationComp(place, type)
-      {
-        for (const component of place)
+          this.$emit('next');
+        },
+        getLocationComp(place, type)
         {
-          if (component.types[0] === type)
+          for (const component of place)
           {
-            return component[this.locationNameFormat[type]];
+            if (component.types[0] === type)
+            {
+              return component[this.locationNameFormat[type]];
+            }
           }
-        }
-        return '';
-      },
-      insertLocatationData(loc)
-      {
-        for (const component of this.locationForm)
+          return '';
+        },
+        insertLocatationData(loc)
         {
-          switch (component)
+          for (const component of this.locationForm)
           {
-            case 'location':
-              this.locationData.streetAddress = this.getLocationComp(loc, 'street_number') + ' ' + this.getLocationComp(loc, 'route');
-              break;
-            case 'locality':
-              this.locationData.addressLocality = this.getLocationComp(loc, component);
-              break;
-            case 'administrative_area_level_1':
-              this.locationData.addressRegion = this.getLocationComp(loc, component);
-              break;
-            case 'country':
-              this.locationData.addressCountry = this.getLocationComp(loc, component);
-              break;
-            case 'postal_code':
-              this.locationData.postalCode = this.getLocationComp(loc, component);
-              break;
+            switch (component)
+            {
+              case 'location':
+                this.locationData.streetAddress = this.getLocationComp(loc, 'street_number') + ' ' + this.getLocationComp(loc, 'route');
+                break;
+              case 'locality':
+                this.locationData.addressLocality = this.getLocationComp(loc, component);
+                break;
+              case 'administrative_area_level_1':
+                this.locationData.addressRegion = this.getLocationComp(loc, component);
+                break;
+              case 'country':
+                this.locationData.addressCountry = this.getLocationComp(loc, component);
+                break;
+              case 'postal_code':
+                this.locationData.postalCode = this.getLocationComp(loc, component);
+                break;
+            }
           }
+        },
+        locationChanged(place)
+        {
+          const addressComponents = place.address_components;
+          this.insertLocatationData(addressComponents);
+          this.$store.commit('SET_LOCATION', Object.assign({}, this.locationData));
+          this.locationDisplay = place.formatted_address;
         }
-      },
-      locationChanged(place)
-      {
-        const addressComponents = place.address_components;
-        this.insertLocatationData(addressComponents);
-        this.$store.commit('SET_LOCATION', Object.assign({}, this.locationData));
-        this.locationDisplay = place.formatted_address;
-      },
-    }
-};
+        ,
+      }
+}
+;
 </script>
-
-<i18n>
-  {
-    "en": {
-      "job_title": "Job title",
-      "organization": "Organization",
-      "country": "Country",
-      "location": "Location",
-      "apply_url": "Apply URL",
-      "apply_email": "Apply e-mail",
-      "apply_post": "No online application/postal application",
-      "reference": "Reference",
-      "help": {
-        "reference": "You can assign a reference number to your advertisement. An applicant can refer to this.",
-      }
-    },
-    "de": {
-      "job_title": "Anzeigentitel",
-      "organization": "Name des Unternehmens",
-      "country": "Land",
-      "location": "Ort",
-      "apply_url": "Bewerbungslink",
-      "apply_email": "Bewerbungsemail",
-      "apply_post": "keine Onlinebewerbung/postalische Bewerbungen",
-      "reference": "Referenz",
-      "rules": {
-        "required": "Pflichtfeld",
-        "invalid_url": "ungültige URL",
-        "invalid_email": {
-          "hostname": "ungültiger Email Hostname",
-          "domain": "ungültige Email Domain",
-          "delimiters": "ungültige Email Trennzeichen"
-        }
-      },
-      "help": {
-        "reference": "Sie können Ihrer Anzeige eine Referenznummer zuweisen. Auf diese kann sich ein Bewerber beziehen.",
-        "apply_post": "hier können sie festlegen, ob sie Bewerbungen lieber in der traditionellen Form per Post wüschen. Der Berwerbungsbutton in der Stellenanzeige passt sich dann entsprechend an."
-      }
-    }
-  }
-</i18n>

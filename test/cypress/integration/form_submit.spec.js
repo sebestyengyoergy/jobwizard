@@ -21,7 +21,7 @@ describe('Filling and sending the form', () =>
     cy.get('[name="organization"]').type('CROSS Solution');
     cy.get('[name="apply_url"]').type('http://coss-solution.de');
     cy.get('[name="apply_email"]').type('bleek@cross-solution.de');
-    cy.get('.q-checkbox__svg').click();
+    cy.get('[aria-label="keine Onlinebewerbung/postalische Bewerbungen"] > .q-checkbox__inner > .q-checkbox__bg > .q-checkbox__svg').click();
     cy.get('[name="reference"]').type('123');
     cy.get('[name="next"]').click();
   });
@@ -46,6 +46,7 @@ describe('Filling and sending the form', () =>
 
   it('Step 4. Download', () =>
   {
+    cy.get('.q-bar > .q-btn > .q-btn__content > .mdi').click();
     cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
     // submit form
     cy.get('[name="next"]').click();

@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex">
     <div style="width: 100%;" class="text-h4 q-mb-md">
-      {{ $t('statistics') }}
+      {{ $t('nav.statistics') }}
       <apexchart
         width="500"
         type="bar"
@@ -25,10 +25,22 @@
 <script>
 import SupportYawik from 'src/components/SupportYawik';
 import VueApexCharts from 'vue3-apexcharts';
+import { useMeta } from 'quasar';
 
 export default
 {
   name: 'Statistics',
+  setup()
+  {
+    useMeta({
+      link: {
+        material: {
+          rel: 'canonical',
+          href: 'https://jobwizard.yawik.org' + window.location.pathname
+        }
+      },
+    });
+  },
   components: {
     apexchart: VueApexCharts,
     SupportYawik
@@ -81,14 +93,3 @@ export default
   },
 };
 </script>
-
-<i18n>
-  {
-    'en': {
-      'statistics': 'Statistics',
-    },
-    'de': {
-      'statistics': 'Statistiken',
-    }
-  }
-</i18n>

@@ -32,16 +32,16 @@
       <q-toggle
         v-model="portal"
         :val="name"
-        :disable="!$store.getters.HAS_AUTH"
+        :disable="!$yawik.isAuth()"
       >
-        <Tooltip v-if="!$store.getters.HAS_AUTH" :text="$t('pleaseRegister')" />
+        <Tooltip v-if="!$yawik.isAuth()" :text="$t('pleaseRegister')" />
       </q-toggle>
     </q-card-actions>
   </q-card>
 </template>
 
 <script>
-import { GET_FORM, SET_FIELD } from 'src/store/names';
+import { GET_META, SET_META } from 'src/store/names';
 import { mapGetters, mapMutations } from 'vuex';
 import Tooltip from 'src/components/form/Tooltip';
 export default
@@ -85,22 +85,22 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_FORM]),
+      ...mapGetters([GET_META]),
       portal:
         {
           get()
           {
-            return this[GET_FORM].channels;
+            return this[GET_META].channels;
           },
           set(val)
           {
-            this[SET_FIELD]({ channels: val });
+            this[SET_META]({ channels: val });
           }
         },
     },
   methods:
     {
-      ...mapMutations([SET_FIELD]),
+      ...mapMutations([SET_META]),
     }
 };
 </script>

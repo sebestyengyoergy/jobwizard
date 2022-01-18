@@ -12,6 +12,9 @@ theme:
   favicon: images/favicon.png
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/yawik-job-list.css
+extra_javascript:
+  - js/yawik-job-list.js
 markdown_extensions:
   - attr_list
   - md_in_html

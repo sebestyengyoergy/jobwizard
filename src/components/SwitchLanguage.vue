@@ -1,7 +1,7 @@
 <template>
   <q-btn-dropdown no-caps color="primary">
     <template #label>
-      <img :src="'flags/'+$root.$i18n.locale+'.png'" width="28" :alt="$root.$i18n.locale.substr(0, 2).toUpperCase()"
+      <img :src="'flags/'+$root.$i18n.locale+'.svg'" width="28" :alt="$root.$i18n.locale.substr(0, 2).toUpperCase()"
            class="q-mr-md"
       >
       {{ $q.platform.is.mobile ? '' : $t('localeName') }}
@@ -20,18 +20,19 @@
 </template>
 
 <script>
-import { SET_LANG } from '../store/names';
+import { SET_LANG, SET_SETTINGS_FIELD } from '../store/names';
 import { mapMutations } from 'vuex';
 
 export default {
   name: 'SwitchLanguage',
   methods:
       {
-        ...mapMutations([SET_LANG]),
+        ...mapMutations([SET_LANG, SET_SETTINGS_FIELD]),
         setLocale(lang)
         {
           this.$root.$i18n.locale = lang;
-          this[SET_LANG](lang);
+          this[SET_LANG](lang); // should be removed. We only need default Language
+          this[SET_SETTINGS_FIELD]({ defaultLanguage: lang });
 
           const routeName = this.$route.name;
           let routePath = '/' + lang;
@@ -44,7 +45,7 @@ export default {
             }
           }
           this.$router.push(routePath);
-          //   this.$router.push('/' + lang + (this.$route.name !== 'wizard' ? '/' + this.$route.name : ''));
+
           import(
             /* webpackInclude: /(de|en-GB)\.js$/ */
             'quasar/lang/' + (lang === 'en' ? 'en-GB' : lang)

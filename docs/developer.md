@@ -2,11 +2,19 @@
 
 ## Testing
 
-e2e Tests are done with cypress.
+there are e2e and unit tests. Unit tests are done with jest. e2e Tests are done with cypress.
+
+### cypress
 
 Testsuite can be started locally by:
 
 `yarn test:e2e`
+
+### jest
+
+test tests must be located in a __tests__ directory. Test files must be prefixed by jest.js. 
+
+`yarn test:unit`
 
 ## Documentation
 
@@ -17,9 +25,15 @@ the documentation.
 
 ## Api
 
-our API is build with api-plattform
+our API is build with strapi
+
+https://api.yawik.org/documentation/
+
+There is a staging and a live version. 
 
 - Staging: https://staging.api.yawik.org
-- Live: https://yawik.api.org
+- Live: https://api.yawik.org
 
 ## VS Code
+
+

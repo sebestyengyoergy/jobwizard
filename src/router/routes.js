@@ -22,10 +22,16 @@ const routes = [
         component: () => import('pages/jobs/Index.vue'),
       },
       {
-        path: 'job/:id',
+        path: 'edit/job/:id',
         name: 'job',
         props: true,
-        component: () => import('pages/jobs/Job.vue'),
+        component: () => import('pages/Wizard.vue'),
+
+      },
+      {
+        path: 'jobboard',
+        name: 'jobboard',
+        component: () => import('pages/jobboard/Index.vue'),
       },
       {
         path: 'settings',
@@ -36,6 +42,11 @@ const routes = [
         path: 'statistics',
         name: 'statistics',
         component: () => import('pages/Statistics.vue'),
+      },
+      {
+        path: 'templates',
+        name: 'templates',
+        component: () => import('pages/Templates.vue'),
       },
     ],
   },

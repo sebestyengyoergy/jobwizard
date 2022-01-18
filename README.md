@@ -1,8 +1,8 @@
-# Wizard for entering job ad
+# Wizard. Input tool for jobs. 
 
 Standalone wizard based on [quasar](https://quasar.dev/). It is a single page application (SPA) running in the  clients browser. The result is a static HTML content. 
 
-As an authenticated user it's possible to save the job.
+As an authenticated user it's possible to save, manage and publish jobs. Jobs are [Google Jobs](https://jobs.google.com/about/) ready.
 
 ![JobWizard](./docs/jobwizard-animated.gif)
 
@@ -12,7 +12,7 @@ https://gitlab.com/yawik/rewrite/-/issues/1
 
 ## Status
 
-In development.
+ready for production
 
 ## Requirements
 
@@ -23,8 +23,8 @@ In development.
 
 ```
 git clone https://gitlab.com/yawik/jobwizard.git
-cd wizard
-yarn install
+cd jobwizard
+yarn
 yarn dev
 ```
 
@@ -37,6 +37,7 @@ The form is .env-aware.
 | YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
 | YAWIK_APP_KEY                | Shared App Key                      |
 | YAWIK_API_URL                | Yawik API                           |
+| YAWIK_JOB_URL                | URL to job details                  |
 | YAWIK_ROUTER_BASE            | Router Base of the web app          |
 | YAWIK_SSO_URL                | Keycloak base URL                   |  
 | YAWIK_SSO_REALM              | Keycloak realm                      |  
@@ -48,9 +49,15 @@ It's possible to show a toolbar with the Logo and a navigation drawer by using q
 |--------------|-------------------|
 | tb           | hide toolbar      |  
 
+## Live
+
+https://jobwizard.yawik.org/
+
 ## Demo
 
-http://jobwizard.yawik.org/
+you can use the same login in the live and the demo system
+
+https://yawik.gitlab.io/jobwizard/
 
 ## Documentation
 

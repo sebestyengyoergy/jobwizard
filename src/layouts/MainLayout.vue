@@ -29,12 +29,12 @@
 
         <q-separator v-if="!$q.platform.is.mobile" spaced vertical />
 
-        <q-btn v-if="!HAS_AUTH" flat @click="toggleLogin">
-          {{ $t(HAS_AUTH ? 'logout' : 'login') }}
+        <q-btn v-if="!$yawik.isAuth()" flat @click="toggleLogin">
+          {{ $t($yawik.isAuth() ? 'btn.logout' : 'btn.login') }}
         </q-btn>
 
         <q-btn-dropdown
-          v-if="HAS_AUTH"
+          v-if="$yawik.isAuth()"
           flat
           rounded
           no-caps
@@ -51,12 +51,13 @@
               <q-item-section>
                 <q-item-label>{{ user.firstName }} {{ user.lastName }}</q-item-label>
                 <q-item-label caption>{{ user.email }}</q-item-label>
+                <q-item-label caption>{{ user.role.includes('recruiter') ? $t('recruiter') : '' }}</q-item-label>
               </q-item-section>
             </q-item>
             <q-item v-close-popup clickable>
               <q-item-section>
                 <q-btn class="bg-primary text-white" @click="toggleLogin">
-                  {{ $t(HAS_AUTH ? 'logout' : 'login') }}
+                  {{ $t($yawik.isAuth() ? 'logout' : 'login') }}
                 </q-btn>
               </q-item-section>
             </q-item>
@@ -105,6 +106,12 @@ const metaData = {
       content: 'Anzeigengenerator Stellenanzeigen Google Jobs'
     }
   },
+  link: {
+    material: {
+      rel: 'canonical',
+      href: 'https://jobwizard.yawik.org' + window.location.pathname
+    }
+  },
   noscript: {
     default: 'Der Yawik Anzeigengenerator benötigt Javascript'
   }
@@ -134,7 +141,8 @@ export default
       user: {
         firstName: '',
         lastName: '',
-        email: ''
+        email: '',
+        role: ''
       }
     };
   },
@@ -189,15 +197,34 @@ export default
       this[SET_TOKEN](cloak);
       if (cloak.tokenParsed)
       {
+        console.log(cloak);
         this.user.email = cloak.tokenParsed.email;
         this.user.firstName = cloak.tokenParsed.given_name;
         this.user.lastName = cloak.tokenParsed.family_name;
+        this.user.role = cloak.tokenParsed.realm_access?.roles;
       }
     });
+    cloak.onTokenExpired = () =>
+    {
+      console.log('expired at' + new Date());
+      cloak.updateToken(70).success((refreshed) =>
+      {
+        if (refreshed)
+        {
+          console.log('refreshed at ' + new Date());
+        }
+        else
+        {
+          console.log('not refreshed at ' + new Date());
+        }
+      }).error(() =>
+      {
+        console.error('Failed to refresh token ' + new Date());
+      });
+    };
   },
   mounted()
   {
-    console.log('created', this.dark, this.$q.dark);
     this.$q.dark.set(this.dark);
   },
   beforeUnmount()
@@ -214,7 +241,7 @@ export default
       },
       toggleLogin()
       {
-        if (this[HAS_AUTH])
+        if (this.$yawik.isAuth())
         {
           window.location.href = process.env.YAWIK_SSO_URL +
             'realms/' + process.env.YAWIK_SSO_REALM +
@@ -230,7 +257,6 @@ export default
           {
             if (authenticated)
             {
-              console.log('Hallo Has Auth');
               //Token Refresh
               this.clearTimer();
               this.tokenTimer = setInterval(() =>
@@ -256,40 +282,3 @@ export default
     }
 };
 </script>
-
-<style>
-  .fade-enter-active,
-  .fade-leave-active
-  {
-    transition: all 0.2s cubic-bezier(0.55, 0, 0.1, 1);
-  }
-
-  .fade-enter,
-  .fade-leave-active
-  {
-    opacity: 0;
-    transform: translate(2em, 0);
-  }
-</style>
-
-<i18n>
-  {
-    "en": {
-      "login": "Login",
-      "logout": "Logout",
-      "jobs": "Jobs",
-      "help": {
-        "dark_mode": "toogle dark mode"
-      }
-
-    },
-    "de": {
-      "login": "Anmelden",
-      "logout": "Abmelden",
-      "jobs": "Stellenanzeigen",
-      "help": {
-        "dark_mode": "Nachtdarstellung ein und ausschalten",
-      }
-    }
-  }
-</i18n>

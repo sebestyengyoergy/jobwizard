@@ -2,20 +2,23 @@
   <div class="q-gutter-md">
     <!-- Logo -->
     <div class="jobintro row q-col-gutter-md justify-center">
-      <div class="col-lg-2 col-md-3">
+      <div v-if="!(imageLogo && imageLogo.data)" class="col-lg-2 col-md-3">
         <q-uploader
           hide-upload-btn
           :color="$q.dark.mode ? 'black' : 'grey-2' "
           :text-color="$q.dark.mode ? 'white' : 'dark'"
           accept="image/*"
           style="max-width: 220px; height: 220px;"
-          :max-total-size="1e7"
+          :max-total-size="2e5"
           :max-files="1"
           :label="$t('choose_logo')"
           @rejected="rejectedFiles"
           @added="logoAdded"
           @removed="logoRemoved"
         />
+      </div>
+      <div v-if="imageLogo && imageLogo.data" class="col-lg-2 col-md-3">
+        <q-img :src="jobDetailUrl + imageLogo.data.url" />
       </div>
       <div class="col-lg-10 col-md-9" :style="{maxWidth: (maxWidth * 2 * 0.8) + 'px'}">
         <q-item>
@@ -34,7 +37,7 @@
           :text-color="$q.dark.mode ? 'white' : 'dark'"
           accept="image/*"
           style="max-height: 400px; min-height: 200px; width: 100%;"
-          :max-total-size="1e7"
+          :max-total-size="2e6"
           :max-files="1"
           :label="$t('choose_header')"
           @rejected="rejectedFiles"
@@ -56,9 +59,10 @@
       <div
         v-if="orgDescription"
         class="col-md-12"
+        :style="{maxWidth: (maxWidth * 2) + 'px'}"
       >
         <div style="width: 100%;" class="text-h5 q-mb-md">
-          {{ orgLabel }}
+          {{ orgDescriptionLabel }}
         </div>
         <!-- eslint-disable  vue/no-v-html -->
         <div v-html="orgDescription" />
@@ -90,11 +94,23 @@
 
       <!-- Contact info -->
       <EditorInput
+        v-if="!orgContactInfo"
         v-model:label="contactInfoLabel"
         v-model:value="contactInfo"
         :rules="applyPost ? [ruleRequired] : []"
         name="contactInfo"
       />
+      <div
+        v-if="orgContactInfo"
+        class="col-md-12"
+        :style="{maxWidth: (maxWidth * 2) + 'px'}"
+      >
+        <div style="width: 100%;" class="text-h5 q-mb-md">
+          {{ orgContactInfoLabel }}
+        </div>
+        <!-- eslint-disable  vue/no-v-html -->
+        <div v-html="orgContactInfo" />
+      </div>
     </div>
   </div>
 </template>
@@ -116,6 +132,7 @@ export default
   {
     return {
       maxWidth: 800,
+      jobDetailUrl: `${process.env.YAWIK_JOB_URL}`,
     };
   },
   computed:
@@ -259,12 +276,19 @@ export default
       },
       orgDescription()
       {
-        console.log('Org description available');
         return this[GET_SETTINGS].orgDescription;
       },
-      orgLabel()
+      orgDescriptionLabel()
       {
-        return this[GET_SETTINGS].orgLabel;
+        return this[GET_SETTINGS].orgDescriptionLabel;
+      },
+      orgContactInfo()
+      {
+        return this[GET_SETTINGS].orgContactInfo;
+      },
+      orgContactInfoLabel()
+      {
+        return this[GET_SETTINGS].orgContactInfoLabel;
       }
     },
   watch:
@@ -279,6 +303,12 @@ export default
     if (this.orgDescription !== '')
     {
       this.intro = this.orgDescription;
+      this.introLabel = this.orgDescriptionLabel;
+    }
+    if (this.orgContactInfo !== '')
+    {
+      this.contactInfo = this.orgContactInfo;
+      this.contactInfoLabel = this.orgContactInfoLabel;
     }
   },
   mounted()
@@ -331,6 +361,7 @@ export default
       {
         this.readFile(files[0]).then(b64 =>
         {
+          console.log('Image ' + b64);
           this.imageHeader = b64;
         });
       },
@@ -372,7 +403,7 @@ export default
     "en": {
       "logo": "Logo",
       "header": "Header image",
-      "intro": "Intro",
+      "intro": "Company description",
       "tasks": "Tasks",
       "profile": "Profile",
       "offer": "Offer",
@@ -392,9 +423,6 @@ export default
       "image_rejected": "Die Datei ist zu groß. über 10Mb",
       "choose_logo": "Logo wählen",
       "choose_header": "Header wählen",
-      "rules": {
-        "required": "Pflichtfeld"
-      }
     }
   }
 </i18n>

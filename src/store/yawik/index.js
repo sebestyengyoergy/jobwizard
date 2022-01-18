@@ -1,9 +1,13 @@
+import { uid } from 'quasar';
+import userSettings from 'src/settings/user';
+
 import {
   GET_FORM,
   GET_SETTINGS,
   GET_STEP,
   GET_LANG,
   GET_LOGO,
+  GET_META,
   GET_HEADER,
   GET_TOKEN,
   HAS_AUTH,
@@ -13,16 +17,18 @@ import {
   SET_FIELD,
   SET_LANG,
   SET_LOGO,
+  SET_JOB,
+  SET_META,
   SET_HEADER,
   SET_TOKEN,
   SET_LOCATION
 } from '../names';
 
 const emptyForm = {
+  jobId: uid(),
   step: 'stepOne',
   jobTitle: '',
   organization: '',
-  country: null,
   channels: [],
   location: {
     streetAdress: '',
@@ -31,7 +37,25 @@ const emptyForm = {
     postalCode: '',
     addressCountry: '',
   },
-  formattedAddress: '',
+  meta: {
+    publishImmediately: true,
+    publishStart: '',
+    publishDays: 30,
+    acceptTerms: false,
+    channels: [],
+    workKind: ['contract'],
+    workDuration: ['fulltime'],
+    partTimePercentage: 50,
+    shiftWorkAmount: 2,
+    remoteWork: false,
+    remoteWorkPercentage: 50,
+    salary: {
+      label: '40.000€ - 60.000€',
+      value: '40|60'
+    },
+    salaryVisibility: true,
+    formattedAddress: '',
+  },
   applyURL: '',
   applyEmail: '',
   applyPost: false,
@@ -46,27 +70,7 @@ const emptyForm = {
   offer: '',
   contactInfoLabel: '',
   contactInfo: '',
-  workKind: [],
-  workDuration: [],
   acceptTerms: false,
-  salary: {
-    label: '40.000€ - 60.000€',
-    value: '40|60'
-  },
-  salaryVisibility: true
-};
-
-const userSettings = {
-  miscDarkmode: 'auto',
-  miscTimezone: '',
-  miscLocale: '',
-  orgName: '',
-  orgLabel: '',
-  orgDescription: '',
-  jobsStatsEnabled: true,
-  formSpellcheckEnabled: true,
-  formAutocompleteEnabled: false
-
 };
 
 export default
@@ -100,6 +104,10 @@ export default
       {
         return state.lang;
       },
+      [GET_META](state)
+      {
+        return state.form.meta;
+      },
       [GET_LOGO](state)
       {
         return state.logo;
@@ -124,6 +132,10 @@ export default
         for (const key in emptyForm) state.form[key] = emptyForm[key];
         state.logo = '';
         state.header = '';
+        if (state.form.id)
+        {
+          delete state.form.id;
+        }
       },
       [SET_STEP](state, value)
       {
@@ -136,6 +148,11 @@ export default
       [SET_LANG](state, value)
       {
         state.lang = value;
+      },
+      [SET_META](state, obj)
+      {
+        console.log(Object.values(obj)[0]);
+        state.form.meta[Object.keys(obj)[0]] = Object.values(obj)[0];
       },
       [SET_LOCATION](state, obj)
       {
@@ -153,9 +170,46 @@ export default
       {
         state.token = token;
       },
+      [SET_JOB](state, data)
+      {
+        state.form = { ...Object.values(data)[0] };
+        state.form.step = 'stepOne';
+        if (!state.form.meta)
+        {
+          state.form.meta = {
+            publishImmediately: true,
+            publishStart: '',
+            publishDays: 30,
+            acceptTerms: false,
+          };
+        }
+        if (!state.form.remoteWork)
+        {
+          state.form.remoteWork = false;
+        }
+        if (!state.form.meta.remoteWork)
+        {
+          state.form.meta.remoteWork = false;
+        }
+        if (!state.form.meta.partTimePercentage)
+        {
+          state.form.meta.partTimePercentage = 50;
+        }
+        if (!state.form.salary)
+        {
+          state.form.salary = {
+            label: '40.000€ - 60.000€',
+            value: '40|60'
+          };
+        }
+        if (!state.form.meta.channels)
+        {
+          state.form.meta.channels = [];
+        }
+      },
       [SET_SETTINGS_FIELD](state, obj)
       {
         state.settings[Object.keys(obj)[0]] = Object.values(obj)[0];
-      },
+      }
     }
 };
