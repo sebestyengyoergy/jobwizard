@@ -1,6 +1,8 @@
 <template>
   <div>
-    <q-btn :ripple="false" flat size="lg" :to="urlHome" class="logo" />
+    <q-btn no-caps flat :icon="$q.config.logo" :to="home">
+      {{ '&nbsp;' + $q.config.sitename }}
+    </q-btn>
     <Tooltip :text="$t('slogan')" />
   </div>
 </template>
@@ -17,9 +19,9 @@ export default
   },
   computed:
     {
-      urlHome()
+      home()
       {
-        return process.env.VUE_ROUTER_BASE + this.$yawik.lang();
+        return process.env.VUE_ROUTER_BASE + this.$root.$i18n.locale;
       }
     }
 };

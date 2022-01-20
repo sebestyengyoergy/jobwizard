@@ -44,8 +44,8 @@ module.exports = function(ctx)
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
-      // 'material-icons' // optional, you are not bound to it
+      //'roboto-font', // optional, you are not bound to it
+      'material-icons' // optional, you are not bound to it
     ],
 
     htmlVariables:
@@ -134,7 +134,9 @@ module.exports = function(ctx)
       iconSet: 'mdi-v5', // Quasar icon set
       lang: 'de', // Quasar language pack
       config: {
-        dark: false
+        dark: false,
+        sitename: 'jobwizard',
+        logo: 'img:../../images/yawik_logo-mobile.svg'
       },
 
       // Possible values for "importStrategy":
@@ -173,7 +175,7 @@ module.exports = function(ctx)
       manifest: {
         name: 'Yawik Jobwizard',
         short_name: 'Jobwizard',
-        description: 'The Jobwizard enables the creation of Google Jobs compatible job advertisements. Authenticated users can manage job ads.',
+        description: 'Yawik jobwizard enables the creation of Google Jobs compatible job advertisements. Authenticated users can manage job ads.',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
