@@ -46,9 +46,9 @@ describe('Logo', () =>
   });
 
 
-  it('check urlHome', () =>
+  it('check home', () =>
   {
-    expect(cmp.vm.urlHome).toBe('yawik/de');
+    expect(cmp.vm.home).toBe('yawik/de');
   });
 
 });

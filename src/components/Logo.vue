@@ -21,7 +21,7 @@ export default
     {
       home()
       {
-        return process.env.VUE_ROUTER_BASE + this.$root.$i18n.locale;
+        return process.env.VUE_ROUTER_BASE + this.$yawik.lang();
       }
     }
 };
