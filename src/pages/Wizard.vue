@@ -286,14 +286,14 @@ export default {
                 {
                   this[CLEAR_FORM]();
                 }
+                this.$router.push({
+                  name: 'jobs',
+                });
               }
             }).catch(error =>
             {
               console.log('Error', error);
             });
-          this.$router.push({
-            name: 'jobs',
-          });
         },
         trySubmit()
         {

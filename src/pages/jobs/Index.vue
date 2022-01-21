@@ -55,7 +55,7 @@
         </q-tr>
       </template>
       <template #top-right>
-        <q-btn no-caps color="primary" :disable="loading" :label="$t('create_job')" :to="'/' + $yawik.lang()" />
+        <q-btn no-caps color="primary" :disable="loading" :label="$t('create_job')" @click="createAd" />
       </template>
     </q-table>
     <q-card v-if="!$yawik.isAuth()" class="absolute-center channel">
@@ -90,8 +90,6 @@
 
 import { useMeta } from 'quasar';
 import { SET_JOB, SET_LOGO } from 'src/store/names';
-import { mapMutations } from 'vuex';
-
 export default {
   name: 'Index',
   setup()
@@ -179,7 +177,6 @@ export default {
   },
   methods:
       {
-        ...mapMutations([SET_JOB, SET_LOGO]),
         getJobs(pagination = { pagination: this.pagination })
         {
           this.loading = true;
@@ -285,6 +282,14 @@ export default {
             console.log('I am triggered on both OK and Cancel');
           });
         },
+        createAd()
+        {
+          this.$router.push(
+            {
+              path: '/'
+            }
+          );
+        }
       }
 };
 </script>
