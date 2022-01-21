@@ -175,9 +175,18 @@ export default {
         "help": "If your application process requires that applications are only received by post, you can activate this here.",
       },
       "apply_email": {
-        "header": "Bewerbungen per Email",
-        "label": "Hier können sie eine E-Mail Adresse festlegen, an die Bewerbungen gesendet werden sollen.",
+        "header": "Applications by email",
+        "label": "E-mail address",
+        "enable": "Allow incoming applications by email",
         "help": "Here you can specify an e-mail address to which applications should be sent.",
+        "placeholder": "E-mail address for incoming applications"
+      },
+      "apply_url": {
+        "header": "Application form",
+        "label": "Application form",
+        "enable": "Use application form",
+        "help": "Here you can store a link to an application form through which a candidate should apply.",
+        "placeholder": "Link to an application form"
       },
       "contact_info": {
         "label": "Contact",
@@ -204,7 +213,7 @@ export default {
         "header": "Bewerbungsformular",
         "label": "Bewerbungsformular",
         "enable": "Bewerbungsformular verwenden",
-        "help": "Wenn es der Bewerbungsprozess bei Ihnen verlangt, dass Bewerbungen nur über den postalischen Weg eingehen sollen, können Sie das hier aktivieren.",
+        "help": "Hier können Sie einen Link zu einem Bewerbungsformular hinterlegen, über das sich ein Kandidat bewerben soll.",
         "placeholder": "Link zu einem Bewerbungsformular"
       },
       "contact_info": {
@@ -218,12 +227,24 @@ export default {
     "settings": {
       "apply_post": {
         "header": "Candidatures par voie postale",
-        "label": "Evaluer les clics et les pages vues conformément à la protection des données.",
-        "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt."
+        "label": "Autoriser les candidatures uniquement par voie postale.",
+        "help": "Si votre processus de candidature exige que les candidatures soient envoyées uniquement par voie postale, vous pouvez l'activer ici. Les paramètres relatifs à l'e-mail et au formulaire de candidature ne sont pas pris en compte dans l'activation."
       },
       "contact_info": {
         "label": "Contact",
         "help": "Si votre processus de candidature exige que les candidatures soient envoyées uniquement par voie postale, vous pouvez l'activer ici.",
+        "header": "Contact pour les candidats"
+      },
+      "apply_url": {
+        "header": "Formulaire de candidature",
+        "label": "Formulaire de candidature",
+        "enable": "Utiliser le formulaire de candidature",
+        "help": "Vous pouvez déposer ici un lien vers un formulaire de candidature via lequel un candidat doit postuler.",
+        "placeholder": "Lien vers un formulaire de candidature"
+      },
+      "contact_info": {
+        "label": "Contact",
+        "help": "Ici, vous pouvez enregistrer des informations de contact pour les candidats. Celles-ci leur seront proposées lors de leurs prochaines annonces.",
         "header": "Contact pour les candidats"
       }
     }
