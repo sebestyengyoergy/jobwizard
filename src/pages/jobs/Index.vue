@@ -263,8 +263,8 @@ export default {
         confirm(id, title)
         {
           this.$q.dialog({
-            title: 'Alert',
-            message: 'Do you really want to delete the job advertisement ' + title + '?',
+            title: this.$t('alert'),
+            message: this.$t('confirm_del') + title + '?',
             cancel: true,
             persistent: true
           }).onOk(() =>
@@ -337,7 +337,9 @@ export default {
   "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
   "preis1": "Registration is free of charge",
   "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
-  "del_job": "Delete job ad"
+  "del_job": "Delete job ad",
+  "confirm_del":"Do you really want to delete the job advertisement ",
+  "alert":"Alert"
   },
   "de": {
   "edit_job":"Anzeige bearbeiten",
@@ -348,7 +350,9 @@ export default {
   "date": "Datum",
   "preis1": "Die Anmeldung ist kostenlos",
   "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
-  "del_job": "Stellenanzeige löschen"
+  "del_job": "Stellenanzeige löschen",
+  "confirm_del":"Möchten Sie die Stellenanzeige wirklich löschen ",
+  "alert":"Aufmerksam"
   },
   "fr": {
   "edit_job": "Modifier l'annonce",
@@ -357,7 +361,9 @@ export default {
   "action": "Action",
   "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
   "preis1": "L'inscription est gratuite",
-  "del_job": "Supprimer une offre d'emploi"
+  "del_job": "Supprimer une offre d'emploi",
+  "confirm_del":"Voulez-vous vraiment supprimer l'offre d'emploi ",
+  "alert":"Alerte"
   }
   }
 </i18n>
