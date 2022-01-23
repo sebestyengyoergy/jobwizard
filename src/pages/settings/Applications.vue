@@ -171,7 +171,7 @@ export default {
     "settings": {
       "apply_post": {
         "header": "Postal applications",
-        "label": "Evaluate clicks and page views in accordance with data protection regulations.",
+        "label": "Admit applications by post only.",
         "help": "If your application process requires that applications are only received by post, you can activate this here.",
       },
       "apply_email": {
