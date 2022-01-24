@@ -58,7 +58,7 @@
         <q-btn no-caps color="primary" :disable="loading" :label="$t('create_job')" @click="createAd" />
       </template>
     </q-table>
-    <q-card v-if="!$yawik.isAuth()" class="absolute-center channel">
+    <q-card v-if="!$yawik.isAuth()" class="absolute-center channel shadow-5">
       <div class="text-h4 q-mb-md full-width">{{ $t('title') }}</div>
       <p>{{ $t('please_register') }}</p>
 
@@ -264,9 +264,10 @@ export default {
         {
           this.$q.dialog({
             title: this.$t('alert'),
-            message: this.$t('confirm_del') + title + '?',
+            message: this.$t('confirm_del') + '<p><b>' + title + '</b></p>',
             cancel: true,
-            persistent: true
+            persistent: true,
+            html: true
           }).onOk(() =>
           {
             this.deleteJob(id);
@@ -303,12 +304,12 @@ export default {
 
   .body--dark .jobtitle
   {
-    color: #FAA427;
+    color: var(--q-secondary);
   }
 
   .body--light .jobtitle
   {
-    color: #5498D7;
+    color: var(--q-primary);
   }
 
   .channel
@@ -318,52 +319,45 @@ export default {
     max-width: 500px;
   }
 
-  .channel-logo
-  {
-    max-height: 92px;
-    width: auto;
-    display: block;
-  }
-
 </style>
 
 <i18n>
-  {
+{
   "en": {
-  "edit_job":"Edit Job",
-  "title": "Please register",
-  "action": "Action",
-  "unpublished": "unpublished",
-  "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
-  "preis1": "Registration is free of charge",
-  "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
-  "del_job": "Delete job ad",
-  "confirm_del":"Do you really want to delete the job advertisement ",
-  "alert":"Alert"
+    "edit_job":"Edit Job",
+    "title": "Please register",
+    "action": "Action",
+    "unpublished": "unpublished",
+    "ad-management-description": "With the advertisement management you can save, edit and delete job advertisements. The advertisement management is also required to integrate job advertisements into your homepage.",
+    "preis1": "Registration is free of charge",
+    "please_register": "You are currently not logged in. To use the ad management, you must register. Registration is free of charge.",
+    "del_job": "Delete job ad",
+    "confirm_del":"Do you really want to delete the job advertisement?",
+    "alert":"Alert"
   },
   "de": {
-  "edit_job":"Anzeige bearbeiten",
-  "unpublished": "unveröffentlicht",
-  "title": "Bitte melden Sie sich an",
-  "action": "Aktion",
-  "ad-management-description": "Mit der Anzeigenverwaltung können die Stellenanzeigen speichern, bearbeiten und löschen. Die Anzeigenverwaltung wird auch benötigt, um Stellenanzeigen in ihre Homepage zu integrieren.",
-  "date": "Datum",
-  "preis1": "Die Anmeldung ist kostenlos",
-  "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
-  "del_job": "Stellenanzeige löschen",
-  "confirm_del":"Möchten Sie die Stellenanzeige wirklich löschen ",
-  "alert":"Aufmerksam"
+    "edit_job":"Anzeige bearbeiten",
+    "unpublished": "unveröffentlicht",
+    "title": "Bitte melden Sie sich an",
+    "action": "Aktion",
+    "ad-management-description": "Mit der Anzeigenverwaltung können die Stellenanzeigen speichern, bearbeiten und löschen. Die Anzeigenverwaltung wird auch benötigt, um Stellenanzeigen in ihre Homepage zu integrieren.",
+    "date": "Datum",
+    "preis1": "Die Anmeldung ist kostenlos",
+    "please_register": "Sie sind momentan nicht angemeldet. Um die Anzeigenverwaltung zu nutzen, müssen Sie sich registrieren. Die Registrierung ist kostenlos.",
+    "del_job": "Stellenanzeige löschen",
+    "confirm_del":"Möchten Sie die Stellenanzeige wirklich löschen?",
+    "alert":"Achtung"
   },
   "fr": {
-  "edit_job": "Modifier l'annonce",
-  "title": "Veuillez vous identifier.",
-  "unpublished": "non publié",
-  "action": "Action",
-  "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
-  "preis1": "L'inscription est gratuite",
-  "del_job": "Supprimer une offre d'emploi",
-  "confirm_del":"Voulez-vous vraiment supprimer l'offre d'emploi ",
-  "alert":"Alerte"
+    "edit_job": "Modifier l'annonce",
+    "title": "Veuillez vous identifier.",
+    "unpublished": "non publié",
+    "action": "Action",
+    "please_register": "Vous n'êtes pas connecté pour le moment. Pour pouvoir utiliser la gestion des annonces, vous devez vous inscrire. L'inscription est gratuite.",
+    "preis1": "L'inscription est gratuite",
+    "del_job": "Supprimer une offre d'emploi",
+    "confirm_del":"Voulez-vous vraiment supprimer l'offre d'emploi ?",
+    "alert":"Alerte"
   }
-  }
+}
 </i18n>
