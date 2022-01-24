@@ -33,6 +33,7 @@ export default
   },
   nav:
   {
+    applications: () => 'Applications',
     settings: () => 'Settings',
     jobs: () => 'Jobs',
     job_title: () => 'Job title',
