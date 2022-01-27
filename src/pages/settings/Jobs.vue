@@ -57,6 +57,15 @@
         />
       </div>
     </div>
+
+    <h5>{{ $t("settings.jobs_reference.header") }}</h5>
+    <div>{{ $t("settings.jobs_reference.help") }}</div>
+    <q-checkbox
+      v-model="reference"
+      :label="$t('settings.jobs_reference.label')"
+      color="primary"
+      name="reference"
+    />
   </div>
 </template>
 
@@ -107,6 +116,17 @@ export default {
           set(val)
           {
             this[SET_SETTINGS_FIELD]({ countries: val });
+          }
+        },
+    reference:
+        {
+          get()
+          {
+            return this[GET_SETTINGS].jobs_reference_enabled;
+          },
+          set(val)
+          {
+            this[SET_SETTINGS_FIELD]({ jobs_reference_enabled: val });
           }
         },
     countryList()
@@ -187,6 +207,12 @@ export default {
         "header": "Statistiken",
         "label": "Klicks und Pageviews datenschutzkonform auswerten.",
         "help": "mit dem Aktivieren wird in die Anzeige ein Code eingebaut, der Zugriffszahlen sammelt.",
+       "placeholder": "Enter Location"
+      },
+      "jobs_reference": {
+        "header": "Referenznummerm",
+        "label": "Referenznummer für Stellenanzeige aktivieren",
+        "help": "mit dem Aktivieren erscheint ein weiteres Feld für die eingabe einer Referenznummer.",
        "placeholder": "Enter Location"
       },
       "jobs_powered": {

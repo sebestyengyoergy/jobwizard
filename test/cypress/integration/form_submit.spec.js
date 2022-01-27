@@ -19,10 +19,7 @@ describe('Filling and sending the form', () =>
     // fill step 1 (general data)
     cy.get('[name="job_title"]').type('Software Developer');
     cy.get('[name="organization"]').type('CROSS Solution');
-    cy.get('[name="apply_url"]').type('http://coss-solution.de');
     cy.get('[name="apply_email"]').type('bleek@cross-solution.de');
-    cy.get('[aria-label="keine Onlinebewerbung/postalische Bewerbungen"] > .q-checkbox__inner > .q-checkbox__bg > .q-checkbox__svg').click();
-    cy.get('[name="reference"]').type('123');
     cy.get('[name="next"]').click();
   });
 
@@ -58,7 +55,6 @@ describe('Filling and sending the form', () =>
     cy.get('iframe#jobpreview').invoke('attr', 'srcdoc').then( ($job) => {
       cy.state('document').write($job)
       cy.contains('CROSS Solution');
-      cy.contains('123');
       return null
     })
   });

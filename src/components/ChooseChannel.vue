@@ -48,7 +48,7 @@
 <script>
 import { ref } from 'vue';
 import Channel from 'src/components/Channel.vue';
-import Channels from 'src/channels.json';
+import Channels from 'src/settings/channels.json';
 import { Cookies } from 'quasar';
 
 const settingsBanner = 'please_register';

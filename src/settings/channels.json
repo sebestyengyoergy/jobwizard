@@ -24,7 +24,7 @@
         "logo": "images/yawik_logo-desktop.svg",
         "slug": "Yawik",
         "icon": "mdi-star",
-        "price": 10,
+        "price": 100,
         "mode": false
     }
 ]

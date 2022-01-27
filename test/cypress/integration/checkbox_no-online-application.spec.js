@@ -10,17 +10,20 @@ describe('check apply_url, apply_email and apply_post', () =>
   before(() =>
   {
     cy.intercept('http://localhost:8080', { body: { success: true } }).as('submitForm');
-    cy.visit('/en');
+    cy.visit('/en/settings');
     // load job details
+  });
+
+  it('enable url in settings', () =>
+  {
+    cy.contains('Applications').click();
+    cy.contains('Use application form').click();
   });
 
   it('Step 1. apply by email', () =>
   {
-    cy.get('input[name="apply_url"]').type('http://cross-solution.de');
+    cy.visit('/en')
     cy.get('input[name="apply_email"]').type('bleek@cross-solution.de');
-    cy.get('input[name="apply_url"]').should('be.enabled');
-    cy.get('[aria-label="No online application/postal application"] > .q-checkbox__inner > .q-checkbox__bg > .q-checkbox__svg').click()
-    cy.get('input[name="apply_url"]').should('be.disabled');
 
     cy.get('button[name="preview"]').then(($btn) => {
       cy.wrap($btn).click();
@@ -28,7 +31,7 @@ describe('check apply_url, apply_email and apply_post', () =>
 
     cy.get('iframe#jobpreview').invoke('attr', 'srcdoc').then( ($job) => {
       cy.state('document').write($job)
-      cy.contains('Apply by regular post');
+      cy.contains('apply now');
       return null
     })
 

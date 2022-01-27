@@ -18,7 +18,12 @@
         <q-scroll-area class="fit">
           <q-list>
             <template v-for="(menuItem, index) in menuList" :key="index">
-              <q-item v-ripple clickable :active="index===selectedIndex" @click="selectedIndex=index">
+              <q-item
+                v-ripple
+                clickable
+                :active="index===selectedIndex"
+                @click="selectedIndex=index"
+              >
                 <q-item-section avatar>
                   <q-icon :name="menuItem.icon" color="secondary" />
                 </q-item-section>

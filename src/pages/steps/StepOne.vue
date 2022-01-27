@@ -1,100 +1,136 @@
 <template>
   <div class="row q-col-gutter-md">
-    <!-- Job title -->
-    <TextInput
-      v-model="jobTitle"
-      name="job_title"
-      class="col-12"
-      :label="$t('job_title')"
-      :rules="[ruleRequired]"
-      @enterPress="gotoNext"
-    />
+    <div class="col-6 row q-col-gutter-md">
+      <!-- Job title -->
+      <TextInput
+        v-model="jobTitle"
+        name="job_title"
+        class="col-12"
+        :label="$t('job_title')"
+        :rules="[ruleRequired]"
+        @enterPress="gotoNext"
+      />
 
-    <!-- Organization -->
-    <TextInput
-      v-model.trim="organization"
-      name="organization"
-      class="col-12"
-      :label="$t('label.organization')"
-      :rules="[ruleRequired]"
-      @enterPress="gotoNext"
-    />
+      <!-- Organization -->
+      <TextInput
+        v-model.trim="organization"
+        name="organization"
+        class="col-12"
+        :label="$t('label.organization')"
+        :rules="[ruleRequired]"
+        @enterPress="gotoNext"
+      />
 
-    <div class="col-12">
-      <div class="row">
-        <q-input
-          id="location"
-          ref="location"
-          v-model.trim="locationDisplay"
-          :label="$t('label.location')"
-          color="primary"
-          class="col-lg-8 col-md-8"
-          name="location"
-          outlined
-          dense
-          :rules="[ruleRequired]"
-          @keypress.enter="gotoNext"
-        />
-        <q-checkbox
-          v-model="remoteWork"
-          style="margin-top: -20px;"
-          :label="$t('label.homeoffice')"
-          color="primary"
-          name="apply_post"
-          class="col-lg-2 col-md-2"
-        />
-        <q-slider
-          v-if="remoteWork"
-          v-model="remoteWorkPercentage"
-          name="remoteWorkPercentage"
-          class="col-lg-2 col-md-2"
-          :label-value="remoteWorkPercentage + '%'"
-          label-always
-          :min="10"
-          :max="100"
-          :step="10"
-        />
+      <div class="col-12">
+        <div class="row">
+          <q-input
+            id="location"
+            ref="location"
+            v-model.trim="locationDisplay"
+            :label="$t('label.location')"
+            color="primary"
+            class="col-lg-6 col-md-6"
+            name="location"
+            outlined
+            dense
+            :rules="[ruleRequired]"
+            @keypress.enter="gotoNext"
+          />
+          <q-checkbox
+            v-model="remoteWork"
+            style="margin-top: -20px;"
+            :label="$t('label.homeoffice')"
+            color="primary"
+            name="apply_post"
+            class="col-lg-3 col-md-3"
+          />
+          <q-slider
+            v-if="remoteWork"
+            v-model="remoteWorkPercentage"
+            name="remoteWorkPercentage"
+            class="col-lg-3 col-md-3"
+            :label-value="remoteWorkPercentage + '%'"
+            label-always
+            :min="10"
+            :max="100"
+            :step="10"
+          />
+        </div>
       </div>
+      <!-- URL -->
+      <TextInput
+        v-if="urlEnabled"
+        v-model="applyUrl"
+        name="apply_url"
+        class="col-12"
+        :label="$t('label.apply_url')"
+        :rules="[validURL]"
+        :disable="applyPost"
+        @enterPress="gotoNext"
+      />
+
+      <!-- Email -->
+      <TextInput
+        v-if="emailEnabled"
+        v-model="applyEmail"
+        name="apply_email"
+        class="col-12"
+        :label="$t('label.apply_email')"
+        :rules="[validEmail]"
+        :disable="applyPost"
+        @enterPress="gotoNext"
+      />
+
+      <q-checkbox
+        v-if="postEnabled"
+        v-model="applyPost"
+        :label="$t('label.apply_post')"
+        color="primary"
+        name="apply_post"
+      >
+        <Tooltip :text="$t('help.apply_post')" />
+      </q-checkbox>
+
+      <!-- Reference -->
+      <TextInput
+        v-if="referenceEnabled"
+        v-model="reference"
+        name="reference"
+        class="col-12"
+        :label="$t('label.reference')"
+        @enterPress="gotoNext"
+      />
     </div>
-    <!-- URL -->
-    <TextInput
-      v-model="applyUrl"
-      name="apply_url"
-      class="col-12"
-      :label="$t('label.apply_url')"
-      :rules="[validURL]"
-      :disable="applyPost"
-      @enterPress="gotoNext"
-    />
-
-    <!-- Email -->
-    <TextInput
-      v-model="applyEmail"
-      name="apply_email"
-      class="col-12"
-      :label="$t('label.apply_email')"
-      :rules="[validEmail]"
-      :disable="applyPost"
-      @enterPress="gotoNext"
-    />
-
-    <q-checkbox
-      v-model="applyPost"
-      :label="$t('label.apply_post')"
-      color="primary"
-      name="apply_post"
-    >
-      <Tooltip :text="$t('help.apply_post')" />
-    </q-checkbox>
-
-    <!-- Reference -->
-    <TextInput
-      v-model="reference"
-      name="reference"
-      class="col-12"
-      :label="$t('label.reference')"
-      @enterPress="gotoNext"
-    />
+    <div class="col-6 q-gutter-md">
+      <q-card>
+        <q-card-section>
+          <div class="text-h4">
+            {{ $t('wizard-help-title') }}
+          </div>
+        </q-card-section>
+        <q-card-section>
+          <div>
+            {{ $t('wizard-help-text') }}
+          </div>
+        </q-card-section>
+        <q-card-section align="center">
+          <q-btn flat :to="'/' + $yawik.lang() + '/settings'">{{ $t('nav.settings') }}</q-btn>
+        </q-card-section>
+        <q-card-section>
+          <div>
+            {{ $t('Sie sind momentan nicht angemeldet. Sie können als anonymer Benutzer alle Funktionen nutzen. Allerdings können Sie am Ende die Anzeige nur als HTML downloaden.') }}
+          </div>
+        </q-card-section>
+        <q-card-actions align="center">
+          <q-btn type="a" :href="$yawik.loginUrl('jobs')" no-caps color="primary">
+            {{ $t('btn.login') }}
+          </q-btn>
+          <q-btn type="a" :href="$yawik.registerUrl('jobs')" no-caps color="primary">
+            {{ $t('btn.register') }}
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+    </div>
   </div>
 </template>
 
@@ -254,7 +290,35 @@ export default {
             {
               return this[GET_SETTINGS].countries;
             }
+          },
+        emailEnabled:
+        {
+          get()
+          {
+            return this[GET_SETTINGS].applications_applyEmail_enabled;
           }
+        },
+        postEnabled:
+        {
+          get()
+          {
+            return this[GET_SETTINGS].applications_applyPost_enabled;
+          }
+        },
+        urlEnabled:
+        {
+          get()
+          {
+            return this[GET_SETTINGS].applications_applyUrl_enabled;
+          }
+        },
+        referenceEnabled:
+        {
+          get()
+          {
+            return this[GET_SETTINGS].jobs_reference_enabled;
+          }
+        },
       },
   mounted()
   {
@@ -340,3 +404,20 @@ export default {
 }
 ;
 </script>
+
+<i18n>
+{
+  "en": {
+    "wizard-help-title": "Create job ad",
+    "wizard-help-text": "The Jobwizard supports you in creating an advertisement. The use of the Job Wizard and the creation of the advertisement is free of charge. You can activate and deactivate further fields via the settings.",
+  },
+  "de": {
+    "wizard-help-title": "Stellenanzeige erstellen",
+    "wizard-help-text": "Der Jobwizard unterstützt sie bei der Erstellung einer Anzeige. Die Nutzung des Jobwizard und die Erstellung der Anzeige ist kostenlos. Über die Einstellungen können sie weitere Felder aktivieren und deaktivieren.",
+  },
+  "fr": {
+    "wizard-help-title": "Créer une offre d'emploi",
+    "wizard-help-text": "Le Jobwizard vous aide à créer une annonce. L'utilisation du Jobwizard et la création de l'annonce sont gratuites. Vous pouvez activer ou désactiver d'autres champs dans les paramètres.",
+  }
+}
+</i18n>

@@ -1,5 +1,5 @@
 {
-    "miscDarkmode": "auto",
+    "miscDarkmode": false,
     "miscTimezone": "",
     "country": null,
     "useBrowserLanguage": true,
@@ -20,5 +20,7 @@
     "applications_applyEmail_formular": false,
     "applications_contactInfo_enabled": false,
     "applications_contactInfo_text": "",
-    "applications_contactInfo_headline": ""
+    "applications_contactInfo_headline": "",
+    "jobs_reference_enabled": false,
+    "organization_name_enabled": false
 }
