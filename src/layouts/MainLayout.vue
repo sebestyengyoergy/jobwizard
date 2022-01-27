@@ -25,12 +25,18 @@
 
         <q-separator spaced vertical />
 
-        <SwitchLanguage v-if="!$q.platform.is.mobile" class="q-mx-auto" />
+        <switch-language v-if="!$q.platform.is.mobile" class="q-mx-auto" />
 
-        <q-separator v-if="!$q.platform.is.mobile" spaced vertical />
+        <q-separator v-if="!$q.platform.is.mobile" spaced vertical color="transparent" />
 
-        <q-btn v-if="!$yawik.isAuth()" flat @click="toggleLogin">
-          {{ $t($yawik.isAuth() ? 'btn.logout' : 'btn.login') }}
+        <q-btn v-if="!$yawik.isAuth()" outline type="a" :href="$yawik.loginUrl()" no-caps>
+          {{ $t('btn.login') }}
+        </q-btn>
+
+        <q-separator v-if="!$q.platform.is.mobile" spaced vertical color="transparent" />
+
+        <q-btn v-if="!$yawik.isAuth()" type="a" :href="$yawik.registerUrl()" no-caps>
+          {{ $t('btn.register') }}
         </q-btn>
 
         <q-btn-dropdown

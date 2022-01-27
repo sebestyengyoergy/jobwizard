@@ -1,7 +1,7 @@
 <template>
   <div>
     <h5 v-if="$yawik.isAuth()">{{ $t('channel') }}</h5>
-    <q-dialog v-model="alert">
+    <q-dialog v-if="!$yawik.isAuth()" v-model="alert">
       <q-card>
         <q-bar>
           <q-icon name="mdi-emoticon-wink-outline" />
@@ -39,7 +39,7 @@
         </q-card-actions>
       </q-card>
     </q-dialog>
-    <div class="row justify-center q-gutter-lg" :style="'opacity: ' + ( !alert ? '1;' : '0.2;')">
+    <div class="row justify-center q-gutter-lg" :style="'opacity: ' + ( $yawik.isAuth() ? '1;' : '0.2;')">
       <Channel v-for="c in data" :key="c.id" v-bind="c" />
     </div>
   </div>
@@ -76,7 +76,10 @@ export default
     },
   mounted()
   {
-    this.alert = !Cookies.has(settingsBanner);
+    if (!this.$yawik.isAuth())
+    {
+      this.alert = !Cookies.has(settingsBanner);
+    }
   },
   methods:
   {
