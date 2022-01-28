@@ -20,7 +20,7 @@
           keep-color
           @click="$q.dark.toggle()"
         >
-          <Tooltip :text="$t('help.dark_mode')" />
+          <tooltip :text="$t('help.dark_mode')" />
         </q-toggle>
 
         <q-separator spaced vertical />
